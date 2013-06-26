@@ -29,4 +29,10 @@ end
 #WEB SERVERS
 gem 'unicorn'
 
-gem 'pry', group: [:development, :test]
+gem 'figaro'
+
+group :test, :development do
+  gem 'pry'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+end
