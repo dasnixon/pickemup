@@ -8,6 +8,7 @@ gem 'pg'
 #FRONT-END
 gem 'sass-rails', '~> 4.0.0'
 gem 'haml-rails'
+gem 'twitter-bootstrap-rails'
 
 #OAUTH
 gem 'oauth2'
