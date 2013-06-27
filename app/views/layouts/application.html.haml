@@ -1,0 +1,18 @@
+%html
+  %head
+    %title
+      Pickemup
+      = stylesheet_link_tag "application", media: "all"
+      = javascript_include_tag "application"
+      = csrf_meta_tags
+  %body
+    - if user_signed_in?
+      Logged in as #{current_user.name}
+      = link_to 'Log Out', log_out_path
+      - if current_user.has_linkedin_synced?
+        %h2 Your LinkedIn is linked!
+      - else
+        = link_to 'Link your LinkedIn Profile', '/auth/linkedin_oauth2'
+    - else
+      = link_to 'Sign in With GitHub', '/auth/github'
+    = yield
