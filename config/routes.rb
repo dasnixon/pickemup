@@ -1,8 +1,11 @@
 Pickemup::Application.routes.draw do
   scope :auth do
-    get '/github/callback', to: 'users#create'
-    get '/linkedin/callback', to: 'users#update'
+    get '/github/callback', to: 'sessions#create'
+    get '/linkedin_oauth2/callback', to: 'sessions#update'
   end
+
+  get "log_out" => "sessions#destroy", as: "log_out"
+  resources :users
 
   root 'home#index'
 end
