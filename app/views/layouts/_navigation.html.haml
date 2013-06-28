@@ -1,10 +1,10 @@
 - if user_signed_in?
   %ul.nav.pull-left
-    %li= image_tag(current_user.github_profile_image, class: 'img-rounded brand-image')
+    %li= image_tag(current_user.github.profile_image, class: 'img-rounded brand-image')
 = link_to 'Pickemup', root_path, class: 'brand'
 %ul.nav
-  %li= link_to 'About', root_path
-  %li= link_to 'Contact', root_path
+  %li= link_to 'About', about_path
+  %li= link_to 'Contact', contact_path
 %ul.nav.pull-right
   - if user_signed_in?
     - unless current_user.has_linkedin_synced?

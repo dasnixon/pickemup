@@ -26,6 +26,8 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
     angularjs-rails (1.0.7)
+    annotate (2.5.0)
+      rake
     arel (4.0.0)
     atomic (1.1.10)
     bootstrap-sass (2.3.2.0)
@@ -176,6 +178,7 @@ PLATFORMS
 
 DEPENDENCIES
   angularjs-rails
+  annotate
   bootstrap-sass
   coffee-rails (~> 4.0.0)
   figaro

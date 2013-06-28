@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
 
   def update
     redirect_to root_path, error: 'Must be logged in!' unless user_signed_in? && from_linkedin?
-    if current_user.update_linkedin_info(request.env['omniauth.auth'])
+    if current_user.build_linkedin.from_omniauth(request.env['omniauth.auth'])
       redirect_to root_url, notice: 'Successfully linked your LinkedIn profile!'
     else
       redirect_to root_url, error: 'Unable to link your LinkedIn profile!'
