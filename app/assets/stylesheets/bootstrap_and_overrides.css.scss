@@ -1,0 +1,11 @@
+@import "bootstrap";
+body { padding-top: 60px; }
+@import "bootstrap-responsive";
+@import 'font-awesome';
+
+.navbar .brand-image {
+    max-height: 40px;
+    overflow: visible;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
