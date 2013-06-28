@@ -11,34 +11,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130626065929) do
+ActiveRecord::Schema.define(version: 20130628062406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "githubs", force: true do |t|
+    t.string   "nickname"
+    t.string   "profile_image"
+    t.boolean  "hireable"
+    t.text     "bio"
+    t.integer  "public_repos_count"
+    t.integer  "number_followers"
+    t.integer  "number_following"
+    t.integer  "number_gists"
+    t.string   "token"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "linkedins", force: true do |t|
+    t.string   "token"
+    t.string   "headline"
+    t.string   "industry"
+    t.string   "uid"
+    t.string   "profile_url"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: true do |t|
-    t.string   "provider"
     t.string   "uid"
     t.string   "email"
-    t.string   "nickname"
     t.string   "name"
-    t.string   "github_profile_image"
     t.string   "location"
     t.string   "blog"
     t.string   "current_company"
-    t.boolean  "hireable"
     t.text     "description"
-    t.text     "github_bio"
-    t.integer  "public_repos_count"
-    t.integer  "github_number_followers"
-    t.integer  "github_number_following"
-    t.integer  "github_number_public_gists"
-    t.string   "github_token"
-    t.string   "linkedin_token"
-    t.string   "headline"
-    t.string   "industry"
-    t.string   "linkedin_uid"
-    t.string   "linkedin_profile_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
