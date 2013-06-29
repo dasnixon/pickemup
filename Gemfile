@@ -14,11 +14,13 @@ gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'font-awesome-sass-rails'
 gem 'annotate'
+gem 'httparty'
 
 #OAUTH
 gem 'oauth2'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-github'
+gem 'linkedin'
 
 #JAVASCRIPT
 gem 'angularjs-rails'

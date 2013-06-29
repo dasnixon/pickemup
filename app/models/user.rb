@@ -15,8 +15,8 @@
 #
 
 class User < ActiveRecord::Base
-  has_one :github
-  has_one :linkedin
+  has_one :github, dependent: :destroy
+  has_one :linkedin, dependent: :destroy
 
   def self.from_omniauth(auth)
     User.where(auth.slice(:uid)).first_or_create do |user|
