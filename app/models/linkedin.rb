@@ -14,6 +14,10 @@
 #
 
 class Linkedin < ActiveRecord::Base
+  after_create :grab_user_information
+
+  has_one :profile, dependent: :destroy
+
   #http://developer.linkedin.com/documents/profile-api
   URL = "https://api.linkedin.com/v1"
   #http://developer.linkedin.com/documents/profile-fields
@@ -32,12 +36,12 @@ class Linkedin < ActiveRecord::Base
     self.save!
   end
 
-  def profile(options={})
+  def get_profile(options={})
     path = person_path(options)
     simple_query(path, {oauth2_access_token: self.token, format: 'json'})
   end
 
-  def connections(options={})
+  def get_connections(options={})
     path = "#{person_path(options)}/connections"
     simple_query(path, {oauth2_access_token: self.token, format: 'json'})
   end
@@ -107,5 +111,9 @@ class Linkedin < ActiveRecord::Base
         v.nil? ? escape(k) : "#{CGI.escape(k.to_s)}=#{CGI.escape(v.to_s)}"
       end
     }.join("&")
+  end
+
+  def grab_user_information
+    LinkedinWorker.perform_async(self.id)
   end
 end

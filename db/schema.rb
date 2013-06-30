@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130628062406) do
+ActiveRecord::Schema.define(version: 20130630043135) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "hstore"
+
+  create_table "educations", force: true do |t|
+    t.text     "activities"
+    t.string   "degree"
+    t.string   "field_of_study"
+    t.text     "notes"
+    t.string   "school_name"
+    t.string   "start_year"
+    t.string   "end_year"
+    t.string   "education_key"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "githubs", force: true do |t|
     t.string   "nickname"
@@ -38,6 +53,32 @@ ActiveRecord::Schema.define(version: 20130628062406) do
     t.string   "uid"
     t.string   "profile_url"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "positions", force: true do |t|
+    t.string   "industry"
+    t.string   "company_type"
+    t.string   "name"
+    t.string   "size"
+    t.string   "company_key"
+    t.boolean  "is_current"
+    t.string   "title"
+    t.text     "summary"
+    t.string   "start_year"
+    t.string   "start_month"
+    t.integer  "profile_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "profiles", force: true do |t|
+    t.integer  "number_connections"
+    t.integer  "number_recommenders"
+    t.text     "summary"
+    t.string   "skills",              array: true
+    t.integer  "linkedin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

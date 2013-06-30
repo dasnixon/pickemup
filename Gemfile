@@ -4,6 +4,7 @@ gem 'rails', '4.0.0'
 
 #DATABASES
 gem 'pg'
+gem 'pg-hstore'
 
 #FRONT-END
 gem 'haml-rails'
@@ -15,6 +16,9 @@ gem 'jquery-rails'
 gem 'font-awesome-sass-rails'
 gem 'annotate'
 gem 'httparty'
+gem 'sidekiq'
+gem 'sinatra'
+gem 'slim'
 
 #OAUTH
 gem 'oauth2'

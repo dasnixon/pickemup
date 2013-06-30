@@ -33,6 +33,8 @@ GEM
     bootstrap-sass (2.3.2.0)
       sass (~> 3.2)
     builder (3.1.4)
+    celluloid (0.14.1)
+      timers (>= 1.0.0)
     coderay (1.0.9)
     coffee-rails (4.0.0)
       coffee-script (>= 2.2.0)
@@ -41,6 +43,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    connection_pool (1.1.0)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     execjs (1.4.0)
@@ -110,12 +113,15 @@ GEM
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     pg (0.15.1)
+    pg-hstore (1.1.7)
     polyglot (0.3.3)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
       slop (~> 3.4)
     rack (1.5.2)
+    rack-protection (1.5.0)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.0)
@@ -135,6 +141,9 @@ GEM
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.0.4)
+    redis-namespace (1.3.0)
+      redis (~> 3.0.0)
     rspec-core (2.13.1)
     rspec-expectations (2.13.0)
       diff-lcs (>= 1.1.3, < 2.0)
@@ -156,6 +165,19 @@ GEM
       rdoc (~> 3.10)
     shoulda-matchers (2.2.0)
       activesupport (>= 3.0.0)
+    sidekiq (2.12.4)
+      celluloid (>= 0.14.1)
+      connection_pool (>= 1.0.0)
+      json
+      redis (>= 3.0)
+      redis-namespace
+    sinatra (1.4.3)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
+    slim (2.0.0)
+      temple (~> 0.6.5)
+      tilt (~> 1.3, >= 1.3.3)
     slop (3.4.5)
     sprockets (2.10.0)
       hike (~> 1.2)
@@ -166,10 +188,12 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    temple (0.6.5)
     thor (0.18.1)
     thread_safe (0.1.0)
       atomic
     tilt (1.4.1)
+    timers (1.1.0)
     treetop (1.4.14)
       polyglot
       polyglot (>= 0.3.1)
@@ -201,11 +225,15 @@ DEPENDENCIES
   omniauth-github
   omniauth-linkedin-oauth2
   pg
+  pg-hstore
   pry
   rails (= 4.0.0)
   rspec-rails
   sass-rails (~> 4.0.0)
   sdoc
   shoulda-matchers
+  sidekiq
+  sinatra
+  slim
   uglifier (>= 1.3.0)
   unicorn
