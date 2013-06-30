@@ -20,8 +20,8 @@ class Linkedin < ActiveRecord::Base
 
   has_one :profile, dependent: :destroy
 
-  def from_omniauth(auth, token)
-    self.token         = token
+  def from_omniauth(auth)
+    self.token         = auth.credentials.token
     self.headline      = auth.info.description
     self.industry      = auth.extra.raw_info.industry
     self.uid           = auth.uid

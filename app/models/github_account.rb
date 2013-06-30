@@ -1,10 +1,10 @@
 class GithubAccount < ActiveRecord::Base
   belongs_to :user
-  has_many :repos, class_name: 'Repo', foreign_key: 'github_account_id'
+  has_many :repos, class_name: 'Repo', foreign_key: 'github_account_id', dependent: :destroy
 
   after_create :grab_github_information
 
-  def from_omniauth(auth, token)
+  def from_omniauth(auth)
     info                    = auth.info
     extra_info              = auth.extra.raw_info
     self.nickname           = info.nickname
@@ -15,7 +15,7 @@ class GithubAccount < ActiveRecord::Base
     self.number_followers   = extra_info.followers
     self.number_following   = extra_info.following
     self.number_gists       = extra_info.public_gists
-    self.token              = token
+    self.token              = auth.credentials.token
     self.save!
   end
 

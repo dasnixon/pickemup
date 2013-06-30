@@ -1,8 +1,10 @@
 class Profile < ActiveRecord::Base
   has_many :positions, dependent: :destroy
   has_many :educations, dependent: :destroy
+  belongs_to :linkedin
 
-  def from_omniauth(profile)
+  def from_omniauth
+    profile = self.linkedin.get_profile
     self.summary = profile['summary']
     self.number_connections = profile['numConnections']
     self.number_recommenders = profile['numRecommenders']
@@ -13,9 +15,11 @@ class Profile < ActiveRecord::Base
   end
 
   def self.format_skills(profile)
-    profile['skills']['values'].inject([]) do |skills, collection|
-      skills << collection['skill']['name']
-      skills
+    if profile['skills'].present?
+      profile['skills']['values'].inject([]) do |skills, collection|
+        skills << collection['skill']['name']
+        skills
+      end
     end
   end
 end
