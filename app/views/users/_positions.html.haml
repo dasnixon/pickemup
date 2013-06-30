@@ -1,0 +1,22 @@
+%h3 Positions
+
+%table.table
+  %tr
+    %th Company Name
+    %th Industry
+    %th Company Type
+    %th Company Size
+    %th Current Job?
+    %th Title
+    %th.span5 Summary
+    %th Start Date
+  - current_user.linkedin.profile.positions.each do |position|
+    %tr
+      %td= position.name
+      %td= position.industry
+      %td= position.company_type
+      %td= position.size
+      %td= position.is_current?
+      %td= position.title
+      %td.span5= position.summary
+      %td #{Date::MONTHNAMES[position.start_month.to_i]} of #{position.start_year}

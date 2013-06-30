@@ -1,0 +1,18 @@
+%h3 Education
+
+%table.table
+  %tr
+    %th School Name
+    %th Field of Study
+    %th Degree
+    %th.span5 Activities
+    %th Notes
+    %th Dates Attended
+  - current_user.linkedin.profile.educations.each do |education|
+    %tr
+      %td= education.school_name
+      %td= education.field_of_study
+      %td= education.degree
+      %td.span5= education.activities
+      %td= education.notes
+      %td #{education.start_year} - #{education.end_year}

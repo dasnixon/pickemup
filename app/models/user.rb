@@ -15,10 +15,10 @@
 #
 
 class User < ActiveRecord::Base
-  has_one :github, dependent: :destroy
+  has_one :github, class_name: 'GithubAccount', dependent: :destroy
   has_one :linkedin, dependent: :destroy
 
-  def self.from_omniauth(auth)
+  def self.from_omniauth(auth, token)
     User.where(auth.slice(:uid)).first_or_create do |user|
       info                 = auth.info
       extra_info           = auth.extra.raw_info
@@ -27,7 +27,7 @@ class User < ActiveRecord::Base
       user.location        = extra_info.location
       user.blog            = extra_info.blog
       user.current_company = extra_info.company
-      user.build_github.from_omniauth(auth)
+      user.build_github_account.from_omniauth(auth, token)
     end
   end
 

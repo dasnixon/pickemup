@@ -1,6 +1,6 @@
-class CreateGithubs < ActiveRecord::Migration
+class CreateGithubAccounts < ActiveRecord::Migration
   def change
-    create_table :githubs do |t|
+    create_table :github_accounts do |t|
       t.string     :nickname
       t.string     :profile_image
       t.boolean    :hireable

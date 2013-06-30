@@ -1,0 +1,7 @@
+%h3 Skills
+
+%table.table
+  - current_user.linkedin.profile.skills.each_slice(6) do |group|
+    %tr
+      - group.each do |skill|
+        %td= skill

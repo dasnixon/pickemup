@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130630043135) do
+ActiveRecord::Schema.define(version: 20130630094116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20130630043135) do
     t.datetime "updated_at"
   end
 
-  create_table "githubs", force: true do |t|
+  create_table "github_accounts", force: true do |t|
     t.string   "nickname"
     t.string   "profile_image"
     t.boolean  "hireable"
@@ -79,6 +79,24 @@ ActiveRecord::Schema.define(version: 20130630043135) do
     t.text     "summary"
     t.string   "skills",              array: true
     t.integer  "linkedin_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "repos", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "private"
+    t.string   "url"
+    t.string   "language"
+    t.integer  "number_forks"
+    t.integer  "number_watchers"
+    t.integer  "size"
+    t.integer  "open_issues"
+    t.datetime "started"
+    t.datetime "last_updated"
+    t.string   "repo_key"
+    t.integer  "github_account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

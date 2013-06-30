@@ -10,24 +10,27 @@ gem 'pg-hstore'
 gem 'haml-rails'
 gem 'bootstrap-sass'
 gem 'sass-rails', '~> 4.0.0'
-gem 'coffee-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'jquery-rails'
 gem 'font-awesome-sass-rails'
-gem 'annotate'
-gem 'httparty'
+
+#Queues
 gem 'sidekiq'
 gem 'sinatra'
 gem 'slim'
+
+#APIs
+gem 'linkedin'
+gem 'github_api'
 
 #OAUTH
 gem 'oauth2'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-github'
-gem 'linkedin'
 
 #JAVASCRIPT
 gem 'angularjs-rails'
+gem 'jquery-rails'
+gem 'coffee-rails', '~> 4.0.0'
 
 gem 'jbuilder', '~> 1.2'
 
@@ -38,7 +41,13 @@ end
 #WEB SERVERS
 gem 'unicorn'
 
+#ENV VARIABLES (application.yml)
 gem 'figaro'
+
+#OTHER
+gem 'annotate'
+gem 'httparty'
+
 
 group :test, :development do
   gem 'pry'

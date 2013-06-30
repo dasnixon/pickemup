@@ -3,6 +3,7 @@
     %li= image_tag(current_user.github.profile_image, class: 'img-rounded brand-image')
 = link_to 'Pickemup', root_path, class: 'brand'
 %ul.nav
+  %li= link_to 'My Resume', resume_user_path(id: current_user.id) if user_signed_in?
   %li= link_to 'About', about_path
   %li= link_to 'Contact', contact_path
 %ul.nav.pull-right

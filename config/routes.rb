@@ -8,7 +8,11 @@ Pickemup::Application.routes.draw do
     get :contact
   end
   get "log_out" => "sessions#destroy", as: "log_out"
-  resources :users
+  resources :users, only: [:edit, :update] do
+    member do
+      get :resume
+    end
+  end
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
   root 'home#index'
