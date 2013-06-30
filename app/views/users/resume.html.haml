@@ -1,7 +1,7 @@
 %h2 Github Information
 = render 'repos'
 
-- if current_user.try(:has_linkedin_synced?)
+- if @user.try(:has_linkedin_synced?)
   %h2 Linkedin Information
   = render 'skills'
   = render 'positions'

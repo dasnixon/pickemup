@@ -9,7 +9,7 @@
     %th # Watchers
     %th Started
     %th Last Updated
-  - current_user.github_account.repos.each do |repo|
+  - @user.github_account.repos.each do |repo|
     %tr
       %td= link_to repo.name, repo.url
       %td.span5= repo.description
