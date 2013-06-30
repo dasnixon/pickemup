@@ -20,15 +20,6 @@ class Linkedin < ActiveRecord::Base
 
   has_one :profile, dependent: :destroy
 
-  #http://developer.linkedin.com/documents/profile-api
-  URL = "https://api.linkedin.com/v1"
-  #http://developer.linkedin.com/documents/profile-fields
-  PROFILE_FIELDS = %w(summary positions languages num-connections industry
-    skills certifications educations num-recommenders interests email-address)
-  DEFAULT_HEADERS = {
-    'x-li-format' => 'json'
-  }
-
   def from_omniauth(auth, token)
     self.token         = token
     self.headline      = auth.info.description

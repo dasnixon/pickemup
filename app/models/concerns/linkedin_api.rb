@@ -1,6 +1,15 @@
 module LinkedinApi
   include ActiveSupport::Concern
 
+  #http://developer.linkedin.com/documents/profile-api
+  URL = "https://api.linkedin.com/v1"
+  #http://developer.linkedin.com/documents/profile-fields
+  PROFILE_FIELDS = %w(summary positions languages num-connections industry
+    skills certifications educations num-recommenders interests email-address)
+  DEFAULT_HEADERS = {
+    'x-li-format' => 'json'
+  }
+
   private
 
   def raise_errors(response)

@@ -1,6 +1,6 @@
 - if user_signed_in?
   %ul.nav.pull-left
-    %li= image_tag(current_user.github.profile_image, class: 'img-rounded brand-image')
+    %li= image_tag(current_user.github_account.profile_image, class: 'img-rounded brand-image')
 = link_to 'Pickemup', root_path, class: 'brand'
 %ul.nav
   %li= link_to 'My Resume', resume_user_path(id: current_user.id) if user_signed_in?

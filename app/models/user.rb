@@ -15,7 +15,7 @@
 #
 
 class User < ActiveRecord::Base
-  has_one :github, class_name: 'GithubAccount', dependent: :destroy
+  has_one :github_account, dependent: :destroy
   has_one :linkedin, dependent: :destroy
 
   def self.from_omniauth(auth, token)

@@ -1,6 +1,6 @@
 class GithubAccount < ActiveRecord::Base
   belongs_to :user
-  has_many repos, class_name: 'Repo', foreign_key: 'github_account_id'
+  has_many :repos, class_name: 'Repo', foreign_key: 'github_account_id'
 
   after_create :grab_github_information
 
