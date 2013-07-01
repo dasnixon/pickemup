@@ -17,6 +17,21 @@ ActiveRecord::Schema.define(version: 20130704004306) do
   enable_extension "plpgsql"
   enable_extension "hstore"
 
+  create_table "companies", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_salt"
+    t.string   "password_hash"
+    t.string   "description"
+    t.string   "website"
+    t.string   "industry"
+    t.string   "num_employees"
+    t.boolean  "public",        default: false
+    t.date     "founded"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "educations", force: true do |t|
     t.text     "activities"
     t.string   "degree"

@@ -14,6 +14,10 @@ Pickemup::Application.routes.draw do
       get :resume
     end
   end
+  resources :companies, only: [:new, :create]
+  get "/company_log_in" => "sessions#company_sign_in", :as => "company_log_in"
+  post "/company_log_in" => "sessions#company"
+  get "companies/sign_up" => "companies#new", :as => "company_sign_up"
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
   root 'home#index'

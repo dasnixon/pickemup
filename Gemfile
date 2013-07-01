@@ -25,11 +25,12 @@ gem 'slim'
 gem 'linkedin'
 gem 'github_api'
 
-#OAUTH
+#AUTHENTICATION
 gem 'oauth2'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-github'
 gem 'omniauth-stackexchange'
+gem "bcrypt-ruby", :require => "bcrypt"
 
 #JAVASCRIPT
 gem 'angularjs-rails'
