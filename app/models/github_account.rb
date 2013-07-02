@@ -1,6 +1,28 @@
+# == Schema Information
+#
+# Table name: github_accounts
+#
+#  id                 :integer          not null, primary key
+#  nickname           :string(255)
+#  profile_image      :string(255)
+#  hireable           :boolean
+#  bio                :text
+#  public_repos_count :integer
+#  number_followers   :integer
+#  number_following   :integer
+#  number_gists       :integer
+#  token              :string(255)
+#  user_id            :integer
+#  created_at         :datetime
+#  updated_at         :datetime
+#
+
 class GithubAccount < ActiveRecord::Base
+  include Extensions
+
   belongs_to :user
   has_many :repos, class_name: 'Repo', foreign_key: 'github_account_id', dependent: :destroy
+  has_many :organizations, dependent: :destroy
 
   after_create :grab_github_information
 
@@ -24,8 +46,16 @@ class GithubAccount < ActiveRecord::Base
   end
 
   def setup_information
-    repos = get_repos
-    Repo.from_omniauth(repos, self.id)
+    Repo.from_omniauth(get_repos, self.id)
+    Organization.from_omniauth(get_organizations, self.id)
+  end
+
+  def most_common_language
+    self.repos.collect { |repo| repo.language }.mode
+  end
+
+  def get_org_information(name)
+    github_api_setup.orgs.get(name)
   end
 
   private
@@ -35,6 +65,10 @@ class GithubAccount < ActiveRecord::Base
   end
 
   def get_repos
-    repos = github_api_setup.repos.list
+    github_api_setup.repos.list
+  end
+
+  def get_organizations
+    github_api_setup.organizations.list
   end
 end

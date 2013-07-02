@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: profiles
+#
+#  id                  :integer          not null, primary key
+#  number_connections  :integer
+#  number_recommenders :integer
+#  summary             :text
+#  skills              :string(255)
+#  linkedin_id         :integer
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+
 class Profile < ActiveRecord::Base
   has_many :positions, dependent: :destroy
   has_many :educations, dependent: :destroy

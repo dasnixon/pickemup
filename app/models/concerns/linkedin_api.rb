@@ -1,5 +1,5 @@
 module LinkedinApi
-  include ActiveSupport::Concern
+  extend ActiveSupport::Concern
 
   #http://developer.linkedin.com/documents/profile-api
   URL = "https://api.linkedin.com/v1"

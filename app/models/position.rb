@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: positions
+#
+#  id           :integer          not null, primary key
+#  industry     :string(255)
+#  company_type :string(255)
+#  name         :string(255)
+#  size         :string(255)
+#  company_key  :string(255)
+#  is_current   :boolean
+#  title        :string(255)
+#  summary      :text
+#  start_year   :string(255)
+#  start_month  :string(255)
+#  profile_id   :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class Position < ActiveRecord::Base
   belongs_to :profile
 

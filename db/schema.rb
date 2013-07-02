@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130630094116) do
+ActiveRecord::Schema.define(version: 20130701224056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,22 @@ ActiveRecord::Schema.define(version: 20130630094116) do
     t.string   "uid"
     t.string   "profile_url"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "organizations", force: true do |t|
+    t.string   "name"
+    t.string   "avatar_url"
+    t.string   "url"
+    t.string   "organization_key"
+    t.string   "location"
+    t.integer  "number_followers"
+    t.integer  "number_following"
+    t.string   "blog"
+    t.integer  "public_repos_count"
+    t.string   "company_type"
+    t.integer  "github_account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

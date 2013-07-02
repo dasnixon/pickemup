@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: educations
+#
+#  id             :integer          not null, primary key
+#  activities     :text
+#  degree         :string(255)
+#  field_of_study :string(255)
+#  notes          :text
+#  school_name    :string(255)
+#  start_year     :string(255)
+#  end_year       :string(255)
+#  education_key  :string(255)
+#  profile_id     :integer
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
 class Education < ActiveRecord::Base
   belongs_to :profile
 

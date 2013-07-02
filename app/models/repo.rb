@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: repos
+#
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  description       :text
+#  private           :boolean
+#  url               :string(255)
+#  language          :string(255)
+#  number_forks      :integer
+#  number_watchers   :integer
+#  size              :integer
+#  open_issues       :integer
+#  started           :datetime
+#  last_updated      :datetime
+#  repo_key          :string(255)
+#  github_account_id :integer
+#  created_at        :datetime
+#  updated_at        :datetime
+#
+
 class Repo < ActiveRecord::Base
   belongs_to :github_account
 
