@@ -1,7 +1,11 @@
-%h3 Skills
-
-%table.table
-  - @user.linkedin.profile.skills.try(:each_slice, 6) do |group|
-    %tr
-      - group.each do |skill|
-        %td= skill
+.accordion-group
+  .accordion-heading
+    %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseSkills' }
+      %h4 Skills
+  #collapseSkills{ class: 'accordion-body collapse' }
+    .accordion-inner
+      %table.table
+        - @user.linkedin.profile.skills.try(:each_slice, 6) do |group|
+          %tr
+            - group.each do |skill|
+              %td= skill

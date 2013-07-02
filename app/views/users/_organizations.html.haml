@@ -1,9 +1,12 @@
-%h3 Organizations
-
-.row-fluid
-  %ul
-    - @user.github_account.organizations.each do |org|
-      %li.span1.text-center
-        %h5= link_to(org.name, org.url, target: '_blank')
-        = image_tag(org.avatar_url, width: '50', height: '30')
-
+.accordion-group
+  .accordion-heading
+    %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseOrg' }
+      %h4 Organizations
+  #collapseOrg{ class: 'accordion-body collapse' }
+    .accordion-inner
+      .row-fluid
+        %ul
+          - @user.github_account.organizations.each do |org|
+            %li.span1.text-center
+              %h5= link_to(org.name, org.url, target: '_blank')
+              = image_tag(org.avatar_url, width: '50', height: '30')

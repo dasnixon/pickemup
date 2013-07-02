@@ -1,12 +1,20 @@
-%h2 Github Information
-
 %h4 Most Common Language
 %h5= @user.github_account.most_common_language
-= render 'repos'
-= render 'organizations'
 
-- if @user.try(:has_linkedin_synced?)
-  %h2 Linkedin Information
-  = render 'skills'
-  = render 'positions'
-  = render 'education'
+%hr
+%p
+  %i.icon-github.icon-2x
+    Github Information
+
+.accordion#accordion
+  = render 'repos'
+  = render 'organizations'
+
+  - if @user.try(:has_linkedin_synced?)
+    %hr
+    %p
+      %i.icon-linkedin.icon-2x
+        Linkedin Information
+    = render 'skills'
+    = render 'positions'
+    = render 'education'
