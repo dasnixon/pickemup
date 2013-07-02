@@ -13,6 +13,9 @@ gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'font-awesome-sass-rails'
 
+#CRON
+gem 'whenever', require: false
+
 #Queues
 gem 'sidekiq'
 gem 'sinatra'
@@ -26,6 +29,7 @@ gem 'github_api'
 gem 'oauth2'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-github'
+gem 'omniauth-stackoverflow'
 
 #JAVASCRIPT
 gem 'angularjs-rails'
