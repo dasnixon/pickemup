@@ -29,7 +29,7 @@ gem 'github_api'
 gem 'oauth2'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-github'
-gem 'omniauth-stackoverflow'
+gem 'omniauth-stackexchange'
 
 #JAVASCRIPT
 gem 'angularjs-rails'
