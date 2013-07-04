@@ -124,9 +124,9 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    omniauth-stackoverflow (1.0.1)
-      httparty
-      omniauth-oauth2 (~> 1.1.1)
+    omniauth-stackexchange (0.2.0)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
     pg (0.15.1)
     pg-hstore (1.1.7)
     polyglot (0.3.3)
@@ -243,7 +243,7 @@ DEPENDENCIES
   oauth2
   omniauth-github
   omniauth-linkedin-oauth2
-  omniauth-stackoverflow
+  omniauth-stackexchange
   pg
   pg-hstore
   pry

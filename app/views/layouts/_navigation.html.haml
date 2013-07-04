@@ -13,6 +13,10 @@
         = link_to '/auth/linkedin_oauth2' do
           Link your
           %i.icon-linkedin
+    - unless current_user.has_stackexchange_synced?
+      %li
+        = link_to '/auth/stackexchange' do
+          Link your Stackoverflow
     %li= link_to('Logout', log_out_path)
   - else
     %li
