@@ -18,3 +18,9 @@
     = render 'skills'
     = render 'positions'
     = render 'education'
+
+%hr
+%p
+  %i.icon-stackexchange.icon-2x
+    Stackoverflow Information
+= render 'stackoverflow' if @stackexchange

@@ -9,5 +9,6 @@ class UsersController < ApplicationController
 
   def resume
     @user = User.find_by_id(params[:id])
+    @stackexchange = @user.stackexchange if @user
   end
 end
