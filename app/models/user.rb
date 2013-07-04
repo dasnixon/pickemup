@@ -17,6 +17,7 @@
 class User < ActiveRecord::Base
   has_one :github_account, dependent: :destroy
   has_one :linkedin, dependent: :destroy
+  has_one :stackexchange, dependent: :destroy
 
   def self.from_omniauth(auth)
     User.where(auth.slice(:uid)).first_or_create do |user|
@@ -33,5 +34,9 @@ class User < ActiveRecord::Base
 
   def has_linkedin_synced?
     self.linkedin.try(:uid).present?
+  end
+
+  def has_stackexchange_synced?
+    self.stackexchange.try(:uid).present?
   end
 end
