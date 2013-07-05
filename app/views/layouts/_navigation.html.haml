@@ -18,8 +18,13 @@
         = link_to '/auth/stackexchange' do
           Link your Stackoverflow
     %li= link_to('Logout', log_out_path)
+  - elsif company_signed_in?
+    %li= link_to('Logout', log_out_path)
   - else
     %li
       = link_to '/auth/github' do
         Login with
         %i.icon-github
+    %li
+      = link_to company_log_in_path do
+        Company Log in
