@@ -1,4 +1,20 @@
 class SessionsController < ApplicationController
+  def company_sign_in
+  end
+
+  def company
+    company = Company.authenticate(params[:email], params[:password])
+    if company.present?
+      session[:company_id] = company.id
+      flash[:success] = "Signed in!"
+      redirect_to root_path
+    else
+      session[:company_id] = nil
+      flash[:error] = "Unable to sign you in."
+      redirect_to root_path
+    end
+  end
+
   def github
     user = User.from_omniauth(request.env['omniauth.auth'])
     if user.present?
@@ -20,7 +36,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:company_id] = session[:user_id] = nil
     redirect_to root_url, notice: 'Logged out!'
   end
 
