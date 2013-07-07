@@ -19,6 +19,7 @@
           Link your Stackoverflow
     %li= link_to('Logout', log_out_path)
   - elsif company_signed_in?
+    %li= link_to('Edit Profile', edit_company_path(current_user))
     %li= link_to('Logout', log_out_path)
   - else
     %li
