@@ -1,0 +1,36 @@
+%h2
+  = @company.name
+= form_for @company do |f|
+  %p
+    = f.label :email
+    = f.text_field :email
+  %p
+    = f.label :name
+    = f.text_field :name
+  %p
+    = f.label :description
+    = f.text_area :description
+  %p
+    = f.label :website
+    = f.text_field :website
+  %p
+    = f.label :industry
+    = f.text_field :industry
+  %p
+    = f.label "Number of Employees"
+    = f.text_field :num_employees
+  %p
+    = f.label "Publicly Held?"
+    = f.check_box :public
+  %p
+    = f.label "Year Founded"
+    = f.text_field :founded, :value => @company.founded.year
+  %h4 Change Password
+  %p
+    = f.label "New Password"
+    = f.password_field :password
+  %p
+    = f.label "New Password Confirmation"
+    = f.password_field :password_confirmation
+  = f.submit :submit
+
