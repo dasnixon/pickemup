@@ -6,8 +6,7 @@ class SessionsController < ApplicationController
     company = Company.authenticate(params[:email], params[:password])
     if company.present?
       session[:company_id] = company.id
-      flash[:success] = "Signed in!"
-      redirect_to root_path
+      redirect_to root_path, notice: "Signed in!"
     else
       session[:company_id] = nil
       flash[:error] = "Unable to sign you in."
