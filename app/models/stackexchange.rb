@@ -34,4 +34,19 @@ class Stackexchange < ActiveRecord::Base
     self.stackexchange_key = auth.extra.raw_info.user_id
     self.save!
   end
+
+  def update_stackexchange
+    stackexchange_info = get_stackexchange_info
+    self.update_attributes(
+      display_name:  stackexchange_info.display_name,
+      reputation:    stackexchange_info.reputation,
+      age:           stackexchange_info.age,
+      profile_image: stackexchange_info.profile_image,
+      badges:        stackexchange_info.badge_counts
+    )
+  end
+
+  def get_stackexchange_info
+    @info ||= Serel::AccessToken.new(self.token).user
+  end
 end

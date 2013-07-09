@@ -22,16 +22,16 @@ class Education < ActiveRecord::Base
   def self.from_omniauth(profile, id)
     if profile['educations'] && profile['educations'].has_key?('values')
       profile['educations']['values'].each do |education|
-        Education.create(profile_id: id) do |e|
-          e.activities     = education['activities']
-          e.degree         = education['degree']
-          e.field_of_study = education['fieldOfStudy']
-          e.notes          = education['notes']
-          e.school_name    = education['schoolName']
-          e.education_key  = education['id']
-          e.start_year     = education['startDate']['year']
-          e.end_year       = education['endDate']['year']
-        end
+        edu = Education.find_or_initialize_by_education_key_and_profile_id(education['id'].to_s, id)
+        edu.update_attributes(
+          activities:     education['activities'],
+          degree:         education['degree'],
+          field_of_study: education['fieldOfStudy'],
+          notes:          education['notes'],
+          school_name:    education['schoolName'],
+          start_year:     education['startDate']['year'],
+          end_year:       education['endDate']['year']
+        )
       end
     end
   end

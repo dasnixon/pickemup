@@ -17,22 +17,22 @@ class Profile < ActiveRecord::Base
   has_many :educations, dependent: :destroy
   belongs_to :linkedin
 
-  def from_omniauth
-    profile = self.linkedin.get_profile
-    self.summary = profile['summary']
-    self.number_connections = profile['numConnections']
+  def from_omniauth(profile=nil)
+    profile                  = self.linkedin.get_profile unless profile.present?
+    self.summary             = profile['summary']
+    self.number_connections  = profile['numConnections']
     self.number_recommenders = profile['numRecommenders']
-    self.skills = self.class.format_skills(profile)
+    self.skills              += self.format_skills(profile)
     self.save!
     Position.from_omniauth(profile, self.id)
     Education.from_omniauth(profile, self.id)
   end
 
-  def self.format_skills(profile)
+  def format_skills(profile)
     if profile['skills'].present?
-      profile['skills']['values'].inject([]) do |skills, collection|
-        skills << collection['skill']['name']
-        skills
+      profile['skills']['values'].inject([]) do |code_skills, collection|
+        code_skills << collection['skill']['name'] unless self.skills.include?(collection['skill']['name'])
+        code_skills
       end
     end
   end

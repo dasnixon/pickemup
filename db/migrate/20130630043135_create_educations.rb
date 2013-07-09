@@ -12,5 +12,7 @@ class CreateEducations < ActiveRecord::Migration
       t.belongs_to :profile
       t.timestamps
     end
+
+    add_index :educations, :education_key
   end
 end

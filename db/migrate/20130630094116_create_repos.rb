@@ -16,5 +16,7 @@ class CreateRepos < ActiveRecord::Migration
       t.belongs_to :github_account
       t.timestamps
     end
+
+    add_index :repos, :repo_key
   end
 end
