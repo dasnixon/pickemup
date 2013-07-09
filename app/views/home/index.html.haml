@@ -1,6 +1,8 @@
 - if user_signed_in?
   Welcome #{current_user.name}
 - elsif company_signed_in?
-  Fill out your info and start finding developers now.
+  - unless current_user.subscription
+    = link_to "Start your subscription", subscriptions_path(:company_id => current_user.id)
+    Fill out your info and start finding developers now.
 - else
   Sign in with Github then link your LinkedIn

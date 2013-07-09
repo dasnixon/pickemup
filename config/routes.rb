@@ -18,6 +18,13 @@ Pickemup::Application.routes.draw do
   get "/company_log_in" => "sessions#company_sign_in", :as => "company_log_in"
   post "/company_log_in" => "sessions#company"
   get "companies/sign_up" => "companies#new", :as => "company_sign_up"
+  resources :subscriptions, except: [:destroy] do
+    member do
+      get 'edit_card'
+      post 'edit_card'
+    end
+  end
+  match '/subscriptions_listener' => 'subscriptions#listener', :via => [ :post, :get ]
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
   root 'home#index'
