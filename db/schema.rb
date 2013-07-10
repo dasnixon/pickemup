@@ -46,6 +46,8 @@ ActiveRecord::Schema.define(version: 20130704004306) do
     t.datetime "updated_at"
   end
 
+  add_index "educations", ["education_key"], name: "index_educations_on_education_key", using: :btree
+
   create_table "github_accounts", force: true do |t|
     t.string   "nickname"
     t.string   "profile_image"
@@ -56,10 +58,13 @@ ActiveRecord::Schema.define(version: 20130704004306) do
     t.integer  "number_following"
     t.integer  "number_gists"
     t.string   "token"
+    t.string   "github_account_key"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "github_accounts", ["github_account_key"], name: "index_github_accounts_on_github_account_key", using: :btree
 
   create_table "linkedins", force: true do |t|
     t.string   "token"
@@ -71,6 +76,8 @@ ActiveRecord::Schema.define(version: 20130704004306) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "linkedins", ["uid"], name: "index_linkedins_on_uid", using: :btree
 
   create_table "organizations", force: true do |t|
     t.string   "name"
@@ -88,6 +95,8 @@ ActiveRecord::Schema.define(version: 20130704004306) do
     t.datetime "updated_at"
   end
 
+  add_index "organizations", ["organization_key"], name: "index_organizations_on_organization_key", using: :btree
+
   create_table "positions", force: true do |t|
     t.string   "industry"
     t.string   "company_type"
@@ -104,11 +113,13 @@ ActiveRecord::Schema.define(version: 20130704004306) do
     t.datetime "updated_at"
   end
 
+  add_index "positions", ["company_key"], name: "index_positions_on_company_key", using: :btree
+
   create_table "profiles", force: true do |t|
     t.integer  "number_connections"
     t.integer  "number_recommenders"
     t.text     "summary"
-    t.string   "skills",              array: true
+    t.string   "skills",              default: [], array: true
     t.integer  "linkedin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -132,6 +143,8 @@ ActiveRecord::Schema.define(version: 20130704004306) do
     t.datetime "updated_at"
   end
 
+  add_index "repos", ["repo_key"], name: "index_repos_on_repo_key", using: :btree
+
   create_table "stackexchanges", force: true do |t|
     t.string   "token"
     t.string   "uid"
@@ -148,6 +161,8 @@ ActiveRecord::Schema.define(version: 20130704004306) do
     t.datetime "updated_at"
   end
 
+  add_index "stackexchanges", ["stackexchange_key"], name: "index_stackexchanges_on_stackexchange_key", using: :btree
+
   create_table "users", force: true do |t|
     t.string   "uid"
     t.string   "email"
@@ -159,5 +174,8 @@ ActiveRecord::Schema.define(version: 20130704004306) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["email"], name: "index_users_on_email", using: :btree
+  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
 
 end

@@ -38,11 +38,8 @@ class GithubAccount < ActiveRecord::Base
     self.number_following   = extra_info.following
     self.number_gists       = extra_info.public_gists
     self.token              = auth.credentials.token
-    self.save!
-  end
-
-  def grab_github_information
-    GithubWorker.perform_async(self.id)
+    self.github_account_key = extra_info.id
+    self.save! if self.changed?
   end
 
   def setup_information
@@ -59,6 +56,10 @@ class GithubAccount < ActiveRecord::Base
   end
 
   private
+
+  def grab_github_information
+    GithubWorker.perform_async(self.id)
+  end
 
   def github_api_setup
     @github_api ||= Github.new(oauth_token: self.token)

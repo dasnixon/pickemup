@@ -23,19 +23,19 @@ class Organization < ActiveRecord::Base
 
   def self.from_omniauth(organizations, github_id)
     organizations.each do |org|
-      Organization.create(github_account_id: github_id) do |o|
-        org_info = o.github_account.get_org_information(org.login)
-        o.avatar_url         = org.avatar_url
-        o.organization_key   = org.id
-        o.name               = org_info.try(:name) || org.login
-        o.url                = org_info.html_url
-        o.location           = org_info.try(:location)
-        o.company_type       = org_info.type
-        o.blog               = org_info.try(:blog)
-        o.number_followers   = org_info.followers
-        o.number_following   = org_info.following
-        o.public_repos_count = org_info.public_repos
-      end
+      organization = Organization.find_or_initialize_by_organization_key_and_github_account_id(org.id.to_s, github_id)
+      org_info = organization.github_account.get_org_information(org.login)
+      organization.update_attributes(
+        avatar_url:         org.avatar_url,
+        name:               (org_info.try(:name) || org.login),
+        url:                org_info.html_url,
+        location:           org_info.try(:location),
+        company_type:       org_info.type,
+        blog:               org_info.try(:blog),
+        number_followers:   org_info.followers,
+        number_following:   org_info.following,
+        public_repos_count: org_info.public_repos
+      )
     end
   end
 end

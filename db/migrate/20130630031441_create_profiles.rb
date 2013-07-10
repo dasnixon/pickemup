@@ -4,7 +4,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.integer    :number_connections
       t.integer    :number_recommenders
       t.text       :summary
-      t.string     :skills, array: true
+      t.string     :skills, array: true, default: []
       t.belongs_to :linkedin
       t.timestamps
     end

@@ -24,6 +24,7 @@ gem 'slim'
 #APIs
 gem 'linkedin'
 gem 'github_api'
+gem 'serel' #stackoverflow
 
 #AUTHENTICATION
 gem 'oauth2'

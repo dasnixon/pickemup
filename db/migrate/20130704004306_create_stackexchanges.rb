@@ -14,5 +14,7 @@ class CreateStackexchanges < ActiveRecord::Migration
       t.belongs_to :user
       t.timestamps
     end
+
+    add_index :stackexchanges, :stackexchange_key
   end
 end

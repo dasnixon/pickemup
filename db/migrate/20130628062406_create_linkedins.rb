@@ -9,5 +9,7 @@ class CreateLinkedins < ActiveRecord::Migration
       t.belongs_to :user
       t.timestamps
     end
+
+    add_index :linkedins, :uid
   end
 end

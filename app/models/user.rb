@@ -19,16 +19,15 @@ class User < ActiveRecord::Base
   has_one :linkedin, dependent: :destroy
   has_one :stackexchange, dependent: :destroy
 
+  attr_accessor :newly_created
+
   def self.from_omniauth(auth)
     User.where(auth.slice(:uid)).first_or_create do |user|
-      info                 = auth.info
-      extra_info           = auth.extra.raw_info
-      user.name            = info.name
-      user.email           = info.email
-      user.location        = extra_info.location
-      user.blog            = extra_info.blog
-      user.current_company = extra_info.company
+      user.newly_created = true
+      user.set_attributes(auth)
       user.build_github_account.from_omniauth(auth)
+    end.tap do |user| #update user's token in case it has expired/changed
+      user.update_information(auth) unless user.newly_created
     end
   end
 
@@ -38,5 +37,28 @@ class User < ActiveRecord::Base
 
   def has_stackexchange_synced?
     self.stackexchange.try(:uid).present?
+  end
+
+  def update_resume
+    self.github_account.setup_information
+    self.linkedin.update_linkedin if self.has_linkedin_synced?
+    self.stackexchange.update_stackexchange if self.has_stackexchange_synced?
+  end
+
+  def update_information(auth)
+    UserInformationWorker.perform_async(self.id) #this will call the update_resume method
+    self.set_attributes(auth)
+    self.github_account.from_omniauth(auth)
+  end
+
+  def set_attributes(auth)
+    info                 = auth.info
+    extra_info           = auth.extra.raw_info
+    self.name            = info.name
+    self.email           = info.email
+    self.location        = extra_info.location
+    self.blog            = extra_info.blog
+    self.current_company = extra_info.company
+    self.save! if !self.newly_created && self.changed?
   end
 end

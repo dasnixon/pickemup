@@ -14,5 +14,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.belongs_to :github_account
       t.timestamps
     end
+
+    add_index :organizations, :organization_key
   end
 end

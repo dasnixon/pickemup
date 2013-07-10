@@ -14,5 +14,7 @@ class CreatePositions < ActiveRecord::Migration
       t.belongs_to :profile
       t.timestamps
     end
+
+    add_index :positions, :company_key
   end
 end
