@@ -26,7 +26,7 @@ class Linkedin < ActiveRecord::Base
     self.industry      = auth.extra.raw_info.industry
     self.uid           = auth.uid
     self.profile_url   = auth.extra.raw_info.publicProfileUrl
-    self.save!
+    self.save! if self.changed?
   end
 
   def get_profile(options={})
@@ -37,6 +37,15 @@ class Linkedin < ActiveRecord::Base
   def get_connections(options={})
     path = "#{person_path(options)}/connections"
     simple_query(path, {oauth2_access_token: self.token, format: 'json'})
+  end
+
+  def update_linkedin
+    profile = self.get_profile
+    self.headline = profile['headline']
+    self.industry = profile['industry']
+    self.profile_url = profile['publicProfileUrl']
+    self.save!
+    self.profile.from_omniauth(profile) if self.profile.present?
   end
 
   private

@@ -24,20 +24,20 @@ class Position < ActiveRecord::Base
   def self.from_omniauth(profile, id)
     if profile['positions'].present?
       profile['positions']['values'].each do |position|
-        Position.create(profile_id: id) do |p|
-          company_info   = position['company']
-          p.industry     = company_info['industry']
-          p.company_type = company_info['type']
-          p.name         = company_info['name']
-          p.size         = company_info['size']
-          p.company_type = company_info['type']
-          p.company_key  = company_info['id']
-          p.is_current   = position['isCurrent']
-          p.start_year   = position['startDate']['year']
-          p.start_month  = position['startDate']['month']
-          p.summary      = position['summary']
-          p.title        = position['title']
-        end
+        company_info = position['company']
+        pos = Position.find_or_initialize_by_company_key_and_profile_id(company_info['id'].to_s, id)
+        pos.update_attributes(
+          industry:      company_info['industry'],
+          company_type:  company_info['type'],
+          name:          company_info['name'],
+          size:          company_info['size'],
+          company_type:  company_info['type'],
+          is_current:    position['isCurrent'],
+          start_year:    position['startDate']['year'],
+          start_month:   position['startDate']['month'],
+          summary:       position['summary'],
+          title:         position['title']
+        )
       end
     end
   end

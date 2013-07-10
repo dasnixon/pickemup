@@ -5,7 +5,7 @@ module LinkedinApi
   URL = "https://api.linkedin.com/v1"
   #http://developer.linkedin.com/documents/profile-fields
   PROFILE_FIELDS = %w(summary positions languages num-connections industry
-    skills certifications educations num-recommenders interests email-address)
+    skills certifications educations num-recommenders interests email-address first-name last-name headline public-profile-url)
   DEFAULT_HEADERS = {
     'x-li-format' => 'json'
   }
