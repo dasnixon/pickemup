@@ -10,17 +10,27 @@
   = render 'repos'
   = render 'organizations'
 
+  %hr
+  %p
+    %i.icon-linkedin.icon-2x
+      Linkedin Information
+
   - if @user.try(:has_linkedin_synced?)
-    %hr
-    %p
-      %i.icon-linkedin.icon-2x
-        Linkedin Information
     = render 'skills'
     = render 'positions'
     = render 'education'
+  - else
+    = link_to '/auth/linkedin_oauth2', class: 'btn btn-info' do
+      %i.icon-linkedin
+      %strong | Link your Linkedin
 
 %hr
 %p
   %i.icon-stackexchange.icon-2x
     Stackoverflow Information
-= render 'stackoverflow' if @stackexchange
+- if @stackexchange
+  = render 'stackoverflow'
+- else
+  = link_to '/auth/stackexchange', class: 'btn btn-warning' do
+    %i.icon-stackexchange
+    %strong | Link your Stackexchange
