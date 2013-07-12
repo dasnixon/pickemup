@@ -10,7 +10,7 @@ class CompaniesController < ApplicationController
     unless params[:company][:email].blank? || params[:company][:password].blank? || params[:company][:password_confirmation].blank?
       if @company.save
         session[:company_id] = @company.id
-        redirect_to root_path, notice: "You've just created a new company!"
+        redirect_to new_subscription_path(:company_id => @company.id), notice: "You've just created a new company!"
       else
         @company.errors.messages.each { |error, message| flash[:error] = message.join(', ') }
         render :new

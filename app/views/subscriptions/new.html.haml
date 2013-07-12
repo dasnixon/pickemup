@@ -1,0 +1,17 @@
+= render "shared/stripe_js_head"
+%div{class: "container"}
+  %div{id: "stripe_error"}
+    %h3 New Subscription
+
+  = form_for @subscription  do |f|
+
+    = label_tag 'Subscription Plan:'
+    = select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => ['Plan 2 - $50.00/month', 2])
+
+    %div{id: "subscription"}
+      = render "shared/subscription_form"
+
+    = hidden_field_tag :email, @company.email
+    = hidden_field_tag :company_id, @company.id
+    = hidden_field nil, :stripe_card_token
+    = f.submit

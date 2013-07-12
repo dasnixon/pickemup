@@ -1,5 +1,4 @@
-%h2
-  = @company.name
+%h2 Company Info
 = form_for @company do |f|
   %p
     = f.label :email
@@ -24,7 +23,7 @@
     = f.check_box :public
   %p
     = f.label "Year Founded"
-    = f.text_field :founded, :value => @company.founded.year
+    = f.text_field :founded, :value => @company.founded ? @company.founded.year : ""
   %h4 Change Password
   %p
     = f.label "New Password"
@@ -33,4 +32,6 @@
     = f.label "New Password Confirmation"
     = f.password_field :password_confirmation
   = f.submit :submit
+%h4
+  = link_to "Change Billing Info", edit_subscription_path(:company_id => @company.id)
 
