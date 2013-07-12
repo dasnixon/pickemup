@@ -1,0 +1,4 @@
+- content_for :head do
+  %script{type: "text/javascript", src: "https://js.stripe.com/v1/"}
+  %script{type: "text/javascript"}
+    Stripe.setPublishableKey("#{ENV["STRIPE_PUBLIC_KEY"]}");

@@ -1,0 +1,30 @@
+%h4 Edit Subscription
+= form_for @subscription do |f|
+
+  %div
+    = label_tag "Subscription Status: #{@subscription.active ? 'Active' : 'Inactive'}"
+
+  %div
+    = label_tag 'Subscription Plan:'
+    = select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => @subscription.plan)
+
+  - if @subscription.active
+    %div
+      = label_tag "Cancel Subscription:"
+      = radio_button_tag :cancel_subscription, true
+      = label_tag "Yes"
+
+      = radio_button_tag :cancel_subscription, false, :checked => true
+      = label_tag "No"
+  - else
+    %div
+      = label_tag "Reactivate Subscription:"
+      = radio_button_tag :reactivate_subscription, true
+      = label_tag "Yes"
+      = radio_button_tag :reactivate_subscription, false
+      = label_tag "No"
+  = hidden_field_tag :company_id, @subscription.company_id
+
+  = f.submit "Update"
+%h4
+  = link_to "Change Card", edit_card_subscription_path(:id => @subscription.id)

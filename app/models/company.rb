@@ -19,7 +19,8 @@
 
 class Company < ActiveRecord::Base
   attr_accessor :password
-  before_save :encrypt_password, :clean_url
+  before_save :encrypt_password
+  before_update :clean_url #TODO fix this validation
 
   validates_confirmation_of :password, :message => "Password/Password Confirmation is invalid"
   validates_presence_of :password, :on => :create
@@ -27,6 +28,8 @@ class Company < ActiveRecord::Base
   validates_uniqueness_of :email
   validate :password_strength, :on => :create
   validates_format_of :email, :with => /[\w|\d]{1,}@[\w|\d]*[.][\w|\d]*/, :message => "Email is invalid."
+
+  has_one :subscription
 
   def password_strength
     errors.add(:password_length, "Password must be at least 8 characters") unless password.length >= 8
