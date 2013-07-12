@@ -64,6 +64,10 @@ class GithubAccount < ActiveRecord::Base
     self.repos.collect { |repo| repo.repo_key }
   end
 
+  def github_url
+    "https://github.com/#{self.nickname}"
+  end
+
   private
 
   def grab_github_information

@@ -1,7 +1,7 @@
 .accordion-group
   .accordion-heading
     %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseRepo' }
-      %h4 Repositories
+      %h4 Repositories (#{@github_account.public_repos_count})
   #collapseRepo{ class: 'accordion-body collapse' }
     .accordion-inner
       %table.table
@@ -13,7 +13,7 @@
           %th # Watchers
           %th Started
           %th Last Updated
-        - @user.github_account.repos.each do |repo|
+        - @repos.each do |repo|
           %tr
             %td= link_to repo.name, repo.url
             %td.span5= repo.description
