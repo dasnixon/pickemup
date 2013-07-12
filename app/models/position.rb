@@ -21,8 +21,9 @@
 class Position < ActiveRecord::Base
   belongs_to :profile
 
-  def self.from_omniauth(profile, id)
+  def self.from_omniauth(profile, id, position_keys=nil)
     if profile['positions'].present?
+      Position.remove_positions(profile['positions']['values'], position_keys) if position_keys.present?
       profile['positions']['values'].each do |position|
         company_info = position['company']
         pos = Position.find_or_initialize_by_company_key_and_profile_id(company_info['id'].to_s, id)
@@ -39,6 +40,12 @@ class Position < ActiveRecord::Base
           title:         position['title']
         )
       end
+    end
+  end
+
+  def self.remove_positions(positions, position_keys)
+    (position_keys - positions.collect { |pos| pos['company']['id'].to_s }).each do |diff_id|
+      Position.where(company_key: diff_id).first.try(:destroy)
     end
   end
 end

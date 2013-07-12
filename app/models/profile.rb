@@ -6,7 +6,7 @@
 #  number_connections  :integer
 #  number_recommenders :integer
 #  summary             :text
-#  skills              :string(255)
+#  skills              :string(255)      default([])
 #  linkedin_id         :integer
 #  created_at          :datetime
 #  updated_at          :datetime
@@ -22,16 +22,24 @@ class Profile < ActiveRecord::Base
     self.summary             = profile['summary']
     self.number_connections  = profile['numConnections']
     self.number_recommenders = profile['numRecommenders']
-    self.skills              += self.format_skills(profile)
+    self.skills              = self.class.get_skills(profile)
     self.save!
-    Position.from_omniauth(profile, self.id)
-    Education.from_omniauth(profile, self.id)
+    Position.from_omniauth(profile, self.id, self.collected_position_keys)
+    Education.from_omniauth(profile, self.id, self.collected_education_keys)
   end
 
-  def format_skills(profile)
+  def collected_position_keys
+    self.positions.collect { |pos| pos.company_key }
+  end
+
+  def collected_education_keys
+    self.educations.collect { |edu| edu.education_key }
+  end
+
+  def self.get_skills(profile)
     if profile['skills'].present?
       profile['skills']['values'].inject([]) do |code_skills, collection|
-        code_skills << collection['skill']['name'] unless self.skills.include?(collection['skill']['name'])
+        code_skills << collection['skill']['name']
         code_skills
       end
     end

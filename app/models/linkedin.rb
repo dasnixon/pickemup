@@ -18,6 +18,7 @@ class Linkedin < ActiveRecord::Base
 
   after_create :grab_user_information
 
+  belongs_to :user
   has_one :profile, dependent: :destroy
 
   def from_omniauth(auth)
@@ -40,9 +41,9 @@ class Linkedin < ActiveRecord::Base
   end
 
   def update_linkedin
-    profile = self.get_profile
-    self.headline = profile['headline']
-    self.industry = profile['industry']
+    profile          = self.get_profile
+    self.headline    = profile['headline']
+    self.industry    = profile['industry']
     self.profile_url = profile['publicProfileUrl']
     self.save!
     self.profile.from_omniauth(profile) if self.profile.present?

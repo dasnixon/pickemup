@@ -1,3 +1,22 @@
+# == Schema Information
+#
+# Table name: companies
+#
+#  id            :integer          not null, primary key
+#  name          :string(255)
+#  email         :string(255)
+#  password_salt :string(255)
+#  password_hash :string(255)
+#  description   :string(255)
+#  website       :string(255)
+#  industry      :string(255)
+#  num_employees :string(255)
+#  public        :boolean          default(FALSE)
+#  founded       :date
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
 class Company < ActiveRecord::Base
   attr_accessor :password
   before_save :encrypt_password, :clean_url
