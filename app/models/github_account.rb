@@ -12,6 +12,7 @@
 #  number_following   :integer
 #  number_gists       :integer
 #  token              :string(255)
+#  github_account_key :string(255)
 #  user_id            :integer
 #  created_at         :datetime
 #  updated_at         :datetime
@@ -43,8 +44,8 @@ class GithubAccount < ActiveRecord::Base
   end
 
   def setup_information
-    Repo.from_omniauth(get_repos, self.id)
-    Organization.from_omniauth(get_organizations, self.id)
+    Repo.from_omniauth(get_repos, self.id, self.collected_repo_keys)
+    Organization.from_omniauth(get_organizations, self.id, self.collected_org_keys)
   end
 
   def most_common_language
@@ -53,6 +54,14 @@ class GithubAccount < ActiveRecord::Base
 
   def get_org_information(name)
     github_api_setup.orgs.get(name)
+  end
+
+  def collected_org_keys
+    self.organizations.collect { |org| org.organization_key }
+  end
+
+  def collected_repo_keys
+    self.repos.collect { |repo| repo.repo_key }
   end
 
   private

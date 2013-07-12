@@ -21,7 +21,8 @@
 class Organization < ActiveRecord::Base
   belongs_to :github_account
 
-  def self.from_omniauth(organizations, github_id)
+  def self.from_omniauth(organizations, github_id, org_keys=nil)
+    Organization.remove_orgs(organizations, org_keys) if org_keys.present?
     organizations.each do |org|
       organization = Organization.find_or_initialize_by_organization_key_and_github_account_id(org.id.to_s, github_id)
       org_info = organization.github_account.get_org_information(org.login)
@@ -36,6 +37,12 @@ class Organization < ActiveRecord::Base
         number_following:   org_info.following,
         public_repos_count: org_info.public_repos
       )
+    end
+  end
+
+  def self.remove_orgs(organizations, org_keys)
+    (org_keys - organizations.collect { |org| org.id.to_s }).each do |diff_id|
+      Organization.where(organization_key: diff_id).first.try(:destroy)
     end
   end
 end

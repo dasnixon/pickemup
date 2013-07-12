@@ -23,7 +23,8 @@
 class Repo < ActiveRecord::Base
   belongs_to :github_account
 
-  def self.from_omniauth(repos, github_id)
+  def self.from_omniauth(repos, github_id, repo_keys=nil)
+    Repo.remove_repos(repos, repo_keys) if repo_keys.present?
     repos.each do |repo|
       found_repo = Repo.find_or_initialize_by_repo_key_and_github_account_id(repo.id.to_s, github_id)
       found_repo.update_attributes(
@@ -39,6 +40,12 @@ class Repo < ActiveRecord::Base
         started:         repo.created_at,
         last_updated:    repo.updated_at
       )
+    end
+  end
+
+  def self.remove_repos(repos, repo_keys)
+    (repo_keys - repos.collect { |repo| repo.id.to_s }).each do |diff_id|
+      Repo.where(repo_key: diff_id).first.try(:destroy)
     end
   end
 end

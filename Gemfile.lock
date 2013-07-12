@@ -51,6 +51,11 @@ GEM
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
+    factory_girl (4.2.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.2.1)
+      factory_girl (~> 4.2.0)
+      railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
     figaro (0.7.0)
@@ -235,6 +240,7 @@ DEPENDENCIES
   bcrypt-ruby
   bootstrap-sass
   coffee-rails (~> 4.0.0)
+  factory_girl_rails
   figaro
   font-awesome-rails
   github_api

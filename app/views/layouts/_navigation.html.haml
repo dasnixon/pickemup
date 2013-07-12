@@ -11,12 +11,13 @@
     - unless current_user.has_linkedin_synced?
       %li
         = link_to '/auth/linkedin_oauth2' do
-          Link your
           %i.icon-linkedin
+          | Link your Linkedin
     - unless current_user.has_stackexchange_synced?
       %li
         = link_to '/auth/stackexchange' do
-          Link your Stackoverflow
+          %i.icon-stackexchange
+          | Link your Stackexchange
     %li= link_to('Logout', log_out_path)
   - elsif company_signed_in?
     %li= link_to('Edit Profile', edit_company_path(current_user))
