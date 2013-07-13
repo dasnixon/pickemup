@@ -11,3 +11,11 @@
  *= require_self
  *= require_tree .
  */
+link {
+  text-decoration: none;
+}
+
+.sign-up:link {
+  color: white;
+  text-decoration: none;
+}

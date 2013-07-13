@@ -5,4 +5,8 @@
     = link_to "Start your subscription", subscriptions_path(:company_id => current_user.id)
     Fill out your info and start finding developers now.
 - else
-  Sign in with Github then link your LinkedIn
+  %div{:class => "btn btn-success"}
+    = link_to "Companies Start Here", new_company_path, :class => 'sign-up'
+  or
+  %div{:class => "btn btn-primary"}
+    = link_to "Developers Start Here", '/auth/github', :class => 'sign-up'
