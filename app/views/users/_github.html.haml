@@ -1,0 +1,17 @@
+%p
+  %i.icon-github.icon-2x
+    Github Information
+  %span.nickname_link
+    = link_to @github_account.nickname, @github_account.github_url, target: '_blank'
+
+  .same_line_padder
+    %strong Followers:
+    #{@github_account.number_followers}
+
+  .same_line_padder
+    %strong Following:
+    #{@github_account.number_following}
+
+  .accordion
+    = render 'repos'
+    = render 'organizations'

@@ -12,7 +12,7 @@
           %th.span5 Activities
           %th Notes
           %th Dates Attended
-        - @user.linkedin.profile.educations.each do |education|
+        - @educations.each do |education|
           %tr
             %td= education.school_name
             %td= education.field_of_study

@@ -1,0 +1,23 @@
+%p
+  %i.icon-linkedin.icon-2x
+    Linkedin Information
+    %span.nickname_link
+      = link_to @user.name, @linkedin.profile_url, target: '_blank' if @linkedin.present?
+
+  .same_line_padder
+    %strong Connections:
+    #{@profile.number_connections}
+
+  .same_line_padder
+    %strong Recommendations:
+    #{@profile.number_recommenders}
+
+  - if @linkedin.present?
+    .accordion
+      = render 'skills'
+      = render 'positions'
+      = render 'education'
+  - else
+    = link_to '/auth/linkedin_oauth2', class: 'btn btn-info' do
+      %i.icon-linkedin
+      %strong | Link your Linkedin

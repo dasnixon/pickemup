@@ -1,0 +1,9 @@
+%p
+  %i.icon-stackexchange.icon-2x
+    Stackoverflow Information
+  - if @stackexchange
+    = render 'stackoverflow'
+  - else
+    = link_to '/auth/stackexchange', class: 'btn btn-warning' do
+      %i.icon-stackexchange
+      %strong | Link your Stackexchange

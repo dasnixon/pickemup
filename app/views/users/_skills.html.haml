@@ -2,10 +2,8 @@
   .accordion-heading
     %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseSkills' }
       %h4 Skills
-  #collapseSkills{ class: 'accordion-body collapse' }
+  #collapseSkills{ class: 'accordion-body collapse', 'ng-controller' => 'Skills', 'ng-init' => "init(#{@user.id})"}
     .accordion-inner
       %table.table
-        - @user.linkedin.profile.skills.try(:each_slice, 6) do |group|
-          %tr
-            - group.each do |skill|
-              %td= skill
+        %tr{'ng-repeat' => 'row in rows'}
+          %td{'ng-repeat' => 'skill in row'} {{skill}}

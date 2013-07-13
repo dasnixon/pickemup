@@ -14,7 +14,7 @@
           %th Title
           %th.span5 Summary
           %th Start Date
-        - @user.linkedin.profile.positions.each do |position|
+        - @positions.each do |position|
           %tr
             %td= position.name
             %td= position.industry

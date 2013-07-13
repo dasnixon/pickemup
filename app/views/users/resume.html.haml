@@ -1,36 +1,7 @@
-%h4 Most Common Language
-%h5= @user.github_account.most_common_language
-
+= render 'common_language'
 %hr
-%p
-  %i.icon-github.icon-2x
-    Github Information
-
-.accordion#accordion
-  = render 'repos'
-  = render 'organizations'
-
-  %hr
-  %p
-    %i.icon-linkedin.icon-2x
-      Linkedin Information
-
-  - if @user.try(:has_linkedin_synced?)
-    = render 'skills'
-    = render 'positions'
-    = render 'education'
-  - else
-    = link_to '/auth/linkedin_oauth2', class: 'btn btn-info' do
-      %i.icon-linkedin
-      %strong | Link your Linkedin
-
+= render 'github'
 %hr
-%p
-  %i.icon-stackexchange.icon-2x
-    Stackoverflow Information
-- if @stackexchange
-  = render 'stackoverflow'
-- else
-  = link_to '/auth/stackexchange', class: 'btn btn-warning' do
-    %i.icon-stackexchange
-    %strong | Link your Stackexchange
+= render 'linkedin'
+%hr
+= render 'stackexchange'
