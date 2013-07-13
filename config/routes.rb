@@ -12,6 +12,7 @@ Pickemup::Application.routes.draw do
   resources :users, only: [:edit, :update] do
     member do
       get :resume
+      get :skills
     end
   end
   resources :companies
