@@ -4,6 +4,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :user_signed_in?, :company_signed_in?
 
+  def check_invalid_permissions
+    redirect_to root_path, error: 'You do not have permissions to view this page' if not_valid_user?
+  end
+
+  private
+
+  def intercept_html_requests
+    if params[:format] == 'ng'
+      render("/#{params[:controller]}/#{params[:action]}.html.haml", layout: false)
+    elsif request.format == Mime::HTML
+      render('layouts/application')
+    end
+  end
   private
 
   def current_user
@@ -13,6 +26,10 @@ class ApplicationController < ActionController::Base
     elsif session[:user_id]
       User.find_by_id(session[:user_id])
     end
+  end
+
+  def not_valid_user?
+    !(current_user == @user)
   end
 
   def user_signed_in?

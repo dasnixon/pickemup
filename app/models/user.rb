@@ -18,8 +18,11 @@ class User < ActiveRecord::Base
   has_one :github_account, dependent: :destroy
   has_one :linkedin, dependent: :destroy
   has_one :stackexchange, dependent: :destroy
+  has_one :preference, dependent: :destroy
 
   attr_accessor :newly_created
+
+  after_create :create_preference
 
   def self.from_omniauth(auth)
     User.where(auth.slice(:uid)).first_or_create do |user|
@@ -60,5 +63,11 @@ class User < ActiveRecord::Base
     self.blog            = extra_info.blog
     self.current_company = extra_info.company
     self.save! if !self.newly_created && self.changed?
+  end
+
+  private
+
+  def create_preference
+    self.build_preference.save
   end
 end

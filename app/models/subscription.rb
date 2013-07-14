@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: subscriptions
+#
+#  id                    :integer          not null, primary key
+#  plan                  :integer
+#  company_id            :integer          not null
+#  stripe_customer_token :string(255)
+#  stripe_card_token     :string(255)
+#  active                :boolean          default(FALSE)
+#  email                 :string(255)
+#  created_at            :datetime
+#  updated_at            :datetime
+#
+
 class Subscription < ActiveRecord::Base
   belongs_to :company
 

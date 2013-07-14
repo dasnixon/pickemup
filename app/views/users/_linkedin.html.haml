@@ -1,18 +1,19 @@
 %p
   %i.icon-linkedin.icon-2x
     Linkedin Information
-    %span.nickname_link
-      = link_to @user.name, @linkedin.profile_url, target: '_blank' if @linkedin.present?
-
-  .same_line_padder
-    %strong Connections:
-    #{@profile.number_connections}
-
-  .same_line_padder
-    %strong Recommendations:
-    #{@profile.number_recommenders}
+    - if @linkedin.present?
+      %span.nickname_link
+        = link_to @user.name, @linkedin.profile_url, target: '_blank'
 
   - if @linkedin.present?
+    .same_line_padder
+      %strong Connections:
+      #{@profile.number_connections}
+
+    .same_line_padder
+      %strong Recommendations:
+      #{@profile.number_recommenders}
+
     .accordion
       = render 'skills'
       = render 'positions'
