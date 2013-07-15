@@ -1,0 +1,11 @@
+<p>
+  Perks:
+</p>
+<table class='table table-bordered'>
+  <tr ng-repeat="row in data.perks">
+    <td ng-repeat="perk in row">
+      {{perk.name}}:
+      <input type="checkbox" ng-model="perk.checked"\>
+    </td>
+  </tr>
+</table>

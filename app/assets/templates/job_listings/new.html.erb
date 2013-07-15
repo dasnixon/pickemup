@@ -1,0 +1,6 @@
+<h2> New Job Listing </h2>
+<div ng-controller = "JobListingCtrl">
+  <form class='jobListing', name='jobListingForm', ng-submit="create()">
+    <ng-include src="'/assets/job_listings/_job_listing_form.html.erb'" />
+  </form>
+</div>

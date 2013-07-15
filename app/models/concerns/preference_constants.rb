@@ -32,4 +32,12 @@ module PreferenceConstants
   REMOTE        = ["No", "Yes", "I'm open to remote work"]
 
   COMPANY_SIZE  = ["1-10 Employees", "11-50 Employees", "51-200 Employees", "201-500 Employees", "501+ Employees"]
+
+  EXPERIENCE_LEVEL = ['N/A', 'Junior', 'Mid-level', 'Senior', 'Executive']
+
+  SPECIAL_CHARACTERISTICS = ['Entrepreneur', 'Blogger', 'Open Source Committer']
+
+  ACCEPTABLE_LANGUAGES = ['Ruby', 'Python', 'Javascript', 'Java', 'PHP', 'Scala', 'C', 'C++', 'C#', 'Objective C', 'Clojure']
+
+  POSITION_TYPE = ['Individual Contributor', 'Manager', 'Tech Lead', 'Executive']
 end

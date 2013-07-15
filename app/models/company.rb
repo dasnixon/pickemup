@@ -33,6 +33,7 @@ class Company < ActiveRecord::Base
   validates_format_of :email, :with => /[\w|\d]{1,}@[\w|\d]*[.][\w|\d]*/, :message => "Email is invalid."
 
   has_one :subscription
+  has_many :job_listings
 
   acts_as_messageable
 

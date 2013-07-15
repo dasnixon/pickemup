@@ -1,0 +1,11 @@
+<p>
+  Practices:
+</p>
+<table class='table table-bordered'>
+  <tr ng-repeat="row in data.practices">
+    <td ng-repeat="practice in row">
+      {{practice.name}}:
+      <input type="checkbox" ng-model="practice.checked"\>
+    </td>
+  </tr>
+</table>
