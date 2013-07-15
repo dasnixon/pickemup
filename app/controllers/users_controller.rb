@@ -1,15 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :find_user, only: [:resume, :skills, :preferences]
-  before_filter :check_invalid_permissions, only: [:preferences]
+  before_filter :find_user, except: [:resume]
+  before_filter :eager_load_user, only: [:resume]
+  before_filter :check_invalid_permissions, only: [:preferences, :get_preference, :update_preference]
   respond_to :json, :html
-
-  def edit
-
-  end
-
-  def update
-
-  end
 
   def resume
     if @user
@@ -19,9 +12,9 @@ class UsersController < ApplicationController
       @stackexchange  = @user.stackexchange
       @linkedin       = @user.linkedin
       if @linkedin
-        @profile        = @linkedin.profile
-        @positions      = @profile.positions
-        @educations     = @profile.educations
+        @profile      = @linkedin.profile
+        @positions    = @profile.positions
+        @educations   = @profile.educations
       end
     end
   end
@@ -34,25 +27,27 @@ class UsersController < ApplicationController
   end
 
   def get_preference
-    user = User.find(params[:id])
-    respond_with user.try(:preference)
+    respond_with @user.try(:preference)
   end
 
   def update_preference
-    user = User.find(params[:id])
-    preference = user.preference
+    preference = @user.preference
     preference.update_attributes(preference_params)
     respond_with(preference)
   end
 
   private
 
-  def find_user
+  def eager_load_user
     @user ||= User.includes(
       stackexchange: [],
       github_account: [:repos, :organizations],
       linkedin: {profile: [:positions, :educations]}
     ).find(params[:id]) #eager load all user information
+  end
+
+  def find_user
+    @user ||= User.find(params[:id])
   end
 
   def preference_params

@@ -10,7 +10,7 @@ Pickemup::Application.routes.draw do
     get :contact
   end
   get "log_out" => "sessions#destroy", as: "log_out"
-  resources :users, only: [:edit, :update] do
+  resources :users, only: [] do
     member do
       get :resume
       get :skills

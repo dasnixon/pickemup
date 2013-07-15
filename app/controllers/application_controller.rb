@@ -10,15 +10,6 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def intercept_html_requests
-    if params[:format] == 'ng'
-      render("/#{params[:controller]}/#{params[:action]}.html.haml", layout: false)
-    elsif request.format == Mime::HTML
-      render('layouts/application')
-    end
-  end
-  private
-
   def current_user
     @current_user ||=
     if session[:company_id]
