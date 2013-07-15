@@ -1,32 +1,34 @@
 - if user_signed_in?
   %ul.nav.pull-left
     %li= image_tag(current_user.github_account.profile_image, class: 'img-rounded brand-image')
-= link_to 'Pickemup', root_path, class: 'brand'
+= link_to_self 'Pickemup', root_path, class: 'brand'
 %ul.nav
-  %li= link_to 'My Resume', resume_user_path(id: current_user.id) if user_signed_in?
-  %li= link_to 'About', about_path
-  %li= link_to 'Contact', contact_path
+  - if user_signed_in?
+    %li= link_to 'Preferences', "/users/#{current_user.id}/preferences"
+    %li= link_to_self 'My Resume', resume_user_path(id: current_user.id)
+  %li= link_to_self 'About', about_path
+  %li= link_to_self 'Contact', contact_path
 %ul.nav.pull-right
   - if user_signed_in?
     - unless current_user.has_linkedin_synced?
       %li
-        = link_to '/auth/linkedin_oauth2' do
+        = link_to_self '/auth/linkedin_oauth2' do
           %i.icon-linkedin
           | Link your Linkedin
     - unless current_user.has_stackexchange_synced?
       %li
-        = link_to '/auth/stackexchange' do
+        = link_to_self '/auth/stackexchange' do
           %i.icon-stackexchange
           | Link your Stackexchange
     %li= link_to('Logout', log_out_path)
   - elsif company_signed_in?
-    %li= link_to('Edit Profile', edit_company_path(current_user))
-    %li= link_to('Logout', log_out_path)
+    %li= link_to_self('Edit Profile', edit_company_path(current_user))
+    %li= link_to_self('Logout', log_out_path)
   - else
     %li
-      = link_to '/auth/github' do
+      = link_to_self '/auth/github' do
         Login with
         %i.icon-github
     %li
-      = link_to company_log_in_path do
+      = link_to_self company_log_in_path do
         Company Log in
