@@ -1,4 +1,5 @@
 Pickemup::Application.routes.draw do
+  root to: 'home#index'
   scope :auth do
     get '/github/callback', to: 'sessions#github'
     get '/linkedin_oauth2/callback', to: 'sessions#linkedin'
@@ -13,6 +14,9 @@ Pickemup::Application.routes.draw do
     member do
       get :resume
       get :skills
+      get :preferences
+      get :get_preference
+      put :update_preference
     end
   end
   resources :companies
@@ -28,5 +32,4 @@ Pickemup::Application.routes.draw do
   match '/subscriptions_listener' => 'subscriptions#listener', :via => [ :post, :get ]
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
-  root 'home#index'
 end

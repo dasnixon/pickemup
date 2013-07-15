@@ -1,4 +1,5 @@
 config/database.yml
+.ruby-version
 *.rbc
 *.sassc
 .sass-cache

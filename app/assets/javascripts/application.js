@@ -15,4 +15,6 @@
 //= require bootstrap
 //= require angular
 //= require angular-resource
+//= require angular-ui-states
+//= require app/main
 //= require_tree .
