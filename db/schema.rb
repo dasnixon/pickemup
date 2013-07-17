@@ -116,29 +116,33 @@ ActiveRecord::Schema.define(version: 20130713011833) do
   add_index "positions", ["company_key"], name: "index_positions_on_company_key", using: :btree
 
   create_table "preferences", force: true do |t|
-    t.integer   "expected_salary"
-    t.integer   "vacation_days"
-    t.boolean   "healthcare"
-    t.boolean   "equity"
-    t.boolean   "bonuses"
-    t.boolean   "retirement"
-    t.boolean   "fulltime"
-    t.boolean   "remote"
-    t.integer   "potential_availability"
-    t.boolean   "open_source"
-    t.int8range "company_size"
-    t.string    "skills",                 default: [], array: true
-    t.string    "locations",              default: [], array: true
-    t.string    "industries",             default: [], array: true
-    t.string    "positions",              default: [], array: true
-    t.string    "settings",               default: [], array: true
-    t.string    "dress_codes",            default: [], array: true
-    t.string    "company_types",          default: [], array: true
-    t.string    "perks",                  default: [], array: true
-    t.string    "practices",              default: [], array: true
-    t.integer   "user_id"
-    t.datetime  "created_at"
-    t.datetime  "updated_at"
+    t.boolean  "healthcare"
+    t.boolean  "dentalcare"
+    t.boolean  "visioncare"
+    t.boolean  "life_insurance"
+    t.boolean  "paid_vacation"
+    t.boolean  "equity"
+    t.boolean  "bonuses"
+    t.boolean  "retirement"
+    t.boolean  "fulltime"
+    t.integer  "remote"
+    t.boolean  "open_source"
+    t.integer  "expected_salary"
+    t.integer  "potential_availability"
+    t.integer  "company_size"
+    t.integer  "work_hours"
+    t.string   "skills",                 default: [], array: true
+    t.string   "locations",              default: [], array: true
+    t.string   "industries",             default: [], array: true
+    t.string   "positions",              default: [], array: true
+    t.string   "settings",               default: [], array: true
+    t.string   "dress_codes",            default: [], array: true
+    t.string   "company_types",          default: [], array: true
+    t.string   "perks",                  default: [], array: true
+    t.string   "practices",              default: [], array: true
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "profiles", force: true do |t|

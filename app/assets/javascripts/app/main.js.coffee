@@ -1,4 +1,5 @@
-@app = angular.module('Pickemup', ['ngResource', 'ui.compat'])
+@preference_app = angular.module('Preferences', ['ngResource', 'ui.compat'])
+@skill_app = angular.module('Skills', ['ngResource'])
 
 @chunk = (a,s)->
   if a

@@ -32,8 +32,11 @@ class UsersController < ApplicationController
 
   def update_preference
     preference = @user.preference
-    preference.update_attributes(preference_params)
-    respond_with(preference)
+    if preference.update_attributes(preference_params)
+      respond_with(preference)
+    else
+      render json: { errors: preference.errors }, status: :bad_request
+    end
   end
 
   private

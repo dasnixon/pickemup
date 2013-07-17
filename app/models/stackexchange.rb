@@ -19,8 +19,6 @@
 #
 
 class Stackexchange < ActiveRecord::Base
-  include StackexchangeHelper
-
   belongs_to :user
 
   def from_omniauth(auth)
@@ -41,7 +39,7 @@ class Stackexchange < ActiveRecord::Base
     stackexchange_info = get_stackexchange_info
     self.update_attributes(
       display_name:  stackexchange_info.display_name,
-      reputation:    stackexchange_info.reputation.get.collect_reputation,
+      reputation:    stackexchange_info.reputation,
       age:           stackexchange_info.age,
       profile_image: stackexchange_info.profile_image,
       badges:        stackexchange_info.badge_counts
