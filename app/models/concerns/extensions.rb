@@ -5,7 +5,7 @@ module Extensions
     def mode
       group_by do |e|
         e
-      end.values.max_by(&:size).first
+      end.values.max_by(&:size).try(:first)
     end
   end
 end

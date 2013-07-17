@@ -1,4 +1,4 @@
-app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+preference_app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
 
   $stateProvider
@@ -7,6 +7,6 @@ app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
       views:
         "":
           controller: "PreferencesController"
-          templateUrl: "/assets/preferences/edit.html.haml"
+          templateUrl: "/assets/preferences/edit.html.erb"
 
   $urlRouterProvider.otherwise("/")
