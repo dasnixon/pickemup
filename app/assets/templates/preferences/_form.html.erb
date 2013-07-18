@@ -8,15 +8,23 @@
       <input type="text" ng-model="preference.expected_salary" />
       <span class="add-on">.00</span>
     </div>
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.expected_salary">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
-
-<h5>Benefits</h5>
 
 <div class="control-group">
   <label class='control-label' for="title"><i class='icon-plane'></i> Paid vacation?</label>
   <div class="controls">
-    <input type="checkbox" ng-model="preference.vacation" />
+    <input type="checkbox" ng-model="preference.paid_vacation" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.paid_vacation">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -24,27 +32,47 @@
   <label class='control-label' for="title"><i class='icon-medkit'></i> Healthcare?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.healthcare" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.healthcare">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Dental?</label>
+  <label class='control-label' for="title"><i class="icon-smile"></i> Dental?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.dentalcare" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.dentalcare">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Vision?</label>
+  <label class='control-label' for="title"><i class="icon-eye-open"></i> Vision?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.visioncare" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.visioncare">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Life Insurance?</label>
+  <label class='control-label' for="title"><i class="icon-ambulance"></i> Life Insurance?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.life_insurance" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.life_insurance">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -52,6 +80,11 @@
   <label class='control-label' for="title">Equity?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.equity" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.equity">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -59,6 +92,11 @@
   <label class='control-label' for="title">Bonuses?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.bonuses" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.bonuses">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -66,6 +104,11 @@
   <label class='control-label' for="title">Retirement?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.retirement" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.retirement">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -73,6 +116,11 @@
   <label class='control-label' for="title">Fulltime?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.fulltime" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.fulltime">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
@@ -84,38 +132,58 @@
       <option value="1">Yes</option>
       <option value="2">I'm open to remote work</option>
     </select>
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.remote">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Availablity After Hire</label>
+  <label class='control-label' for="title"><i class="icon-calendar"></i> Availablity After Hire</label>
   <div class="controls">
     <div class="input-append">
       <input type="text" ng-model="preference.potential_availability" />
       <span class="add-on">week(s)</span>
     </div>
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.potential_availability">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Open Source?</label>
+  <label class='control-label' for="title"><i class="icon-code"></i> Open Source?</label>
   <div class="controls">
     <input type="checkbox" ng-model="preference.open_source" />
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.open_source">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"># Hours per Week</label>
+  <label class='control-label' for="title"><i class="icon-time"></i> # Hours per Week</label>
   <div class="controls">
     <div class="input-append">
       <input type="text" ng-model="preference.work_hours" />
       <span class="add-on">hour(s)</span>
     </div>
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.work_hours">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Company Size</label>
+  <label class='control-label' for="title"><i class="icon-building"></i> Company Size</label>
   <div class="controls">
     <select ng-model="preference.company_size">
       <option value="0">1-10 Employees</option>
@@ -124,6 +192,11 @@
       <option value="3">201-500 Employees</option>
       <option value="4">501+ Employees</option>
     </select>
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.company_size">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
   </div>
 </div>
 

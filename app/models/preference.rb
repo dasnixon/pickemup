@@ -35,8 +35,19 @@
 class Preference < ActiveRecord::Base
   belongs_to :user
 
-  validates :expected_salery, numericality: true, allow_blank: true
+  validates :expected_salary, numericality: true, inclusion: { in: 1..20000000 }, allow_blank: true
   validates :work_hours, numericality: true, inclusion: { in: 1..168 }, allow_blank: true
   validates :company_size, :potential_availability, numericality: true, inclusion: { in: 0..4 }, allow_blank: true
   validates :remote, numericality: true, inclusion: { in: 0..2 }, allow_blank: true
+
+  REMOTE = {0 => "No", 1 => "Yes", 2 => "I'm open to remote work"}
+  COMPANY_SIZE = {0 => "1-10 Employees", 1 => "11-50 Employees", 2 => "51-200 Employees", 3 => "201-500 Employees", 4 => "501+ Employees"}
+
+  def remote_to_string
+    REMOTE[self.remote]
+  end
+
+  def company_size_to_string
+    COMPANY_SIZE[self.company_size]
+  end
 end
