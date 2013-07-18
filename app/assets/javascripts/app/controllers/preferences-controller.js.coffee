@@ -1,6 +1,9 @@
 preference_app.controller "PreferencesController", ($scope, $http, $location, $state, $stateParams, Preference) ->
 
-  $scope.preference = {}
+  $scope.preference     = {}
+  $scope.errors         = []
+  $scope.success        = ''
+  $scope.error_updating = ''
 
   if $state.current.name == 'edit'
     Preference.getPreference
@@ -8,28 +11,32 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
       action: 'get_preference'
 
     , (response) ->
+      response.expected_salary = response.expected_salary.toLocaleString()
       $scope.preference = response
 
     , (response) ->
+      $scope.error_updating = 'Unable to fetch your preferences at this time.'
 
   $scope.update = ->
     Preference.update
       user_id: $scope.preference.user_id,
       action: 'update_preference',
       preference:
-        expected_salary: $scope.preference.expected_salary
         healthcare: $scope.preference.healthcare
-        vacation_days: $scope.preference.vacation_days
+        dentalcare: $scope.preference.dentalcare
+        visioncare: $scope.preference.visioncare
+        life_insurance: $scope.preference.life_insurance
+        paid_vacation: $scope.preference.paid_vacation
         equity: $scope.preference.equity
         bonuses: $scope.preference.bonuses
         retirement: $scope.preference.retirement
-        perks: $scope.preference.perks
-        practices: $scope.preference.practices
         fulltime: $scope.preference.fulltime
         remote: $scope.preference.remote
-        potential_availability: $scope.preference.potential_availability
         open_source: $scope.preference.open_source
+        expected_salary: $scope.preference.expected_salary.replace(/,/g, "")
+        potential_availability: $scope.preference.potential_availability
         company_size: $scope.preference.company_size
+        work_hours: $scope.preference.work_hours
         skills: $scope.preference.skills
         locations: $scope.preference.locations
         industries: $scope.preference.industries
@@ -37,8 +44,17 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
         settings: $scope.preference.settings
         dress_codes: $scope.preference.dress_codes
         company_types: $scope.preference.company_types
+        perks: $scope.preference.perks
+        practices: $scope.preference.practices
 
     , (response) ->
       $location.path "/users/" + $scope.preference.user_id + "/preferences"
+      $scope.preference.errors          = []
+      $scope.success                    = 'Successfully updated your preferences.'
+      $scope.error_updating             = ''
+      $scope.preference.expected_salary = addCommas($scope.preference.expected_salary)
 
     , (response) ->
+      $scope.preference.errors = response['data']['errors']
+      $scope.error_updating    = 'Unable to update your preferences. See specific error messages below.'
+      $scope.success           = ''
