@@ -16,7 +16,7 @@ class CreatePreferences < ActiveRecord::Migration
       t.integer   :potential_availability
       t.integer   :company_size
       t.integer   :work_hours
-      t.string    :skills,        array: true, default: []
+      t.hstore    :skills,                     default: {}
       t.string    :locations,     array: true, default: []
       t.string    :industries,    array: true, default: []
       t.string    :positions,     array: true, default: []
