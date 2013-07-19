@@ -1,6 +1,7 @@
 preference_app.controller "PreferencesController", ($scope, $http, $location, $state, $stateParams, Preference) ->
 
   $scope.preference     = {}
+  $scope.skills_changed = {}
   $scope.errors         = []
   $scope.success        = ''
   $scope.error_updating = ''
@@ -11,11 +12,23 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
       action: 'get_preference'
 
     , (response) ->
-      response.expected_salary = response.expected_salary.toLocaleString()
+      for name, value of response.skills
+        if value == "true"
+          response.skills[name] = true
+        else
+          response.skills[name] = false
+
+      response.expected_salary = response.expected_salary.toLocaleString() if response.expected_salary
       $scope.preference = response
 
     , (response) ->
       $scope.error_updating = 'Unable to fetch your preferences at this time.'
+
+  $scope.updateSkills = (skill) ->
+    if $scope.preference.skills[skill]
+      $scope.skills_changed[skill] = false
+    else
+      $scope.skills_changed[skill] = true
 
   $scope.update = ->
     Preference.update
@@ -33,11 +46,11 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
         fulltime: $scope.preference.fulltime
         remote: $scope.preference.remote
         open_source: $scope.preference.open_source
-        expected_salary: $scope.preference.expected_salary.replace(/,/g, "")
+        expected_salary: $scope.preference.expected_salary.replace(/,/g, "") if $scope.preference.expected_salary
         potential_availability: $scope.preference.potential_availability
         company_size: $scope.preference.company_size
         work_hours: $scope.preference.work_hours
-        skills: $scope.preference.skills
+        skills: $scope.skills_changed
         locations: $scope.preference.locations
         industries: $scope.preference.industries
         positions: $scope.preference.positions

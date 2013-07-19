@@ -250,14 +250,14 @@ DEPENDENCIES
   annotate
   bcrypt-ruby
   bootstrap-sass
-  coffee-rails (~> 4.0.0)
+  coffee-rails
   factory_girl_rails
   figaro
   font-awesome-rails
   github_api
   haml-rails
   httparty
-  jbuilder (~> 1.2)
+  jbuilder
   jquery-rails
   linkedin
   oauth2
@@ -268,9 +268,9 @@ DEPENDENCIES
   pg-hstore
   pry
   railroady
-  rails (= 4.0.0)
+  rails
   rspec-rails
-  sass-rails (~> 4.0.0)
+  sass-rails
   sdoc
   serel!
   shoulda-matchers
@@ -278,6 +278,6 @@ DEPENDENCIES
   sinatra
   slim
   stripe
-  uglifier (>= 1.3.0)
+  uglifier
   unicorn
   whenever
