@@ -16,6 +16,7 @@ class Profile < ActiveRecord::Base
   has_many :positions, dependent: :destroy
   has_many :educations, dependent: :destroy
   belongs_to :linkedin
+  after_save :set_user_preference_skills
 
   def from_omniauth(profile=nil)
     profile                  = self.linkedin.get_profile unless profile.present?
@@ -43,5 +44,12 @@ class Profile < ActiveRecord::Base
         code_skills
       end
     end
+  end
+
+  private
+
+  #set the skills they prefer, to the skills that are grabbed from linkedin
+  def set_user_preference_skills
+    self.linkedin.user.preference.set_skills(self.skills)
   end
 end

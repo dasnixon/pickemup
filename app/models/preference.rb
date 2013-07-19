@@ -18,7 +18,7 @@
 #  potential_availability :integer
 #  company_size           :integer
 #  work_hours             :integer
-#  skills                 :string(255)      default([])
+#  skills                 :hstore           default({})
 #  locations              :string(255)      default([])
 #  industries             :string(255)      default([])
 #  positions              :string(255)      default([])
@@ -33,6 +33,8 @@
 #
 
 class Preference < ActiveRecord::Base
+  include PreferenceConstants
+
   belongs_to :user
 
   validates :expected_salary, numericality: true, inclusion: { in: 1..20000000 }, allow_blank: true
@@ -40,14 +42,18 @@ class Preference < ActiveRecord::Base
   validates :company_size, :potential_availability, numericality: true, inclusion: { in: 0..4 }, allow_blank: true
   validates :remote, numericality: true, inclusion: { in: 0..2 }, allow_blank: true
 
-  REMOTE = {0 => "No", 1 => "Yes", 2 => "I'm open to remote work"}
-  COMPANY_SIZE = {0 => "1-10 Employees", 1 => "11-50 Employees", 2 => "51-200 Employees", 3 => "201-500 Employees", 4 => "501+ Employees"}
-
   def remote_to_string
     REMOTE[self.remote]
   end
 
   def company_size_to_string
     COMPANY_SIZE[self.company_size]
+  end
+
+  def set_skills(profile_skills)
+    new_skills = {}
+    profile_skills.each { |skill| new_skills[skill] = "false" unless self.skills.has_key?(skill) }
+    self.skills = self.skills.merge(new_skills)
+    self.save!
   end
 end

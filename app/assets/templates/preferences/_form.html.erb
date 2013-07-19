@@ -201,6 +201,18 @@
 </div>
 
 <div class="control-group">
+  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Skills</label>
+  <div class="controls">
+    <table class="table">
+      <tr ng-repeat="(skill, checked) in preference.skills">
+        <td><input type="checkbox" value="{{skill}}" ng-checked="checked" ng-click="updateSkills(skill)" />
+        <span>{{skill}}</span></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="control-group">
   <div class="controls">
     <button class='btn' type="submit">Save</button>
   </div>

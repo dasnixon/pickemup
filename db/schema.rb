@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 20130713011833) do
     t.integer  "potential_availability"
     t.integer  "company_size"
     t.integer  "work_hours"
-    t.string   "skills",                 default: [], array: true
+    t.hstore   "skills",                 default: ""
     t.string   "locations",              default: [], array: true
     t.string   "industries",             default: [], array: true
     t.string   "positions",              default: [], array: true
