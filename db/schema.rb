@@ -131,15 +131,16 @@ ActiveRecord::Schema.define(version: 20130713011833) do
     t.integer  "potential_availability"
     t.integer  "company_size"
     t.integer  "work_hours"
-    t.hstore   "skills",                 default: ""
-    t.string   "locations",              default: [], array: true
-    t.string   "industries",             default: [], array: true
-    t.string   "positions",              default: [], array: true
-    t.string   "settings",               default: [], array: true
-    t.string   "dress_codes",            default: [], array: true
-    t.string   "company_types",          default: [], array: true
-    t.string   "perks",                  default: [], array: true
-    t.string   "practices",              default: [], array: true
+    t.json     "skills"
+    t.json     "locations"
+    t.json     "industries"
+    t.json     "positions"
+    t.json     "settings"
+    t.json     "dress_codes"
+    t.json     "company_types"
+    t.json     "perks"
+    t.json     "practices"
+    t.json     "levels"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

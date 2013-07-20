@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_filter :find_user, except: [:resume]
   before_filter :eager_load_user, only: [:resume]
   before_filter :check_invalid_permissions, only: [:preferences, :get_preference, :update_preference]
-  before_filter :sanitize_skills, only: [:update_preference]
   respond_to :json, :html
 
   def resume
@@ -32,10 +31,11 @@ class UsersController < ApplicationController
   end
 
   def update_preference
-    if @preference.update_attributes(preference_params)
-      respond_with(@preference)
+    preference = @user.preference
+    if preference.update_attributes(preference_params)
+      respond_with(preference)
     else
-      render json: { errors: @preference.errors }, status: :bad_request
+      render json: { errors: preference.errors }, status: :bad_request
     end
   end
 
@@ -54,13 +54,10 @@ class UsersController < ApplicationController
   end
 
   def preference_params
-    params.require(:preference).permit!
-  end
-
-  def sanitize_skills
-    @preference = @user.preference
-    @preference.skills.each do |name, value|
-      preference_params[:skills][name] = value unless preference_params[:skills].has_key?(name)
-    end
+    params.require(:preference).permit(:expected_salary, :paid_vacation,
+      :healthcare, :equity, :bonuses, :retirement, :perks, :practices,
+      :fulltime, :remote, :potential_availability, :open_source, :company_size,
+      :skills, :locations, :industries, :positions, :settings, :dress_codes,
+      :company_types, :dentalcare, :visioncare, :life_insurance, :work_hours)
   end
 end
