@@ -18,15 +18,16 @@
 #  potential_availability :integer
 #  company_size           :integer
 #  work_hours             :integer
-#  skills                 :hstore           default({})
-#  locations              :string(255)      default([])
-#  industries             :string(255)      default([])
-#  positions              :string(255)      default([])
-#  settings               :string(255)      default([])
-#  dress_codes            :string(255)      default([])
-#  company_types          :string(255)      default([])
-#  perks                  :string(255)      default([])
-#  practices              :string(255)      default([])
+#  skills                 :json
+#  locations              :json
+#  industries             :json
+#  positions              :json
+#  settings               :json
+#  dress_codes            :json
+#  company_types          :json
+#  perks                  :json
+#  practices              :json
+#  levels                 :json
 #  user_id                :integer
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -82,11 +83,20 @@ class Preference < ActiveRecord::Base
   end
 
   def set_skills(profile_skills)
-    self.skills = ((self.skills || []) + profile_skills.collect { |skill| {'name' => skill, 'checked' => false} unless self.skills && self.skills.detect { |hash| hash[:name] == skill } }).to_json
+    default_skills = self.skills || []
+    new_skills = profile_skills.collect do |skill|
+      {name: skill, checked: false} unless default_skills.any? { |hash| hash['name'] == skill }
+    end
+    self.skills = (default_skills + new_skills).to_json
+    self.save
   end
 
   def default_hash(attr)
-    ((self.send(attr) || []) + self.class.const_get(attr.upcase).collect{ |value| {'name' => value, 'checked' => false} unless self.send(attr) && self.send(attr).detect { |hash| hash[:name] == value } }).to_json
+    default_hash = self.send(attr) || []
+    default_attributes = self.class.const_get(attr.upcase).collect do |value|
+      {name: value, checked: false} unless default_hash.any? { |hash| hash['name'] == value }
+    end
+    (default_hash + default_attributes).to_json
   end
 
   def set_defaults

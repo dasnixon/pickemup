@@ -12,6 +12,16 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
 
     , (response) ->
       response.expected_salary = response.expected_salary.toLocaleString() if response.expected_salary
+      response.skills = chunk response.skills, 6 if response.skills
+      response.locations = chunk response.locations, 6 if response.locations
+      response.industries = chunk response.industries, 6 if response.industries
+      response.positions = chunk response.positions, 5 if response.positions
+      response.settings = chunk response.settings, 6 if response.settings
+      response.dress_codes = chunk response.dress_codes, 6 if response.dress_codes
+      response.company_types = chunk response.company_types, 6 if response.company_types
+      response.perks = chunk response.perks, 7 if response.perks
+      response.practices = chunk response.practices, 6 if response.practices
+      response.levels = chunk response.levels, 6 if response.levels
       $scope.preference = response
 
     , (response) ->
@@ -37,15 +47,16 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
         potential_availability: $scope.preference.potential_availability
         company_size: $scope.preference.company_size
         work_hours: $scope.preference.work_hours
-        skills: $scope.preference.skills
-        locations: $scope.preference.locations
-        industries: $scope.preference.industries
-        positions: $scope.preference.positions
-        settings: $scope.preference.settings
-        dress_codes: $scope.preference.dress_codes
-        company_types: $scope.preference.company_types
-        perks: $scope.preference.perks
-        practices: $scope.preference.practices
+        skills: unchunk $scope.preference.skills
+        locations: unchunk $scope.preference.locations
+        industries: unchunk $scope.preference.industries
+        positions: unchunk $scope.preference.positions
+        settings: unchunk $scope.preference.settings
+        dress_codes: unchunk $scope.preference.dress_codes
+        company_types: unchunk $scope.preference.company_types
+        perks: unchunk $scope.preference.perks
+        practices: unchunk $scope.preference.practices
+        levels: unchunk $scope.preference.levels
 
     , (response) ->
       $location.path "/users/" + $scope.preference.user_id + "/preferences"

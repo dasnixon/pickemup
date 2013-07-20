@@ -54,10 +54,6 @@ class UsersController < ApplicationController
   end
 
   def preference_params
-    params.require(:preference).permit(:expected_salary, :paid_vacation,
-      :healthcare, :equity, :bonuses, :retirement, :perks, :practices,
-      :fulltime, :remote, :potential_availability, :open_source, :company_size,
-      :skills, :locations, :industries, :positions, :settings, :dress_codes,
-      :company_types, :dentalcare, :visioncare, :life_insurance, :work_hours)
+    params.require(:preference).permit!
   end
 end
