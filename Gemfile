@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails'
+gem 'rails', git: 'git://github.com/rails/rails.git', branch: '4-0-stable'
 
 #DATABASES
 gem 'pg'
