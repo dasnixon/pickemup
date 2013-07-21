@@ -1,0 +1,34 @@
+.pull-left
+  %h3= conversation.subject
+  %h4= t("message.participants")
+  .participants
+    - conversation.recipients.each do |recp|
+      = link_to image_tag(recp.github_account.profile_image, title: recp.name, alt: recp.name, size: '50x50'), resume_user_path(id: recp.id)
+
+.pull-right
+  - unless @box.eql? 'trash'
+    = link_to('Delete', user_conversation_path(user_id: @user.id, id: conversation.id, location: 'conversation', box: @box), |
+           confirm: t('mailboxer.delete_confirm', object: conversation.subject), method: :delete, class: 'btn') |
+
+.span12
+  %hr
+  .editor
+    = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12"
+  .actions
+    = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn"
+  %ul
+  - @receipts.each do |receipt|
+    = render receipt.message
+
+  - unless @box.eql? 'trash'
+    %br
+    = form_tag user_conversation_path(id: conversation.id, user_id: @user.id), method: :put, class: "cont_conversation" do
+      - if @receipt and @receipt.errors.any?
+        .error
+          %h2
+            #{pluralize(@receipt.errors.count, "error")}
+            prohibited this message from being sent:
+          %ul
+          - @receipt.errors.full_messages.each do |msg|
+            %li
+              = msg

@@ -87,7 +87,7 @@ class Preference < ActiveRecord::Base
     new_skills = profile_skills.collect do |skill|
       {name: skill, checked: false} unless default_skills.any? { |hash| hash['name'] == skill }
     end
-    self.skills = (default_skills + new_skills).to_json
+    self.skills = (default_skills + new_skills).compact.to_json
     self.save
   end
 

@@ -18,6 +18,8 @@ Pickemup::Application.routes.draw do
       get :get_preference
       put :update_preference
     end
+    resources :conversations
+    resources :messages, except: [:edit, :update, :destroy]
   end
   resources :companies
   get "/company_log_in" => "sessions#company_sign_in", :as => "company_log_in"

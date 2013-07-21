@@ -61,6 +61,10 @@ GEM
     bootstrap-sass (2.3.2.1)
       sass (~> 3.2)
     builder (3.1.4)
+    carrierwave (0.9.0)
+      activemodel (>= 3.2.0)
+      activesupport (>= 3.2.0)
+      json (>= 1.7)
     celluloid (0.14.1)
       timers (>= 1.0.0)
     chronic (0.9.1)
@@ -89,6 +93,8 @@ GEM
       rails (>= 3, < 5)
     font-awesome-rails (3.2.1.2)
       railties (>= 3.2, < 5.0)
+    foreigner (1.4.2)
+      activerecord (>= 3.0.0)
     github_api (0.10.2)
       addressable
       faraday (~> 0.8.7)
@@ -127,6 +133,10 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    mailboxer (0.10.2)
+      carrierwave (>= 0.5.8)
+      foreigner (>= 0.9.1)
+      rails (> 3.0.0)
     method_source (0.8.1)
     mime-types (1.23)
     mini_portile (0.5.1)
@@ -161,6 +171,8 @@ GEM
     pg (0.15.1)
     pg-hstore (1.1.7)
     polyglot (0.3.3)
+    protected_attributes (1.0.3)
+      activemodel (>= 4.0.0, < 5.0)
     pry (0.9.12.2)
       coderay (~> 1.0.5)
       method_source (~> 0.8)
@@ -256,6 +268,7 @@ DEPENDENCIES
   annotate
   bcrypt-ruby
   bootstrap-sass
+  carrierwave
   coffee-rails
   factory_girl_rails
   figaro
@@ -266,12 +279,14 @@ DEPENDENCIES
   jbuilder
   jquery-rails
   linkedin
+  mailboxer
   oauth2
   omniauth-github
   omniauth-linkedin-oauth2
   omniauth-stackexchange
   pg
   pg-hstore
+  protected_attributes
   pry
   railroady
   rails!

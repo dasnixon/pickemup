@@ -15,6 +15,8 @@
 #
 
 class User < ActiveRecord::Base
+  acts_as_messageable
+
   has_one :github_account, dependent: :destroy
   has_one :linkedin, dependent: :destroy
   has_one :stackexchange, dependent: :destroy
@@ -63,6 +65,14 @@ class User < ActiveRecord::Base
     self.blog            = extra_info.blog
     self.current_company = extra_info.company
     self.save! if !self.newly_created && self.changed?
+  end
+
+  def mailboxer_email(object)
+    self.email
+  end
+
+  def mailboxer_name
+    self.name
   end
 
   private

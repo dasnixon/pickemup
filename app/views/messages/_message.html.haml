@@ -1,0 +1,16 @@
+= div_for(message, :class => (message.is_unread?(@user) ? 'unread' : '')) do
+  .media.thumbnail
+    .pull-left
+      = link_to image_tag(message.sender.github_account.profile_image, |
+                            title: message.sender.name, |
+                            alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
+                   resume_user_path(id: @user.id) |
+
+    .media-heading.name
+      = link_to message.sender.name, resume_user_path(id: @user.id)
+      .date
+        = t('time.ago', time: time_ago_in_words(message.updated_at))
+
+    .media-body.well
+      .word-break.pre-message
+        = raw(message.body)
