@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   has_one :preference, dependent: :destroy
 
   attr_accessor :newly_created
+  attr_accessible :uid, :email, :name, :location,
+    :blog, :current_company, :description
 
   after_create :create_preference
 
