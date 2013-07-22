@@ -16,6 +16,15 @@ gem 'font-awesome-rails'
 #CRON
 gem 'whenever', require: false
 
+#STORE FILES/IMAGES
+gem 'carrierwave'
+
+#MESSAGING
+gem 'mailboxer'
+
+#ATTR SUPPORT
+gem 'protected_attributes'
+
 #Queues
 gem 'sidekiq'
 gem 'sinatra'

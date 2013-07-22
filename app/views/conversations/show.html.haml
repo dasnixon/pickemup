@@ -1,0 +1,5 @@
+= render 'navigation'
+
+%section#conversation
+  .conversation_full
+    = render partial: 'conversation_full', locals: { conversation: @conversation }
