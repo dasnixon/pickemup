@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+#MAGIC
 gem 'rails', git: 'git://github.com/rails/rails.git', branch: '4-0-stable'
 
 #DATABASES
@@ -23,9 +24,9 @@ gem 'carrierwave'
 gem 'mailboxer'
 
 #ATTR SUPPORT
-gem 'protected_attributes'
+gem 'protected_attributes' #needed for mailboxer gem
 
-#Queues
+#QUEUES
 gem 'sidekiq'
 gem 'sinatra'
 gem 'slim'
@@ -48,8 +49,7 @@ gem 'angularjs-rails'
 gem 'jquery-rails'
 gem 'coffee-rails'
 
-gem 'jbuilder'
-
+#DOCUMENTING
 group :doc do
   gem 'sdoc', require: false
 end
@@ -63,7 +63,7 @@ gem 'figaro'
 #OTHER
 gem 'annotate'
 gem 'httparty'
-
+gem 'jbuilder'
 
 group :test, :development do
   gem 'factory_girl_rails'

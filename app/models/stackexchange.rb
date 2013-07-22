@@ -19,6 +19,10 @@
 #
 
 class Stackexchange < ActiveRecord::Base
+  attr_accessible :token, :uid, :profile_url, :reputation, :age,
+    :profile_image, :badges, :display_name, :nickname,
+    :stackexchange_key
+
   belongs_to :user
 
   def from_omniauth(auth)
@@ -36,7 +40,7 @@ class Stackexchange < ActiveRecord::Base
   end
 
   def update_stackexchange
-    stackexchange_info = get_stackexchange_info
+    stackexchange_info = get_stackexchange_user
     self.update_attributes(
       display_name:  stackexchange_info.display_name,
       reputation:    stackexchange_info.reputation,
@@ -46,7 +50,11 @@ class Stackexchange < ActiveRecord::Base
     )
   end
 
-  def get_stackexchange_info
-    @info ||= Serel::AccessToken.new(self.token).user
+  def initialize_stackexchange
+    @info ||= Serel::AccessToken.new(self.token)
+  end
+
+  def get_stackexchange_user
+    initialize_stackexchange.user
   end
 end

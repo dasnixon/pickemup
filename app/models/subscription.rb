@@ -14,6 +14,8 @@
 #
 
 class Subscription < ActiveRecord::Base
+  attr_accessible :plan, :stripe_card_token, :stripe_customer_token,
+    :active, :email
   belongs_to :company
 
   validates_presence_of :company_id, :plan, :stripe_card_token
