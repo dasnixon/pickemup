@@ -19,7 +19,7 @@
 <div class="control-group">
   <label class='control-label' for="title">Benefits</label>
   <div class="controls">
-    <table class="table">
+    <table class="table table-bordered">
       <tr>
         <td>
           <label class="checkbox">
@@ -67,6 +67,16 @@
           </label>
           <ul class="unstyled">
             <li ng-repeat="error in preference.errors.life_insurance">
+              <span class="error_message">{{error}}</span>
+            </li>
+          </ul>
+        </td>
+        <td>
+          <label class="checkbox">
+            <input type="checkbox" ng-model="preference.us_citizen">U.S. Citizen?
+          </label>
+          <ul class="unstyled">
+            <li ng-repeat="error in preference.errors.us_citizen">
               <span class="error_message">{{error}}</span>
             </li>
           </ul>
@@ -129,22 +139,6 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Remote?</label>
-  <div class="controls">
-    <select ng-model="preference.remote">
-      <option value="0">No</option>
-      <option value="1">Yes</option>
-      <option value="2">I'm open to remote work</option>
-    </select>
-    <ul class="unstyled">
-      <li ng-repeat="error in preference.errors.remote">
-        <span class="error_message">{{error}}</span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="control-group">
   <label class='control-label' for="title"><i class="icon-calendar"></i> Availablity After Hire</label>
   <div class="controls">
     <div class="input-append">
@@ -175,20 +169,26 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Company Size</label>
+  <label class='control-label' for="title">Select Your Remote Preferences</label>
   <div class="controls">
-    <select ng-model="preference.company_size">
-      <option value="0">1-10 Employees</option>
-      <option value="1">11-50 Employees</option>
-      <option value="2">51-200 Employees</option>
-      <option value="3">201-500 Employees</option>
-      <option value="4">501+ Employees</option>
-    </select>
-    <ul class="unstyled">
-      <li ng-repeat="error in preference.errors.company_size">
-        <span class="error_message">{{error}}</span>
-      </li>
-    </ul>
+    <table class="table table-bordered">
+      <tr ng-repeat="row in preference.remote">
+        <td ng-repeat="rem in row"><input type="checkbox" value="{{rem.name}}" ng-model="rem.checked"/>
+        <span>{{rem.name}}</span></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label' for="title">Select Your Company Size Preferences</label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr ng-repeat="row in preference.company_size">
+        <td ng-repeat="cs in row"><input type="checkbox" value="{{cs.name}}" ng-model="cs.checked"/>
+        <span>{{cs.name}}</span></td>
+      </tr>
+    </table>
   </div>
 </div>
 

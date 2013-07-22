@@ -21,6 +21,10 @@
 class GithubAccount < ActiveRecord::Base
   include Extensions
 
+  attr_accessible :nickname, :profile_image, :hireable, :bio,
+    :public_repos_count, :number_followers, :number_following,
+    :number_gists, :token
+
   belongs_to :user
   has_many :repos, class_name: 'Repo', foreign_key: 'github_account_id', dependent: :destroy
   has_many :organizations, dependent: :destroy

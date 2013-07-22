@@ -19,6 +19,9 @@
 #
 
 class Position < ActiveRecord::Base
+  attr_accessible :industry, :company_type, :name, :size,
+    :is_current, :title, :summary, :start_year, :start_month
+
   belongs_to :profile
 
   def self.from_omniauth(profile, id, position_keys=nil)
@@ -29,7 +32,6 @@ class Position < ActiveRecord::Base
         pos = Position.find_or_initialize_by_company_key_and_profile_id(company_info['id'].to_s, id)
         pos.update_attributes(
           industry:      company_info['industry'],
-          company_type:  company_info['type'],
           name:          company_info['name'],
           size:          company_info['size'],
           company_type:  company_info['type'],

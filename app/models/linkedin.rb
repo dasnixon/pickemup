@@ -16,6 +16,9 @@
 class Linkedin < ActiveRecord::Base
   include LinkedinApi
 
+  attr_accessible :token, :headline, :industry,
+    :uid, :profile_url
+
   after_create :grab_user_information
 
   belongs_to :user

@@ -13,9 +13,13 @@
 #
 
 class Profile < ActiveRecord::Base
+  attr_accessible :number_connections, :number_recommenders, :summary,
+    :skills
+
   has_many :positions, dependent: :destroy
   has_many :educations, dependent: :destroy
   belongs_to :linkedin
+
   after_save :set_user_preference_skills
 
   def from_omniauth(profile=nil)

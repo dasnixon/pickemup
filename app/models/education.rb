@@ -17,6 +17,9 @@
 #
 
 class Education < ActiveRecord::Base
+  attr_accessible :activities, :degree, :field_of_study, :notes,
+    :school_name, :start_year, :end_year
+
   belongs_to :profile
 
   def self.from_omniauth(profile, id, education_keys=nil)

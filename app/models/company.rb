@@ -18,6 +18,9 @@
 #
 
 class Company < ActiveRecord::Base
+  attr_accessible :name, :email, :description, :website,
+    :industry, :password_salt, :password_hash, :description,
+    :num_employees, :public, :founded
   attr_accessor :password
   before_save :encrypt_password
   before_update :clean_url #TODO fix this validation

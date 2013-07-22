@@ -21,6 +21,10 @@
 #
 
 class Repo < ActiveRecord::Base
+  attr_accessible :name, :description, :private, :url,
+    :language, :number_forks, :number_watchers, :size,
+    :open_issues, :started, :last_updated
+
   belongs_to :github_account
 
   def self.from_omniauth(repos, github_id, repo_keys=nil)
@@ -43,6 +47,8 @@ class Repo < ActiveRecord::Base
     end
   end
 
+  #Will remove any repositories in our system that we have that are no longer on
+  #github anymore for a particular user
   def self.remove_repos(repos, repo_keys)
     (repo_keys - repos.collect { |repo| repo.id.to_s }).each do |diff_id|
       Repo.where(repo_key: diff_id).first.try(:destroy)
