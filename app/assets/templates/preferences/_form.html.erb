@@ -17,6 +17,36 @@
 </div>
 
 <div class="control-group">
+  <label class='control-label' for="title"><i class="icon-calendar"></i> Availablity After Hire</label>
+  <div class="controls">
+    <div class="input-append">
+      <input type="text" ng-model="preference.potential_availability" />
+      <span class="add-on">week(s)</span>
+    </div>
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.potential_availability">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label' for="title"><i class="icon-time"></i> # Hours per Week</label>
+  <div class="controls">
+    <div class="input-append">
+      <input type="text" ng-model="preference.work_hours" />
+      <span class="add-on">hour(s)</span>
+    </div>
+    <ul class="unstyled">
+      <li ng-repeat="error in preference.errors.work_hours">
+        <span class="error_message">{{error}}</span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="control-group">
   <label class='control-label' for="title">Benefits</label>
   <div class="controls">
     <table class="table table-bordered">
@@ -139,42 +169,12 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-calendar"></i> Availablity After Hire</label>
-  <div class="controls">
-    <div class="input-append">
-      <input type="text" ng-model="preference.potential_availability" />
-      <span class="add-on">week(s)</span>
-    </div>
-    <ul class="unstyled">
-      <li ng-repeat="error in preference.errors.potential_availability">
-        <span class="error_message">{{error}}</span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class='control-label' for="title"><i class="icon-time"></i> # Hours per Week</label>
-  <div class="controls">
-    <div class="input-append">
-      <input type="text" ng-model="preference.work_hours" />
-      <span class="add-on">hour(s)</span>
-    </div>
-    <ul class="unstyled">
-      <li ng-repeat="error in preference.errors.work_hours">
-        <span class="error_message">{{error}}</span>
-      </li>
-    </ul>
-  </div>
-</div>
-
-<div class="control-group">
   <label class='control-label' for="title">Select Your Remote Preferences</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.remote">
-        <td ng-repeat="rem in row"><input type="checkbox" value="{{rem.name}}" ng-model="rem.checked"/>
-        <span>{{rem.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.remote">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']"/>
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -184,9 +184,9 @@
   <label class='control-label' for="title">Select Your Company Size Preferences</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.company_size">
-        <td ng-repeat="cs in row"><input type="checkbox" value="{{cs.name}}" ng-model="cs.checked"/>
-        <span>{{cs.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.company_size">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']"/>
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -196,9 +196,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Skills</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.skills">
-        <td ng-repeat="skill in row"><input type="checkbox" value="{{skill.name}}" ng-model="skill.checked" />
-        <span>{{skill.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.skills">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -208,9 +208,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Location</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.locations">
-        <td ng-repeat="location in row"><input type="checkbox" value="{{location.name}}" ng-model="location.checked"/>
-        <span>{{location.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.locations">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']"/>
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -220,9 +220,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Industries</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.industries">
-        <td ng-repeat="industry in row"><input type="checkbox" value="{{industry.name}}" ng-model="industry.checked" />
-        <span>{{industry.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.industries">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -232,9 +232,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Levels</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.levels">
-        <td ng-repeat="level in row"><input type="checkbox" value="{{level.name}}" ng-model="level.checked" />
-        <span>{{level.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.levels">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -244,9 +244,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Positions</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.positions">
-        <td ng-repeat="position in row"><input type="checkbox" value="{{position.name}}" ng-model="position.checked" />
-        <span>{{position.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.positions">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -256,9 +256,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Company Setting</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.settings">
-        <td ng-repeat="setting in row"><input type="checkbox" value="{{setting.name}}" ng-model="setting.checked" />
-        <span>{{setting.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.settings">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -268,9 +268,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Dress Code</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.dress_codes">
-        <td ng-repeat="dress_code in row"><input type="checkbox" value="{{dress_code.name}}" ng-model="dress_code.checked" />
-        <span>{{dress_code.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.dress_codes">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -280,9 +280,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Company Type</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.company_types">
-        <td ng-repeat="company_type in row"><input type="checkbox" value="{{company_type.name}}" ng-model="company_type.checked" />
-        <span>{{company_type.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.company_types">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -292,9 +292,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Perks</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.perks">
-        <td ng-repeat="perk in row"><input type="checkbox" value="{{perk.name}}" ng-model="perk.checked" />
-        <span>{{perk.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.perks">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>
@@ -304,9 +304,9 @@
   <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Practices</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.practices">
-        <td ng-repeat="practice in row"><input type="checkbox" value="{{practice.name}}" ng-model="practice.checked" />
-        <span>{{practice.name}}</span></td>
+      <tr ng-repeat="(name, attributes) in preference.practices">
+        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
+        <span>{{name}}</span></td>
       </tr>
     </table>
   </div>

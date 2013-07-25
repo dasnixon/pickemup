@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   before_filter :find_user, except: [:resume]
   before_filter :eager_load_user, only: [:resume]
   before_filter :check_invalid_permissions, only: [:preferences, :get_preference, :update_preference]
+  before_filter :cleanup_preference_params, only: [:update_preference]
   respond_to :json, :html
 
   def resume
@@ -27,12 +28,13 @@ class UsersController < ApplicationController
   end
 
   def get_preference
-    respond_with @user.try(:preference)
+    preference = @user.preference
+    respond_with preference.get_preference_defaults
   end
 
   def update_preference
     preference = @user.preference
-    if preference.update_attributes(params[:preference])
+    if preference.update_attributes(@bathed_preferences)
       respond_with(preference)
     else
       render json: { errors: preference.errors }, status: :bad_request
@@ -53,7 +55,7 @@ class UsersController < ApplicationController
     @user ||= User.find(params[:id])
   end
 
-  def preference_params
-    params.require(:preference).permit!
+  def cleanup_preference_params
+    @bathed_preferences = Preference.cleanup_invalid_data(params[:preference])
   end
 end

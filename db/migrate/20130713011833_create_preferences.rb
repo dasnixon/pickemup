@@ -15,18 +15,18 @@ class CreatePreferences < ActiveRecord::Migration
       t.integer    :expected_salary,        default: 0
       t.integer    :potential_availability, default: 0
       t.integer    :work_hours,             default: 0
-      t.json       :remote,                 default: []
-      t.json       :company_size,           default: []
-      t.json       :skills,                 default: []
-      t.json       :locations,              default: []
-      t.json       :industries,             default: []
-      t.json       :positions,              default: []
-      t.json       :settings,               default: []
-      t.json       :dress_codes,            default: []
-      t.json       :company_types,          default: []
-      t.json       :perks,                  default: []
-      t.json       :practices,              default: []
-      t.json       :levels,                 default: []
+      t.json       :remote,                 default: {}
+      t.json       :company_size,           default: {}
+      t.json       :skills,                 default: {}
+      t.json       :locations,              default: {}
+      t.json       :industries,             default: {}
+      t.json       :positions,              default: {}
+      t.json       :settings,               default: {}
+      t.json       :dress_codes,            default: {}
+      t.json       :company_types,          default: {}
+      t.json       :perks,                  default: {}
+      t.json       :practices,              default: {}
+      t.json       :levels,                 default: {}
       t.belongs_to :user
       t.timestamps
     end
