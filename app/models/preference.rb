@@ -3,31 +3,32 @@
 # Table name: preferences
 #
 #  id                     :integer          not null, primary key
-#  healthcare             :boolean
-#  dentalcare             :boolean
-#  visioncare             :boolean
-#  life_insurance         :boolean
-#  paid_vacation          :boolean
-#  equity                 :boolean
-#  bonuses                :boolean
-#  retirement             :boolean
-#  fulltime               :boolean
-#  remote                 :integer
-#  open_source            :boolean
-#  expected_salary        :integer
-#  potential_availability :integer
-#  company_size           :integer
-#  work_hours             :integer
-#  skills                 :json
-#  locations              :json
-#  industries             :json
-#  positions              :json
-#  settings               :json
-#  dress_codes            :json
-#  company_types          :json
-#  perks                  :json
-#  practices              :json
-#  levels                 :json
+#  healthcare             :boolean          default(FALSE)
+#  dentalcare             :boolean          default(FALSE)
+#  visioncare             :boolean          default(FALSE)
+#  life_insurance         :boolean          default(FALSE)
+#  paid_vacation          :boolean          default(FALSE)
+#  equity                 :boolean          default(FALSE)
+#  bonuses                :boolean          default(FALSE)
+#  retirement             :boolean          default(FALSE)
+#  fulltime               :boolean          default(FALSE)
+#  us_citizen             :boolean          default(FALSE)
+#  open_source            :boolean          default(FALSE)
+#  expected_salary        :integer          default(0)
+#  potential_availability :integer          default(0)
+#  work_hours             :integer          default(0)
+#  remote                 :json             default({})
+#  company_size           :json             default({})
+#  skills                 :json             default({})
+#  locations              :json             default({})
+#  industries             :json             default({})
+#  positions              :json             default({})
+#  settings               :json             default({})
+#  dress_codes            :json             default({})
+#  company_types          :json             default({})
+#  perks                  :json             default({})
+#  practices              :json             default({})
+#  levels                 :json             default({})
 #  user_id                :integer
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -47,55 +48,56 @@ class Preference < ActiveRecord::Base
   validates :expected_salary, numericality: true, inclusion: { in: 0..20000000 }
   validates :work_hours, numericality: true, inclusion: { in: 0..168 }
 
-  before_validation :cleanup_invalid_data, unless: Proc.new { |instance| instance.new_record? }
+  def default_hash
+    { healthcare: self.healthcare, dentalcare: self.dentalcare, visioncare: self.visioncare,
+      life_insurance: self.life_insurance, paid_vacation: self.paid_vacation, equity: self.equity,
+      bonuses: self.bonuses, retirement: self.retirement, fulltime: self.fulltime, remote: self.remote,
+      open_source: self.open_source, expected_salary: self.expected_salary, us_citizen: self.us_citizen,
+      potential_availability: self.potential_availability, work_hours: self.work_hours }
 
-  def set_skills(profile_skills)
-    new_skills = profile_skills.collect do |skill|
-      {name: skill, checked: false} unless self.skills.any? { |hash| hash['name'] == skill }
-    end
-    self.skills = (self.skills + new_skills).compact.to_json
-    self.save
   end
 
-  def default_hash(attr)
-    default_attributes = self.class.const_get(attr.upcase).collect do |value|
-      {name: value, checked: false} unless self.send(attr).any? { |hash| hash['name'] == value }
-    end
-    (self.send(attr) + default_attributes).compact.to_json
-  end
-
-  def set_defaults
-    %w(locations industries positions settings dress_codes company_types perks practices levels remote company_size).each do |attr|
-      self.send("#{attr}=", self.default_hash(attr))
+  def get_preference_defaults
+    %w(locations industries positions settings dress_codes company_types perks practices levels remote company_size skills).inject(self.default_hash) do |default_hash, attr|
+      default_hash[attr] = get_attr_values(attr)
+      default_hash
     end
   end
 
-  def reject_invalid_data(attr)
-    attrs_changed = (self.send(attr) - self.send("#{attr}_was"))
-    names = self.send(attr).collect { |hash| hash['name'] }
-    self.send(attr).uniq!
-    attrs_changed.each do |hash| #reject any data if:
-      if !hash.is_a?(Hash) || #element of array is not a hash
-           !(['name', 'checked'].all? { |k| hash.has_key?(k) }) || #hash does not have 'name' and 'checked' keys
-           hash.keys.length >= 3 || #hash has more than 3 keys (should only have 2)
-           !self.class.const_get(attr.upcase).include?(hash['name']) || #the name value is not a default in constants
-           ![TrueClass, FalseClass].include?(hash['checked'].class) || #the checked value is not a boolean
-           names.count(hash['name']) > 1 #check if name repeats itself more than once (duplicate)
-        self.send("#{attr}=", (self.send(attr) - [hash]))
+  def get_attr_values(attr)
+    self.attribute_default_values(attr).inject({}) do |attr_hash, value|
+      if self.send(attr).has_key?(value) #if user has checked this value for this particular attribute
+        attr_hash[value] = { 'checked' => true } #set it into the returned hash for angular
+      else
+        attr_hash[value] = { 'checked' => false } #otherwise default to a false checked hash for the value
+      end
+      attr_hash
+    end
+  end
+
+  def attribute_default_values(attr)
+    if attr == 'skills'
+      current_user = self.user
+      if current_user.has_linkedin_synced?
+        current_user.linkedin.profile.skills
+      else
+        []
+      end
+    else
+      self.class.const_get(attr.upcase)
+    end
+  end
+
+  def self.cleanup_invalid_data(params)
+    %w(locations industries positions settings dress_codes company_types perks practices levels remote company_size skills).each do |attr|
+      params.delete(attr) and next unless params.has_key?(attr) && params[attr].is_a?(Hash)
+      params[attr].reject! do |name, attributes|
+        !attributes.has_key?('checked') ||
+          attributes.keys.length > 1 ||
+          ![TrueClass, FalseClass].include?(attributes['checked'].class) ||
+          !attributes['checked']
       end
     end
-  end
-
-  private
-
-  def cleanup_invalid_data
-    %w(locations industries positions settings dress_codes company_types perks practices levels remote company_size).each do |attr|
-      next unless self.send("#{attr}_changed?")
-      if !self.send(attr).is_a?(Array)
-        self.send("#{attr}=", [])
-        next
-      end
-      reject_invalid_data(attr)
-    end
+    params
   end
 end
