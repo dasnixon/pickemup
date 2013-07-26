@@ -156,18 +156,18 @@ ActiveRecord::Schema.define(version: 20130721005835) do
     t.integer  "expected_salary",        default: 0
     t.integer  "potential_availability", default: 0
     t.integer  "work_hours",             default: 0
-    t.json     "remote",                 default: {}
-    t.json     "company_size",           default: {}
-    t.json     "skills",                 default: {}
-    t.json     "locations",              default: {}
-    t.json     "industries",             default: {}
-    t.json     "positions",              default: {}
-    t.json     "settings",               default: {}
-    t.json     "dress_codes",            default: {}
-    t.json     "company_types",          default: {}
-    t.json     "perks",                  default: {}
-    t.json     "practices",              default: {}
-    t.json     "levels",                 default: {}
+    t.string   "remote",                 default: [],    array: true
+    t.string   "company_size",           default: [],    array: true
+    t.string   "skills",                 default: [],    array: true
+    t.string   "locations",              default: [],    array: true
+    t.string   "industries",             default: [],    array: true
+    t.string   "positions",              default: [],    array: true
+    t.string   "settings",               default: [],    array: true
+    t.string   "dress_codes",            default: [],    array: true
+    t.string   "company_types",          default: [],    array: true
+    t.string   "perks",                  default: [],    array: true
+    t.string   "practices",              default: [],    array: true
+    t.string   "levels",                 default: [],    array: true
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

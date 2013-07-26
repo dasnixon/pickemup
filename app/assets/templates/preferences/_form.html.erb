@@ -169,144 +169,144 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Select Your Remote Preferences</label>
+  <label class='control-label'>Select Your Remote Preferences</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.remote">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']"/>
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.remote">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Select Your Company Size Preferences</label>
+  <label class='control-label'>Select Your Company Size Preferences</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.company_size">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']"/>
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.company_size">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Skills</label>
+  <label class='control-label'>Select Your Preferred Skills</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.skills">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.skills">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Location</label>
+  <label class='control-label'>Select Your Preferred Location</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.locations">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']"/>
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.locations">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Industries</label>
+  <label class='control-label'>Select Your Preferred Industries</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.industries">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.industries">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Levels</label>
+  <label class='control-label'>Select Your Preferred Levels</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.levels">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.levels">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Positions</label>
+  <label class='control-label'>Select Your Preferred Positions</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.positions">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.positions">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Company Setting</label>
+  <label class='control-label'>Select Your Preferred Company Setting</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.settings">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.settings">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Dress Code</label>
+  <label class='control-label'>Select Your Preferred Dress Code</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.dress_codes">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.dress_codes">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Company Type</label>
+  <label class='control-label'>Select Your Preferred Company Type</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.company_types">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.company_types">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Perks</label>
+  <label class='control-label'>Select Your Preferred Perks</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.perks">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.perks">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-building"></i> Select Your Preferred Practices</label>
+  <label class='control-label'>Select Your Preferred Practices</label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="(name, attributes) in preference.practices">
-        <td><input type="checkbox" value="{{name}}" ng-model="attributes['checked']" />
-        <span>{{name}}</span></td>
+      <tr ng-repeat="row in preference.practices">
+        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
+        <span>{{attributes.name}}</span></td>
       </tr>
     </table>
   </div>

@@ -33,6 +33,9 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #
+#
+#http://www.postgresql.org/docs/7.3/static/functions-matching.html
+#SELECT * FROM ( SELECT *, unnest(remote) rem FROM preferences) x WHERE rem ~* 'y';
 
 class Preference < ActiveRecord::Base
   include PreferenceConstants
@@ -65,13 +68,13 @@ class Preference < ActiveRecord::Base
   end
 
   def get_attr_values(attr)
-    self.attribute_default_values(attr).inject({}) do |attr_hash, value|
-      if self.send(attr).has_key?(value) #if user has checked this value for this particular attribute
-        attr_hash[value] = { 'checked' => true } #set it into the returned hash for angular
+    self.attribute_default_values(attr).inject([]) do |attr_array, value|
+      if self.send(attr).include?(value) #if user has checked this value for this particular attribute
+        attr_array << { name: value, checked: true } #set it into the returned hash for angular
       else
-        attr_hash[value] = { 'checked' => false } #otherwise default to a false checked hash for the value
+        attr_array << { name: value, checked: false } #set it into the returned hash for angular
       end
-      attr_hash
+      attr_array
     end
   end
 
@@ -90,13 +93,17 @@ class Preference < ActiveRecord::Base
 
   def self.cleanup_invalid_data(params)
     %w(locations industries positions settings dress_codes company_types perks practices levels remote company_size skills).each do |attr|
-      params.delete(attr) and next unless params.has_key?(attr) && params[attr].is_a?(Hash)
-      params[attr].reject! do |name, attributes|
-        !attributes.has_key?('checked') ||
-          attributes.keys.length > 1 ||
+      unless params.has_key?(attr) && params[attr] && params[attr].is_a?(Array)
+        params.delete(attr)
+        next
+      end
+      params[attr] = params[attr].reject do |attributes|
+        !(attributes.has_key?('checked') && attributes.has_key?('name')) ||
+          attributes.keys.length > 2 ||
           ![TrueClass, FalseClass].include?(attributes['checked'].class) ||
           !attributes['checked']
       end
+      params[attr].collect! { |attrs| attrs['name'] }
     end
     params
   end
