@@ -80,8 +80,6 @@ class User < ActiveRecord::Base
   private
 
   def create_preference
-    preference = self.build_preference
-    preference.set_defaults
-    preference.save
+    self.build_preference.save
   end
 end
