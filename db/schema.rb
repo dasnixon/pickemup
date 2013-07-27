@@ -153,10 +153,10 @@ ActiveRecord::Schema.define(version: 20130721005835) do
     t.boolean  "fulltime",               default: false
     t.boolean  "us_citizen",             default: false
     t.boolean  "open_source",            default: false
+    t.boolean  "remote",                 default: false
     t.integer  "expected_salary",        default: 0
     t.integer  "potential_availability", default: 0
     t.integer  "work_hours",             default: 0
-    t.string   "remote",                 default: [],    array: true
     t.string   "company_size",           default: [],    array: true
     t.string   "skills",                 default: [],    array: true
     t.string   "locations",              default: [],    array: true

@@ -12,10 +12,10 @@ class CreatePreferences < ActiveRecord::Migration
       t.boolean    :fulltime,               default: false
       t.boolean    :us_citizen,             default: false
       t.boolean    :open_source,            default: false
+      t.boolean    :remote,                 default: false
       t.integer    :expected_salary,        default: 0
       t.integer    :potential_availability, default: 0
       t.integer    :work_hours,             default: 0
-      t.string     :remote,                 array: true, default: []
       t.string     :company_size,           array: true, default: []
       t.string     :skills,                 array: true, default: []
       t.string     :locations,              array: true, default: []

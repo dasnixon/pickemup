@@ -14,28 +14,27 @@
 #  fulltime               :boolean          default(FALSE)
 #  us_citizen             :boolean          default(FALSE)
 #  open_source            :boolean          default(FALSE)
+#  remote                 :boolean          default(FALSE)
 #  expected_salary        :integer          default(0)
 #  potential_availability :integer          default(0)
 #  work_hours             :integer          default(0)
-#  remote                 :json             default({})
-#  company_size           :json             default({})
-#  skills                 :json             default({})
-#  locations              :json             default({})
-#  industries             :json             default({})
-#  positions              :json             default({})
-#  settings               :json             default({})
-#  dress_codes            :json             default({})
-#  company_types          :json             default({})
-#  perks                  :json             default({})
-#  practices              :json             default({})
-#  levels                 :json             default({})
+#  company_size           :string(255)      default([])
+#  skills                 :string(255)      default([])
+#  locations              :string(255)      default([])
+#  industries             :string(255)      default([])
+#  positions              :string(255)      default([])
+#  settings               :string(255)      default([])
+#  dress_codes            :string(255)      default([])
+#  company_types          :string(255)      default([])
+#  perks                  :string(255)      default([])
+#  practices              :string(255)      default([])
+#  levels                 :string(255)      default([])
 #  user_id                :integer
 #  created_at             :datetime
 #  updated_at             :datetime
 #
-#
 #http://www.postgresql.org/docs/7.3/static/functions-matching.html
-#SELECT * FROM ( SELECT *, unnest(remote) rem FROM preferences) x WHERE rem ~* 'y';
+#SELECT * FROM ( SELECT *, unnest(skills) s FROM preferences) x WHERE s ~* 'ruby';
 
 class Preference < ActiveRecord::Base
   include PreferenceConstants
@@ -61,7 +60,7 @@ class Preference < ActiveRecord::Base
   end
 
   def get_preference_defaults
-    %w(locations industries positions settings dress_codes company_types perks practices levels remote company_size skills).inject(self.default_hash) do |default_hash, attr|
+    %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills).inject(self.default_hash) do |default_hash, attr|
       default_hash[attr] = get_attr_values(attr)
       default_hash
     end
@@ -92,7 +91,7 @@ class Preference < ActiveRecord::Base
   end
 
   def self.cleanup_invalid_data(params)
-    %w(locations industries positions settings dress_codes company_types perks practices levels remote company_size skills).each do |attr|
+    %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills).each do |attr|
       unless params.has_key?(attr) && params[attr] && params[attr].is_a?(Array)
         params.delete(attr)
         next

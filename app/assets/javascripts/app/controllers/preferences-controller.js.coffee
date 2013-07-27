@@ -26,7 +26,6 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
       response.perks           = chunk response.perks, 7
       response.practices       = chunk response.practices, 6
       response.levels          = chunk response.levels, 6
-      response.remote          = chunk response.remote, 6
       response.company_size    = chunk response.company_size, 6
       $scope.preference        = response
       $scope.original          = angular.copy($scope.preference)
@@ -59,9 +58,9 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
         us_citizen: $scope.preference.us_citizen
         open_source: $scope.preference.open_source
         expected_salary: $scope.preference.expected_salary.replace(/,/g, "") if $scope.preference.expected_salary
+        remote: $scope.preference.remote
         potential_availability: $scope.preference.potential_availability
         work_hours: $scope.preference.work_hours
-        remote: unchunk $scope.preference.remote
         company_size: unchunk $scope.preference.company_size
         skills: unchunk $scope.preference.skills
         locations: unchunk $scope.preference.locations

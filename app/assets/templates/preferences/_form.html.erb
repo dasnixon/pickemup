@@ -163,18 +163,16 @@
             </li>
           </ul>
         </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class='control-label'>Select Your Remote Preferences</label>
-  <div class="controls">
-    <table class="table table-bordered">
-      <tr ng-repeat="row in preference.remote">
-        <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
-        <span>{{attributes.name}}</span></td>
+        <td>
+          <label class="checkbox">
+            <input type="checkbox" ng-model="preference.remote">Open to Remote Work?
+          </label>
+          <ul class="unstyled">
+            <li ng-repeat="error in preference.errors.remote">
+              <span class="error_message">{{error}}</span>
+            </li>
+          </ul>
+        </td>
       </tr>
     </table>
   </div>
