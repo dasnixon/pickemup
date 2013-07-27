@@ -1,6 +1,7 @@
 preference_app.controller "PreferencesController", ($scope, $http, $location, $state, $stateParams, Preference) ->
 
   $scope.preference     = {}
+  $scope.user_id        = ''
   $scope.original       = {}
   $scope.errors         = []
   $scope.success        = ''
@@ -8,6 +9,7 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
   $scope.dirty_message  = ''
 
   if $state.current.name == 'edit'
+    $scope.user_id = $stateParams['id']
     Preference.getPreference
       user_id: $stateParams['id'],
       action: 'get_preference'
@@ -17,14 +19,13 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
       response.skills          = chunk response.skills, 6
       response.locations       = chunk response.locations, 6
       response.industries      = chunk response.industries, 6
-      response.positions       = chunk response.positions, 5
+      response.positions       = chunk response.positions, 6
       response.settings        = chunk response.settings, 6
       response.dress_codes     = chunk response.dress_codes, 6
       response.company_types   = chunk response.company_types, 6
       response.perks           = chunk response.perks, 7
       response.practices       = chunk response.practices, 6
       response.levels          = chunk response.levels, 6
-      response.remote          = chunk response.remote, 6
       response.company_size    = chunk response.company_size, 6
       $scope.preference        = response
       $scope.original          = angular.copy($scope.preference)
@@ -42,7 +43,7 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
 
   $scope.update = ->
     Preference.update
-      user_id: $scope.preference.user_id,
+      user_id: $scope.user_id,
       action: 'update_preference',
       preference:
         healthcare: $scope.preference.healthcare
@@ -55,12 +56,12 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
         retirement: $scope.preference.retirement
         fulltime: $scope.preference.fulltime
         us_citizen: $scope.preference.us_citizen
-        remote: unchunk $scope.preference.remote
         open_source: $scope.preference.open_source
         expected_salary: $scope.preference.expected_salary.replace(/,/g, "") if $scope.preference.expected_salary
+        remote: $scope.preference.remote
         potential_availability: $scope.preference.potential_availability
-        company_size: unchunk $scope.preference.company_size
         work_hours: $scope.preference.work_hours
+        company_size: unchunk $scope.preference.company_size
         skills: unchunk $scope.preference.skills
         locations: unchunk $scope.preference.locations
         industries: unchunk $scope.preference.industries
@@ -73,7 +74,6 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
         levels: unchunk $scope.preference.levels
 
     , (response) ->
-      $location.path "/users/" + $scope.preference.user_id + "/preferences"
       $scope.preference.expected_salary = addCommas(response.preference.expected_salary)
       $scope.preference.errors          = []
       $scope.success                    = 'Successfully updated your preferences.'
