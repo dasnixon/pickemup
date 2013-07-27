@@ -3,32 +3,54 @@
   %h4= t("message.participants")
   .participants
     - conversation.recipients.each do |recp|
-      = link_to image_tag(recp.github_account.profile_image, title: recp.name, alt: recp.name, size: '50x50'), resume_user_path(id: recp.id)
+      - if recp.is_a?(User)
+        = link_to image_tag(recp.github_account.profile_image, title: recp.name, alt: recp.name, size: '50x50'), resume_user_path(id: recp.id)
+      - elsif recp.is_a?(Company)
+        = link_to recp.name, company_path(id: recp.id)
 
 .pull-right
   - unless @box.eql? 'trash'
-    = link_to('Delete', user_conversation_path(user_id: @user.id, id: conversation.id, location: 'conversation', box: @box), |
-           confirm: t('mailboxer.delete_confirm', object: conversation.subject), method: :delete, class: 'btn') |
+    - if current_user
+      = link_to('Delete', user_conversation_path(user_id: current_user.id, id: conversation.id, location: 'conversation', box: @box), |
+             confirm: t('mailboxer.delete_confirm', object: conversation.subject), method: :delete, class: 'btn') |
+    - elsif current_company
+      = link_to('Delete', company_conversation_path(company_id: current_company.id, id: conversation.id, location: 'conversation', box: @box), |
+             confirm: t('mailboxer.delete_confirm', object: conversation.subject), method: :delete, class: 'btn') |
 
 .span12
   %hr
-  .editor
-    = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12"
-  .actions
-    = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn"
+  - unless @box.eql? 'trash'
+    %br
+    - if current_company
+      = form_tag company_conversation_path(id: conversation.id, company_id: current_company.id), method: :put, class: "cont_conversation" do
+        - if @receipt and @receipt.errors.any?
+          .error
+            %h2
+              #{pluralize(@receipt.errors.count, "error")}
+              prohibited this message from being sent:
+            %ul
+            - @receipt.errors.full_messages.each do |msg|
+              %li
+                = msg
+        .editor
+          = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12"
+        .actions
+          = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn"
+    - elsif current_user
+      = form_tag user_conversation_path(id: conversation.id, user_id: current_user.id), method: :put, class: "cont_conversation" do
+        - if @receipt and @receipt.errors.any?
+          .error
+            %h2
+              #{pluralize(@receipt.errors.count, "error")}
+              prohibited this message from being sent:
+            %ul
+            - @receipt.errors.full_messages.each do |msg|
+              %li
+                = msg
+        .editor
+          = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12"
+        .actions
+          = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn"
   %ul
   - @receipts.each do |receipt|
     = render receipt.message
-
-  - unless @box.eql? 'trash'
-    %br
-    = form_tag user_conversation_path(id: conversation.id, user_id: @user.id), method: :put, class: "cont_conversation" do
-      - if @receipt and @receipt.errors.any?
-        .error
-          %h2
-            #{pluralize(@receipt.errors.count, "error")}
-            prohibited this message from being sent:
-          %ul
-          - @receipt.errors.full_messages.each do |msg|
-            %li
-              = msg

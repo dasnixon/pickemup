@@ -1,5 +1,7 @@
 class ConversationsController < ApplicationController
-  before_filter :find_user, :check_invalid_permissions, :get_mailbox, :get_box
+  include Concerns::MailboxerHub
+
+  before_filter :find_mailbox_for, :check_invalid_permissions, :get_mailbox, :get_box
   before_filter :find_conversation, only: [:show, :update, :destroy]
 
   def index
@@ -23,12 +25,12 @@ class ConversationsController < ApplicationController
 
   def update
     if params[:untrash].present?
-      @conversation.untrash(@user)
+      @conversation.untrash(@mailbox_for)
     end
 
     if params[:reply_all].present?
       last_receipt = @mailbox.receipts_for(@conversation).last
-      @receipt = @user.reply_to_all(last_receipt, params[:body])
+      @receipt = @mailbox_for.reply_to_all(last_receipt, params[:body])
     end
 
     if @box.eql? 'trash'
@@ -41,37 +43,21 @@ class ConversationsController < ApplicationController
   end
 
   def destroy
-    @conversation.move_to_trash(@user)
+    @conversation.move_to_trash(@mailbox_for)
     if params[:location].present? and params[:location] == 'conversation'
-      redirect_to user_conversations_path(box: :trash)
+      @box = 'trash' and conversations_redirect
     else
-      redirect_to user_conversations_path(box: @box)
+      conversations_redirect
     end
   end
 
   private
 
-  def get_mailbox
-    @mailbox = @user.mailbox
-  end
-
-  def get_box
-    if params[:box].blank? or !["inbox","sentbox","trash"].include?(params[:box])
-      @box = params[:box] = 'inbox'
-      return
-    end
-    @box = params[:box]
-  end
-
   def find_conversation
     @conversation = Conversation.find_by_id(params[:id])
 
-    if @conversation.nil? or !@conversation.is_participant?(@user)
-      redirect_to conversations_path(box: @box) and return
+    if @conversation.nil? or !@conversation.is_participant?(@mailbox_for)
+      conversations_redirect
     end
-  end
-
-  def find_user
-    @user = User.find(params[:user_id])
   end
 end

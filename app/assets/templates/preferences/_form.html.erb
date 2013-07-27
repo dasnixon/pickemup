@@ -1,7 +1,7 @@
 <input type="hidden" ng-model="preference.id" />
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class='icon-money'></i> Expected salary</label>
+  <label class='control-label'><strong>Expected salary</strong></label>
   <div class="controls">
     <div class="input-prepend input-append">
       <span class="add-on"><i class='icon-usd'></i></span>
@@ -17,7 +17,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-calendar"></i> Availablity After Hire</label>
+  <label class='control-label'><strong>Availablity After Hire</strong></label>
   <div class="controls">
     <div class="input-append">
       <input type="text" ng-model="preference.potential_availability" />
@@ -32,7 +32,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title"><i class="icon-time"></i> # Hours per Week</label>
+  <label class='control-label'><strong># Hours per Week</strong></label>
   <div class="controls">
     <div class="input-append">
       <input type="text" ng-model="preference.work_hours" />
@@ -47,13 +47,17 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label' for="title">Benefits</label>
+  <label class='control-label' for="title"><strong>Benefits</strong></label>
   <div class="controls">
+    <button type="button" ng-click="selectAllBenefits()" class="btn btn-info">Select All</button>
+    <button type="button" ng-click="unselectAllBenefits()" class="btn btn-info">Unselect All</button>
+    <br />
+    <br />
     <table class="table table-bordered">
       <tr>
         <td>
           <label class="checkbox">
-            <input type="checkbox" ng-model="preference.paid_vacation"><i class='icon-plane'></i> Paid vacation?
+            <input type="checkbox" ng-model="preference.paid_vacation">Paid vacation?
           </label>
           <ul class="unstyled">
             <li ng-repeat="error in preference.errors.paid_vacation">
@@ -63,7 +67,7 @@
         </td>
         <td>
           <label class="checkbox">
-            <input type="checkbox" ng-model="preference.healthcare"><i class='icon-medkit'></i> Healthcare?
+            <input type="checkbox" ng-model="preference.healthcare">Healthcare?
           </label>
           <ul class="unstyled">
             <li ng-repeat="error in preference.errors.healthcare">
@@ -73,7 +77,7 @@
         </td>
         <td>
           <label class="checkbox">
-            <input type="checkbox" ng-model="preference.dentalcare"><i class="icon-smile"></i> Dental?
+            <input type="checkbox" ng-model="preference.dentalcare">Dental?
           </label>
           <ul class="unstyled">
             <li ng-repeat="error in preference.errors.dentalcare">
@@ -83,7 +87,7 @@
         </td>
         <td>
           <label class="checkbox">
-            <input type="checkbox" ng-model="preference.visioncare"><i class="icon-eye-open"></i> Vision?
+            <input type="checkbox" ng-model="preference.visioncare">Vision?
           </label>
           <ul class="unstyled">
             <li ng-repeat="error in preference.errors.visioncare">
@@ -93,7 +97,7 @@
         </td>
         <td>
           <label class="checkbox">
-            <input type="checkbox" ng-model="preference.life_insurance"><i class="icon-ambulance"></i> Life Insurance?
+            <input type="checkbox" ng-model="preference.life_insurance">Life Insurance?
           </label>
           <ul class="unstyled">
             <li ng-repeat="error in preference.errors.life_insurance">
@@ -179,7 +183,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Company Size Preferences</label>
+  <label class='control-label'><strong>Company Sizes</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.company_size">
@@ -191,7 +195,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Skills</label>
+  <label class='control-label'><strong>Skills</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.skills">
@@ -203,7 +207,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Location</label>
+  <label class='control-label'><strong>Locations</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.locations">
@@ -215,7 +219,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Industries</label>
+  <label class='control-label'><strong>Industries</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.industries">
@@ -227,7 +231,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Levels</label>
+  <label class='control-label'><strong>Levels</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.levels">
@@ -239,7 +243,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Positions</label>
+  <label class='control-label'><strong>Positions</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.positions">
@@ -251,7 +255,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Company Setting</label>
+  <label class='control-label'><strong>Company Settings</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.settings">
@@ -263,7 +267,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Dress Code</label>
+  <label class='control-label'><strong>Dress Codes</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.dress_codes">
@@ -275,7 +279,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Company Type</label>
+  <label class='control-label'><strong>Company Types</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.company_types">
@@ -287,8 +291,12 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Perks</label>
+  <label class='control-label'><strong>Perks</strong></label>
   <div class="controls">
+    <button type="button" ng-click="selectAll(preference.perks)" class="btn btn-info">Select All</button>
+    <button type="button" ng-click="unselectAll(preference.perks)" class="btn btn-info">Unselect All</button>
+    <br />
+    <br />
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.perks">
         <td ng-repeat="attributes in row"><input type="checkbox" ng-model="attributes.checked"/>
@@ -299,7 +307,7 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'>Select Your Preferred Practices</label>
+  <label class='control-label'><strong>Practices</strong></label>
   <div class="controls">
     <table class="table table-bordered">
       <tr ng-repeat="row in preference.practices">

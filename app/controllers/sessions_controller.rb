@@ -1,5 +1,11 @@
 class SessionsController < ApplicationController
-  def company_sign_in
+  before_filter :check_if_logged_in, only: [:sign_in, :sign_up, :company, :github]
+
+  def sign_in
+  end
+
+  def sign_up
+    @company = Company.new
   end
 
   def company
@@ -56,5 +62,9 @@ class SessionsController < ApplicationController
 
   def from_stackexchange?
     request.env['omniauth.auth'] && request.env['omniauth.auth'].provider == 'stackexchange'
+  end
+
+  def check_if_logged_in
+    redirect_to root_path, error: 'Already logged in.' and return if user_signed_in?
   end
 end

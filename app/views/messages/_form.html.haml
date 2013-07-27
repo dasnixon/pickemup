@@ -1,7 +1,4 @@
-%h2.colorfont
-  = t('mailbox.message.new')
-
-= form_tag user_messages_path, method: :post , :class => "new_message" do
+= form_tag (user_signed_in? ? user_messages_path : company_messages_path), method: :post , class: "form-horizontal" do
   - if @receipt and @receipt.errors.any?
     .error
       %h2
@@ -11,17 +8,22 @@
         - @receipt.errors.full_messages.each do |msg|
           %li
             = msg
-  = label_tag t('mailboxer.form.recipients')
 
-  = hidden_field_tag :_recipients, @recipient.try(:id), "data-recipient-name" => @recipient.try(:name)
+  = hidden_field_tag :_recipients, @recipient.id
 
-  = label_tag t('mailboxer.form.subject')
+  .control-group
+    = label_tag t('mailboxer.form.recipients'), nil, class: 'control-label'
+    .controls
+      = text_field_tag :recipient_name, @recipient.name, disabled: true
 
-  = text_field_tag :subject, nil
+  .control-group
+    = label_tag t('mailboxer.form.subject'), nil, class: 'control-label'
+    .controls
+      = text_field_tag :subject, nil
 
-  = label_tag t('mailboxer.form.body')
+  .control-group
+    = label_tag t('mailboxer.form.body'), nil, class: 'control-label'
+    .controls
+      = text_area_tag :body, nil, rows: 6, cols: 53, maxlength: 5000
 
-  .ck_editor
-    = text_area_tag :body, nil,:rows =>6, :cols=> 53, :maxlength => 5000
-
-  = submit_tag t('mailboxer.send'), :name => :send_message, :class => "btn pull-right"
+  = submit_tag t('mailboxer.send'), name: :send_message, class: "btn pull-left"

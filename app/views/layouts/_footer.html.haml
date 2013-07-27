@@ -1,0 +1,32 @@
+%footer#footer
+  .container
+    .row.info
+      .span6.residence
+        %ul
+          %li San Francisco, CA
+      .span5.touch
+        %ul
+          %li
+            %strong
+              Phone
+            555 555 555
+          %li
+            %strong
+              Email
+            pickemupteam@gmail.com
+    .row.credits
+      .span12
+        .row.social
+          .span12
+            = link_to root_path, class: 'facebook' do
+              %span.socialicons.ico1
+              %span.socialicons_h.ico1h
+            = link_to root_path, class: 'twitter' do
+              %span.socialicons.ico2
+              %span.socialicons_h.ico2h
+            = link_to root_path, class: 'gplus' do
+              %span.socialicons.ico3
+              %span.socialicons_h.ico3h
+        .row.copyright
+          .span12
+            2013 Pickemup. All rights reserved

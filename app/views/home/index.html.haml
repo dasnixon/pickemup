@@ -1,12 +1,147 @@
-- if user_signed_in?
-  Welcome #{current_user.name}
-- elsif company_signed_in?
-  - unless current_user.subscription
-    = link_to "Start your subscription", subscriptions_path(:company_id => current_user.id)
-    Fill out your info and start finding developers now.
-- else
-  %div{:class => "btn btn-success"}
-    = link_to "Companies Start Here", new_company_path, :class => 'sign-up'
-  or
-  %div{:class => "btn btn-primary"}
-    = link_to "Developers Start Here", '/auth/github', :class => 'sign-up'
+%section#feature_slider
+  %article#showcasing.slide{:style => "background: url('assets/backgrounds/landscape.png') repeat-x top center;"}
+    %img.asset.left-30.sp600.t120.z1{:src => "#{image_path('slides/scene1/macbook.png')}"}/
+    .info
+      %h2 Beautiful theme for showcasing your works.
+  %article#ideas.slide{:style => "background: url('assets/backgrounds/aqua.jpg') repeat-x top center;"}
+    .info
+      %h2 We love to turn ideas into beautiful things.
+    %img.asset.left-480.sp600.t260.z1{:src => "#{image_path('slides/scene2/left.png')}"}/
+    %img.asset.left-210.sp600.t213.z2{:src => "#{image_path('slides/scene2/middle.png')}"}/
+    %img.asset.left60.sp600.t260.z1{:src => "#{image_path('slides/scene2/right.png')}"}/
+  %article#tour.slide{:style => "background: url('assets/backgrounds/color-splash.jpg') repeat-x top center;"}
+    %img.asset.left-472.sp650.t210.z3{:src => "#{image_path('slides/scene3/ipad.png')}"}/
+    %img.asset.left-365.sp600.t270.z4{:src => "#{image_path('slides/scene3/iphone.png')}"}/
+    %img.asset.left-350.sp450.t135.z2{:src => "#{image_path('slides/scene3/desktop.png')}"}/
+    %img.asset.left-185.sp550.t220.z1{:src => "#{image_path('slides/scene3/macbook.png')}"}/
+    .info
+      %h2 Fully Responsive theme
+      %a{:href => "features.html"} TOUR THE PRODUCT
+  %article#responsive.slide{:style => "background: url('assets/backgrounds/indigo.jpg') repeat-x top center;"}
+    %img.asset.left-472.sp600.t120.z3{:src => "#{image_path('slides/scene4/html5.png')}"}/
+    %img.asset.left-190.sp500.t120.z2{:src => "#{image_path('slides/scene4/css3.png')}"}/
+    .info
+      %h2
+        Responsive
+        %strong HTML5 & CSS3
+        Theme
+
+#showcase
+  .container
+    .section_header
+      %h3 Our Services
+    .row.feature_wrapper
+      / Features Row
+      .features_op1_row
+        / Feature
+        .span4.feature.first
+          .img_box
+            %a{:href => "services.html"}
+              %img{:src => "#{image_path('service1.png')}"}
+                %span.circle
+                  %span.plus +
+          .text
+            %h6 Responsive theme
+            %p
+              There are many variations of passages of generators on the  embarrassing hidden in   content here making it look like.
+        / Feature
+        .span4.feature
+          .img_box
+            %a{:href => "services.html"}
+              %img{:src => "#{image_path('service2.png')}"}
+                %span.circle
+                  %span.plus +
+          .text
+            %h6 Easy customization
+            %p
+              There are many variations of passages of generators on the  embarrassing hidden in   content here making it look like.
+        / Feature
+        .span4.feature.last
+          .img_box
+            %a{:href => "services.html"}
+              %img{:src => "#{image_path('service3.png')}"}
+                %span.circle
+                  %span.plus +
+          .text
+            %h6 Made with love
+            %p
+              There are many variations of passages of generators on the  embarrassing hidden in   content here making it look like.
+#features
+  .container
+    .section_header
+      %h3 Features
+    .row.feature
+      .span6
+        %img{:src => "#{image_path('showcase1.png')}"}/
+      .span6.info
+        %h3
+          %img{:src => "#{image_path('features-ico1.png')}"}/
+          Beautiful on all devices
+        %p
+          There are many variations of passages of Lorem Ipsum available, but the randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+    .row.feature.ss
+      .span6.info
+        %h3
+          %img{:src => "#{image_path('features-ico2.png')}"}/
+          Blog page included
+        %p
+          There are many variations of passages of Lorem Ipsum available, but the randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+      .span6
+        %img.pull-right{:src => "#{image_path('showcase2.png')}"}/
+    .row.feature.ss
+      .span6
+        %img{:src => "#{image_path('showcase3.png')}"}/
+      .span6.info
+        %h3
+          %img{:src => "#{image_path('features-ico3.png')}"}/
+          Simple and clean coming soon page
+        %p
+          There are many variations of passages of Lorem Ipsum available, but the randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
+#in_pricing
+  .container
+    .section_header
+      %h3 Pricing
+    .row.charts_wrapp
+      .span4.pro
+        .plan
+          .wrapper
+            %img.ribbon{:src => "#{image_path('badge.png')}"}
+              %h3 Pro
+              .price
+                %span.dollar $
+                %span.qty 99
+                %span.month /month
+              .features
+                %p
+                  %strong 10
+                  Shared Projects
+                %p
+                  %strong 25
+                  Team Members
+                %p
+                  %strong Unlimited
+                  Storage
+                %p
+                  %strong Plus
+                  Phone Support
+              %a.order{:href => "pricing.html"} ORDER NOW
+    .start
+      %p Start your free, no-risk, 14 day trial!
+      %a{:href => "pricing.html"} Start Now!
+#clients
+  .container
+    .section_header
+      %h3 Clients
+    .row
+      .span2.client
+        .img.client1
+      .span2.client
+        .img.client2
+      .span2.client
+        .img.client3
+      .span2.client
+        .img.client1
+      .span2.client
+        .img.client2
+      .span2.client
+        .img.client3

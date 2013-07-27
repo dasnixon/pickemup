@@ -1,0 +1,24 @@
+#sign_in1
+  .container
+    .row
+      .span12.header
+        %h4 Log in to your account
+        %h4 Developers
+        .span4.social
+          = link_to raw("<i class='icon-github-sign icon-5x'></i>"), '/auth/github', class: 'circle github_link'
+      .span3.division
+        .line.l
+        %span or
+        .line.r
+      .span12.footer
+        %h4 Companies
+        = form_tag company_log_in_path, :action => :create, :method => :post do |f|
+          = text_field_tag :email, nil, placeholder: 'Email'
+          = password_field_tag :password, nil, placeholder: 'Password'
+          = submit_tag "Submit"
+      .span12.proof
+        .span5.remember
+          %a{:href => "reset.html"} Forgot password?
+        .span3.dosnt
+          %span Don’t have an account?
+          = link_to 'Sign up', sign_up_path
