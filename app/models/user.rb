@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :newly_created
   attr_accessible :uid, :email, :name, :location,
-    :blog, :current_company, :description
+    :blog, :current_company, :description, :profile_image
 
   after_create :create_preference
 
@@ -63,6 +63,7 @@ class User < ActiveRecord::Base
     extra_info           = auth.extra.raw_info
     self.name            = info.name
     self.email           = info.email
+    self.profile_image   = info.image
     self.location        = extra_info.location
     self.blog            = extra_info.blog
     self.current_company = extra_info.company

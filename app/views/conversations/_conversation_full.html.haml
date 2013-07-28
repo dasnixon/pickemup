@@ -4,7 +4,7 @@
   .participants
     - conversation.recipients.each do |recp|
       - if recp.is_a?(User)
-        = link_to image_tag(recp.github_account.profile_image, title: recp.name, alt: recp.name, size: '50x50'), resume_user_path(id: recp.id)
+        = link_to image_tag(recp.profile_image, title: recp.name, alt: recp.name, size: '50x50'), resume_user_path(id: recp.id)
       - elsif recp.is_a?(Company)
         = link_to recp.name, company_path(id: recp.id)
 

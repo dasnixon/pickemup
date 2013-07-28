@@ -7,6 +7,7 @@ class CreateUsers < ActiveRecord::Migration
       t.string  :location
       t.string  :blog
       t.string  :current_company
+      t.string  :profile_image
       t.text    :description
       t.timestamps
     end

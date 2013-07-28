@@ -7,7 +7,7 @@
         - if is_company
           = link_to message.sender.name, company_path(id: message.sender.id)
         - else
-          = link_to image_tag(message.sender.github_account.profile_image, |
+          = link_to image_tag(message.sender.profile_image, |
                                 title: message.sender.name, |
                                 alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
                        resume_user_path(id: message.sender.id) |
