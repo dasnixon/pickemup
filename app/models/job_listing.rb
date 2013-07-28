@@ -1,3 +1,39 @@
+# == Schema Information
+#
+# Table name: job_listings
+#
+#  id                      :integer          not null, primary key
+#  job_title               :string(255)
+#  job_description         :string(255)
+#  salary_range_high       :integer
+#  salary_range_low        :integer
+#  vacation_days           :integer
+#  equity                  :string(255)
+#  bonuses                 :string(255)
+#  fulltime                :boolean          default(TRUE)
+#  remote                  :boolean
+#  hiring_time             :integer
+#  tech_stack_id           :integer
+#  location                :string(255)
+#  company_id              :integer          not null
+#  active                  :boolean          default(FALSE)
+#  sponsorship_available   :boolean          default(FALSE)
+#  created_at              :datetime
+#  updated_at              :datetime
+#  healthcare              :boolean          default(FALSE)
+#  dental                  :boolean          default(FALSE)
+#  vision                  :boolean          default(FALSE)
+#  life_insurance          :boolean          default(FALSE)
+#  retirement              :boolean          default(FALSE)
+#  estimated_work_hours    :integer
+#  practices               :string(255)      default([])
+#  acceptable_languages    :string(255)      default([])
+#  special_characteristics :string(255)      default([])
+#  experience_level        :string(255)      default([])
+#  perks                   :string(255)      default([])
+#  position_type           :string(255)      default([])
+#
+
 class JobListing < ActiveRecord::Base
   attr_accessible :job_title, :job_description, :experience_level, :estimated_work_hours, :salary_range_low,
                   :salary_range_high, :vacation_days, :healthcare, :equity, :bonuses, :retirement,

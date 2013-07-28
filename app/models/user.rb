@@ -9,6 +9,7 @@
 #  location        :string(255)
 #  blog            :string(255)
 #  current_company :string(255)
+#  profile_image   :string(255)
 #  description     :text
 #  created_at      :datetime
 #  updated_at      :datetime
