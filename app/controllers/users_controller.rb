@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :find_user, except: [:resume]
   before_filter :eager_load_user, only: [:resume]
-  before_filter :check_invalid_permissions, only: [:preferences, :get_preference, :update_preference]
+  before_filter :get_and_check_user, only: [:preferences, :get_preference, :update_preference]
   before_filter :cleanup_preference_params, only: [:update_preference]
   respond_to :json, :html
 
@@ -16,12 +15,9 @@ class UsersController < ApplicationController
         @profile      = @linkedin.profile
         @positions    = @profile.positions
         @educations   = @profile.educations
+        @skills       = @profile.skills
       end
     end
-  end
-
-  def skills
-    respond_with Array @user.linkedin.profile if @user
   end
 
   def preferences
@@ -49,10 +45,6 @@ class UsersController < ApplicationController
       github_account: [:repos, :organizations],
       linkedin: {profile: [:positions, :educations]}
     ).find(params[:id]) #eager load all user information
-  end
-
-  def find_user
-    @user ||= User.find(params[:id])
   end
 
   def cleanup_preference_params

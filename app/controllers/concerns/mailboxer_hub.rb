@@ -19,8 +19,10 @@ module Concerns
     def find_mailbox_for
       if params[:user_id]
         @mailbox_for = @user = User.find(params[:user_id])
+        check_invalid_permissions_user
       elsif params[:company_id]
         @mailbox_for = @company = Company.find(params[:company_id])
+        check_invalid_permissions_company
       end
     end
 
