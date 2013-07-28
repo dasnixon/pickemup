@@ -1,0 +1,7 @@
+%h2 New Listing
+%div{"ng-app" => "jobListing"}
+  %div{"ng-controller" => "JobListingCtrl"}
+    = form_for @job_listing, url: company_job_listings_path, method: 'POST', html: {name: 'jobListingForm'} do |f|
+      = render partial: "job_listing_form", locals: { job_listing: @job_listing, form:f }
+      %p
+        = f.submit "Create Listing"

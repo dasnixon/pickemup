@@ -1,0 +1,13 @@
+<h2> Edit Job Listing </h2>
+<div ng-controller = "JobListingCtrl">
+  <form class='jobListing', name='jobListingForm', ng-submit="update()">
+    <ng-include src="'/assets/job_listings/_job_listing_form.html.erb'" />
+    <p>
+      <div class="control-group">
+        <div class="controls">
+          <button class='btn' type="submit">Update Listing</button>
+        </div>
+      </div>
+    </p>
+  </form>
+</div>

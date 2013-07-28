@@ -8,7 +8,7 @@
     %th Description:
     %th Ownership:
   %tr
-    %td= @company.founded.year
+    %td= @company.founded.year if @company.founded
     %td= @company.num_employees
     %td= @company.industry
     %td= @company.description

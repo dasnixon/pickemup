@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130721005835) do
+ActiveRecord::Schema.define(version: 20130727043520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,38 @@ ActiveRecord::Schema.define(version: 20130721005835) do
   end
 
   add_index "github_accounts", ["github_account_key"], name: "index_github_accounts_on_github_account_key", using: :btree
+
+  create_table "job_listings", force: true do |t|
+    t.string   "job_title"
+    t.string   "job_description"
+    t.integer  "salary_range_high"
+    t.integer  "salary_range_low"
+    t.integer  "vacation_days"
+    t.string   "equity"
+    t.string   "bonuses"
+    t.boolean  "fulltime",                default: true
+    t.boolean  "remote"
+    t.integer  "hiring_time"
+    t.integer  "tech_stack_id"
+    t.string   "location"
+    t.integer  "company_id",                              null: false
+    t.boolean  "active",                  default: false
+    t.boolean  "sponsorship_available",   default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "healthcare",              default: false
+    t.boolean  "dental",                  default: false
+    t.boolean  "vision",                  default: false
+    t.boolean  "life_insurance",          default: false
+    t.boolean  "retirement",              default: false
+    t.integer  "estimated_work_hours"
+    t.string   "practices",               default: [],                 array: true
+    t.string   "acceptable_languages",    default: [],                 array: true
+    t.string   "special_characteristics", default: [],                 array: true
+    t.string   "experience_level",        default: [],                 array: true
+    t.string   "perks",                   default: [],                 array: true
+    t.string   "position_type",           default: [],                 array: true
+  end
 
   create_table "linkedins", force: true do |t|
     t.string   "token"
