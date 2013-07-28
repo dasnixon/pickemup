@@ -28,6 +28,8 @@ class Company < ActiveRecord::Base
   validates_confirmation_of :password, :message => "Password/Password Confirmation is invalid"
   validates_presence_of :password, :on => :create
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
+  validates_presence_of :email
+  validates_uniqueness_of :email
   validate :password_strength, :on => :create
   validates :name, presence: true
 

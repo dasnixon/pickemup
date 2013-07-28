@@ -1,7 +1,0 @@
-%h2 Edit Job Listing
-%div{"ng-app" => "jobListing"}
-  %div{"ng-controller" => "JobListingCtrl"}
-    = form_for @job_listing, url: company_job_listing_path, :method => 'PUT', html: {name: 'jobListingForm'} do |f|
-      = render partial: "job_listing_form", locals: { job_listing: @job_listing, form:f }
-      %p
-        = f.submit "Update Listing", "ng-disabled" => "job-listing-form.$invalid"
