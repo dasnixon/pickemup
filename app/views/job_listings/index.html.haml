@@ -1,3 +1,3 @@
 %h2 All Job Listings
 - @job_listings.each do |listing|
-  = link_to "Edit #{listing.id}", edit_company_job_listing_path(company_id: current_user.id, id: listing.id)
+  = link_to "Edit #{listing.id}", edit_company_job_listing_path(company_id: current_company.id, id: listing.id)
