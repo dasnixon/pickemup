@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   include Concerns::MailboxerHub
 
-  before_filter :find_mailbox_for, :check_invalid_permissions, :get_mailbox, :get_box
+  before_filter :find_mailbox_for, :get_mailbox, :get_box
   before_filter :find_conversation, only: [:show, :update, :destroy]
 
   def index

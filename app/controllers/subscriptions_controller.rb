@@ -1,14 +1,14 @@
 require 'subscription_handler'
 class SubscriptionsController < ApplicationController
-  before_filter :get_credentials, :except => [:listener, :new, :create, :edit_card]
+  before_filter :find_company
+  before_filter :get_credentials, except: [:listener, :new, :create, :edit_card]
 
   def new
-    @company = Company.find(params[:company_id])
     @subscription = Subscription.new
   end
 
   def create
-    @subscription = Subscription.new(subscription_params)
+    @subscription = @company.build_subscription(subscription_params)
     if @subscription.save_with_payment
       redirect_to root_path, notice: "Subscription created!"
     else
@@ -48,7 +48,7 @@ class SubscriptionsController < ApplicationController
     @customer = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
     if params[:stripe_card_token].present?
       @subscription.update(subscription_params)
-      @customer.update_subscription(:card => params[:stripe_card_token], :plan => @subscription.plan)
+      @customer.update_subscription(card: params[:stripe_card_token], plan: @subscription.plan)
       if @subscription.save
         redirect_to edit_company_path(@subscription.company_id) #change this path
       end
@@ -67,12 +67,17 @@ class SubscriptionsController < ApplicationController
   private
 
   def get_credentials
-    @subscription = Subscription.find_by_company_id(params[:company_id])
+    @subscription = @company.subscription
     @customer = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
   end
 
   def subscription_params
     params.permit(:company_id, :email, :plan, :stripe_card_token)
+  end
+
+  def find_company
+    @company ||= Company.find(params[:company_id])
+    check_invalid_permissions_company
   end
 end
 

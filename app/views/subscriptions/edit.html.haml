@@ -1,30 +1,35 @@
-%h4 Edit Subscription
-= form_for @subscription do |f|
+#housing
+  .container
+    .section_header
+      %h3 Edit Subscription
+      %h4 #{"Subscription Status: #{@subscription.active ? 'Active' : 'Inactive'}"}
+    = form_for [@company, @subscription], html: { class: 'form-horizontal' } do |f|
+      .control-group
+        = label_tag 'Subscription Plan:', nil, class: 'control-label'
+        .controls
+          = select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => @subscription.plan)
 
-  %div
-    = label_tag "Subscription Status: #{@subscription.active ? 'Active' : 'Inactive'}"
+      - if @subscription.active
+        .control-group
+          = label_tag 'Cancel Subscription', nil, class: 'control-label'
+          .controls
+            = label_tag 'Yes', nil, class: 'radio inline' do
+              = radio_button_tag :cancel_subscription, true
+              Yes
+            = label_tag 'No', nil, class: 'radio inline' do
+              = radio_button_tag :cancel_subscription, false, checked: true
+              No
+      - else
+        .control-group
+          = label_tag 'Reactivate Subscription', nil, class: 'control-label'
+          .controls
+            = label_tag 'Yes', nil, class: 'radio inline' do
+              = radio_button_tag :reactivate_subscription, true, checked: true
+              Yes
+            = label_tag 'No', nil, class: 'radio inline' do
+              = radio_button_tag :reactivate_subscription, false
+              No
 
-  %div
-    = label_tag 'Subscription Plan:'
-    = select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => @subscription.plan)
-
-  - if @subscription.active
-    %div
-      = label_tag "Cancel Subscription:"
-      = radio_button_tag :cancel_subscription, true
-      = label_tag "Yes"
-
-      = radio_button_tag :cancel_subscription, false, :checked => true
-      = label_tag "No"
-  - else
-    %div
-      = label_tag "Reactivate Subscription:"
-      = radio_button_tag :reactivate_subscription, true
-      = label_tag "Yes"
-      = radio_button_tag :reactivate_subscription, false
-      = label_tag "No"
-  = hidden_field_tag :company_id, @subscription.company_id
-
-  = f.submit "Update"
-%h4
-  = link_to "Change Card", edit_card_subscription_path(:id => @subscription.id)
+      = f.submit 'Update Subscription', class: 'btn'
+    %h4
+      = link_to "Change Card", edit_card_company_subscription_path(company_id: @company.id, :id => @subscription.id)

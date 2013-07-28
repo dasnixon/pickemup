@@ -15,7 +15,10 @@ class JobListing < ActiveRecord::Base
   end
 
   def salary_range_check
-    errors.add(:salary_range, "Invalid salary range") unless salary_range_high >= salary_range_low
+    return unless self.salary_range_high && self.salary_range_low
+    unless salary_range_high >= salary_range_low
+      errors.add(:salary_range, "Invalid salary range")
+    end
   end
 
   def unhash_all_params(job_listing_params)

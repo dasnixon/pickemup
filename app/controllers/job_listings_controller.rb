@@ -1,4 +1,5 @@
 class JobListingsController < ApplicationController
+  before_filter :find_company
   before_filter :get_job_listing, only: [:show, :edit, :retrieve_listing]
   respond_to :json, :html
 
@@ -11,7 +12,11 @@ class JobListingsController < ApplicationController
   def create
     @job_listing = JobListing.new
     remaining_params = @job_listing.unhash_all_params(job_listing_params)
-    redirect_to root_path if @job_listing.update(remaining_params)
+    if @job_listing.update(remaining_params)
+      respond_with @job_listing
+    else
+      render json: { errors: @job_listing.errors }, status: :bad_request
+    end
   end
 
   def show
@@ -39,6 +44,8 @@ class JobListingsController < ApplicationController
     remaining_params = @job_listing.unhash_all_params(job_listing_params)
     if @job_listing.update(remaining_params)
       respond_with(@job_listing)
+    else
+      render json: { errors: @job_listing.errors }, status: :bad_request
     end
   end
 
@@ -50,10 +57,15 @@ class JobListingsController < ApplicationController
   private
 
   def get_job_listing
-    @job_listing = JobListing.find(params[:id])
+    @job_listing = @company.job_listings.find(params[:id])
   end
 
   def job_listing_params
-    return_params = params.require(:job_listing).permit!.merge(company_id: params[:company_id])
+    params.require(:job_listing).permit!.merge(company_id: params[:company_id])
+  end
+
+  def find_company
+    @company ||= Company.find(params[:company_id])
+    check_invalid_permissions_company
   end
 end

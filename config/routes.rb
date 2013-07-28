@@ -34,14 +34,14 @@ Pickemup::Application.routes.draw do
       end
     end
     resources :messages, except: [:edit, :update, :destroy]
-  end
-  post "/company_log_in" => "sessions#company"
-  resources :subscriptions, except: [:destroy] do
-    member do
-      get 'edit_card'
-      post 'edit_card'
+    resources :subscriptions, except: [:destroy] do
+      member do
+        get :edit_card
+        put :edit_card
+      end
     end
   end
+  post "/company_log_in" => "sessions#company"
   match '/subscriptions_listener' => 'subscriptions#listener', :via => [ :post, :get ]
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
