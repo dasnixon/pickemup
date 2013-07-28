@@ -1,10 +1,6 @@
 class CompaniesController < ApplicationController
   before_filter :find_company, :except => [:new, :create]
 
-  def new
-    @company = Company.new
-  end
-
   def create
     @company = Company.new(company_params)
     unless params[:company][:email].blank? || params[:company][:password].blank? || params[:company][:password_confirmation].blank?

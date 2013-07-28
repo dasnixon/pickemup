@@ -41,6 +41,42 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
       $scope.dirty_message = 'You have made changes, make sure to click the \'Save\' button below.'
   ), true
 
+  $scope.selectAll = (objectScope) ->
+    for object in unchunk objectScope
+      object.checked = true
+
+  $scope.unselectAll = (objectScope) ->
+    for object in unchunk objectScope
+      object.checked = false
+
+  $scope.selectAllBenefits = ->
+    $scope.preference.healthcare     = true
+    $scope.preference.dentalcare     = true
+    $scope.preference.visioncare     = true
+    $scope.preference.life_insurance = true
+    $scope.preference.paid_vacation  = true
+    $scope.preference.equity         = true
+    $scope.preference.bonuses        = true
+    $scope.preference.retirement     = true
+    $scope.preference.fulltime       = true
+    $scope.preference.us_citizen     = true
+    $scope.preference.open_source    = true
+    $scope.preference.remote         = true
+
+  $scope.unselectAllBenefits = ->
+    $scope.preference.healthcare     = false
+    $scope.preference.dentalcare     = false
+    $scope.preference.visioncare     = false
+    $scope.preference.life_insurance = false
+    $scope.preference.paid_vacation  = false
+    $scope.preference.equity         = false
+    $scope.preference.bonuses        = false
+    $scope.preference.retirement     = false
+    $scope.preference.fulltime       = false
+    $scope.preference.us_citizen     = false
+    $scope.preference.open_source    = false
+    $scope.preference.remote         = false
+
   $scope.update = ->
     Preference.update
       user_id: $scope.user_id,
