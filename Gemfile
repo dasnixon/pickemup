@@ -72,3 +72,7 @@ group :test, :development do
   gem 'shoulda-matchers'
   gem 'railroady' #schema diagrams
 end
+
+group :development do
+  gem 'meta_request' #for RailsPanel Google Chrome extension
+end

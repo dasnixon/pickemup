@@ -1,37 +1,50 @@
-%h2 Company Info
-= form_for @company do |f|
-  %p
-    = f.label :email
-    = f.text_field :email
-  %p
-    = f.label :name
-    = f.text_field :name
-  %p
-    = f.label :description
-    = f.text_area :description
-  %p
-    = f.label :website
-    = f.text_field :website
-  %p
-    = f.label :industry
-    = f.text_field :industry
-  %p
-    = f.label "Number of Employees"
-    = f.text_field :num_employees
-  %p
-    = f.label "Publicly Held?"
-    = f.check_box :public
-  %p
-    = f.label "Year Founded"
-    = f.text_field :founded, :value => @company.founded ? @company.founded.year : ""
-  %h4 Change Password
-  %p
-    = f.label "New Password"
-    = f.password_field :password
-  %p
-    = f.label "New Password Confirmation"
-    = f.password_field :password_confirmation
-  = f.submit :submit
-%h4
-  = link_to "Change Billing Info", edit_subscription_path(:company_id => @company.id)
-
+#housing
+  .container
+    .section_header
+      %h3 Company Info
+      %h4 #{link_to "Change Billing Info", edit_company_subscription_path(id: @subscription.id, company_id: @company.id)}
+    = form_for @company, html: { class: 'form-horizontal' } do |f|
+      .control-group
+        = f.label :email, class: 'control-label'
+        .controls
+          = f.text_field :email
+      .control-group
+        = f.label :name, class: 'control-label'
+        .controls
+          = f.text_field :name
+      .control-group
+        = f.label :description, class: 'control-label'
+        .controls
+          = f.text_area :description
+      .control-group
+        = f.label :website, class: 'control-label'
+        .controls
+          = f.text_field :website
+      .control-group
+        = f.label :industry, class: 'control-label'
+        .controls
+          = f.text_field :industry
+      .control-group
+        = f.label "Number of Employees", class: 'control-label'
+        .controls
+          = f.text_field :num_employees
+      .control-group
+        = f.label "Publicly Held?", class: 'control-label'
+        .controls
+          = f.check_box :public
+      .control-group
+        = f.label "Year Founded", class: 'control-label'
+        .controls
+          = f.text_field :founded, :value => @company.founded ? @company.founded.year : ""
+      %h4 Change Password
+      .control-group
+        = f.label "New Password", class: 'control-label'
+        .controls
+          = f.password_field :password
+      .control-group
+        = f.label "New Password Confirmation", class: 'control-label'
+        .controls
+          = f.password_field :password_confirmation
+      .control-group
+        .controls
+          = f.submit 'Save Company', class: 'btn'

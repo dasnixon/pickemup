@@ -49,7 +49,6 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           practices: unchunk($scope.data.practices)
         }},
         function(response) {
-          $location.path("/companies/" + $stateParams['company_id'] + "/job_listings/" + $stateParams['job_listing_id'])
           return $scope.success;
         }
     )};
@@ -96,7 +95,6 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           practices: unchunk($scope.data.practices)
         }},
         function(response) {
-          $location.path("/companies/" + $stateParams['company_id'] + "/job_listings/")
           return $scope.success;
         }
     )};

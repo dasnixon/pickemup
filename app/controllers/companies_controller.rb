@@ -1,19 +1,14 @@
 class CompaniesController < ApplicationController
-  before_filter :find_company, :except => [:new, :create]
+  before_filter :find_company, only: [:show]
+  before_filter :get_and_check_company, only: [:edit, :update]
 
   def create
     @company = Company.new(company_params)
-    unless params[:company][:email].blank? || params[:company][:password].blank? || params[:company][:password_confirmation].blank?
-      if @company.save
-        session[:company_id] = @company.id
-        redirect_to new_subscription_path(:company_id => @company.id), notice: "You've just created a new company!"
-      else
-        @company.errors.messages.each { |error, message| flash[:error] = message.join(', ') }
-        render :new
-      end
+    if @company.save
+      session[:company_id] = @company.id
+      redirect_to new_company_subscription_path(company_id: @company.id), notice: "You've just created a new company!"
     else
-      flash[:error] = "Email and Password are required."
-      render :new
+      redirect_to sign_up_path, error: @company.errors.messages
     end
   end
 
@@ -21,6 +16,7 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    @subscription = @company.subscription
   end
 
   def update
@@ -42,7 +38,7 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:email, :password, :password_confirmation)
+    params.require(:company).permit(:name, :email, :password, :password_confirmation)
   end
 
   def company_info_params
