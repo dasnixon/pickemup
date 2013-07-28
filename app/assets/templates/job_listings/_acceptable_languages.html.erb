@@ -1,0 +1,11 @@
+<p>
+  Acceptable Languages:
+</p>
+<table class='table table-bordered'>
+  <tr ng-repeat="row in data.acceptable_languages">
+    <td ng-repeat="language in row">
+      {{language.name}}:
+      <input type="checkbox" ng-model="language.checked"\>
+    </td>
+  </tr>
+</table>

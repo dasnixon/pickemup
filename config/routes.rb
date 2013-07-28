@@ -27,6 +27,12 @@ Pickemup::Application.routes.draw do
   end
   resources :companies, except: [:new] do
     resources :conversations
+    resources :job_listings do
+      member do
+        get :retrieve_listing
+        put :update_listing
+      end
+    end
     resources :messages, except: [:edit, :update, :destroy]
   end
   post "/company_log_in" => "sessions#company"

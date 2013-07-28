@@ -1,0 +1,6 @@
+%p
+  Perks: 
+- if @job_listing.perks
+  - @job_listing.perks.each do |perk|
+    = perk.keys.first
+    <input id=#{perk.keys.first} name="perks[#{perk.keys.first}]" type="checkbox" multiple=true value=#{{'checked' => true}} #{perk.values.first["checked"] ? checked : ""}>

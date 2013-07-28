@@ -1,0 +1,12 @@
+<div ng-show="success.length > 0" class="alert alert-success">
+  {{success}}
+</div>
+<div ng-show="dirty_message.length > 0" class="alert alert-info">
+  {{dirty_message}}
+</div>
+<div ng-show="error_updating.length > 0" class="alert alert-error">
+  {{error_updating}}
+</div>
+<form name="preferenceForm" class='form-horizontal' ng-submit="update()">
+  <ng-include src="'/assets/preferences/_form.html.erb'" />
+</form>

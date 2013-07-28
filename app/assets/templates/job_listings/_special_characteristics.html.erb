@@ -1,0 +1,11 @@
+<p>
+  Special Characteristics:
+<p>
+<table class='table table-bordered'>
+  <tr ng-repeat="row in data.special_characteristics">
+    <td ng-repeat="characteristic in row">
+      {{characteristic.name}}:
+      <input type="checkbox" ng-model="characteristic.checked"\>
+    </td>
+  </tr>
+</table>

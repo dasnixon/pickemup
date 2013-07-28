@@ -23,6 +23,7 @@ pickle-email-*.html
 *~
 *.swp
 *.swo
+*.log
 
 # Ignore application configuration
 /config/application.yml

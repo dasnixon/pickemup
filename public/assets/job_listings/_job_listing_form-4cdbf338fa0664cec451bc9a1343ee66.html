@@ -1,0 +1,183 @@
+<div class = 'job-title'>
+  <ng-include src="'/assets/job_listings/_errors.html.erb'" />
+  Job Title:
+  <input id="job_listing_job_title" name="jobTitle" ng-model="data.jobTitle" required="required" type="text"></input>
+</div>
+<div class = 'job-description'>
+  Job Description:
+  <textarea id="job_listing_job_description" name="jobDescription" ng-model="data.jobDescription"></textarea>
+</div>
+<div class = 'location'>
+  Location:
+  <input id="job_listing_location" name="location" ng-model="data.location" required="required" type="text"></input>
+</div>
+<div class = 'postition-type'>
+  Position Type:
+  <select id="job_listing_position_type" name="position_type", ng-model="data.positionType">
+    <option value="Individual Contributor">Individual Contributor</option>
+    <option value="Manager">Manager</option>
+    <option value="Tech Lead">Tech Lead</option>
+    <option value="Executive">Executive</option>
+  </select>
+</div>
+<div class = 'experience_level'>
+  Experience Level:
+  <select id="job_listing_experience_level" name="experience_level", ng-model="data.experienceLevel">
+    <option selected="selected" value="N/A">N/A</option>
+    <option value="Junior">Junior</option>
+    <option value="Mid-level">Mid-level</option>
+    <option value="Senior">Senior</option></select>
+  </select>
+</div>
+<div class = 'salary_range'>
+  Salary Range: 
+  <select id="job_listing_salary_range_low" name="salary_range_low", ng-model="data.salaryRangeLow">
+   <option value="0">Less than $10,000</option>
+   <option value="10000">$10,000</option>
+   <option value="20000">$20,000</option>
+   <option value="30000">$30,000</option>
+   <option value="40000">$40,000</option>
+   <option value="50000">$50,000</option>
+   <option value="60000">$60,000</option>
+   <option value="70000">$70,000</option>
+   <option value="80000">$80,000</option>
+   <option value="90000">$90,000</option>
+   <option value="100000">$100,000</option>
+   <option value="110000">$110,000</option>
+   <option value="120000">$120,000</option>
+   <option value="130000">$130,000</option>
+   <option value="140000">$140,000</option>
+   <option value="150000">$150,000</option>
+   <option value="160000">$160,000</option>
+   <option value="170000">$170,000</option>
+   <option value="180000">$180,000</option>
+   <option value="190000">$190,000</option>
+   <option value="200000">$200,000</option>
+   <option value="225000">$225,000</option>
+   <option value="250000">$250,000</option>
+   <option value="275000">$275,000</option>
+   <option value="300000">$300,000</option>
+   <option value="325000">$325,000</option>
+   <option value="350000">$350,000</option>
+   <option value="500000">More than $350,000</option>
+  </select>
+  to
+  <select id="job_listing_salary_range_high" name="salary_range_high", ng-model="data.salaryRangeHigh">
+   <option value="0">Less than $10,000</option>
+   <option value="10000">$10,000</option>
+   <option value="20000">$20,000</option>
+   <option value="30000">$30,000</option>
+   <option value="40000">$40,000</option>
+   <option value="50000">$50,000</option>
+   <option value="60000">$60,000</option>
+   <option value="70000">$70,000</option>
+   <option value="80000">$80,000</option>
+   <option value="90000">$90,000</option>
+   <option value="100000">$100,000</option>
+   <option value="110000">$110,000</option>
+   <option value="120000">$120,000</option>
+   <option value="130000">$130,000</option>
+   <option value="140000">$140,000</option>
+   <option value="150000">$150,000</option>
+   <option value="160000">$160,000</option>
+   <option value="170000">$170,000</option>
+   <option value="180000">$180,000</option>
+   <option value="190000">$190,000</option>
+   <option value="200000">$200,000</option>
+   <option value="225000">$225,000</option>
+   <option value="250000">$250,000</option>
+   <option value="275000">$275,000</option>
+   <option value="300000">$300,000</option>
+   <option value="325000">$325,000</option>
+   <option value="350000">$350,000</option>
+   <option value="500000">More than $350,000</option>
+  </select>
+</div>
+<div class = 'vacation-days'>
+  Vacation Days: 
+  <select id="job_listing_vacation_days" name="vacation_days", ng-model="data.vacationDays">
+    <option value="0">None</option>
+    <option value="5">1 Week</option>
+    <option value="10">2 Weeks</option>
+    <option value="15">3 Weeks</option>
+    <option value="20">4 Weeks</option>
+    <option value="25">5 Weeks</option>
+    <option value="30">6 Weeks</option>
+    <option value="365">Unlimited</option>
+  </select>
+</div>
+<div class = 'healthcare'>
+  Health Care: 
+  <select id="job_listing_healthcare" name="healthcare", ng-model="data.healthcare">
+    <option value="None">None</option>
+    <option value="Basic benefits">Basic benefits</option>
+    <option value="Expansive benefits package">Expansive benefits package</option>
+  </select>
+</div>
+<div class = 'equity'>
+  Equity: 
+  <select id="job_listing_equity" name="equity", ng-model="data.equity">
+    <option value="None">None</option>
+    <option value="Less than 1%">Less than 1%</option>
+    <option value="1% - 5%">1% - 5%</option>
+    <option value="Greater than 5%">Greater than 5%</option>
+  </select>
+</div>
+<div class = 'bonuses'>
+  Bonus: 
+  <select id="job_listing_bonuses" name="bonuses", ng-model="data.bonus">
+    <option value="None">None</option>
+    <option value="1-10% of base salary">1-10% of base salary</option>
+    <option value="Greater than 10% of base salary">Greater than 10% of base salary</option>
+    <option value="Something else">Something else</option>
+  </select>
+</div>
+<div class = 'retirement'>
+  Retirement: 
+  <select id="job_listing_retirement" name="retirement", ng-model="data.retirement">
+    <option value="None">None</option>
+    <option value="IRA">IRA</option>
+  </select>
+</div>
+<div class = 'perks'>
+  <ng-include src="'/assets/job_listings/_perks.html.erb'" />
+</div>
+<div class = 'practices'>
+  <ng-include src="'/assets/job_listings/_practices.html.erb'" />
+</div>
+<div class = 'fulltime'>
+  Work Hours:
+  <select id="job_listing_fulltime" name="fulltime", ng-model="data.fulltime">
+    <option value="true">Full-time</option>
+    <option value="false">Part-Time</option>
+  </select>
+</div>
+<div class = 'estimated-work-hours'>
+  Estimated Hours per Week:
+  <select id="job_listing_estimated_work_hours" name="estimated_work_hours", ng-model="data.estimatedWorkHours">
+    <option value="N/A">N/A</option>
+    <option value="0 - 20 hours">0 - 20 hours</option>
+    <option value="21 - 40 hours">21 - 40 hours</option>
+    <option value="41 - 50 hours">41 - 50 hours</option>
+    <option value="51 - 60 hours">51 - 60 hours</option>
+    <option value="61+ hours">61+ hours</option>
+  </select>
+</div>
+<div class = 'hiring-time'>
+  Approximate Start Time:
+  <select id="job_listing_hiring_time" name="hiring_time", ng-model="data.hiringTime">
+    <option value="">Unkown</option>
+    <option value="0">ASAP</option>
+    <option value="14">The next couple of weeks</option>
+    <option value="60">The next couple of months</option>
+    <option value="90">Next quarter or some other time in the future</option>
+  </select>
+</div>
+<div class = 'tech-stack'>
+</div>
+<div class = 'special-characteristics'>
+  <ng-include src="'/assets/job_listings/_special_characteristics.html.erb'" />
+</div>
+<div class = 'acceptable-languages'>
+  <ng-include src="'/assets/job_listings/_acceptable_languages.html.erb'" />
+</div>
