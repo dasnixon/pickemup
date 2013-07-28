@@ -56,7 +56,6 @@ ActiveRecord::Schema.define(version: 20130721005835) do
 
   create_table "github_accounts", force: true do |t|
     t.string   "nickname"
-    t.string   "profile_image"
     t.boolean  "hireable"
     t.text     "bio"
     t.integer  "public_repos_count"
@@ -253,6 +252,7 @@ ActiveRecord::Schema.define(version: 20130721005835) do
     t.string   "location"
     t.string   "blog"
     t.string   "current_company"
+    t.string   "profile_image"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

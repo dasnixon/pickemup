@@ -2,7 +2,6 @@ class CreateGithubAccounts < ActiveRecord::Migration
   def change
     create_table :github_accounts do |t|
       t.string     :nickname
-      t.string     :profile_image
       t.boolean    :hireable
       t.text       :bio
       t.integer    :public_repos_count

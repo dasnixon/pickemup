@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
   include Concerns::MailboxerHub
+
   before_filter :find_mailbox_for, :check_invalid_permissions, :get_mailbox, :get_box
 
   def index
