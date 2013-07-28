@@ -1,182 +1,234 @@
-<div class = 'job-title'>
-  Job Title:
-  <input id="job_listing_job_title" name="job_title" ng-model="data.job_title" type="text" required \> <span class='client-error', ng-show = 'jobListingForm.job_title.$invalid'>Job Title Required</span>
+<div class='control-group'>
+  <label class='control-label'>Job Title*</label>
+  <div class='controls'>
+    <input id="job_listing_job_title" name="job_title" ng-model="data.job_title" type="text" required \> <span class='client-error', ng-show = 'jobListingForm.job_title.$invalid'></span>
+  </div>
 </div>
-<div class = 'job-description'>
-  Job Description:
-  <textarea id="job_listing_job_description" name="job_description" ng-model="data.job_description" required></textarea> <span class='client-error', ng-show = 'jobListingForm.job_description.$invalid'>Job Description Required</span>
+
+<div class='control-group'>
+  <label class='control-label'>Job Description*</label>
+  <div class='controls'>
+    <textarea id="job_listing_job_description" name="job_description" ng-model="data.job_description" required></textarea> <span class='client-error', ng-show = 'jobListingForm.job_description.$invalid'></span>
+  </div>
 </div>
-<div class = 'location'>
-  Location:
-  <input id="job_listing_location" name="location" ng-model="data.location" type="text" required \></input> <span class='client-error', ng-show = 'jobListingForm.location.$invalid'>Location Required</span>
+
+<div class='control-group'>
+  <label class='control-label'>Location*</label>
+  <div class='controls'>
+    <input id="job_listing_location" name="location" ng-model="data.location" type="text" required \></input> <span class='client-error', ng-show = 'jobListingForm.location.$invalid'></span>
+  </div>
 </div>
-<div class = 'fulltime'>
-  Full-time?:
-  <input type="checkbox" ng-model="data.fulltime"\>
+
+<div class='control-group'>
+  <label class='control-label'>Full-time?</label>
+  <div class='controls'>
+    <input type="checkbox" ng-model="data.fulltime"\>
+  </div>
 </div>
-<div class = 'remote'>
-  Remote work acceptable?:
-  <input type="checkbox" ng-model="data.remote"\>
+
+<div class='control-group'>
+  <label class='control-label'>Remote work acceptable?</label>
+  <div class='controls'>
+    <input type="checkbox" ng-model="data.remote"\>
+  </div>
 </div>
-<div class = 'postition-type'>
-  Position Type:
-  <table class = 'table table-bordered'>
-    <tr ng-repeat="row in data.position_type">
-      <td ng-repeat="type in row">
-        {{type.name}}:
-        <input type="checkbox" ng-model="type.checked"\>
+
+<div class='control-group'>
+  <label class='control-label'>Position Type</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.position_type">
+        <td ng-repeat="type in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="type.checked"/>{{type.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Experience Level</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.experience_level">
+        <td ng-repeat="level in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="level.checked"/>{{level.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Estimated Hours per Week*</label>
+  <div class='controls'>
+    <input id="job_listing_estimated_work_hours" name="estimate_work_hours" ng-model="data.estimated_work_hours" required="required" type="text"></input>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Approximate Start Time</label>
+  <div class='controls'>
+    <input id="job_listing_hiring_time" name="hiring_time" ng-model="data.hiring_time" required="required" type="text"></input>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Salary Range</label>
+  <div class='controls'>
+    <select id="job_listing_salary_range_low" name="salary_range_low", ng-model="data.salary_range_low">
+     <option value="0">Less than $10,000</option>
+     <option value="10000">$10,000</option>
+     <option value="20000">$20,000</option>
+     <option value="30000">$30,000</option>
+     <option value="40000">$40,000</option>
+     <option value="50000">$50,000</option>
+     <option value="60000">$60,000</option>
+     <option value="70000">$70,000</option>
+     <option value="80000">$80,000</option>
+     <option value="90000">$90,000</option>
+     <option value="100000">$100,000</option>
+     <option value="110000">$110,000</option>
+     <option value="120000">$120,000</option>
+     <option value="130000">$130,000</option>
+     <option value="140000">$140,000</option>
+     <option value="150000">$150,000</option>
+     <option value="160000">$160,000</option>
+     <option value="170000">$170,000</option>
+     <option value="180000">$180,000</option>
+     <option value="190000">$190,000</option>
+     <option value="200000">$200,000</option>
+     <option value="225000">$225,000</option>
+     <option value="250000">$250,000</option>
+     <option value="275000">$275,000</option>
+     <option value="300000">$300,000</option>
+     <option value="325000">$325,000</option>
+     <option value="350000">$350,000</option>
+     <option value="500000">More than $350,000</option>
+    </select>
+    to
+    <select id="job_listing_salary_range_high" name="salary_range_high", ng-model="data.salary_range_high">
+     <option value="0">Less than $10,000</option>
+     <option value="10000">$10,000</option>
+     <option value="20000">$20,000</option>
+     <option value="30000">$30,000</option>
+     <option value="40000">$40,000</option>
+     <option value="50000">$50,000</option>
+     <option value="60000">$60,000</option>
+     <option value="70000">$70,000</option>
+     <option value="80000">$80,000</option>
+     <option value="90000">$90,000</option>
+     <option value="100000">$100,000</option>
+     <option value="110000">$110,000</option>
+     <option value="120000">$120,000</option>
+     <option value="130000">$130,000</option>
+     <option value="140000">$140,000</option>
+     <option value="150000">$150,000</option>
+     <option value="160000">$160,000</option>
+     <option value="170000">$170,000</option>
+     <option value="180000">$180,000</option>
+     <option value="190000">$190,000</option>
+     <option value="200000">$200,000</option>
+     <option value="225000">$225,000</option>
+     <option value="250000">$250,000</option>
+     <option value="275000">$275,000</option>
+     <option value="300000">$300,000</option>
+     <option value="325000">$325,000</option>
+     <option value="350000">$350,000</option>
+     <option value="500000">More than $350,000</option>
+    </select>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Vacation Days</label>
+  <div class='controls'>
+    <input id="job_listing_vacation_days" name="vacation_days" ng-model="data.vacation_days" required="required" type="text"/>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Equity</label>
+  <div class='controls'>
+    <select id="job_listing_equity" name="equity", ng-model="data.equity">
+      <option value="None">None</option>
+      <option value="Less than 1%">Less than 1%</option>
+      <option value="1% - 5%">1% - 5%</option>
+      <option value="Greater than 5%">Greater than 5%</option>
+    </select>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Bonus</label>
+  <div class='controls'>
+    <select id="job_listing_bonuses" name="bonuses", ng-model="data.bonuses">
+      <option value="None">None</option>
+      <option value="1-10% of base salary">1-10% of base salary</option>
+      <option value="Greater than 10% of base salary">Greater than 10% of base salary</option>
+      <option value="Something else">Something else</option>
+    </select>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Health Benefits</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <td>
+        <label class='checkbox'>
+          <input type="checkbox" ng-model="data.healthcare"/>Health Care
+        </label>
       </td>
-    </tr>
-  </table>
-</div>
-<div class = 'experience_level'>
-  Experience Level:
-  <table class = 'table table-bordered'>
-    <tr ng-repeat="row in data.experience_level">
-      <td ng-repeat="level in row">
-        {{level.name}}:
-        <input type="checkbox" ng-model="level.checked"\>
+      <td>
+        <label class='checkbox'>
+          <input type="checkbox" ng-model="data.vision"/>Vision
+        </label>
       </td>
-    </tr>
-  </table>
+      <td>
+        <label class='checkbox'>
+          <input type="checkbox" ng-model="data.dental"/>Dental
+        </label>
+      </td>
+      <td>
+        <label class='checkbox'>
+          <input type="checkbox" ng-model="data.life_insurance"/>Life Insurance
+        </label>
+      </td>
+      <td>
+        <label class='checkbox'>
+          <input type="checkbox" ng-model="data.retirement"/>Retirement
+        </label>
+      </td>
+    </table>
+  </div>
 </div>
-<div class = 'estimated-work-hours'>
-  Estimated Hours per Week:
-  <input id="job_listing_estimated_work_hours" name="estimate_work_hours" ng-model="data.estimated_work_hours" required="required" type="text"></input>
-</div>
-<div class = 'hiring-time'>
-  Approximate Start Time:
-  <input id="job_listing_hiring_time" name="hiring_time" ng-model="data.hiring_time" required="required" type="text"></input>
-</div>
-<div class = 'salary_range'>
-  Salary Range: 
-  <select id="job_listing_salary_range_low" name="salary_range_low", ng-model="data.salary_range_low">
-   <option value="0">Less than $10,000</option>
-   <option value="10000">$10,000</option>
-   <option value="20000">$20,000</option>
-   <option value="30000">$30,000</option>
-   <option value="40000">$40,000</option>
-   <option value="50000">$50,000</option>
-   <option value="60000">$60,000</option>
-   <option value="70000">$70,000</option>
-   <option value="80000">$80,000</option>
-   <option value="90000">$90,000</option>
-   <option value="100000">$100,000</option>
-   <option value="110000">$110,000</option>
-   <option value="120000">$120,000</option>
-   <option value="130000">$130,000</option>
-   <option value="140000">$140,000</option>
-   <option value="150000">$150,000</option>
-   <option value="160000">$160,000</option>
-   <option value="170000">$170,000</option>
-   <option value="180000">$180,000</option>
-   <option value="190000">$190,000</option>
-   <option value="200000">$200,000</option>
-   <option value="225000">$225,000</option>
-   <option value="250000">$250,000</option>
-   <option value="275000">$275,000</option>
-   <option value="300000">$300,000</option>
-   <option value="325000">$325,000</option>
-   <option value="350000">$350,000</option>
-   <option value="500000">More than $350,000</option>
-  </select>
-  to
-  <select id="job_listing_salary_range_high" name="salary_range_high", ng-model="data.salary_range_high">
-   <option value="0">Less than $10,000</option>
-   <option value="10000">$10,000</option>
-   <option value="20000">$20,000</option>
-   <option value="30000">$30,000</option>
-   <option value="40000">$40,000</option>
-   <option value="50000">$50,000</option>
-   <option value="60000">$60,000</option>
-   <option value="70000">$70,000</option>
-   <option value="80000">$80,000</option>
-   <option value="90000">$90,000</option>
-   <option value="100000">$100,000</option>
-   <option value="110000">$110,000</option>
-   <option value="120000">$120,000</option>
-   <option value="130000">$130,000</option>
-   <option value="140000">$140,000</option>
-   <option value="150000">$150,000</option>
-   <option value="160000">$160,000</option>
-   <option value="170000">$170,000</option>
-   <option value="180000">$180,000</option>
-   <option value="190000">$190,000</option>
-   <option value="200000">$200,000</option>
-   <option value="225000">$225,000</option>
-   <option value="250000">$250,000</option>
-   <option value="275000">$275,000</option>
-   <option value="300000">$300,000</option>
-   <option value="325000">$325,000</option>
-   <option value="350000">$350,000</option>
-   <option value="500000">More than $350,000</option>
-  </select>
-</div>
-<div class = 'vacation-days'>
-  Vacation Days: 
-  <input id="job_listing_vacation_days" name="vacation_days" ng-model="data.vacation_days" required="required" type="text"/>
-</div>
-<div class = 'equity'>
-  Equity: 
-  <select id="job_listing_equity" name="equity", ng-model="data.equity">
-    <option value="None">None</option>
-    <option value="Less than 1%">Less than 1%</option>
-    <option value="1% - 5%">1% - 5%</option>
-    <option value="Greater than 5%">Greater than 5%</option>
-  </select>
-</div>
-<div class = 'bonuses'>
-  Bonus: 
-  <select id="job_listing_bonuses" name="bonuses", ng-model="data.bonuses">
-    <option value="None">None</option>
-    <option value="1-10% of base salary">1-10% of base salary</option>
-    <option value="Greater than 10% of base salary">Greater than 10% of base salary</option>
-    <option value="Something else">Something else</option>
-  </select>
-</div>
-<div class = 'healthcare-benefits'>
-  <table class='table table-bordered'>
-    Health Benefits:
-    <td>
-      Health Care:
-      <input type="checkbox" ng-model="data.healthcare"\>
-    </td>
-    <td>
-      Vision:
-      <input type="checkbox" ng-model="data.vision"\>
-    </td>
-    <td>
-      Dental:
-      <input type="checkbox" ng-model="data.dental"\>
-    </td>
-    <td>
-      Life Insurance:
-      <input type="checkbox" ng-model="data.life_insurance"\>
-    </td>
-    <td>
-      Retirement:
-      <input type="checkbox" ng-model="data.retirement"\>
-    </td>
-  </table>
-</div>
+
 <div class = 'perks'>
   <ng-include src="'/assets/job_listings/_perks.html.erb'" />
 </div>
+
 <div class = 'practices'>
   <ng-include src="'/assets/job_listings/_practices.html.erb'" />
 </div>
+
 <div class = 'tech-stack'>
 </div>
+
 <div class = 'special-characteristics'>
   <ng-include src="'/assets/job_listings/_special_characteristics.html.erb'" />
 </div>
+
 <div class = 'acceptable-languages'>
   <ng-include src="'/assets/job_listings/_acceptable_languages.html.erb'" />
 </div>
-<p>
-  <div class="control-group">
-    <div class="controls">
-      <button class='btn' type="submit">Update Listing</button>
-    </div>
+
+<div class="control-group">
+  <div class="controls">
+    <button class='btn' type="submit">Update Listing</button>
   </div>
-</p>
+</div>

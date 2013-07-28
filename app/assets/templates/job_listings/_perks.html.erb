@@ -1,11 +1,14 @@
-<p>
-  Perks:
-</p>
-<table class='table table-bordered'>
-  <tr ng-repeat="row in data.perks">
-    <td ng-repeat="perk in row">
-      {{perk.name}}:
-      <input type="checkbox" ng-model="perk.checked"\>
-    </td>
-  </tr>
-</table>
+<div class='control-group'>
+  <label class='control-label'>Perks</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.perks">
+        <td ng-repeat="perk in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="perk.checked"/>{{perk.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

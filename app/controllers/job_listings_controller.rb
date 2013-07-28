@@ -1,5 +1,6 @@
 class JobListingsController < ApplicationController
   before_filter :find_company
+  before_filter :check_invalid_permissions_company, except: [:index, :show]
   before_filter :get_job_listing, only: [:show, :edit, :retrieve_listing]
   respond_to :json, :html
 
@@ -66,6 +67,5 @@ class JobListingsController < ApplicationController
 
   def find_company
     @company ||= Company.find(params[:company_id])
-    check_invalid_permissions_company
   end
 end

@@ -1,0 +1,17 @@
+.section_header
+  - if company_signed_in?
+    .media
+      .pull-right
+        = link_to 'Send Message', new_company_message_path(company_id: current_company.id, receiver: @user.id), class: 'btn btn-success'
+      .pull-left
+        = image_tag(@user.profile_image, class: 'img-rounded', size: '50x50')
+      .media-body
+        %h3 #{@user.name}'s Resume
+  - elsif @user != current_user
+    .media
+      .pull-left
+        = image_tag(@user.profile_image, class: 'img-rounded', size: '50x50')
+      .media-body
+        %h3 #{@user.name}'s Resume
+  - else
+    %h3 Resume

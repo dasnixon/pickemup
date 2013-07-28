@@ -1,11 +1,14 @@
-<p>
-  Special Characteristics:
-<p>
-<table class='table table-bordered'>
-  <tr ng-repeat="row in data.special_characteristics">
-    <td ng-repeat="characteristic in row">
-      {{characteristic.name}}:
-      <input type="checkbox" ng-model="characteristic.checked"\>
-    </td>
-  </tr>
-</table>
+<div class='control-group'>
+  <label class='control-label'>Special Characteristics</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.special_characteristics">
+        <td ng-repeat="characteristic in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="characteristic.checked"/>{{characteristic.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
