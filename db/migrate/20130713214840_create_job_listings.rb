@@ -18,7 +18,7 @@ class CreateJobListings < ActiveRecord::Migration
       t.boolean :remote
       t.integer :hiring_time
       t.integer :tech_stack_id
-      t.json :acceptable_languages: []
+      t.json :acceptable_languages, default: []
       t.string :location
       t.string :position_type
       t.json :special_characteristics
