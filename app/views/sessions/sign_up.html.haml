@@ -1,0 +1,25 @@
+#sign_up1
+  .container
+    .row
+      .span12.header
+        %h4 Sign up for an account
+        %h4 Developers
+        .span4.social
+          = link_to raw("<i class='icon-github-sign icon-5x'></i>"), '/auth/github', class: 'circle github_link'
+      .span3.division
+        .line.l
+        %span or
+        .line.r
+      .span12.footer
+        %h4 Companies
+        = form_for @company do |f|
+          = f.text_field :email, placeholder: 'Email'
+          = f.password_field :password, placeholder: 'Password'
+          = f.password_field :password_confirmation, placeholder: 'Password Confirmation'
+          = f.submit :submit
+      .span12.proof
+        .span5.remember
+          %a{:href => "reset.html"} Forgot password?
+        .span3.dosnt
+          %span Already have an account?
+          = link_to 'Sign in', sign_in_path

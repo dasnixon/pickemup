@@ -1,5 +1,7 @@
-= render 'navigation'
+#housing
+  .container
+    = render 'navigation'
 
-%section#conversation
-  .conversation_full
-    = render partial: 'conversation_full', locals: { conversation: @conversation }
+    %section#conversation
+      .conversation_full
+        = render partial: 'conversation_full', locals: { conversation: @conversation }

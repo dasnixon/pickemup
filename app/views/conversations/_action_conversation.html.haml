@@ -1,0 +1,17 @@
+%p
+  - if current_company
+    = link_to('Reply', company_conversation_path(company_id: current_company.id, id: conversation.id, box: @box), class: 'btn')
+    = link_to('Delete', company_conversation_path(company_id: current_company.id, id: conversation.id), location: @box, |
+                                    box: @box, |
+                                    confirm: t('mailboxer.delete_confirm', |
+                                    object: conversation.subject), |
+                                    method: :delete, class: 'btn') |
+  - elsif current_user
+    = link_to('Reply', user_conversation_path(user_id: current_user.id, id: conversation.id, box: @box), class: 'btn')
+    = link_to('Delete', user_conversation_path(user_id: current_user.id, id: conversation.id), location: @box, |
+                                    box: @box, |
+                                    confirm: t('mailboxer.delete_confirm', |
+                                    object: conversation.subject), |
+                                    method: :delete, class: 'btn') |
+%p
+  = t('time.ago', :time => time_ago_in_words(conversation.updated_at))

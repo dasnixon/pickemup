@@ -20,10 +20,10 @@
 class Company < ActiveRecord::Base
   attr_accessible :name, :email, :description, :website,
     :industry, :password_salt, :password_hash, :description,
-    :num_employees, :public, :founded
+    :num_employees, :public, :founded, :password
   attr_accessor :password
   before_save :encrypt_password
-  before_update :clean_url #TODO fix this validation
+  before_update :clean_url, if: :website_changed? #TODO fix this validation
 
   validates_confirmation_of :password, :message => "Password/Password Confirmation is invalid"
   validates_presence_of :password, :on => :create
@@ -33,6 +33,8 @@ class Company < ActiveRecord::Base
   validates_format_of :email, :with => /[\w|\d]{1,}@[\w|\d]*[.][\w|\d]*/, :message => "Email is invalid."
 
   has_one :subscription
+
+  acts_as_messageable
 
   def password_strength
     errors.add(:password_length, "Password must be at least 8 characters") unless password.length >= 8

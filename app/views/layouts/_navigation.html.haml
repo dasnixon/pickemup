@@ -1,35 +1,34 @@
-- if user_signed_in?
-  %ul.nav.pull-right
-    %li= image_tag(current_user.github_account.profile_image, class: 'img-rounded brand-image')
-= link_to image_tag('logo.png', size: '40x40') + ' Pickemup', root_path, class: 'brand'
-%ul.nav
-  - if user_signed_in?
-    %li= link_to 'Preferences', "/users/#{current_user.id}/preferences"
-    %li= link_to 'My Resume', resume_user_path(id: current_user.id)
-    %li= link_to 'Inbox', user_conversations_path(user_id: current_user.id)
-  %li= link_to 'About', about_path
-  %li= link_to 'Contact', contact_path
-%ul.nav.pull-right
-  - if user_signed_in?
-    - unless current_user.has_linkedin_synced?
-      %li
-        = link_to '/auth/linkedin_oauth2' do
-          %i.icon-linkedin
-          | Link your Linkedin
-    - unless current_user.has_stackexchange_synced?
-      %li
-        = link_to '/auth/stackexchange' do
-          %i.icon-stackexchange
-          | Link your Stackexchange
-    %li= link_to('Logout', log_out_path)
-  - elsif company_signed_in?
-    %li= link_to('Edit Profile', edit_company_path(current_user))
-    %li= link_to('Logout', log_out_path)
-  - else
-    %li
-      = link_to '/auth/github' do
-        Login with
-        %i.icon-github
-    %li
-      = link_to company_log_in_path do
-        Company Log in
+.navbar.transparent.navbar-inverse.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to raw('<strong>Pickemup</strong>'), root_path, class: 'brand'
+      .nav-collapse.collapse
+        %ul.nav.pull-right
+          - if user_signed_in?
+            %li= image_tag(current_user.github_account.profile_image, class: 'img img-circle', size: '40x40')
+            %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
+            %li= link_to 'Resume', resume_user_path(id: current_user.id)
+            %li= link_to 'Mailbox', user_conversations_path(user_id: current_user.id)
+          - if company_signed_in?
+            %li= link_to 'Preferences', root_path
+            %li= link_to 'Mailbox', company_conversations_path(company_id: current_company.id)
+          %li= link_to 'About', about_path
+          - if !user_signed_in? || company_signed_in?
+            %li= link_to 'Pricing', root_path
+          %li= link_to 'Contact Us', contact_path
+          - if user_signed_in?
+            - unless current_user.has_linkedin_synced?
+              %li= link_to 'Link Your Linkedin', '/auth/linkedin_oauth2'
+            - unless current_user.has_stackexchange_synced?
+              %li= link_to 'Link Your Stackexchange', '/auth/stackexchange'
+          - elsif company_signed_in?
+            %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)
+          - else
+            %li= link_to 'Sign In', sign_in_path
+            %li= link_to 'Sign Up', sign_up_path
+          - if user_signed_in? || company_signed_in?
+            %li= link_to 'Logout', log_out_path
