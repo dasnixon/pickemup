@@ -65,6 +65,6 @@ class SessionsController < ApplicationController
   end
 
   def check_if_logged_in
-    redirect_to root_path, error: 'Already logged in.' and return if user_signed_in?
+    redirect_to root_path, error: 'Already logged in.' and return if user_signed_in? || company_signed_in?
   end
 end

@@ -1,0 +1,43 @@
+#contact
+  .container
+    .section_header
+      %h3 Get in touch
+    .row.contact
+      %p
+        We'd love to hear from you. Send us a message and will get back promptly.
+      %form
+        .row.form
+          .span6.box
+            %input.name{:placeholder => "Name", :type => "text"}
+              %input.mail{:placeholder => "Email", :type => "text"}
+                %input.phone{:placeholder => "Phone", :type => "text"}
+          .span6.box.box_r
+            %textarea{:placeholder => "Type a message here..."}
+        .row.submit
+          .span5.box
+            %label.checkbox
+              %input{:type => "checkbox"}
+                Sign up for newsletter
+          .span3.right
+            %input{:type => "submit", :value => "Send your message"}
+  .row.map
+    .container
+      .span5.box_wrapp
+        .box_cont
+          .head
+            %h6 Contact
+          %ul.street
+            %li 2301 East Lamar Blvd. Suite 140.
+            %li City, Arlington. United States,
+            %li Zip Code, TX 76006.
+            %li.icon.icontop
+              %span.contacticos.ico1
+              %span.text 1 817 274 2933
+            %li.icon
+              %span.contacticos.ico2
+              %a.text{:href => "#"} bootstrap@twitter.com
+          .head.headbottom
+            %h6 Work with us
+          %p We've prepared a simple project planner to get to know you and your project better.
+          %a.btn{:href => "#"} Let's get started
+    %iframe{:frameborder => "0", :height => "600", :marginheight => "0", :marginwidth => "0", :scrolling => "no", :src => "https://maps.google.com/maps?q=san+francisco&bav=on.2,or.r_cp.r_qf.&bvm=bv.49784469,d.cGE,pv.xjs.s.en_US.MpiVkF51mpA.O&biw=1440&bih=718&um=1&ie=UTF-8&hl=en&sa=N&tab=wl&output=embed&iwloc=near", :width => "100%"}

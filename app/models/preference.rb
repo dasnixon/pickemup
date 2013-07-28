@@ -56,7 +56,6 @@ class Preference < ActiveRecord::Base
       bonuses: self.bonuses, retirement: self.retirement, fulltime: self.fulltime, remote: self.remote,
       open_source: self.open_source, expected_salary: self.expected_salary, us_citizen: self.us_citizen,
       potential_availability: self.potential_availability, work_hours: self.work_hours }
-
   end
 
   def get_preference_defaults

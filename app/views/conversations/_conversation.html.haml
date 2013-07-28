@@ -3,7 +3,7 @@
   - conversation_with = conversation.participants.detect { |conv| conv.is_a?(User) }
   - if last_message == current_company
     .media
-      = link_to image_tag(conversation_with.github_account.profile_image, class: 'media-object img-rounded', size: '100x100'), resume_user_path(id: last_message.id), class: 'pull-left'
+      = link_to image_tag(conversation_with.profile_image, class: 'media-object img-rounded', size: '100x100'), resume_user_path(id: last_message.id), class: 'pull-left'
       .media-body
         .pull-right.media-heading
           - unless @box.eql?('trash')
@@ -16,7 +16,7 @@
           = raw(truncate(strip_tags(conversation.last_message.body), :length => 100))
   - else
     .media
-      = link_to image_tag(last_message.github_account.profile_image, class: 'media-object img-rounded', size: '100x100'), resume_user_path(id: last_message.id), class: 'pull-left'
+      = link_to image_tag(last_message.profile_image, class: 'media-object img-rounded', size: '100x100'), resume_user_path(id: last_message.id), class: 'pull-left'
       .media-body
         .pull-right.media-heading
           - unless @box.eql?('trash')

@@ -4,7 +4,6 @@
 #
 #  id                 :integer          not null, primary key
 #  nickname           :string(255)
-#  profile_image      :string(255)
 #  hireable           :boolean
 #  bio                :text
 #  public_repos_count :integer
@@ -21,7 +20,7 @@
 class GithubAccount < ActiveRecord::Base
   include Extensions
 
-  attr_accessible :nickname, :profile_image, :hireable, :bio,
+  attr_accessible :nickname, :hireable, :bio,
     :public_repos_count, :number_followers, :number_following,
     :number_gists, :token
 
@@ -35,7 +34,6 @@ class GithubAccount < ActiveRecord::Base
     info                    = auth.info
     extra_info              = auth.extra.raw_info
     self.nickname           = info.nickname
-    self.profile_image      = info.image
     self.hireable           = extra_info.hireable
     self.bio                = extra_info.bio
     self.public_repos_count = extra_info.public_repos
