@@ -1,5 +1,4 @@
 @preference_app = angular.module('Preferences', ['ngResource', 'ui.compat'])
-@skill_app = angular.module('Skills', ['ngResource', 'ui.compat'])
 @jobListing = angular.module('JobListing', ['ngResource', 'ui.compat'])
 
 @chunk = (a,s) ->

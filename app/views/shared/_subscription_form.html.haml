@@ -1,17 +1,19 @@
-%div
-  = label :card_number, 'Card Number:'
-  = text_field_tag :card_number, nil, :name => nil, :class => "card-number"
+.control-group
+  = label_tag :card_number, 'Card Number:', class: 'control-label'
+  .controls
+    = text_field_tag :card_number, nil, name: nil, class: 'card-number'
 
-%div
-  = label :card_cvc, 'Security Code:'
-  = text_field_tag :card_cvc, nil, :name => nil, :class => "card-cvc"
+.control-group
+  = label_tag :card_cvc, 'Security Code:', class: 'control-label'
+  .controls
+    = text_field_tag :card_cvc, nil, name: nil, class: 'card-cvc'
 
-%div
-  = label 'Expiration (MM/YYYY):', 'Expiration (MM/YYYY):'
-%div
-  = label 'Month:', 'Month:'
-  = select_month nil, {add_month_numbers: true}, :name => nil, :class => "card-expiry-month"
+.control-group
+  = label_tag :month, 'Expiration Month:', class: 'control-label'
+  .controls
+    = select_month nil, {add_month_numbers: true}, name: nil, class: 'card-expiry-month'
 
-%div
-  = label 'Year:', 'Year:'
-  = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, :name => nil, :class => "card-expiry-year"
+.control-group
+  = label_tag :month, 'Expiration Year:', class: 'control-label'
+  .controls
+    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, name: nil, class: 'card-expiry-year'

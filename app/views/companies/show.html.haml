@@ -1,16 +1,17 @@
-%h1= @company.name
-= link_to @company.website, @company.website
-%table.table
-  %tr
-    %th Founded:
-    %th Number of Employees:
-    %th Industry:
-    %th Description:
-    %th Ownership:
-  %tr
-    %td= @company.founded.year if @company.founded
-    %td= @company.num_employees
-    %td= @company.industry
-    %td= @company.description
-    %td= @company.public? ? "Public" : "Private"
-
+#housing
+  .container
+    .section_header
+      %h3= link_to @company.name, edit_company_path(id: @company.id)
+    %table.table
+      %tr
+        %th Founded:
+        %th Number of Employees:
+        %th Industry:
+        %th Description:
+        %th Ownership:
+      %tr
+        %td= @company.founded.year if @company.founded
+        %td= @company.num_employees
+        %td= @company.industry
+        %td= @company.description
+        %td= @company.public? ? "Public" : "Private"
