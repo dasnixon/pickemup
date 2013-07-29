@@ -15,18 +15,20 @@
 #
 
 class User < ActiveRecord::Base
-  acts_as_messageable
-
   has_one :github_account, dependent: :destroy
   has_one :linkedin, dependent: :destroy
   has_one :stackexchange, dependent: :destroy
   has_one :preference, dependent: :destroy
 
   attr_accessor :newly_created
+
   attr_accessible :uid, :email, :name, :location,
     :blog, :current_company, :description, :profile_image
 
   after_create :create_preference
+
+  acts_as_messageable #mailboxer
+  mount_uploader :profile_image, AvatarUploader #carrierwave
 
   def self.from_omniauth(auth)
     User.where(auth.slice(:uid)).first_or_create do |user|
@@ -59,15 +61,20 @@ class User < ActiveRecord::Base
   end
 
   def set_attributes(auth)
-    info                 = auth.info
-    extra_info           = auth.extra.raw_info
-    self.name            = info.name
-    self.email           = info.email
-    self.profile_image   = info.image
-    self.location        = extra_info.location
-    self.blog            = extra_info.blog
-    self.current_company = extra_info.company
+    info                          = auth.info
+    extra_info                    = auth.extra.raw_info
+    self.name                     = info.name
+    self.email                    = info.email
+    self.location                 = extra_info.location
+    self.blog                     = extra_info.blog
+    self.current_company          = extra_info.company
     self.save! if !self.newly_created && self.changed?
+    StoreUserProfileImage.perform_async(self.id, auth.info.image)
+  end
+
+  def set_user_image(image_url)
+    self.remote_profile_image_url = image_url
+    self.save! if self.changed?
   end
 
   def mailboxer_email(object)

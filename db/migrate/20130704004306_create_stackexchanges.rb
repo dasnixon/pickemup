@@ -6,7 +6,6 @@ class CreateStackexchanges < ActiveRecord::Migration
       t.string     :profile_url
       t.integer    :reputation
       t.integer    :age
-      t.string     :profile_image
       t.hstore     :badges
       t.string     :display_name
       t.string     :nickname

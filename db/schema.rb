@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20130727043520) do
     t.string   "website"
     t.string   "industry"
     t.string   "num_employees"
+    t.string   "logo"
     t.boolean  "public",        default: false
     t.date     "founded"
     t.datetime "created_at"
@@ -138,7 +139,7 @@ ActiveRecord::Schema.define(version: 20130727043520) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
-    t.string   "avatar_url"
+    t.string   "logo"
     t.string   "url"
     t.string   "organization_key"
     t.string   "location"
@@ -254,7 +255,6 @@ ActiveRecord::Schema.define(version: 20130727043520) do
     t.string   "profile_url"
     t.integer  "reputation"
     t.integer  "age"
-    t.string   "profile_image"
     t.hstore   "badges"
     t.string   "display_name"
     t.string   "nickname"

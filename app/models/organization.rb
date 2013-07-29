@@ -25,13 +25,14 @@ class Organization < ActiveRecord::Base
 
   belongs_to :github_account
 
+  mount_uploader :logo, AvatarUploader #carrierwave
+
   def self.from_omniauth(organizations, github_id, org_keys=nil)
     Organization.remove_orgs(organizations, org_keys) if org_keys.present?
     organizations.each do |org|
       organization = Organization.find_or_initialize_by_organization_key_and_github_account_id(org.id.to_s, github_id)
       org_info = organization.github_account.get_org_information(org.login)
       organization.update_attributes(
-        avatar_url:         org.avatar_url,
         name:               (org_info.try(:name) || org.login),
         url:                org_info.html_url,
         location:           org_info.try(:location),
@@ -41,6 +42,7 @@ class Organization < ActiveRecord::Base
         number_following:   org_info.following,
         public_repos_count: org_info.public_repos
       )
+      StoreOrganizationLogo.perform_async(organization.id, org.avatar_url)
     end
   end
 
@@ -48,5 +50,10 @@ class Organization < ActiveRecord::Base
     (org_keys - organizations.collect { |org| org.id.to_s }).each do |diff_id|
       Organization.where(organization_key: diff_id).first.try(:destroy)
     end
+  end
+
+  def set_organization_logo(image_url)
+    self.remote_logo_url = image_url
+    self.save!
   end
 end

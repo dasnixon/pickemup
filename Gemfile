@@ -19,6 +19,8 @@ gem 'whenever', require: false
 
 #STORE FILES/IMAGES
 gem 'carrierwave'
+gem 'fog'
+gem 'rmagick'
 
 #MESSAGING
 gem 'mailboxer'
