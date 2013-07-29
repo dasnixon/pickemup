@@ -4,9 +4,15 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    if @company.save
-      session[:company_id] = @company.id
-      redirect_to new_company_subscription_path(company_id: @company.id), notice: "You've just created a new company!"
+    unless params[:company][:email].blank? || params[:company][:password].blank? || params[:company][:password_confirmation].blank?
+      @company.founded = Time.now
+      if @company.save
+        session[:company_id] = @company.id
+        redirect_to new_company_subscription_path(:company_id => @company.id), notice: "You've just created a new company!"
+      else
+        @company.errors.messages.each { |error, message| flash[:error] = message.join(', ') }
+        redirect_to :back
+      end
     else
       redirect_to sign_up_path, error: @company.errors.messages
     end
@@ -20,7 +26,7 @@ class CompaniesController < ApplicationController
   end
 
   def update
-    @company.update_attributes(company_info_params)
+    @company.update(company_params)
     #TODO add JS validation of password/password_confirmation fields
     @company.password = params[:company][:password] if params[:company][:password] == params[:company][:password_confirmation]
     if @company.save
@@ -38,11 +44,6 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    params.require(:company).permit(:name, :email, :password, :password_confirmation)
-  end
-
-  def company_info_params
-    params.require(:company).permit(:email, :name, :description,
-                                    :website, :industry, :num_employees, :public).merge(:founded => DateTime.new(params[:company][:founded].to_i))
+    params.require(:company).permit!.merge(:founded => DateTime.new(params[:company][:founded].to_i))
   end
 end
