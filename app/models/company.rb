@@ -20,8 +20,10 @@
 class Company < ActiveRecord::Base
   attr_accessible :name, :email, :description, :website,
     :industry, :password_salt, :password_hash, :description,
-    :num_employees, :public, :founded, :password
+    :num_employees, :public, :founded, :password, :logo
+
   attr_accessor :password
+
   before_save :encrypt_password
   before_update :clean_url, if: :website_changed? #TODO fix this validation
 
@@ -36,7 +38,8 @@ class Company < ActiveRecord::Base
   has_one :subscription
   has_many :job_listings
 
-  acts_as_messageable
+  acts_as_messageable #mailboxer
+  mount_uploader :logo, AvatarUploader #carrierwave
 
   def password_strength
     errors.add(:password_length, "Password must be at least 8 characters") unless password.length >= 8
@@ -61,5 +64,10 @@ class Company < ActiveRecord::Base
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
+  end
+
+  def set_company_logo(image_url)
+    self.remote_logo_url = image_url
+    self.save! if self.changed?
   end
 end

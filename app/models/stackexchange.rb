@@ -20,8 +20,7 @@
 
 class Stackexchange < ActiveRecord::Base
   attr_accessible :token, :uid, :profile_url, :reputation, :age,
-    :profile_image, :badges, :display_name, :nickname,
-    :stackexchange_key
+    :badges, :display_name, :nickname, :stackexchange_key
 
   belongs_to :user
 
@@ -32,7 +31,6 @@ class Stackexchange < ActiveRecord::Base
     self.profile_url       = auth.info.urls.stackoverflow
     self.reputation        = auth.extra.raw_info.reputation
     self.age               = auth.extra.raw_info.age
-    self.profile_image     = auth.info.image
     self.badges            = auth.extra.raw_info.badge_counts
     self.display_name      = auth.extra.raw_info.display_name
     self.stackexchange_key = auth.extra.raw_info.user_id
@@ -45,7 +43,6 @@ class Stackexchange < ActiveRecord::Base
       display_name:  stackexchange_info.display_name,
       reputation:    stackexchange_info.reputation,
       age:           stackexchange_info.age,
-      profile_image: stackexchange_info.profile_image,
       badges:        stackexchange_info.badge_counts
     )
   end

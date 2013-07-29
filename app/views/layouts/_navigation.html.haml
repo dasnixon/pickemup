@@ -9,7 +9,7 @@
       .nav-collapse.collapse
         %ul.nav.pull-right
           - if user_signed_in?
-            %li= image_tag(current_user.profile_image, class: 'img img-circle', size: '40x40')
+            %li= image_tag(current_user.profile_image.url(:thumb), class: 'img img-circle', size: '40x40')
             %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
             %li= link_to 'Resume', resume_user_path(id: current_user.id)
             %li= link_to 'Mailbox', user_conversations_path(user_id: current_user.id)

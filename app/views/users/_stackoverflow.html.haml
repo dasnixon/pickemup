@@ -1,6 +1,6 @@
 .media
-  = link_to(image_tag(@stackexchange.profile_image), @stackexchange.profile_url, class: 'pull-left img-polaroid')
   .media-body
+    %h3.media-heading= link_to(@stackexchange.display_name, @stackexchange.profile_url)
     %h4.media-heading
       Reputation:
       %small

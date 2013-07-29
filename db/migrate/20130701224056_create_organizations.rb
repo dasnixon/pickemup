@@ -2,7 +2,7 @@ class CreateOrganizations < ActiveRecord::Migration
   def change
     create_table :organizations do |t|
       t.string     :name
-      t.string     :avatar_url
+      t.string     :logo
       t.string     :url
       t.string     :organization_key
       t.string     :location

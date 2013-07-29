@@ -9,4 +9,4 @@
           - @orgs.each do |org|
             %li.span1.text-center
               %h5= link_to(org.name, org.url, target: '_blank')
-              = image_tag(org.avatar_url, width: '50', height: '30')
+              = image_tag(org.logo.url(:preview), width: '50', height: '30')
