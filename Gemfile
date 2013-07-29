@@ -38,6 +38,7 @@ gem 'linkedin'
 gem 'github_api'
 gem 'serel', git: 'git://github.com/liamneesonsarm/serel.git' #stackoverflow may need to switch back to original if gets updated properly
 gem 'stripe'
+gem 'crunchbase'
 
 #AUTHENTICATION
 gem 'oauth2'

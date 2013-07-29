@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130727043520) do
+ActiveRecord::Schema.define(version: 20130729010333) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,11 @@ ActiveRecord::Schema.define(version: 20130727043520) do
     t.date     "founded"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "acquired_by"
+    t.string   "tags",               default: [],    array: true
+    t.string   "total_money_raised"
+    t.string   "competitors",        default: [],    array: true
+    t.string   "logo"
   end
 
   create_table "conversations", force: true do |t|
@@ -57,6 +62,7 @@ ActiveRecord::Schema.define(version: 20130727043520) do
 
   create_table "github_accounts", force: true do |t|
     t.string   "nickname"
+    t.string   "profile_image"
     t.boolean  "hireable"
     t.text     "bio"
     t.integer  "public_repos_count"
@@ -284,7 +290,6 @@ ActiveRecord::Schema.define(version: 20130727043520) do
     t.string   "location"
     t.string   "blog"
     t.string   "current_company"
-    t.string   "profile_image"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

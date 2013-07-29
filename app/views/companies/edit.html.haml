@@ -51,4 +51,4 @@
         = f.submit :submit
       - if @company.subscription
         %h4
-          = link_to "Change Billing Info", edit_subscription_path(:company_id => @company.id)
+          = link_to "Change Billing Info", edit_company_subscription_path(:company_id => @company.id)
