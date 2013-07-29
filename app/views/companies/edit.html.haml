@@ -48,3 +48,7 @@
       .control-group
         .controls
           = f.submit 'Save Company', class: 'btn'
+        = f.submit :submit
+      - if @company.subscription
+        %h4
+          = link_to "Change Billing Info", edit_subscription_path(:company_id => @company.id)

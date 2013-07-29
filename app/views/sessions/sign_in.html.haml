@@ -12,7 +12,8 @@
         .line.r
       .span12.footer
         %h4 Companies
-        = form_tag company_log_in_path, :action => :create, :method => :post do |f|
+        %div{class: 'form_errors'}
+        = form_tag company_log_in_path, :action => :create, :method => :post, id: 'company_sign_in' do |f|
           = text_field_tag :email, nil, placeholder: 'Email'
           = password_field_tag :password, nil, placeholder: 'Password'
           = submit_tag "Sign In"
