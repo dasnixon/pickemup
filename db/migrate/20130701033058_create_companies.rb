@@ -9,6 +9,7 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :website
       t.string :industry
       t.string :num_employees
+      t.string :logo
       t.boolean :public, :default => false
       t.date :founded
       t.timestamps
