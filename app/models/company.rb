@@ -37,9 +37,32 @@ class Company < ActiveRecord::Base
 
   has_one :subscription
   has_many :job_listings
+  after_create :process_sign_up
 
   acts_as_messageable #mailboxer
   mount_uploader :logo, AvatarUploader #carrierwave
+
+  def process_sign_up
+    CrunchbaseWorker.perform_async(self.id)
+  end
+
+  def get_crunchbase_info
+    begin
+      info = Crunchbase::Company.get(self.name)
+      self.website = info.homepage_url
+      self.num_employees = info.number_of_employees
+      self.public = info.ipo ? true : false
+      self.description = info.description
+      self.founded = info.founded
+      self.total_money_raised = info.total_money_raised
+      self.tags = info.tags
+      self.logo = "http://crunchbase.com/#{info.image.first.flatten[-1]}" if info.image
+      self.competitors = info.competitions.map { |company| company["competitor"]["name"] } if info.competitions
+    rescue
+    ensure
+      self.save
+    end
+  end
 
   def password_strength
     errors.add(:password_length, "Password must be at least 8 characters") unless password.length >= 8
