@@ -25,6 +25,7 @@ Pickemup::Application.routes.draw do
     resources :conversations
     resources :messages, except: [:edit, :update, :destroy]
   end
+  get '/companies/validate_company', to: "companies#validate_company"
   resources :companies, except: [:new] do
     resources :conversations
     resources :job_listings do
