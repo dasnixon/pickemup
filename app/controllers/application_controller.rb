@@ -42,11 +42,11 @@ class ApplicationController < ActionController::Base
   end
 
   def not_valid_user?
-    current_user != @user
+    !user_signed_in? || current_user != @user
   end
 
   def not_valid_company?
-    current_company != @company
+    !company_signed_in? || current_company != @company
   end
 
   def user_signed_in?

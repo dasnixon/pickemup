@@ -4,7 +4,7 @@
 #
 #  id                 :integer          not null, primary key
 #  name               :string(255)
-#  avatar_url         :string(255)
+#  logo               :string(255)
 #  url                :string(255)
 #  organization_key   :string(255)
 #  location           :string(255)

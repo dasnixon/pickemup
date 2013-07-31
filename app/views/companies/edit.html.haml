@@ -2,7 +2,9 @@
   .container
     .section_header
       %h3 Company Info
-      %h4 #{link_to "Change Billing Info", edit_company_subscription_path(id: @subscription.id, company_id: @company.id)}
+      - if @company.subscription
+        .pull-right
+          %h4 #{link_to "Change Billing Info", edit_company_subscription_path(id: @subscription.id, company_id: @company.id), class: 'btn btn-success'}
     = form_for @company, html: { class: 'form-horizontal' } do |f|
       .control-group
         = f.label :email, class: 'control-label'
@@ -48,7 +50,3 @@
       .control-group
         .controls
           = f.submit 'Save Company', class: 'btn'
-        = f.submit :submit
-      - if @company.subscription
-        %h4
-          = link_to "Change Billing Info", edit_company_subscription_path(:company_id => @company.id)

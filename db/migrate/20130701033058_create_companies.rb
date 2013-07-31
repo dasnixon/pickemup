@@ -5,11 +5,10 @@ class CreateCompanies < ActiveRecord::Migration
       t.string :email, :index => true, :unique => true
       t.string :password_salt
       t.string :password_hash
-      t.string :description
+      t.text   :description
       t.string :website
       t.string :industry
       t.string :num_employees
-      t.string :logo
       t.boolean :public, :default => false
       t.date :founded
       t.timestamps

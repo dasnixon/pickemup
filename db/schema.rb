@@ -22,12 +22,11 @@ ActiveRecord::Schema.define(version: 20130729010333) do
     t.string   "email"
     t.string   "password_salt"
     t.string   "password_hash"
-    t.string   "description"
+    t.text     "description"
     t.string   "website"
     t.string   "industry"
     t.string   "num_employees"
-    t.string   "logo"
-    t.boolean  "public",        default: false
+    t.boolean  "public",             default: false
     t.date     "founded"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -62,7 +61,6 @@ ActiveRecord::Schema.define(version: 20130729010333) do
 
   create_table "github_accounts", force: true do |t|
     t.string   "nickname"
-    t.string   "profile_image"
     t.boolean  "hireable"
     t.text     "bio"
     t.integer  "public_repos_count"
@@ -290,6 +288,7 @@ ActiveRecord::Schema.define(version: 20130729010333) do
     t.string   "location"
     t.string   "blog"
     t.string   "current_company"
+    t.string   "profile_image"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"

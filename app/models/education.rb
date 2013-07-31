@@ -22,11 +22,11 @@ class Education < ActiveRecord::Base
 
   belongs_to :profile
 
-  def self.from_omniauth(profile, id, education_keys=nil)
+  def self.from_omniauth(profile, pro_id, education_keys=nil)
     if profile['educations'] && profile['educations'].has_key?('values')
       Education.remove_educations(profile['educations']['values'], education_keys) if education_keys.present?
       profile['educations']['values'].each do |education|
-        edu = Education.find_or_initialize_by_education_key_and_profile_id(education['id'].to_s, id)
+        edu = Education.find_or_initialize_by_education_key_and_profile_id(education['id'].to_s, pro_id)
         edu.update_attributes(
           activities:     education['activities'],
           degree:         education['degree'],

@@ -19,6 +19,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
+    @job_listings = @company.job_listings
   end
 
   def edit
