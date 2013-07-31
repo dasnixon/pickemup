@@ -145,7 +145,7 @@ ActiveRecord::Schema.define(version: 20130731031902) do
 
   create_table "organizations", force: true do |t|
     t.string   "name"
-    t.string   "avatar_url"
+    t.string   "logo"
     t.string   "url"
     t.string   "organization_key"
     t.string   "location"
