@@ -260,7 +260,6 @@ ActiveRecord::Schema.define(version: 20130731031902) do
     t.string   "profile_url"
     t.integer  "reputation"
     t.integer  "age"
-    t.string   "profile_image"
     t.hstore   "badges"
     t.string   "display_name"
     t.string   "nickname"

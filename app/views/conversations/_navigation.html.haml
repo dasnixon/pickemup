@@ -1,19 +1,5 @@
 %ul.breadcrumb
   - if current_user
-    %li
-      = link_to 'Inbox', user_conversations_path(box: 'inbox'), class: "#{'active' if params[:box] == 'inbox'}"
-      %span.divider /
-    %li
-      = link_to 'Sentbox', user_conversations_path(box: 'sentbox'), class: "#{'active' if params[:box] == 'sentbox'}"
-      %span.divider /
-    %li
-      = link_to 'Trash', user_conversations_path(box: 'trash'), class: "#{'active' if params[:box] == 'trash'}"
+    = render 'user_navigation'
   - elsif current_company
-    %li
-      = link_to 'Inbox', company_conversations_path(box: 'inbox'), class: "#{'active' if params[:box] == 'inbox'}"
-      %span.divider /
-    %li
-      = link_to 'Sentbox', company_conversations_path(box: 'sentbox'), class: "#{'active' if params[:box] == 'sentbox'}"
-      %span.divider /
-    %li
-      = link_to 'Trash', company_conversations_path(box: 'trash'), class: "#{'active' if params[:box] == 'trash'}"
+    = render 'company_navigation'
