@@ -2,19 +2,24 @@
 #
 # Table name: companies
 #
-#  id            :integer          not null, primary key
-#  name          :string(255)
-#  email         :string(255)
-#  password_salt :string(255)
-#  password_hash :string(255)
-#  description   :string(255)
-#  website       :string(255)
-#  industry      :string(255)
-#  num_employees :string(255)
-#  public        :boolean          default(FALSE)
-#  founded       :date
-#  created_at    :datetime
-#  updated_at    :datetime
+#  id                 :integer          not null, primary key
+#  name               :string(255)
+#  email              :string(255)
+#  password_salt      :string(255)
+#  password_hash      :string(255)
+#  description        :string(255)
+#  website            :string(255)
+#  industry           :string(255)
+#  num_employees      :string(255)
+#  public             :boolean          default(FALSE)
+#  founded            :date
+#  created_at         :datetime
+#  updated_at         :datetime
+#  acquired_by        :string(255)
+#  tags               :string(255)      default([])
+#  total_money_raised :string(255)
+#  competitors        :string(255)      default([])
+#  logo               :string(255)
 #
 
 class Company < ActiveRecord::Base
@@ -40,7 +45,6 @@ class Company < ActiveRecord::Base
   after_create :process_sign_up
 
   acts_as_messageable #mailboxer
-  mount_uploader :logo, AvatarUploader #carrierwave
 
   def process_sign_up
     CrunchbaseWorker.perform_async(self.id)
@@ -52,7 +56,7 @@ class Company < ActiveRecord::Base
       self.website = info.homepage_url
       self.num_employees = info.number_of_employees
       self.public = info.ipo ? true : false
-      self.description = info.description
+      self.description = info.overview.present? ? info.overview : info.description
       self.founded = info.founded
       self.total_money_raised = info.total_money_raised
       self.tags = info.tags
@@ -87,10 +91,5 @@ class Company < ActiveRecord::Base
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
-  end
-
-  def set_company_logo(image_url)
-    self.remote_logo_url = image_url
-    self.save! if self.changed?
   end
 end

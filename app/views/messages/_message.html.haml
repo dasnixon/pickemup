@@ -5,17 +5,17 @@
     .media.thumbnail
       .pull-left
         - if is_company
-          = link_to message.sender.name, company_path(id: message.sender.id)
+          = link_to image_tag(message.sender.logo, |
+                                title: message.sender.name, |
+                                alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
+                       company_path(id: message.sender.id) |
         - else
           = link_to image_tag(message.sender.profile_image, |
                                 title: message.sender.name, |
                                 alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
                        resume_user_path(id: message.sender.id) |
       .media-heading.name
-        = link_to message.sender.name, (is_company ? company_path(id: message.sender.id): resume_user_path(id: message.sender.id))
-        .date
-          = t('time.ago', time: time_ago_in_words(message.updated_at))
-
+        = "From #{message.sender.name} #{t('time.ago', time: time_ago_in_words(message.updated_at))}"
       .media-body.well
         .word-break.pre-message
           = raw(message.body)

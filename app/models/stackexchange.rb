@@ -8,7 +8,6 @@
 #  profile_url       :string(255)
 #  reputation        :integer
 #  age               :integer
-#  profile_image     :string(255)
 #  badges            :hstore
 #  display_name      :string(255)
 #  nickname          :string(255)

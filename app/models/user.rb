@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
       user.set_attributes(auth)
       user.build_github_account.from_omniauth(auth)
     end.tap do |user| #update user's token in case it has expired/changed
+      StoreUserProfileImage.perform_async(user.id, auth.info.image)
       user.update_information(auth) unless user.newly_created
     end
   end
@@ -70,7 +71,6 @@ class User < ActiveRecord::Base
     self.blog                     = extra_info.blog
     self.current_company          = extra_info.company
     self.save! if !self.newly_created && self.changed?
-    StoreUserProfileImage.perform_async(self.id, auth.info.image)
   end
 
   def set_user_image(image_url)
