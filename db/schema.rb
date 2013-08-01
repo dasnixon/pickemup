@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130731222040) do
+ActiveRecord::Schema.define(version: 20130801021253) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -278,6 +278,17 @@ ActiveRecord::Schema.define(version: 20130731222040) do
     t.string   "stripe_card_token"
     t.boolean  "active",                default: false
     t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tech_stacks", force: true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.string   "back_end_languages",  default: [], array: true
+    t.string   "front_end_languages", default: [], array: true
+    t.string   "frameworks",          default: [], array: true
+    t.string   "dev_ops_tools",       default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

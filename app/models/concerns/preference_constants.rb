@@ -40,4 +40,12 @@ module PreferenceConstants
   ACCEPTABLE_LANGUAGES    = ['Ruby', 'Python', 'Javascript', 'Java', 'PHP', 'Scala', 'C', 'C++', 'C#', 'Objective C', 'Clojure']
 
   POSITION_TYPE           = ['Individual Contributor', 'Manager', 'Tech Lead', 'Executive']
+
+  DEV_OPS_TOOLS           = ['Chef', 'Puppet', 'Capistrano']
+
+  BACK_END_LANGUAGES      = ['Ruby', 'Python', 'Javascript', 'Java', 'PHP', 'Scala', 'C', 'C++', 'C#', 'Objective C', 'Clojure']
+
+  FRONT_END_LANGUAGES     = ['Javascript', 'HTML', 'CSS', 'HAML', 'SASS']
+
+  FRAMEWORKS              = ['AngularJS', 'BackboneJS', 'Rails', 'Django', 'Tornado', 'KnockoutJS', 'Express']
 end
