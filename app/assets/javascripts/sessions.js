@@ -32,8 +32,6 @@ $(document).ready(function () {
       $(".form_errors").text("Password and Confirmation did not match").show().fadeOut(5000);
       return false;
     }
-
-    return true;
   });
 
   $("#company_sign_in").submit(function() {
