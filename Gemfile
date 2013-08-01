@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 #MAGIC
-gem 'rails', git: 'git://github.com/rails/rails.git', branch: '4-0-stable'
+gem 'rails'
 
 #DATABASES
 gem 'pg'
@@ -62,6 +62,9 @@ gem 'unicorn'
 
 #ENV VARIABLES (application.yml)
 gem 'figaro'
+
+#MANAGEMENT SYSTEMS
+gem 'newrelic_rpm'
 
 #OTHER
 gem 'annotate'

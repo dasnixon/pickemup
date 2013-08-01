@@ -7,7 +7,7 @@
 #  email              :string(255)
 #  password_salt      :string(255)
 #  password_hash      :string(255)
-#  description        :string(255)
+#  description        :text
 #  website            :string(255)
 #  industry           :string(255)
 #  num_employees      :string(255)
@@ -20,6 +20,7 @@
 #  total_money_raised :string(255)
 #  competitors        :string(255)      default([])
 #  logo               :string(255)
+#  verified           :boolean          default(FALSE)
 #
 
 class Company < ActiveRecord::Base
@@ -32,12 +33,10 @@ class Company < ActiveRecord::Base
   before_save :encrypt_password
   before_update :clean_url, if: :website_changed? #TODO fix this validation
 
-  validates_confirmation_of :password, :message => "Password/Password Confirmation is invalid"
-  validates_presence_of :password, :on => :create
+  validates_confirmation_of :password, message: "Password/Password Confirmation is invalid"
+  validates_presence_of :password, on: :create
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
-  validates_presence_of :email
-  validates_uniqueness_of :email
-  validate :password_strength, :on => :create
+  validate :password_strength, on: :create
   validates :name, presence: true
 
   has_one :subscription
@@ -50,6 +49,7 @@ class Company < ActiveRecord::Base
     CrunchbaseWorker.perform_async(self.id)
   end
 
+  #Uses the crunchbase api to pre-populate information regarding companies
   def get_crunchbase_info
     begin
       info = Crunchbase::Company.get(self.name)
@@ -62,7 +62,8 @@ class Company < ActiveRecord::Base
       self.tags = info.tags
       self.logo = "http://crunchbase.com/#{info.image.first.flatten[-1]}" if info.image
       self.competitors = info.competitions.map { |company| company["competitor"]["name"] } if info.competitions
-    rescue
+    rescue => e
+      logger.error "Company #get_crunchbase_info error #{e}"
     ensure
       self.save
     end
