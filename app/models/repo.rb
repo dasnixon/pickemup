@@ -27,6 +27,7 @@ class Repo < ActiveRecord::Base
 
   belongs_to :github_account
 
+  #CRUD operations for a user's github repositories
   def self.from_omniauth(repos, github_id, repo_keys=nil)
     Repo.remove_repos(repos, repo_keys) if repo_keys.present?
     repos.each do |repo|

@@ -2,7 +2,7 @@ Pickemup::Application.routes.draw do
   root to: 'home#index'
   scope :auth do
     get '/github/callback', to: 'sessions#github'
-    get '/linkedin_oauth2/callback', to: 'sessions#linkedin'
+    get '/linkedin/callback', to: 'sessions#linkedin'
     get '/stackexchange/callback', to: 'sessions#stackoverflow'
   end
   scope 'sessions', controller: :sessions do

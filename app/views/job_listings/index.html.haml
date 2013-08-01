@@ -4,24 +4,4 @@
       %h3 All Job Listings
     - if current_company == @company
       = link_to 'Add a Job Listing', new_company_job_listing_path(company_id: current_company.id), class: 'btn'
-    %hr
-    %table.table.table-bordered
-      %tr
-        %th Company
-        %th Job Title
-        %th Job Description
-        %th Salary Range
-        %th Remote
-        %th Fulltime
-        - if current_company == @company
-          %th Actions
-      - @job_listings.each do |listing|
-        %tr
-          %td= @company.name
-          %td= listing.job_title
-          %td= truncate(listing.job_description, length: 50)
-          %td= "#{listing.salary_range_low} - #{listing.salary_range_high}"
-          %td= listing.remote ? 'Yes' : 'No'
-          %td= listing.fulltime ? 'Yes' : 'No'
-          - if current_company == @company
-            %td= link_to 'Edit', edit_company_job_listing_path(company_id: current_company.id, id: listing.id), class: 'btn'
+    = render 'layouts/job_listings'

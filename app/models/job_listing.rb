@@ -50,6 +50,7 @@ class JobListing < ActiveRecord::Base
     (self.salary_range_low..self.salary_range_high)
   end
 
+  #validation to check that the salary ranges are correct
   def salary_range_check
     errors.add(:salary_range, "Invalid salary range") if salary_range_high.nil? || salary_range_low.nil? || salary_range_high <= salary_range_low
   end

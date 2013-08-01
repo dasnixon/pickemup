@@ -24,6 +24,7 @@ class Position < ActiveRecord::Base
 
   belongs_to :profile
 
+  #CRUD operations for a user's linkedin positions
   def self.from_omniauth(profile, id, position_keys=nil)
     if profile['positions'].present?
       Position.remove_positions(profile['positions']['values'], position_keys) if position_keys.present?
@@ -45,6 +46,8 @@ class Position < ActiveRecord::Base
     end
   end
 
+  #remove any positions that we have on our system that have been removed from
+  #the user's linkedin positions so we always have up-to-date information
   def self.remove_positions(positions, position_keys)
     (position_keys - positions.collect { |pos| pos['company']['id'].to_s }).each do |diff_id|
       Position.where(company_key: diff_id).first.try(:destroy)

@@ -46,14 +46,21 @@ class Organization < ActiveRecord::Base
     end
   end
 
+  #remove any organizations that we have in our system that the user no longer
+  #belongs to on github
   def self.remove_orgs(organizations, org_keys)
     (org_keys - organizations.collect { |org| org.id.to_s }).each do |diff_id|
       Organization.where(organization_key: diff_id).first.try(:destroy)
     end
   end
 
+  #uses carrierwave/fog to save the user's organization logo from github to S3
   def set_organization_logo(image_url)
-    self.remote_logo_url = image_url
-    self.save!
+    begin
+      self.remote_logo_url = image_url
+      self.save!
+    rescue => e
+      error.logger "Creating logo S3 error for github organization #{e}"
+    end
   end
 end

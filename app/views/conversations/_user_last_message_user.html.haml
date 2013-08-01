@@ -1,0 +1,12 @@
+.media
+  = link_to image_tag(last_message.profile_image, size: '100x100', alt: last_message.name, title: last_message.name, class: 'media-object img-rounded'), company_path(id: last_message.id), class: 'pull-left'
+  .media-body
+    .pull-right.media-heading
+      - unless @box.eql?('trash')
+        = render partial: 'action_conversation', locals: { conversation: conversation }
+    %h4.media-heading
+      Conversation With: #{link_to conversation_with.name, company_path(id: conversation_with.id)}
+    %h4.media-heading
+      Subject: #{link_to(truncate(conversation.subject, length: 55), user_conversation_path(user_id: current_user.id, id: conversation.id, box: @box))}
+    .span8.well
+      = raw(truncate(strip_tags(conversation.last_message.body), :length => 100))

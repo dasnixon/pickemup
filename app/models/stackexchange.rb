@@ -23,6 +23,10 @@ class Stackexchange < ActiveRecord::Base
 
   belongs_to :user
 
+  after_create :set_user_synced
+
+  #the initial creation of a user's stackexchange account from their auth
+  #information when they agree to link
   def from_omniauth(auth)
     self.uid               = auth.uid
     self.nickname          = auth.info.nickname
@@ -36,6 +40,7 @@ class Stackexchange < ActiveRecord::Base
     self.save!
   end
 
+  #update information that could change from a user's stackoverflow account
   def update_stackexchange
     stackexchange_info = get_stackexchange_user
     self.update_attributes(
@@ -46,11 +51,23 @@ class Stackexchange < ActiveRecord::Base
     )
   end
 
+  #initialize the Stackexchange API with the user's oauth token
   def initialize_stackexchange
     @info ||= Serel::AccessToken.new(self.token)
   end
 
+  #get user's information from stackoverflow which is the default lookup
   def get_stackexchange_user
-    initialize_stackexchange.user
+    begin
+      initialize_stackexchange.user
+    rescue => e
+      logger.error "Stackexchange #get_stackexchange_user error #{e}"
+    end
+  end
+
+  private
+
+  def set_user_synced
+    self.user.set_stackexchange_synced
   end
 end

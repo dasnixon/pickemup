@@ -2,83 +2,11 @@
   .container-fluid
     .row-fluid
       .span2.pull-right
-        .well.sidebar-nav
-          %ul.nav.nav-list
-            %li.nav-header Job Listings
-            - @job_listings.each do |listing|
-              %li= link_to listing.job_title, "##{listing.id}"
+        = render 'sidebar'
       .span10
-        .media
-          = link_to image_tag(@company.logo, class: 'media-object', size: '150x150'), @company.website, target: '_blank', class: 'pull-left'
-          .media-body
-            .section_header
-              %h3.media-heading= @company.name
-              - if company_signed_in? && current_company == @company
-                = link_to 'Edit', edit_company_path(id: @company.id), class: 'btn btn-success', style: 'margin-left: 15px;'
-            %ul.unstyled
-              - if @company.founded
-                %li
-                  %strong Founded:
-                  #{@company.founded.year}
-              %li
-                %strong Number of Employees:
-                #{@company.num_employees}
-              %li
-                %strong Industry:
-                #{@company.industry}
-              %li
-                %strong Description:
-                #{@company.description.html_safe}
-              %li
-                %strong Ownership:
-                #{@company.public? ? "Public" : "Private"}
-              %li
-                %strong Tags:
-                #{@company.tags.join(', ')}
-              %li
-                %strong Total Money Raised:
-                #{@company.total_money_raised}
-              %li
-                %strong Competitors:
-                %p
-                  #{@company.competitors.join(', ')}
-
+        = render 'info'
         %hr
-
         .span1
         .span9
           %h4 Job Listings
-          - @job_listings.each do |listing|
-            %hr
-            .media{id: listing.id}
-              .media-body
-                .lead.media-heading= "#{listing.fulltime? ? 'Fulltime' : 'Part-time'} #{listing.remote? ? 'Remote' : ''} #{listing.job_title} - #{listing.location}"
-                %blockquote
-                  %p
-                    #{listing.job_description}
-                %ul.unstyled
-                  %li
-                    %strong Salary Range:
-                    #{number_to_currency(listing.salary_range_low)} - #{number_to_currency(listing.salary_range_high)}
-                  %li
-                    %strong Preferred Languages:
-                    #{listing.acceptable_languages.join(', ')}
-                  %li
-                    %strong Preferred Experience Level:
-                    #{listing.experience_level.join(', ')}
-                  %li
-                    %strong Preferred Practices:
-                    #{listing.practices.join(', ')}
-                  %li
-                    %strong Bonus Points for:
-                    #{listing.special_characteristics.join(', ')}
-                  %li
-                    %strong Job Perks:
-                    #{listing.perks.join(', ')}
-                  %li
-                    %strong Benefits:
-                    - benefits = %w(healthcare dental vision life_insurance retirement).collect do |benefit|
-                      - benefit.gsub(/_/, ' ').capitalize if listing.send("#{benefit}?")
-                    #{benefits.compact.join(', ')}
-                  - if user_signed_in?
-                    %li= link_to 'Message', new_company_message_path(user_id: current_user.id, receiver: @company.id)
+          = render 'layouts/job_listings'
