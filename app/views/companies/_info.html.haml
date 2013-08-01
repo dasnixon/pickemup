@@ -6,7 +6,7 @@
       - if current_company == @company
         = link_to 'Edit', edit_company_path(id: @company.id), class: 'btn btn-success', style: 'margin-left: 15px;'
       - elsif user_signed_in?
-        = link_to 'View Job Listings', company_job_listings_path(company_id: @company.id), class: 'btn btn-success', style: 'margin-left: 15px;'
+        = link_to 'View Job Listings', company_job_listings_path(company_id: @company.id), class: 'btn btn-success pull-right', style: 'margin-right: 25px;'
     %ul.unstyled
       - if @company.founded
         %li

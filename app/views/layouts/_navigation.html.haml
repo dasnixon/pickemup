@@ -26,9 +26,9 @@
             %li= link_to 'Pricing', root_path
           %li= link_to 'Contact Us', contact_path
           - if user_signed_in?
-            - unless current_user.has_linkedin_synced?
+            - unless current_user.linkedin_synced?
               %li= link_to 'Link Your Linkedin', '/auth/linkedin_oauth2'
-            - unless current_user.has_stackexchange_synced?
+            - unless current_user.stackexchange_synced?
               %li= link_to 'Link Your Stackexchange', '/auth/stackexchange'
           - elsif company_signed_in?
             %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)
@@ -37,3 +37,4 @@
             %li= link_to 'Sign Up', sign_up_path
           - if user_signed_in? || company_signed_in?
             %li= link_to 'Logout', log_out_path
+= render 'layouts/messages'

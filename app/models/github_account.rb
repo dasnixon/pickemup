@@ -30,6 +30,7 @@ class GithubAccount < ActiveRecord::Base
 
   after_create :grab_github_information
 
+  #create a user's github account from their github auth information when they login
   def from_omniauth(auth)
     info                    = auth.info
     extra_info              = auth.extra.raw_info
@@ -45,27 +46,39 @@ class GithubAccount < ActiveRecord::Base
     self.save! if self.changed?
   end
 
+  #this method is used to setup the repos and orgs from a user's github oauth token
   def setup_information
     Repo.from_omniauth(get_repos, self.id, self.collected_repo_keys)
     Organization.from_omniauth(get_organizations, self.id, self.collected_org_keys)
   end
 
+  #use mode from /concerns/extensions to get most common language
   def most_common_language
     self.repos.collect { |repo| repo.language }.mode
   end
 
+  #get more information regarding a user's organization by the organization name
   def get_org_information(name)
-    github_api_setup.orgs.get(name)
+    begin
+      github_api_setup.orgs.get(name)
+    rescue => e
+      logger.error "Github #get_org_information error #{e}"
+    end
   end
 
+  #collect the org keys associated with github that we can use to remove any
+  #orgs from our system that have been removed on github
   def collected_org_keys
     self.organizations.collect { |org| org.organization_key }
   end
 
+  #collect the repo keys associated with github that we can use to remove any
+  #repos from our system that have been removed on github
   def collected_repo_keys
     self.repos.collect { |repo| repo.repo_key }
   end
 
+  #instance method for getting a users's github account url
   def github_url
     "https://github.com/#{self.nickname}"
   end
@@ -76,15 +89,26 @@ class GithubAccount < ActiveRecord::Base
     GithubWorker.perform_async(self.id)
   end
 
+  #instantiate the github api with user's oauth token
   def github_api_setup
     @github_api ||= Github.new(oauth_token: self.token)
   end
 
+  #get all the public repos from a user's github account
   def get_repos
-    github_api_setup.repos.list
+    begin
+      github_api_setup.repos.list
+    rescue => e
+      logger.error "Github #get_repos error #{e}"
+    end
   end
 
+  #get all the organizations from a user's github account
   def get_organizations
-    github_api_setup.organizations.list
+    begin
+      github_api_setup.organizations.list
+    rescue => e
+      logger.error "Github #get_organizations error #{e}"
+    end
   end
 end
