@@ -49,6 +49,10 @@ class Company < ActiveRecord::Base
     CrunchbaseWorker.perform_async(self.id)
   end
 
+  def get_logo
+    self.logo.present? ? self.logo : 'default_logo.png'
+  end
+
   #Uses the crunchbase api to pre-populate information regarding companies
   def get_crunchbase_info
     begin

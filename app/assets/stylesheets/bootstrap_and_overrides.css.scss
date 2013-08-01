@@ -35,3 +35,36 @@ span.error_message {
 .table-bordered td {
   background-color: white;
 }
+
+.message_notification {
+  position: absolute;
+  z-index: 101;
+  top: 82px;
+  left: 0;
+  right: 0;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  line-height: 2.5;
+  overflow: hidden;
+}
+
+a.caret-after {
+  padding-left:1px !important;
+  color: #fff !important;
+}
+
+.navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
+  color: #fff;
+  border-top-color: #fff;
+  border-bottom-color: #fff;
+}
+
+.navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
+  background: rgba(0,0,0,0.0);
+}
+
+.navbar .nav > li.navigation_mailbox > a {
+  padding-right: 1px;
+}

@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :current_company, :user_signed_in?,
     :company_signed_in?
 
+  before_filter :check_user_messages, if: :user_signed_in?
+  before_filter :check_company_messages, if: :company_signed_in?
+
   def check_invalid_permissions_user
     redirect_to root_path, error: 'You do not have permissions to view this page' if not_valid_user?
   end
@@ -24,6 +27,16 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def check_company_messages
+    @messages ||= current_company.mailbox.inbox.first(5)
+    @num_unread_messages ||= @messages.select { |message| message.is_unread?(current_company) }.length
+  end
+
+  def check_user_messages
+    @messages ||= current_user.mailbox.inbox.first(5)
+    @num_unread_messages ||= @messages.select { |message| message.is_unread?(current_user) }.length
+  end
 
   def current_user?(user)
     current_user == user

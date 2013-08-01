@@ -1,5 +1,5 @@
 .media
-  = link_to image_tag(@company.logo, class: 'media-object img-rounded', size: '150x150'), @company.website, target: '_blank', class: 'pull-left'
+  = link_to image_tag(@company.get_logo, class: 'media-object img-rounded', size: '150x150'), @company.website, target: '_blank', class: 'pull-left'
   .media-body
     .section_header
       %h3.media-heading= @company.name

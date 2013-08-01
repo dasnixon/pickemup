@@ -5,7 +5,7 @@
     .media.thumbnail
       .pull-left
         - if is_company
-          = link_to image_tag(message.sender.logo, |
+          = link_to image_tag(message.sender.get_logo, |
                                 title: message.sender.name, |
                                 alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
                        company_path(id: message.sender.id) |
