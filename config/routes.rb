@@ -22,12 +22,20 @@ Pickemup::Application.routes.draw do
       get :get_preference
       put :update_preference
     end
-    resources :conversations
+    resources :conversations do
+      member do
+        put :untrash
+      end
+    end
     resources :messages, except: [:edit, :update, :destroy]
   end
   get '/companies/validate_company', to: "companies#validate_company"
   resources :companies, except: [:new] do
-    resources :conversations
+    resources :conversations do
+      member do
+        put :untrash
+      end
+    end
     resources :job_listings do
       member do
         get :retrieve_listing

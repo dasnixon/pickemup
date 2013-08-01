@@ -1,9 +1,11 @@
-.media
+%div{class: "media #{conversation.is_unread?(current_company) ? 'info' : @box.eql?('trash') ? 'error' : 'success'}"}
   = link_to image_tag(last_message.profile_image, class: 'media-object img-rounded', size: '100x100'), resume_user_path(id: last_message.id), class: 'pull-left'
   .media-body
     .pull-right.media-heading
       - unless @box.eql?('trash')
         = render partial: 'action_conversation', locals: { conversation: conversation }
+      - else
+        = link_to 'Un-trash', untrash_company_conversation_path(id: conversation.id, company_id: current_company.id), method: :put, class: 'btn btn-success'
     %h4.media-heading
       From: #{link_to last_message.name, resume_user_path(id: last_message.id)}
     %h4.media-heading

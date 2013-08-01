@@ -1,19 +1,19 @@
 - is_company = message.sender.is_a?(Company)
-%hr
 .container
   = div_for(message) do
     .media.thumbnail
       .pull-left
-        - if is_company
-          = link_to image_tag(message.sender.get_logo, |
-                                title: message.sender.name, |
-                                alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
-                       company_path(id: message.sender.id) |
-        - else
-          = link_to image_tag(message.sender.profile_image, |
-                                title: message.sender.name, |
-                                alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
-                       resume_user_path(id: message.sender.id) |
+        .image_padder
+          - if is_company
+            = link_to(image_tag(message.sender.get_logo, |
+                                  title: message.sender.name, |
+                                  alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
+                         company_path(id: message.sender.id)) |
+          - else
+            = link_to image_tag(message.sender.profile_image, |
+                                  title: message.sender.name, |
+                                  alt: message.sender.name, size: '50x50', class: 'img-rounded media-object'), |
+                         resume_user_path(id: message.sender.id) |
       .media-heading.name
         = "From #{message.sender.name} #{t('time.ago', time: time_ago_in_words(message.updated_at))}"
       .media-body.well

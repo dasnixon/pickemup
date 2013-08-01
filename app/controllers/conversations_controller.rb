@@ -2,7 +2,7 @@ class ConversationsController < ApplicationController
   include Concerns::MailboxerHub
 
   before_filter :find_mailbox_for, :get_mailbox, :get_box
-  before_filter :find_conversation, only: [:show, :update, :destroy]
+  before_filter :find_conversation, only: [:show, :update, :destroy, :untrash]
 
   def index
     if @box.eql? "inbox"
@@ -45,10 +45,15 @@ class ConversationsController < ApplicationController
   def destroy
     @conversation.move_to_trash(@mailbox_for)
     if params[:location].present? and params[:location] == 'conversation'
-      @box = 'trash' and conversations_redirect
+      @box = 'trash' and conversations_redirect('Successfully removed conversation')
     else
-      conversations_redirect
+      conversations_redirect('Successfully removed conversation')
     end
+  end
+
+  def untrash
+    @conversation.untrash(@mailbox_for)
+    @box = 'inbox' and conversations_redirect('Successfully untrashed the conversation')
   end
 
   private
@@ -57,7 +62,7 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find_by_id(params[:id])
 
     if @conversation.nil? or !@conversation.is_participant?(@mailbox_for)
-      conversations_redirect
+      conversations_redirect('Unable to find conversation')
     end
   end
 end

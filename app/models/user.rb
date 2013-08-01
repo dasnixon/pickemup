@@ -96,8 +96,18 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+  def set_stackexchange_unsynced
+    self.stackexchange_synced = false
+    self.save!
+  end
+
   def set_linkedin_synced
     self.linkedin_synced = true
+    self.save!
+  end
+
+  def set_linkedin_unsynced
+    self.linkedin_synced = false
     self.save!
   end
 

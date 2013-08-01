@@ -11,15 +11,13 @@
   - unless @box.eql? 'trash'
     - if current_user
       = link_to('Delete', user_conversation_path(user_id: current_user.id, id: conversation.id, location: 'conversation', box: @box), |
-             confirm: t('mailboxer.delete_confirm', object: conversation.subject), method: :delete, class: 'btn') |
+             confirm: t('mailboxer.delete_confirm', object: conversation.subject), method: :delete, class: 'btn btn-danger') |
     - elsif current_company
       = link_to('Delete', company_conversation_path(company_id: current_company.id, id: conversation.id, location: 'conversation', box: @box), |
-             confirm: t('mailboxer.delete_confirm', object: conversation.subject), method: :delete, class: 'btn') |
+             confirm: t('mailboxer.delete_confirm', object: conversation.subject), method: :delete, class: 'btn btn-danger') |
 
 .span12
-  %hr
   - unless @box.eql? 'trash'
-    %br
     - if current_company
       = form_tag company_conversation_path(id: conversation.id, company_id: current_company.id), method: :put, class: "cont_conversation" do
         - if @receipt and @receipt.errors.any?
@@ -34,7 +32,7 @@
         .editor
           = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12"
         .actions
-          = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn"
+          = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn btn-success"
     - elsif current_user
       = form_tag user_conversation_path(id: conversation.id, user_id: current_user.id), method: :put, class: "cont_conversation" do
         - if @receipt and @receipt.errors.any?
@@ -49,7 +47,7 @@
         .editor
           = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12"
         .actions
-          = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn"
+          = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn btn-success"
   %ul
   - @receipts.each do |receipt|
     = render receipt.message

@@ -20,6 +20,7 @@ class Linkedin < ActiveRecord::Base
     :uid, :profile_url
 
   after_create :grab_user_information, :set_user_synced
+  after_destroy :set_user_unsynced
 
   belongs_to :user
   has_one :profile, dependent: :destroy
@@ -72,5 +73,9 @@ class Linkedin < ActiveRecord::Base
 
   def set_user_synced
     self.user.set_linkedin_synced
+  end
+
+  def set_user_unsynced
+    self.user.set_linkedin_unsynced
   end
 end

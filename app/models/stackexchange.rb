@@ -24,6 +24,7 @@ class Stackexchange < ActiveRecord::Base
   belongs_to :user
 
   after_create :set_user_synced
+  after_destroy :unset_user_synced
 
   #the initial creation of a user's stackexchange account from their auth
   #information when they agree to link
@@ -69,5 +70,9 @@ class Stackexchange < ActiveRecord::Base
 
   def set_user_synced
     self.user.set_stackexchange_synced
+  end
+
+  def unset_user_synced
+    self.user.set_stackexchange_unsynced
   end
 end
