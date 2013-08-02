@@ -41,6 +41,7 @@ class Company < ActiveRecord::Base
 
   has_one :subscription
   has_many :job_listings
+  has_many :tech_stacks
   after_create :process_sign_up
 
   acts_as_messageable #mailboxer

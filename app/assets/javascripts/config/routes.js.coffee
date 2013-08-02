@@ -32,3 +32,22 @@ jobListing.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $urlRouterProvider.otherwise("/")
 
 
+techStack.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+  $locationProvider.html5Mode(true)
+
+  $stateProvider
+    .state "edit",
+      url: "/companies/:company_id/tech_stacks/:tech_stack_id/edit"
+      views:
+        "":
+          controller: "TechStackCtrl"
+          templateUrl: "/assets/tech_stacks/edit.html.erb",
+
+    .state "new",
+      url: "/companies/:company_id/tech_stacks/new"
+      views:
+        "":
+          controller: "TechStackCtrl"
+          templateUrl: "/assets/tech_stacks/new.html.erb",
+
+  $urlRouterProvider.otherwise("/")

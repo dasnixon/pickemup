@@ -1,0 +1,72 @@
+<div class='control-group'>
+  <label class='control-label'>Name</label>
+  <div class='controls'>
+    <input id="tech_stack_name" name="name" ng-model="data.name" type="text" required \> <span class='client-error', ng-show = 'techStackForm.name.$invalid'></span>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Back-end Languages</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.back_end_languages">
+        <td ng-repeat="language in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="language.checked"/>{{language.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Front-end Languages</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.front_end_languages">
+        <td ng-repeat="language in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="language.checked"/>{{language.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Frameworks</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.frameworks">
+        <td ng-repeat="framework in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="framework.checked"/>{{framework.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>Dev Ops Tools</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.dev_ops_tools">
+        <td ng-repeat="tool in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="tool.checked"/>{{tool.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="control-group">
+  <div class="controls">
+    <button class='btn' type="submit">Submit</button>
+  </div>
+</div>

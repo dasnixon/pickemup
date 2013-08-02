@@ -1,5 +1,6 @@
 @preference_app = angular.module('Preferences', ['ngResource', 'ui.compat'])
 @jobListing = angular.module('JobListing', ['ngResource', 'ui.compat'])
+@techStack = angular.module('TechStack', ['ngResource', 'ui.compat'])
 
 @chunk = (a,s) ->
   if a
