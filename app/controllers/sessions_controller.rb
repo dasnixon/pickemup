@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_filter :check_if_logged_in, only: [:sign_in, :sign_up, :company, :github]
+  before_filter :check_if_logged_in, only: [:sign_in, :sign_up, :company]
 
   def sign_in
   end
@@ -21,22 +21,38 @@ class SessionsController < ApplicationController
   end
 
   def github
-    user = User.from_omniauth(request.env['omniauth.auth'])
-    if user.present?
+    redirect_to root_path, notice: 'Already have your github synced.' and return if user_signed_in? && current_user.github_uid.present?
+    if user_signed_in? && current_user.linkedin_uid.present? && current_user.github_uid.blank? #they already setup a profile from linkedin
+      current_user.setup_github_account(request.env['omniauth.auth'])
+    else
+      user = User.from_omniauth(request.env['omniauth.auth'], :github)
+    end
+    if user_signed_in?
+      redirect_to_root('Sweet, we got your Github account!')
+    elsif user.present?
       session[:user_id] = user.id
-      redirect_to root_path, notice: 'Signed in!'
+      redirect_to_root('You are signed in!')
     else
       session[:user_id] = nil
-      redirect_to root_path, error: 'Unable to sign you in.'
+      redirect_to root_path, error: 'Unable to add your Github, try again.'
     end
   end
 
   def linkedin
-    redirect_to root_path, error: 'Must be logged in!' unless user_signed_in? && from_linkedin?
-    if current_user.build_linkedin.from_omniauth(request.env['omniauth.auth'])
-      redirect_to root_url, notice: 'Successfully linked your LinkedIn profile!'
+    redirect_to root_path, notice: 'Already have your linkedin synced.' and return if user_signed_in? && current_user.linkedin_uid.present?
+    if user_signed_in? && current_user.github_uid.present? && current_user.linkedin_uid.blank?
+      current_user.setup_linkedin_account(request.env['omniauth.auth'])
     else
-      redirect_to root_url, error: 'Unable to link your LinkedIn profile!'
+      user = User.from_omniauth(request.env['omniauth.auth'], :linkedin)
+    end
+    if user_signed_in?
+      redirect_to_root('Sweet, we got your LinkedIn account!')
+    elsif user.present?
+      session[:user_id] = user.id unless user_signed_in?
+      redirect_to_root('You are signed in!')
+    else
+      session[:user_id] = nil
+      redirect_to root_url, error: 'Unable to add your LinkedIn, try again.'
     end
   end
 
@@ -56,8 +72,8 @@ class SessionsController < ApplicationController
 
   private
 
-  def from_linkedin?
-    request.env['omniauth.auth'] && request.env['omniauth.auth'].provider == 'linkedin_oauth2'
+  def redirect_to_root(notice)
+    redirect_to root_path, notice: notice
   end
 
   def from_stackexchange?

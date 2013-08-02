@@ -7,8 +7,10 @@ class UsersController < ApplicationController
   def resume
     if @user
       @github_account = @user.github_account
-      @repos          = @github_account.repos
-      @orgs           = @github_account.organizations
+      if @github_account
+        @repos          = @github_account.repos
+        @orgs           = @github_account.organizations
+      end
       @stackexchange  = @user.stackexchange
       @linkedin       = @user.linkedin
       if @linkedin

@@ -10,7 +10,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = @company.build_subscription(subscription_params)
     if @subscription.save_with_payment
-      redirect_to root_path, notice: "Subscription created!"
+      redirect_to root_path, notice: "Subscription created! Start adding a job listing."
     else
       flash[:error] = "Something went wrong"
       render :new

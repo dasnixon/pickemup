@@ -68,18 +68,21 @@ ActiveRecord::Schema.define(version: 20130801021253) do
     t.integer  "number_followers"
     t.integer  "number_following"
     t.integer  "number_gists"
+    t.string   "blog"
     t.string   "token"
     t.string   "github_account_key"
+    t.string   "uid"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "github_accounts", ["github_account_key"], name: "index_github_accounts_on_github_account_key", using: :btree
+  add_index "github_accounts", ["uid"], name: "index_github_accounts_on_uid", using: :btree
 
   create_table "job_listings", force: true do |t|
     t.string   "job_title"
-    t.string   "job_description"
+    t.text     "job_description"
     t.integer  "salary_range_high"
     t.integer  "salary_range_low"
     t.integer  "vacation_days"
@@ -90,23 +93,23 @@ ActiveRecord::Schema.define(version: 20130801021253) do
     t.integer  "hiring_time"
     t.integer  "tech_stack_id"
     t.string   "location"
-    t.integer  "company_id",                              null: false
     t.boolean  "active",                  default: false
     t.boolean  "sponsorship_available",   default: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.boolean  "healthcare",              default: false
     t.boolean  "dental",                  default: false
     t.boolean  "vision",                  default: false
     t.boolean  "life_insurance",          default: false
     t.boolean  "retirement",              default: false
     t.integer  "estimated_work_hours"
-    t.string   "practices",               default: [],                 array: true
-    t.string   "acceptable_languages",    default: [],                 array: true
-    t.string   "special_characteristics", default: [],                 array: true
-    t.string   "experience_level",        default: [],                 array: true
-    t.string   "perks",                   default: [],                 array: true
-    t.string   "position_type",           default: [],                 array: true
+    t.string   "practices",               default: [],    array: true
+    t.string   "acceptable_languages",    default: [],    array: true
+    t.string   "special_characteristics", default: [],    array: true
+    t.string   "experience_level",        default: [],    array: true
+    t.string   "perks",                   default: [],    array: true
+    t.string   "position_type",           default: [],    array: true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "company_id"
   end
 
   create_table "linkedins", force: true do |t|
@@ -294,22 +297,22 @@ ActiveRecord::Schema.define(version: 20130801021253) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "uid"
+    t.string   "github_uid"
+    t.string   "linkedin_uid"
     t.string   "email"
     t.string   "name"
     t.string   "location"
-    t.string   "blog"
-    t.string   "current_company"
     t.string   "profile_image"
+    t.string   "main_provider"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "linkedin_synced",      default: false
     t.boolean  "stackexchange_synced", default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
-  add_index "users", ["uid"], name: "index_users_on_uid", using: :btree
+  add_index "users", ["github_uid"], name: "index_users_on_github_uid", using: :btree
+  add_index "users", ["linkedin_uid"], name: "index_users_on_linkedin_uid", using: :btree
 
   add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
 

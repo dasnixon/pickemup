@@ -15,11 +15,8 @@
 #  hiring_time             :integer
 #  tech_stack_id           :integer
 #  location                :string(255)
-#  company_id              :integer          not null
 #  active                  :boolean          default(FALSE)
 #  sponsorship_available   :boolean          default(FALSE)
-#  created_at              :datetime
-#  updated_at              :datetime
 #  healthcare              :boolean          default(FALSE)
 #  dental                  :boolean          default(FALSE)
 #  vision                  :boolean          default(FALSE)
@@ -32,6 +29,9 @@
 #  experience_level        :string(255)      default([])
 #  perks                   :string(255)      default([])
 #  position_type           :string(255)      default([])
+#  created_at              :datetime
+#  updated_at              :datetime
+#  company_id              :integer
 #
 
 class JobListing < ActiveRecord::Base

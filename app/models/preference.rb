@@ -80,7 +80,7 @@ class Preference < ActiveRecord::Base
   def attribute_default_values(attr)
     if attr == 'skills'
       current_user = self.user
-      if current_user.linkedin_synced?
+      if current_user.linkedin_uid.present?
         current_user.linkedin.profile.skills
       else
         []

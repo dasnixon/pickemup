@@ -1,4 +1,5 @@
-%h4 Most Common Language
-%h5
-  %blockquote
-    #{@github_account.most_common_language || "No public repositories available"}
+- if @github_account
+  %h4 Most Common Language
+  %h5
+    %blockquote
+      #{@github_account.most_common_language || "No public repositories available"}

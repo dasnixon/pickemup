@@ -1,4 +1,4 @@
-.media{class: "media #{conversation.is_unread?(current_user) ? 'info' : @box.eql?('trash') ? 'error' : 'success'}"}
+.media{class: "media #{conversation.is_unread?(current_user) ? 'info' : @box.eql?('trash') ? 'error' : ''}"}
   = link_to image_tag(last_message.profile_image, size: '100x100', alt: last_message.name, title: last_message.name, class: 'media-object img-rounded'), company_path(id: last_message.id), class: 'pull-left'
   .media-body
     .pull-right.media-heading

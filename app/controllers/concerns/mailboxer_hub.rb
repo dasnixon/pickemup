@@ -28,9 +28,9 @@ module Concerns
 
     def conversations_redirect(message=nil)
       if params[:user_id]
-        redirect_to user_conversations_path(box: @box, notice: message) and return
+        redirect_to(user_conversations_path(box: @box), notice: message) and return
       elsif params[:company_id]
-        redirect_to company_conversations_path(box: @box, notice: message) and return
+        redirect_to(company_conversations_path(box: @box), notice: message) and return
       end
     end
   end

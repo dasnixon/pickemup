@@ -12,23 +12,37 @@
             %li= image_tag(current_user.profile_image.url(:thumb), class: 'img img-circle', size: '40x40')
             %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
             %li= link_to 'Resume', resume_user_path(id: current_user.id)
-            %li.navigation_mailbox= link_to(raw("<span class='badge badge-info'>#{@num_unread_messages}</span> Mailbox"), user_conversations_path(user_id: current_user.id))
+            %li.navigation_mailbox= link_to(raw("<span class='badge badge-success'>#{@unread_messages.length}</span> Mailbox"), user_conversations_path(user_id: current_user.id))
             %li.dropdown
               %a.dropdown-toggle.caret-after{'data-toggle' => 'dropdown'}
                 %b.caret
               %ul.dropdown-menu
-                - @messages.each do |message|
-                  %li= link_to message.subject, user_conversation_path(id: message.id, user_id: current_user.id)
+                - if @messages.present?
+                  - @messages.each do |message|
+                    %li
+                      - if @unread_messages.include?(message)
+                        = link_to raw("<i class='icon-folder-close-alt'></i> " + message.subject), user_conversation_path(id: message.id, user_id: current_user.id)
+                      - else
+                        = link_to raw("<i class='icon-folder-open-alt'></i> " + message.subject), user_conversation_path(id: message.id, user_id: current_user.id)
+                - else
+                  %li= link_to 'No messages', user_conversations_path(user_id: current_user.id)
           - if company_signed_in?
             - subscription = current_company.subscription
             %li= link_to 'Job Listings', company_job_listings_path(company_id: current_company.id)
-            %li.navigation_mailbox= link_to(raw("<span class='badge badge-info'>#{@num_unread_messages}</span> Mailbox"), company_conversations_path(company_id: current_company.id))
+            %li.navigation_mailbox= link_to(raw("<span class='badge badge-success'>#{@unread_messages.length}</span> Mailbox"), company_conversations_path(company_id: current_company.id))
             %li.dropdown
               %a.dropdown-toggle.caret-after{'data-toggle' => 'dropdown'}
                 %b.caret
               %ul.dropdown-menu
-                - @messages.each do |message|
-                  %li= link_to message.subject, company_conversation_path(id: message.id, company_id: current_company.id)
+                - if @messages.present?
+                  - @messages.each do |message|
+                    %li
+                      - if @unread_messages.include?(message)
+                        = link_to raw("<i class='icon-folder-close-alt'></i> " + message.subject), company_conversation_path(id: message.id, company_id: current_company.id)
+                      - else
+                        = link_to raw("<i class='icon-folder-open-alt'></i> " + message.subject), company_conversation_path(id: message.id, company_id: current_company.id)
+                - else
+                  %li= link_to 'No messages', company_conversations_path(company_id: current_company.id)
             - if subscription
               %li= link_to 'Subscription', edit_company_subscription_path(id: subscription.id, company_id: current_company.id)
             - else
@@ -38,10 +52,21 @@
             %li= link_to 'Pricing', root_path
           %li= link_to 'Contact Us', contact_path
           - if user_signed_in?
-            - unless current_user.linkedin_synced?
-              %li= link_to 'Link Your Linkedin', '/auth/linkedin_oauth2'
+            - unless current_user.linkedin_uid.present?
+              %li
+                = link_to '/auth/linkedin' do
+                  %i.icon-linkedin
+                  %strong | Link your Linkedin
+            - unless current_user.github_uid.present?
+              %li
+                = link_to '/auth/github' do
+                  %i.icon-github
+                  %strong | Link your Github
             - unless current_user.stackexchange_synced?
-              %li= link_to 'Link Your Stackexchange', '/auth/stackexchange'
+              %li
+                = link_to '/auth/stackexchange' do
+                  %i.icon-stackexchange
+                  %strong | Link your Stackexchange
           - elsif company_signed_in?
             %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)
           - else

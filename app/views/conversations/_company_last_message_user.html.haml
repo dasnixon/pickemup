@@ -1,4 +1,4 @@
-%div{class: "media #{conversation.is_unread?(current_company) ? 'info' : @box.eql?('trash') ? 'error' : 'success'}"}
+%div{class: "media #{conversation.is_unread?(current_company) ? 'info' : @box.eql?('trash') ? 'error' : ''}"}
   = link_to image_tag(last_message.profile_image, class: 'media-object img-rounded', size: '100x100'), resume_user_path(id: last_message.id), class: 'pull-left'
   .media-body
     .pull-right.media-heading

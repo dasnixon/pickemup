@@ -19,8 +19,7 @@ class Linkedin < ActiveRecord::Base
   attr_accessible :token, :headline, :industry,
     :uid, :profile_url
 
-  after_create :grab_user_information, :set_user_synced
-  after_destroy :set_user_unsynced
+  after_create :grab_user_information
 
   belongs_to :user
   has_one :profile, dependent: :destroy
@@ -69,13 +68,5 @@ class Linkedin < ActiveRecord::Base
 
   def grab_user_information
     LinkedinWorker.perform_async(self.id)
-  end
-
-  def set_user_synced
-    self.user.set_linkedin_synced
-  end
-
-  def set_user_unsynced
-    self.user.set_linkedin_unsynced
   end
 end

@@ -8,12 +8,15 @@ class CreateGithubAccounts < ActiveRecord::Migration
       t.integer    :number_followers
       t.integer    :number_following
       t.integer    :number_gists
+      t.string     :blog
       t.string     :token
       t.string     :github_account_key
+      t.string     :uid
       t.belongs_to :user
       t.timestamps
     end
 
     add_index :github_accounts, :github_account_key
+    add_index :github_accounts, :uid
   end
 end

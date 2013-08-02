@@ -10,8 +10,10 @@
 #  number_followers   :integer
 #  number_following   :integer
 #  number_gists       :integer
+#  blog               :string(255)
 #  token              :string(255)
 #  github_account_key :string(255)
+#  uid                :string(255)
 #  user_id            :integer
 #  created_at         :datetime
 #  updated_at         :datetime
@@ -42,6 +44,7 @@ class GithubAccount < ActiveRecord::Base
     self.number_following   = extra_info.following
     self.number_gists       = extra_info.public_gists
     self.token              = auth.credentials.token
+    self.uid                = auth.uid
     self.github_account_key = extra_info.id
     self.save! if self.changed?
   end

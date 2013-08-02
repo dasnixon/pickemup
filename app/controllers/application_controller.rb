@@ -30,12 +30,12 @@ class ApplicationController < ActionController::Base
 
   def check_company_messages
     @messages ||= current_company.mailbox.inbox.first(5)
-    @num_unread_messages ||= @messages.select { |message| message.is_unread?(current_company) }.length
+    @unread_messages ||= @messages.select { |message| message.is_unread?(current_company) }
   end
 
   def check_user_messages
     @messages ||= current_user.mailbox.inbox.first(5)
-    @num_unread_messages ||= @messages.select { |message| message.is_unread?(current_user) }.length
+    @unread_messages ||= @messages.select { |message| message.is_unread?(current_user) }
   end
 
   def current_user?(user)
