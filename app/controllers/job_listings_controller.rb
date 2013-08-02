@@ -14,7 +14,6 @@ class JobListingsController < ApplicationController
   def create
     @job_listing = @company.job_listings.build
     remaining_params = @job_listing.unhash_all_params(job_listing_params)
-    binding.pry
     if @job_listing.update(remaining_params)
       respond_with @job_listing
     else
