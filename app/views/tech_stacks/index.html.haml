@@ -1,0 +1,6 @@
+#housing
+  .container
+    - if @tech_stacks
+      - @tech_stacks.each do |stack|
+        = link_to "#{stack.name}", edit_company_tech_stack_path(company_id: @company.id, id: stack.id)
+        <br/>

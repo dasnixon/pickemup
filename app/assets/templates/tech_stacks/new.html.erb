@@ -1,0 +1,8 @@
+<div class="section_header">
+  <h3> New Tech Stack </h3>
+</div>
+<div ng-controller = "TechStackCtrl">
+  <form class='tech_stack form-horizontal', name='techStackForm', ng-submit="create()">
+    <ng-include src="'/assets/tech_stacks/_tech_stack_form.html.erb'" />
+  </form>
+</div>

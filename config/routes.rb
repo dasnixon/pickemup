@@ -36,6 +36,12 @@ Pickemup::Application.routes.draw do
         put :untrash
       end
     end
+    resources :tech_stacks do
+      member do
+        get :retrieve_tech_stack
+        put :update_tech_stack
+      end
+    end
     resources :job_listings do
       member do
         get :retrieve_listing

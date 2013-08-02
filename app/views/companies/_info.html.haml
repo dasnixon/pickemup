@@ -20,7 +20,7 @@
         #{@company.industry}
       %li
         %strong Description:
-        #{@company.description.html_safe}
+        #{@company.description.try(:html_safe)}
       %li
         %strong Ownership:
         #{@company.public? ? "Public" : "Private"}
