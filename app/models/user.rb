@@ -42,22 +42,18 @@ class User < ActiveRecord::Base
         User.where(github_uid: auth.uid).first_or_create do |user|
           user.set_user_github_information(auth)
         end.tap do |user|
-          if !user.newly_created && user.main_provider == 'linkedin'
-            UserInformationWorker.perform_async(user.id) #this will call the update_resume method
-          else
-            StoreUserProfileImage.perform_async(user.id, auth.info.image)
-            user.update_github_information(auth) unless user.newly_created
+          StoreUserProfileImage.perform_async(user.id, auth.info.image) unless user.main_provider == 'linkedin'
+          if !user.newly_created
+            user.main_provider == 'linkedin' ? UserInformationWorker.perform_async(user.id) : user.update_github_information(auth)
           end
         end
       when :linkedin
         User.where(linkedin_uid: auth.uid).first_or_create do |user|
           user.set_user_linkedin_information(auth)
         end.tap do |user|
-          if !user.newly_created && user.main_provider == 'github'
-            UserInformationWorker.perform_async(user.id) #this will call the update_resume method
-          else
-            StoreUserProfileImage.perform_async(user.id, auth.info.image)
-            user.update_linkedin_information(auth) unless user.newly_created
+          StoreUserProfileImage.perform_async(user.id, auth.info.image) unless user.main_provider == 'github'
+          if !user.newly_created
+            user.main_provider == 'github' ? UserInformationWorker.perform_async(user.id) : user.update_linkedin_information(auth)
           end
         end
       else
