@@ -3,8 +3,10 @@ module GithubLogin
 
   def set_user_github_information(auth)
     self.newly_created = true
-    self.main_provider = 'github'
-    self.set_attributes_from_github(auth) unless self.linkedin_uid.present?
+    unless self.main_provider.present?
+      self.main_provider = 'github'
+      self.set_attributes_from_github(auth)
+    end
     self.build_github_account.from_omniauth(auth)
   end
 
@@ -17,9 +19,9 @@ module GithubLogin
   #github, linkedin, and stackexchange information, and any updated inforation
   #on the user
   def update_github_information(auth)
-    UserInformationWorker.perform_async(self.id) #this will call the update_resume method
-    self.set_attributes_from_github(auth)
     self.github_account.from_omniauth(auth)
+    self.set_attributes_from_github(auth)
+    UserInformationWorker.perform_async(self.id) #this will call the update_resume method
   end
 
   def setup_github_account(auth)

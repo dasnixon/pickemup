@@ -1,7 +1,12 @@
 .control-group
-  = label_tag :card_number, 'Card Number:', class: 'control-label'
+  = label_tag :card_number, 'Card Number:', class: 'control-label', for: 'credit-card'
   .controls
-    = text_field_tag :card_number, nil, name: nil, class: 'card-number'
+    = text_field_tag :card_number, nil, class: 'xlarge card-number', id: 'credit-card', name: 'credit-card'
+    %span#credit-card-type-text.help-inline
+
+.control-group
+  .controls
+    .pull-left#accepted-cards-images
 
 .control-group
   = label_tag :card_cvc, 'Security Code:', class: 'control-label'

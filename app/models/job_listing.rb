@@ -43,6 +43,7 @@ class JobListing < ActiveRecord::Base
 
   belongs_to :company
   validate :salary_range_check
+  validates :job_description, presence: true
 
   HASHABLE_PARAMS = ['practices', 'perks', 'experience_level', 'special_characteristics', 'acceptable_languages', 'position_type']
 

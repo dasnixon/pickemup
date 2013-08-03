@@ -49,6 +49,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           practices: unchunk($scope.data.practices)
         }},
         function(response) {
+          $scope.success = 'Successfully updated the job listing.'
           return $scope.success;
         }
     )};
@@ -95,6 +96,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           practices: unchunk($scope.data.practices)
         }},
         function(response) {
+          $scope.success = 'Successfully created the job listing.'
           return $scope.success;
         }
     )};
