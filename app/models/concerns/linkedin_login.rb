@@ -3,8 +3,10 @@ module LinkedinLogin
 
   def set_user_linkedin_information(auth)
     self.newly_created = true
-    self.main_provider = 'linkedin'
-    self.set_attributes_from_linkedin(auth) unless self.github_uid.present?
+    unless self.main_provider.present?
+      self.main_provider = 'linkedin'
+      self.set_attributes_from_linkedin(auth)
+    end
     self.build_linkedin.from_omniauth(auth)
   end
 
@@ -14,9 +16,9 @@ module LinkedinLogin
   end
 
   def update_linkedin_information(auth)
-    UserInformationWorker.perform_async(self.id) #this will call the update_resume method
-    self.set_attributes_from_linkedin(auth)
     self.linkedin.from_omniauth(auth)
+    self.set_attributes_from_linkedin(auth)
+    UserInformationWorker.perform_async(self.id) #this will call the update_resume method
   end
 
   #set attributes from the linkedin auth information on the user

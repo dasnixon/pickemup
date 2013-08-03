@@ -2,7 +2,7 @@ class JobListingsController < ApplicationController
   before_filter :find_company
   before_filter :check_invalid_permissions_company, except: [:index, :show]
   before_filter :check_for_subscription, only: [:new, :create]
-  before_filter :get_job_listing, only: [:show, :edit, :retrieve_listing]
+  before_filter :get_job_listing, only: [:show, :edit, :update, :destroy, :retrieve_listing]
   respond_to :json, :html
 
   def new
@@ -32,7 +32,6 @@ class JobListingsController < ApplicationController
   end
 
   def update
-    @job_listing = JobListing.find(params[:id])
     if @job_listing.update(job_listing_params)
       redirect_to root_path, notice: "Listing updated"
     else
@@ -54,6 +53,11 @@ class JobListingsController < ApplicationController
   def retrieve_listing
     @job_listing.populate_all_params
     respond_with @job_listing
+  end
+
+  def destroy
+    @job_listing.destroy
+    redirect_to company_job_listings_path(company_id: @company.id), notice: "Listing has been removed."
   end
 
   private

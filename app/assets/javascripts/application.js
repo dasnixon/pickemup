@@ -16,5 +16,7 @@
 //= require angular
 //= require angular-resource
 //= require angular-ui-states
+//= require cardcheck.min
 //= require app/main
+//= require ckeditor-jquery
 //= require_tree .

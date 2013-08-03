@@ -66,6 +66,9 @@ gem 'figaro'
 #MANAGEMENT SYSTEMS
 gem 'newrelic_rpm'
 
+#HTML TEXT EDITOR
+gem 'ckeditor_rails'
+
 #OTHER
 gem 'annotate'
 gem 'httparty'

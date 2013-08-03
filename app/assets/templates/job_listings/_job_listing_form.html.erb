@@ -1,3 +1,9 @@
+<div ng-show="success.length > 0" class="alert alert-success">
+  {{success}}
+</div>
+<div ng-show="error_updating.length > 0" class="alert alert-info">
+  {{error_updating}}
+</div>
 <div class='control-group'>
   <label class='control-label'>Job Title*</label>
   <div class='controls'>
@@ -8,7 +14,8 @@
 <div class='control-group'>
   <label class='control-label'>Job Description*</label>
   <div class='controls'>
-    <textarea id="job_listing_job_description" name="job_description" ng-model="data.job_description" required></textarea> <span class='client-error', ng-show = 'jobListingForm.job_description.$invalid'></span>
+    <span class='client-error', ng-show = 'jobListingForm.job_description.$invalid'></span>
+    <textarea id="job_listing_job_description" ck-editor name="job_description" ng-model="data.job_description"></textarea>
   </div>
 </div>
 
