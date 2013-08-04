@@ -16,6 +16,12 @@
     .controls
       = text_field_tag :recipient_name, @recipient.name, disabled: true
 
+  - if @job_listings
+    .control-group
+      = label_tag "Job Listing", nil, class: 'control-label'
+      .controls
+        = select_tag "job_listing_id", options_from_collection_for_select(@job_listings, "id", "job_title")
+
   .control-group
     = label_tag t('mailboxer.form.subject'), nil, class: 'control-label'
     .controls

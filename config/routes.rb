@@ -31,6 +31,7 @@ Pickemup::Application.routes.draw do
   end
   get '/companies/validate_company', to: "companies#validate_company"
   resources :companies, except: [:new] do
+    get :get_users
     resources :conversations do
       member do
         put :untrash
