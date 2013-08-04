@@ -24,7 +24,7 @@ class JobListingsController < ApplicationController
   end
 
   def index
-    @job_listings = JobListing.find_all_by_company_id(params[:company_id])
+    @job_listings = JobListing.find_all_by_company_id(params[:company_id], order: "active = false")
   end
 
   def edit
@@ -56,6 +56,17 @@ class JobListingsController < ApplicationController
   def destroy
     @job_listing.destroy
     redirect_to company_job_listings_path(company_id: @company.id), notice: "Listing has been removed."
+  end
+
+  def toggle_active
+    @job_listing = JobListing.find(params[:id])
+    if @job_listing
+      @job_listing.active = !@job_listing.active
+      @job_listing.save
+      redirect_to company_job_listings_path(company_id: params[:company_id], id: params[:id])
+    else
+      redirect_to :back
+    end
   end
 
   private
