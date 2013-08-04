@@ -7,8 +7,7 @@ class JobListingsController < ApplicationController
 
   def new
     @job_listing = JobListing.new
-    @job_listing.populate_all_params
-    respond_with @job_listing
+    listing_response
   end
 
   def create
@@ -51,8 +50,7 @@ class JobListingsController < ApplicationController
   end
 
   def retrieve_listing
-    @job_listing.populate_all_params
-    respond_with @job_listing
+    listing_response
   end
 
   def destroy
@@ -81,5 +79,13 @@ class JobListingsController < ApplicationController
 
   def find_company
     @company ||= Company.find(params[:company_id])
+  end
+
+  def listing_response
+    @job_listing.populate_all_params
+    tech_stacks = Company.find(params[:company_id]).tech_stacks
+    @tech_stack_choices = tech_stacks.map { |stack| {name: stack.name, id: stack.id} }
+    @response = {job_listing: @job_listing, tech_stacks: @tech_stack_choices}
+    respond_with @response
   end
 end

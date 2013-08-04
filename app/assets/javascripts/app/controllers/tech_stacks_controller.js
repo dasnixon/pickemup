@@ -44,7 +44,6 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
        $scope.data = response
     });
     return $scope.create = function() {
-      debugger;
       TechStack.createTechStack.create({
         company_id: $stateParams['company_id'],
         action: 'create',
