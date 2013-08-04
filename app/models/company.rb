@@ -24,6 +24,8 @@
 #
 
 class Company < ActiveRecord::Base
+  acts_as_messageable #mailboxer
+  include JobListingMessages
   attr_accessible :name, :email, :description, :website,
     :industry, :password_salt, :password_hash, :description,
     :num_employees, :public, :founded, :password, :logo
@@ -44,7 +46,6 @@ class Company < ActiveRecord::Base
   has_many :tech_stacks
   after_create :process_sign_up
 
-  acts_as_messageable #mailboxer
 
   def process_sign_up
     CrunchbaseWorker.perform_async(self.id)

@@ -1,0 +1,5 @@
+#housing
+  .container
+    - if @users
+      - @users.each do |user|
+        = link_to "#{user.name}", resume_user_path(user)
