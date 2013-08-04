@@ -97,7 +97,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           special_characteristics: unchunk($scope.data.special_characteristics),
           acceptable_languages: unchunk($scope.data.acceptable_languages),
           practices: unchunk($scope.data.practices),
-          tech_stack_id: $scope.data.tech_stack_id
+          tech_stack_id: $scope.data.tech_stack_id,
+          active: true
         }},
         function(response) {
           $scope.success = 'Successfully created the job listing.'
