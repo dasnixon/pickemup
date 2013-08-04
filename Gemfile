@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 #MAGIC
 gem 'rails'
@@ -76,6 +77,10 @@ gem 'ckeditor_rails'
 gem 'annotate'
 gem 'httparty'
 gem 'jbuilder'
+
+group :production do
+  gem 'rails_12factor'
+end
 
 group :test, :development do
   gem 'factory_girl_rails'
