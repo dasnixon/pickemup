@@ -59,10 +59,10 @@ class JobListingsController < ApplicationController
   end
 
   def toggle_active
-    @job_listing = JobListing.find(params[:id])
-    if @job_listing
-      @job_listing.active = !@job_listing.active
-      @job_listing.save
+    job_listing = JobListing.find(params[:id])
+    if job_listing
+      job_listing.active = !job_listing.active
+      job_listing.save
       redirect_to company_job_listings_path(company_id: params[:company_id], id: params[:id])
     else
       redirect_to :back
