@@ -10,13 +10,14 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       company_id: $stateParams['company_id'],
       action: 'retrieve_listing'
     }, function(response) {
-       response.acceptable_languages = chunk(response.acceptable_languages, 6)
-       response.practices = chunk(response.practices, 6)
-       response.special_characteristics = chunk(response.special_characteristics, 6)
-       response.experience_level = chunk(response.experience_level, 5)
-       response.position_type = chunk(response.position_type, 5)
-       response.perks = chunk(response.perks, 6)
-       $scope.data = response
+       response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6)
+       response.job_listing.practices = chunk(response.job_listing.practices, 6)
+       response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6)
+       response.job_listing.experience_level = chunk(response.job_listing.experience_level, 5)
+       response.job_listing.position_type = chunk(response.job_listing.position_type, 5)
+       response.job_listing.perks = chunk(response.job_listing.perks, 6)
+       $scope.tech_stacks = response.tech_stacks
+       $scope.data = response.job_listing
     });
     return $scope.update = function() {
       JobListing.editListing.update({
@@ -46,7 +47,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           hiring_time: $scope.data.hiring_time,
           special_characteristics: unchunk($scope.data.special_characteristics),
           acceptable_languages: unchunk($scope.data.acceptable_languages),
-          practices: unchunk($scope.data.practices)
+          practices: unchunk($scope.data.practices),
+          tech_stack_id: $scope.data.tech_stack_id
         }},
         function(response) {
           $scope.success = 'Successfully updated the job listing.'
@@ -58,13 +60,14 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       company_id: $stateParams['company_id'],
       action: 'new'
     }, function(response) {
-       response.acceptable_languages = chunk(response.acceptable_languages, 6)
-       response.practices = chunk(response.practices, 6)
-       response.special_characteristics = chunk(response.special_characteristics, 6)
-       response.experience_level = chunk(response.experience_level, 5)
-       response.position_type = chunk(response.position_type, 5)
-       response.perks = chunk(response.perks, 6)
-       $scope.data = response
+       response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6)
+       response.job_listing.practices = chunk(response.job_listing.practices, 6)
+       response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6)
+       response.job_listing.experience_level = chunk(response.job_listing.experience_level, 5)
+       response.job_listing.position_type = chunk(response.job_listing.position_type, 5)
+       response.job_listing.perks = chunk(response.job_listing.perks, 6)
+       $scope.tech_stacks = response.tech_stacks
+       $scope.data = response.job_listing
     });
     return $scope.create = function() {
       JobListing.createListing.create({
@@ -93,7 +96,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           hiring_time: $scope.data.hiring_time,
           special_characteristics: unchunk($scope.data.special_characteristics),
           acceptable_languages: unchunk($scope.data.acceptable_languages),
-          practices: unchunk($scope.data.practices)
+          practices: unchunk($scope.data.practices),
+          tech_stack_id: $scope.data.tech_stack_id
         }},
         function(response) {
           $scope.success = 'Successfully created the job listing.'
