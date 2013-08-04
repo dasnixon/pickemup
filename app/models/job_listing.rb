@@ -42,6 +42,7 @@ class JobListing < ActiveRecord::Base
                   :acceptable_languages, :dental, :vision, :life_insurance
 
   belongs_to :company
+  has_many :conversations
   validate :salary_range_check
   validates :job_description, presence: true
 
