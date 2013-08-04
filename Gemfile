@@ -52,6 +52,9 @@ gem 'angularjs-rails'
 gem 'jquery-rails'
 gem 'coffee-rails'
 
+#ENGLISH LANGUAGE MAGIC
+gem 'indefinite_article'
+
 #DOCUMENTING
 group :doc do
   gem 'sdoc', require: false

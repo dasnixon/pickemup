@@ -47,7 +47,7 @@ class Preference < ActiveRecord::Base
 
   belongs_to :user
 
-  validates :expected_salary, numericality: true, inclusion: { in: 0..20000000, message: 'Nice try money bags.' }
+  validates :expected_salary, numericality: true, inclusion: { in: 0..99999999, message: 'Nice try money bags.' }
   validates :work_hours, numericality: true, inclusion: { in: 0..168, message: 'Are you a machine?' }
   validates :potential_availability, numericality: true, inclusion: { in: 0..52, message: 'Start sooner!' }
 

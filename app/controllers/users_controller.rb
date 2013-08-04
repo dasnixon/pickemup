@@ -1,23 +1,24 @@
 class UsersController < ApplicationController
-  before_filter :eager_load_user, only: [:resume]
+  before_filter :eager_load_user, :check_permissions, only: [:resume]
   before_filter :get_and_check_user, only: [:preferences, :get_preference, :update_preference]
   before_filter :cleanup_preference_params, only: [:update_preference]
   respond_to :json, :html
 
   def resume
     if @user
-      @github_account = @user.github_account
+      @preference        = @user.preference
+      @github_account    = @user.github_account
       if @github_account
-        @repos          = @github_account.repos
-        @orgs           = @github_account.organizations
+        @repos           = @github_account.repos
+        @orgs            = @github_account.organizations
       end
-      @stackexchange  = @user.stackexchange
-      @linkedin       = @user.linkedin
+      @stackexchange     = @user.stackexchange
+      @linkedin          = @user.linkedin
       if @linkedin
-        @profile      = @linkedin.profile
-        @positions    = @profile.positions
-        @educations   = @profile.educations
-        @skills       = @profile.skills
+        @profile         = @linkedin.profile
+        @positions       = @profile.positions
+        @educations      = @profile.educations
+        @skills          = @profile.skills
       end
     end
   end
@@ -44,6 +45,7 @@ class UsersController < ApplicationController
   def eager_load_user
     @user ||= User.includes(
       stackexchange: [],
+      preference: [],
       github_account: [:repos, :organizations],
       linkedin: {profile: [:positions, :educations]}
     ).find(params[:id]) #eager load all user information
@@ -51,5 +53,11 @@ class UsersController < ApplicationController
 
   def cleanup_preference_params
     @bathed_preferences = Preference.cleanup_invalid_data(params[:preference])
+  end
+
+  def check_permissions
+    unless (user_signed_in? && current_user == @user) || company_signed_in?
+      redirect_to root_path, notice: 'You don\'t have permissions to view that page.'
+    end
   end
 end
