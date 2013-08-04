@@ -47,6 +47,14 @@ class CompaniesController < ApplicationController
     end
   end
 
+  def get_users
+    if company_signed_in?
+      @users = User.all
+    else
+      redirect_to root_path
+    end
+  end
+
   private
 
   def find_company
