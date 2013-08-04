@@ -1,0 +1,19 @@
+%hr
+%p
+  %i.icon-gear.icon-2x
+    Preferences
+  %p
+    = user_bio(@user, @preference)
+  %ul.unstyled
+    %li
+      %strong Preferred Skills:
+      #{@preference.skills.join(', ')}
+    %li
+      %strong Preferred Practices:
+      #{@preference.practices.join(', ')}
+    %li
+      %strong Preferred Perks:
+      #{@preference.perks.join(', ')}
+    %li
+      %strong Preferred Benefits:
+      = user_benefits(@preference)
