@@ -9,7 +9,8 @@
           %li
             = msg
 
-  = hidden_field_tag :_recipients, @recipient.id
+  = hidden_field_tag :receiver, @recipient.id
+  = hidden_field_tag :listing_id, @job_listing.id
 
   .control-group
     = label_tag t('mailboxer.form.recipients'), nil, class: 'control-label'
@@ -25,11 +26,16 @@
   .control-group
     = label_tag t('mailboxer.form.subject'), nil, class: 'control-label'
     .controls
-      = text_field_tag :subject, nil
+      = text_field_tag :subject, job_listing_title(@job_listing), class: 'subject-message'
 
   .control-group
     = label_tag t('mailboxer.form.body'), nil, class: 'control-label'
     .controls
-      = text_area_tag :body, nil, rows: 6, cols: 53, maxlength: 5000
+      - if user_signed_in?
+        = text_area_tag :body, default_job_listing_user(@job_listing, @recipient, @user), class: 'ckeditor'
+      - else
+        = text_area_tag :body, default_job_listing_company(@job_listing, @company, @recipient), class: 'ckeditor'
 
-  = submit_tag t('mailboxer.send'), name: :send_message, class: "btn pull-left"
+  .control-group
+    .controls
+      = submit_tag t('mailboxer.send'), name: :send_message, class: "btn btn-success"

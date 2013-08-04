@@ -17,8 +17,11 @@
 #
 
 class User < ActiveRecord::Base
+  acts_as_messageable #mailboxer
+
   include LinkedinLogin
   include GithubLogin
+  include JobListingMessages #override mailboxer .send_message
 
   has_one :github_account, dependent: :destroy
   has_one :linkedin, dependent: :destroy
@@ -32,7 +35,6 @@ class User < ActiveRecord::Base
 
   after_create :create_preference
 
-  acts_as_messageable #mailboxer
   mount_uploader :profile_image, AvatarUploader #carrierwave
 
   #find or create a user from auth then update information on that user

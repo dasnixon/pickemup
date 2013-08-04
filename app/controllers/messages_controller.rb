@@ -2,6 +2,7 @@ class MessagesController < ApplicationController
   include Concerns::MailboxerHub
 
   before_filter :find_mailbox_for, :get_mailbox, :get_box
+  before_filter :validate_params, only: [:new, :create]
 
   def index
     conversations_redirect
@@ -18,25 +19,19 @@ class MessagesController < ApplicationController
   end
 
   def new
-    if params[:receiver].present?
-      if user_signed_in?
-        @recipient = Company.find(params[:receiver])
-      elsif company_signed_in?
-        @job_listings = Company.find(params[:company_id]).job_listings
-        @recipient = User.find(params[:receiver])
-      end
-      return if @recipient.nil?
-      @recipient = nil if sending_to_self?
+    @job_listing = JobListing.find(params[:job_listing_id])
+    if user_signed_in?
+      @recipient = Company.find(params[:receiver])
+    elsif company_signed_in?
+      @recipient = User.find(params[:receiver])
     end
+    return if @recipient.nil?
+    @recipient = nil if sending_to_self?
   end
 
   def create
-    @recipients =
-      if params[:_recipients].present?
-        @recipients = params[:_recipients].split(',').map{ |r| (user_signed_in? ? Company.find(r) : User.find(r)) }
-      else
-        []
-      end
+    @job_listing = JobListing.find(params[:job_listing_id])
+    @recipient = user_signed_in? ? Company.find(params[:receiver]) : User.find(params[:receiver])
 
     @receipt = @mailbox_for.send_message(@recipients, params[:body], params[:subject], params[:job_listing_id])
     if (@receipt.errors.blank?)
@@ -63,6 +58,12 @@ class MessagesController < ApplicationController
       @recipient == current_user
     elsif company_signed_in?
       @recipient == current_company
+    end
+  end
+
+  def validate_params
+    unless params[:receiver] && params[:job_listing_id]
+      conversations_redirect
     end
   end
 end
