@@ -7,4 +7,9 @@ module JobListingsHelper
     range.insert(0,["Less than $10,000", 0])
     range << ["More than $350,000", 500000]
   end
+
+  def conversation_user(conversation)
+    participants = conversation.participants
+    participants.last.class.name == "User" ? participants.last : participants.first
+  end
 end
