@@ -10,7 +10,7 @@
             = msg
 
   = hidden_field_tag :receiver, @recipient.id
-  = hidden_field_tag :listing_id, @job_listing.id
+  = hidden_field_tag :job_listing_id, @job_listing.id
 
   .control-group
     = label_tag t('mailboxer.form.recipients'), nil, class: 'control-label'

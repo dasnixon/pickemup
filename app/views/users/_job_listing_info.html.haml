@@ -1,0 +1,44 @@
+.well
+  .media{id: job_listing[:listing].id}
+    .media-body
+      %div{class: "#{job_listing[:listing].active ? 'active' : 'deactivated'}"}
+        .pull-right= link_to 'View Conversation', user_conversation_path(user_id: current_user.id, id: job_listing[:conversation].id), class: 'btn btn-primary'
+        .lead.media-heading #{link_to(job_listing[:company].name, company_path(id: job_listing[:company].id))} - #{link_to(job_listing_title(job_listing[:listing]), company_job_listing_path(id: job_listing[:listing].id, company_id: job_listing[:company].id))}
+        .accordion
+          .accordion-group
+            .accordion-heading
+              %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseDesc' }
+                %h4 Job Description
+          #collapseDesc{ class: 'accordion-body collapse' }
+            .accordion-inner
+              .row-fluid
+                = job_listing[:listing].job_description.html_safe
+          .accordion-group
+            .accordion-heading
+              %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseBene' }
+                %h4 Benefits
+          #collapseBene{ class: 'accordion-body collapse' }
+            .accordion-inner
+              .row-fluid
+                %ul.unstyled
+                  %li
+                    %strong Salary Range:
+                    #{number_to_currency(job_listing[:listing].salary_range_low)} - #{number_to_currency(job_listing[:listing].salary_range_high)}
+                  %li
+                    %strong Preferred Languages:
+                    #{job_listing[:listing].acceptable_languages.join(', ')}
+                  %li
+                    %strong Preferred Experience Level:
+                    #{job_listing[:listing].experience_level.join(', ')}
+                  %li
+                    %strong Preferred Practices:
+                    #{job_listing[:listing].practices.join(', ')}
+                  %li
+                    %strong Bonus Points for:
+                    #{job_listing[:listing].special_characteristics.join(', ')}
+                  %li
+                    %strong Job Perks:
+                    #{job_listing[:listing].perks.join(', ')}
+                  %li
+                    %strong Benefits:
+                    = job_listing_benefits(job_listing[:listing])

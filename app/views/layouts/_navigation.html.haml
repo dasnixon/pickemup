@@ -12,6 +12,7 @@
             %li= image_tag(current_user.profile_image.url(:thumb), class: 'img img-circle', size: '40x40')
             %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
             %li= link_to 'Resume', resume_user_path(id: current_user.id)
+            %li= link_to 'Briefcase', listings_user_path(id: current_user.id)
             %li.navigation_mailbox= link_to(raw("<span class='badge badge-success'>#{@unread_messages.length}</span> Mailbox"), user_conversations_path(user_id: current_user.id))
             %li.dropdown
               %a.dropdown-toggle.caret-after{'data-toggle' => 'dropdown'}
