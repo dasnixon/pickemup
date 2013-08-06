@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :eager_load_user, :check_permissions, only: [:resume]
-  before_filter :get_and_check_user, only: [:preferences, :get_preference, :update_preference]
+  before_filter :get_and_check_user, only: [:preferences, :get_preference, :update_preference, :listings]
   before_filter :cleanup_preference_params, only: [:update_preference]
   respond_to :json, :html
 
@@ -24,6 +24,14 @@ class UsersController < ApplicationController
   end
 
   def preferences
+  end
+
+  def listings
+    @job_listings = @user.mailbox.sentbox.collect do |conv|
+      listing = JobListing.find(conv.job_listing_id)
+      company = listing.company
+      {listing: listing, company: company, conversation: conv}
+    end
   end
 
   def get_preference

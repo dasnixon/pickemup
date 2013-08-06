@@ -33,7 +33,7 @@ class MessagesController < ApplicationController
     @job_listing = JobListing.find(params[:job_listing_id])
     @recipient = user_signed_in? ? Company.find(params[:receiver]) : User.find(params[:receiver])
 
-    @receipt = @mailbox_for.send_message(@recipients, params[:body], params[:subject], params[:job_listing_id])
+    @receipt = @mailbox_for.send_message(@recipient, params[:body], params[:subject], params[:job_listing_id])
     if (@receipt.errors.blank?)
       @conversation = @receipt.conversation
       flash[:notice]= t('mailboxer.sent')
