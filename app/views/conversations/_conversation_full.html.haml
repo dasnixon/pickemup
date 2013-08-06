@@ -1,12 +1,17 @@
 .pull-left
   %h4= t("message.participants")
+  - company = nil
   .participants
     - conversation.recipients.each do |recp|
       - if recp.is_a?(User)
         = link_to image_tag(recp.profile_image, title: recp.name, alt: recp.name, size: '50x50', class: 'img-rounded'), resume_user_path(id: recp.id)
       - elsif recp.is_a?(Company)
+        - company = recp
         = link_to image_tag(recp.get_logo, size: '50x50', title: recp.name, alt: recp.name, class: 'img-rounded'), company_path(id: recp.id)
-  %h3= conversation.subject
+  - if user_signed_in?
+    %h3= link_to conversation.subject, company_job_listing_path(company_id: company.id, id: conversation.job_listing_id)
+  - else
+    %h3= link_to conversation.subject, company_job_listing_path(company_id: current_company.id, id: conversation.job_listing_id), target: '_blank'
 .pull-right
   - unless @box.eql? 'trash'
     - if current_user
@@ -29,8 +34,9 @@
             - @receipt.errors.full_messages.each do |msg|
               %li
                 = msg
-        .editor
-          = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12"
+        %p
+          %br
+          = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12 ckeditor"
         .actions
           = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn btn-success"
     - elsif current_user
@@ -45,8 +51,9 @@
               %li
                 = msg
         .editor
-          = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12"
-        .actions
+          = text_area_tag :body, nil, rows: 6, cols: 53, class: "required form_tag span12 ckeditor"
+        %p
+          %br
           = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn btn-success"
   %ul
   - @receipts.each do |receipt|
