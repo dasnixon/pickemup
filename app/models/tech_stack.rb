@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: tech_stacks
+#
+#  id                  :integer          not null, primary key
+#  company_id          :integer
+#  name                :string(255)
+#  back_end_languages  :string(255)      default([])
+#  front_end_languages :string(255)      default([])
+#  frameworks          :string(255)      default([])
+#  dev_ops_tools       :string(255)      default([])
+#  created_at          :datetime
+#  updated_at          :datetime
+#
+
 class TechStack < ActiveRecord::Base
   attr_accessible :name
   belongs_to :company

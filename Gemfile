@@ -82,14 +82,15 @@ group :production do
   gem 'rails_12factor'
 end
 
-group :test, :development do
+group :test do
   gem 'factory_girl_rails'
   gem 'pry' #debugging
-  gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'railroady' #schema diagrams
+  gem 'rspec-rails'
+  gem 'fuubar'
 end
 
 group :development do
+  gem 'railroady' #schema diagrams
   gem 'meta_request' #for RailsPanel Google Chrome extension
 end

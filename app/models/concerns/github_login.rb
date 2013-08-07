@@ -3,10 +3,8 @@ module GithubLogin
 
   def set_user_github_information(auth)
     self.newly_created = true
-    unless self.main_provider.present?
-      self.main_provider = 'github'
-      self.set_attributes_from_github(auth)
-    end
+    self.main_provider = 'github'
+    self.set_attributes_from_github(auth)
     self.build_github_account.from_omniauth(auth)
   end
 

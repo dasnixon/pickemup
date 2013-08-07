@@ -6,7 +6,7 @@ describe Education do
   describe '#from_omniauth' do
     context 'no educations present' do
       before :each do
-        Education.should_not_receive(:find_or_initialize_by_education_key_and_profile_id)
+        Education.should_not_receive(:find_or_initialize_by)
       end
       it 'does not call .find_or_initialize' do
         Education.from_omniauth({}, 1).should be_nil
@@ -14,7 +14,7 @@ describe Education do
     end
     context 'no values key' do
       before :each do
-        Education.should_not_receive(:find_or_initialize_by_education_key_and_profile_id)
+        Education.should_not_receive(:find_or_initialize_by)
       end
       it 'does not call .find_or_initialize' do
         Education.from_omniauth({'education' => {}}, 1).should be_nil
@@ -59,7 +59,7 @@ describe Education do
         let(:education) { FactoryGirl.create(:education) }
         let(:profile)   { education.profile }
         before :each do
-          Education.stub(:find_or_initialize_by_education_key_and_profile_id).and_return(education)
+          Education.stub(:find_or_initialize_by).and_return(education)
         end
         it 'finds and updates education with auth data' do
           Education.from_omniauth(auth, profile.id)

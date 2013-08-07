@@ -4,7 +4,7 @@
 #
 #  id                      :integer          not null, primary key
 #  job_title               :string(255)
-#  job_description         :string(255)
+#  job_description         :text
 #  salary_range_high       :integer
 #  salary_range_low        :integer
 #  vacation_days           :integer

@@ -11,7 +11,7 @@
 #  equity                 :boolean          default(FALSE)
 #  bonuses                :boolean          default(FALSE)
 #  retirement             :boolean          default(FALSE)
-#  fulltime               :boolean          default(FALSE)
+#  fulltime               :boolean          default(TRUE)
 #  us_citizen             :boolean          default(FALSE)
 #  open_source            :boolean          default(FALSE)
 #  remote                 :boolean          default(FALSE)
@@ -33,8 +33,6 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #
-#http://www.postgresql.org/docs/7.3/static/functions-matching.html
-#SELECT * FROM ( SELECT *, unnest(skills) s FROM preferences) x WHERE s ~* 'ruby';
 
 class Preference < ActiveRecord::Base
   include PreferenceConstants
