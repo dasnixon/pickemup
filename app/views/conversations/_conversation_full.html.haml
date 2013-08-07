@@ -56,5 +56,6 @@
           %br
           = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn btn-success"
   %ul
-  - @receipts.each do |receipt|
-    = render receipt.message
+  -if @receipts
+    - @receipts.each do |receipt|
+      = render receipt.message
