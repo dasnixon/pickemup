@@ -30,7 +30,7 @@ class Organization < ActiveRecord::Base
   def self.from_omniauth(organizations, github_id, org_keys=nil)
     Organization.remove_orgs(organizations, org_keys) if org_keys.present?
     organizations.each do |org|
-      organization = Organization.find_or_initialize_by_organization_key_and_github_account_id(org.id.to_s, github_id)
+      organization = Organization.find_or_initialize_by(organization_key: org.id.to_s, github_account_id: github_id)
       org_info = organization.github_account.get_org_information(org.login)
       organization.update_attributes(
         name:               (org_info.try(:name) || org.login),

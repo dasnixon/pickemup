@@ -64,7 +64,7 @@ class GithubAccount < ActiveRecord::Base
   def get_org_information(name)
     begin
       github_api_setup.orgs.get(name)
-    rescue => e
+    rescue Exception => e
       logger.error "Github #get_org_information error #{e}"
     end
   end
@@ -101,7 +101,7 @@ class GithubAccount < ActiveRecord::Base
   def get_repos
     begin
       github_api_setup.repos.list
-    rescue => e
+    rescue Exception => e
       logger.error "Github #get_repos error #{e}"
     end
   end
@@ -110,7 +110,7 @@ class GithubAccount < ActiveRecord::Base
   def get_organizations
     begin
       github_api_setup.organizations.list
-    rescue => e
+    rescue Exception => e
       logger.error "Github #get_organizations error #{e}"
     end
   end

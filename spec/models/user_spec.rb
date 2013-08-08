@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user) { create(:user) }
   let(:generic_auth_github) {
     OpenStruct.new(uid: '123456789', info: auth_info, extra: extra_info_github)
   }
@@ -33,7 +33,7 @@ describe User do
   it { should have_one(:linkedin) }
   it { should have_one(:stackexchange) }
 
-  describe '#from_omniauth' do
+  describe '.from_omniauth' do
     context 'invalid provider' do
       before :each do
         expect(UserInformationWorker).to_not receive(:perform_async)

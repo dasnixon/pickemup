@@ -88,6 +88,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem 'fuubar'
+  gem 'ffaker'
 end
 
 group :development do

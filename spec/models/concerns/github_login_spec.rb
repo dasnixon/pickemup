@@ -17,7 +17,7 @@ describe GithubLogin do
   end
 
   describe '#set_user_github_information' do
-    let(:user) { FactoryGirl.build(:user, main_provider: nil, newly_created: nil) }
+    let(:user) { build(:user, main_provider: nil, newly_created: nil) }
     let(:github_account) { double(GithubAccount, from_omniauth: true) }
     before :each do
       expect(github_account).to receive(:from_omniauth)
@@ -40,8 +40,8 @@ describe GithubLogin do
   end
 
   describe '#check_and_remove_existing_github' do
-    let(:current_user) { FactoryGirl.create(:user) }
-    let(:invalid_user) { FactoryGirl.create(:user) }
+    let(:current_user) { create(:user) }
+    let(:invalid_user) { create(:user) }
     context 'existing github found' do
       context 'not same user' do
         before :each do
@@ -75,7 +75,7 @@ describe GithubLogin do
 
   describe '#update_github_information' do
     let(:user) { github_account.user }
-    let(:github_account) { FactoryGirl.create(:github_account) }
+    let(:github_account) { create(:github_account) }
     before :each do
       user.stub(:github_account).and_return(github_account)
       expect(github_account).to receive(:from_omniauth).with(generic_auth_github)
@@ -90,7 +90,7 @@ describe GithubLogin do
   end
 
   describe '#setup_github_account' do
-    let(:user) { FactoryGirl.create(:user, github_uid: nil) }
+    let(:user) { create(:user, github_uid: nil) }
     let(:github_account) { double(GithubAccount, from_omniauth: true) }
     before :each do
       user.stub(:build_github_account).and_return(github_account)
@@ -104,7 +104,7 @@ describe GithubLogin do
   end
 
   describe '#set_attributes_from_github' do
-    let(:user) { FactoryGirl.create(:user) }
+    let(:user) { create(:user) }
     before :each do
       expect(user).to receive(:save!)
     end

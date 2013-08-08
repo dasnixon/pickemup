@@ -38,29 +38,20 @@ class Linkedin < ActiveRecord::Base
     begin
       path = person_path(options)
       simple_query(path, {oauth2_access_token: self.token, format: 'json'})
-    rescue => e
+    rescue Exception => e
       logger.error "Linkedin #get_profile error #{e}"
-    end
-  end
-
-  #get a user's connections from linkedin using their oauth token
-  def get_connections(options={})
-    begin
-      path = "#{person_path(options)}/connections"
-      simple_query(path, {oauth2_access_token: self.token, format: 'json'})
-    rescue => e
-      logger.error "Linkedin #get_connections error #{e}"
     end
   end
 
   #update any information about a user that may have changed on linkedin so we
   #always stay up-to-date
   def update_linkedin
-    profile          = self.get_profile
-    self.headline    = profile['headline']
-    self.industry    = profile['industry']
-    self.profile_url = profile['publicProfileUrl']
-    self.save!
+    profile = self.get_profile
+    self.update_attributes(
+      headline: profile['headline'],
+      industry: profile['industry'],
+      profile_url: profile['publicProfileUrl']
+    )
     self.profile.from_omniauth(profile) if self.profile.present?
   end
 

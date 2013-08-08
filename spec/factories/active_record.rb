@@ -2,34 +2,34 @@ FactoryGirl.define do
   factory :user do
     github_uid    { generate(:guid) }
     linkedin_uid  { generate(:guid) }
-    email         { generate(:email) }
-    name          { generate(:name) }
-    location      'San Francisco'
+    email         { Faker::Internet.email }
+    name          { Faker::Name.name }
+    location      { "#{Faker::Address.city}, #{Faker::AddressUS.state}" }
     main_provider 'github'
-    profile_image 'http://www.dumpaday.com/wp-content/uploads/2011/04/Random-Funny-Photos-Part-132_14-2.jpg'
-    description   'He is a developer'
+    profile_image { Faker::Internet.http_url }
+    description   { Faker::Lorem.sentences.join(' ') }
   end
 
   factory :company do
-    name          { generate(:name) }
-    email         { generate(:email) }
+    name          { Faker::Company.name }
+    email         { Faker::Internet.email }
     password      { generate(:guid) }
-    description   'This is a company'
-    website       'http://company.com'
-    industry      'Sex'
+    description   { Faker::Lorem.sentences.join(' ') }
+    website       { Faker::Internet.http_url }
+    industry      { Faker::Lorem.word }
     num_employees 10
   end
 
   factory :github_account do
     user
-    nickname           { generate(:name) }
+    nickname           { Faker::Name.name }
     hireable           true
-    bio                'Balls hard on code all day playa'
+    bio                { Faker::Lorem.sentences.join(' ') }
     public_repos_count 10
     number_followers   10
     number_following   10
     number_gists       10
-    blog               'http://blog.com'
+    blog               { Faker::Internet.http_url }
     token              { generate(:guid) }
     github_account_key { generate(:guid) }
     uid                { generate(:guid) }
@@ -37,11 +37,11 @@ FactoryGirl.define do
 
   factory :education do
     profile
-    activities     'Chess club fa sho'
-    degree         'Computer Engineering'
-    field_of_study 'Engineering'
-    notes          'Some notes'
-    school_name    { generate(:name) }
+    activities     { Faker::Lorem.sentences.join(' ') }
+    degree         { Faker::Education.degree }
+    field_of_study { Faker::Education.major }
+    notes          { Faker::Lorem.sentences.join(' ') }
+    school_name    { Faker::Education.school_name }
     start_year     { '2013' }
     end_year       { '2018' }
     education_key  { generate(:guid) }
@@ -51,52 +51,52 @@ FactoryGirl.define do
     linkedin
     number_connections  10
     number_recommenders 10
-    summary             'My profile is cool'
+    summary             { Faker::Lorem.sentences.join(' ') }
     skills              ['Ruby', 'Ruby on Rails']
   end
 
   factory :linkedin do
     user
     token       { generate(:guid) }
-    headline    'Baller Developer'
-    industry    'Computer Software'
+    headline    { Faker::Lorem.sentence }
+    industry    { Faker::Lorem.word }
     uid         { generate(:guid) }
-    profile_url 'https://linkedin.com'
+    profile_url { Faker::Internet.http_url }
   end
 
   factory :organization do
     github_account
-    name               { generate(:name) }
-    logo               'logo'
-    url                { 'http://organization.com' }
+    name               { Faker::Name.name }
+    logo               { Faker::Lorem.word }
+    url                { Faker::Internet.http_url }
     organization_key   { generate(:guid) }
-    location           { generate(:name) }
+    location           { "#{Faker::Address.city}, #{Faker::AddressUS.state}" }
     number_followers   10
     number_following   10
-    blog               'http://blog.com'
+    blog               { Faker::Internet.http_url }
     public_repos_count 10
-    company_type       'Organization'
+    company_type       { Faker::Lorem.word }
   end
 
   factory :position do
     profile
-    industry     'Information Technology and Services'
-    company_type 'Privately Held'
-    name         { generate(:name) }
+    industry     { Faker::Lorem.words }
+    company_type { Faker::Lorem.words }
+    name         { Faker::Company.name }
     size         '201-500 employees'
     company_key  { generate(:guid) }
     is_current   true
-    title        'Software Engineer'
-    summary      'Doing work son'
+    title        { Faker::Company.position }
+    summary      { Faker::Lorem.sentences.join(' ') }
     start_year   '2012'
     start_month  '7'
   end
 
   factory :repo do
     github_account
-    name           { generate(:name) }
-    description    'This is a repository'
-    url            'https://github.com'
+    name           { Faker::Name.name }
+    description    { Faker::Lorem.sentences.join(' ') }
+    url            { Faker::Internet.http_url }
     language       'Ruby'
     number_forks    5
     number_watchers 5
@@ -111,12 +111,12 @@ FactoryGirl.define do
     user
     token             { generate(:guid) }
     uid               { generate(:guid) }
-    profile_url       'http://stackoverflow.com'
+    profile_url       { Faker::Internet.http_url }
     repuation         100
     age               42
     badges            { { 'gold' => '0', 'bronze' => '0', 'silver' => '0' } }
-    display_name      { generate(:name) }
-    nickname          { generate(:name) }
+    display_name      { Faker::Name.name }
+    nickname          { Faker::Name.name }
     stackexchange_key { generate(:guid) }
   end
 end

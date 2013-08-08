@@ -42,7 +42,7 @@ describe Education do
         }
       end
       context 'initialization' do
-        let(:profile) { FactoryGirl.create(:profile) }
+        let(:profile) { create(:profile) }
         it 'initializes and updates education with auth data' do
           Education.from_omniauth(auth, profile.id)
           education = Education.first
@@ -56,7 +56,7 @@ describe Education do
         end
       end
       context 'find' do
-        let(:education) { FactoryGirl.create(:education) }
+        let(:education) { create(:education) }
         let(:profile)   { education.profile }
         before :each do
           Education.stub(:find_or_initialize_by).and_return(education)

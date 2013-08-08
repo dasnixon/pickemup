@@ -3,10 +3,8 @@ module LinkedinLogin
 
   def set_user_linkedin_information(auth)
     self.newly_created = true
-    unless self.main_provider.present?
-      self.main_provider = 'linkedin'
-      self.set_attributes_from_linkedin(auth)
-    end
+    self.main_provider = 'linkedin'
+    self.set_attributes_from_linkedin(auth)
     self.build_linkedin.from_omniauth(auth)
   end
 
