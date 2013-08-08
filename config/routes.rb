@@ -32,6 +32,7 @@ Pickemup::Application.routes.draw do
   end
   get '/companies/validate_company', to: "companies#validate_company"
   resources :companies, except: [:new] do
+    match '/purchase_options' => 'subscriptions#purchase_options', via: [ :get ]
     get :get_users
     resources :conversations do
       member do
