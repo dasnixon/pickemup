@@ -7,7 +7,7 @@
       .control-group
         = label_tag 'Subscription Plan:', nil, class: 'control-label'
         .controls
-          = select_tag :plan, options_for_select([['Plan 1 - $20.00/month', 1], ['Plan 2 - $50.00/month', 2], ['Plan 3 - $100.00/month', 3]], :selected => @subscription.plan)
+          = select_tag :plan, options_for_select(plans, :selected => @subscription.plan)
 
       - if @subscription.active
         .control-group
