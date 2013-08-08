@@ -1,10 +1,11 @@
 require 'subscription_handler'
 class SubscriptionsController < ApplicationController
   before_filter :find_company
-  before_filter :get_credentials, except: [:listener, :new, :create, :edit_card]
+  before_filter :get_credentials, only: [:edit, :update]
 
   def new
     @subscription = Subscription.new
+    @clicked_option = params[:clicked_option]
   end
 
   def create
@@ -27,11 +28,12 @@ class SubscriptionsController < ApplicationController
     end
     if params[:plan] != @subscription.plan
       @customer.update_subscription(:plan => params[:plan])
-      @subscription.plan = params[:plan]
+      @subscription.update_plan(params[:plan])
     end
     if params[:reactivate_subscription] == "true"
-      @customer.update_subscription(:plan => params[:plan])
-      @subscription.plan = params[:plan]
+      new_plan = param[:plan]
+      @customer.update_subscription(:plan => new_plan)
+      @subscription.update_plan(new_plan)
       @subscription.active = true
     end
     if @customer.save && @subscription.save_update
@@ -62,6 +64,9 @@ class SubscriptionsController < ApplicationController
     else
       render :status => 500
     end
+  end
+
+  def purchase_options
   end
 
   private
