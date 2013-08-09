@@ -58,9 +58,9 @@ class Preference < ActiveRecord::Base
   end
 
   def get_preference_defaults
-    %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills).inject(self.default_hash) do |default_hash, attr|
-      default_hash[attr] = get_attr_values(attr)
-      default_hash
+    %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills).inject(self.default_hash) do |preferences, attr|
+      preferences[attr] = get_attr_values(attr)
+      preferences
     end
   end
 
@@ -90,18 +90,23 @@ class Preference < ActiveRecord::Base
 
   def self.cleanup_invalid_data(params)
     %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills).each do |attr|
-      unless params.has_key?(attr) && params[attr] && params[attr].is_a?(Array)
+      next unless params.has_key?(attr)
+      unless params[attr].is_a?(Array)
         params.delete(attr)
         next
       end
-      params[attr] = params[attr].reject do |attributes|
-        !(attributes.has_key?('checked') && attributes.has_key?('name')) ||
-          attributes.keys.length > 2 ||
-          ![TrueClass, FalseClass].include?(attributes['checked'].class) ||
-          !attributes['checked']
-      end
+      params[attr] = reject_attrs(params[attr])
       params[attr].collect! { |attrs| attrs['name'] }
     end
     params
+  end
+
+  def self.reject_attrs(param)
+    param.reject do |attributes|
+      !(attributes.has_key?('checked') && attributes.has_key?('name')) ||
+        attributes.keys.length > 2 ||
+        ![TrueClass, FalseClass].include?(attributes['checked'].class) ||
+        !attributes['checked']
+    end
   end
 end

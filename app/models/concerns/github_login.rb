@@ -25,7 +25,7 @@ module GithubLogin
   def setup_github_account(auth)
     self.check_and_remove_existing_github(auth.uid)
     self.build_github_account.from_omniauth(auth)
-    self.update_attributes(github_uid: auth.uid)
+    self.update(github_uid: auth.uid)
   end
 
   #set attributes from the github auth information on the user

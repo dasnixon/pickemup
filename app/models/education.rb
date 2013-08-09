@@ -29,7 +29,7 @@ class Education < ActiveRecord::Base
       Education.remove_educations(profile['educations']['values'], education_keys) if education_keys.present?
       profile['educations']['values'].each do |education|
         edu = Education.find_or_initialize_by(education_key: education['id'].to_s, profile_id: pro_id)
-        edu.update_attributes(
+        edu.update(
           activities:     education['activities'],
           degree:         education['degree'],
           field_of_study: education['fieldOfStudy'],

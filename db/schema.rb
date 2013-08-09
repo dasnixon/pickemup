@@ -169,7 +169,7 @@ ActiveRecord::Schema.define(version: 20130808022540) do
     t.string   "company_type"
     t.string   "name"
     t.string   "size"
-    t.string   "company_key"
+    t.string   "position_key"
     t.boolean  "is_current"
     t.string   "title"
     t.text     "summary"
@@ -180,7 +180,7 @@ ActiveRecord::Schema.define(version: 20130808022540) do
     t.datetime "updated_at"
   end
 
-  add_index "positions", ["company_key"], name: "index_positions_on_company_key", using: :btree
+  add_index "positions", ["position_key"], name: "index_positions_on_position_key", using: :btree
 
   create_table "preferences", force: true do |t|
     t.boolean  "healthcare",             default: false

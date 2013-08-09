@@ -94,7 +94,7 @@ describe LinkedinLogin do
     let(:linkedin) { double(Linkedin, from_omniauth: true) }
     before :each do
       user.stub(:build_linkedin).and_return(linkedin)
-      expect(user).to receive(:update_attributes).with({linkedin_uid: '123456789'})
+      expect(user).to receive(:update).with({linkedin_uid: '123456789'})
       expect(linkedin).to receive(:from_omniauth).with(generic_auth_linkedin)
       expect(user).to receive(:check_and_remove_existing_linkedin).with(generic_auth_linkedin.uid)
     end

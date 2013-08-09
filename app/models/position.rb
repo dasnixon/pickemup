@@ -7,7 +7,7 @@
 #  company_type :string(255)
 #  name         :string(255)
 #  size         :string(255)
-#  company_key  :string(255)
+#  position_key :string(255)
 #  is_current   :boolean
 #  title        :string(255)
 #  summary      :text
@@ -30,8 +30,8 @@ class Position < ActiveRecord::Base
       Position.remove_positions(profile['positions']['values'], position_keys) if position_keys.present?
       profile['positions']['values'].each do |position|
         company_info = position['company']
-        pos = Position.find_or_initialize_by_company_key_and_profile_id(company_info['id'].to_s, id)
-        pos.update_attributes(
+        pos = Position.find_or_initialize_by(position_key: company_info['id'].to_s, profile_id: id)
+        pos.update(
           industry:      company_info['industry'],
           name:          company_info['name'],
           size:          company_info['size'],
@@ -50,7 +50,7 @@ class Position < ActiveRecord::Base
   #the user's linkedin positions so we always have up-to-date information
   def self.remove_positions(positions, position_keys)
     (position_keys - positions.collect { |pos| pos['company']['id'].to_s }).each do |diff_id|
-      Position.where(company_key: diff_id).first.try(:destroy)
+      Position.where(position_key: diff_id).first.try(:destroy)
     end
   end
 end

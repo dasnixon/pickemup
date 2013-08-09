@@ -43,16 +43,16 @@ describe Education do
       end
       context 'initialization' do
         let(:profile) { create(:profile) }
+        context 'calls update' do
+          before :each do
+            Education.any_instance.should_receive(:update).once
+          end
+          it 'initializes and updates education with auth data' do
+            Education.from_omniauth(auth, profile.id)
+          end
+        end
         it 'initializes and updates education with auth data' do
-          Education.from_omniauth(auth, profile.id)
-          education = Education.first
-          education.activities.should == 'activities'
-          education.degree.should == 'degree'
-          education.field_of_study.should == 'field of study'
-          education.notes.should == 'notes'
-          education.school_name.should == 'school name'
-          education.start_year.should == '2011'
-          education.end_year.should == '2015'
+          expect { Education.from_omniauth(auth, profile.id) }.to change(Education, :count).by(1)
         end
       end
       context 'find' do

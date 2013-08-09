@@ -47,7 +47,7 @@ class Linkedin < ActiveRecord::Base
   #always stay up-to-date
   def update_linkedin
     profile = self.get_profile
-    self.update_attributes(
+    self.update(
       headline: profile['headline'],
       industry: profile['industry'],
       profile_url: profile['publicProfileUrl']

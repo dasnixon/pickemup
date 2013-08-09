@@ -31,8 +31,8 @@ class Repo < ActiveRecord::Base
   def self.from_omniauth(repos, github_id, repo_keys=nil)
     Repo.remove_repos(repos, repo_keys) if repo_keys.present?
     repos.each do |repo|
-      found_repo = Repo.find_or_initialize_by_repo_key_and_github_account_id(repo.id.to_s, github_id)
-      found_repo.update_attributes(
+      found_repo = Repo.find_or_initialize_by(repo_key: repo.id.to_s, github_account_id: github_id)
+      found_repo.update(
         name:            repo.name,
         description:     repo.description,
         private:         repo.private,

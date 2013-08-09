@@ -94,7 +94,7 @@ describe GithubLogin do
     let(:github_account) { double(GithubAccount, from_omniauth: true) }
     before :each do
       user.stub(:build_github_account).and_return(github_account)
-      expect(user).to receive(:update_attributes).with({github_uid: '123456789'})
+      expect(user).to receive(:update).with({github_uid: '123456789'})
       expect(github_account).to receive(:from_omniauth).with(generic_auth_github)
       expect(user).to receive(:check_and_remove_existing_github).with(generic_auth_github.uid)
     end

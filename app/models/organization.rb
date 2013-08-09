@@ -54,13 +54,13 @@ class Organization < ActiveRecord::Base
     end
   end
 
-  #uses carrierwave/fog to save the user's organization logo from github to S3
+  #uses carrierwave/fog to :ave the user's organization logo from github to S3
   def set_organization_logo(image_url)
     begin
       self.remote_logo_url = image_url
       self.save!
-    rescue => e
-      error.logger "Creating logo S3 error for github organization #{e}"
+    rescue Exception => e
+      logger.error "Creating logo S3 error for github organization #{e}"
     end
   end
 end

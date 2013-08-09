@@ -33,6 +33,6 @@ module LinkedinLogin
   def setup_linkedin_account(auth)
     self.check_and_remove_existing_linkedin(auth.uid)
     self.build_linkedin.from_omniauth(auth)
-    self.update_attributes(linkedin_uid: auth.uid)
+    self.update(linkedin_uid: auth.uid)
   end
 end

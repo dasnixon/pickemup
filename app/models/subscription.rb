@@ -11,6 +11,7 @@
 #  email                 :string(255)
 #  created_at            :datetime
 #  updated_at            :datetime
+#  started_at            :datetime
 #
 
 class Subscription < ActiveRecord::Base

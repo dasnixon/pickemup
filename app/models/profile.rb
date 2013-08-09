@@ -23,12 +23,12 @@ class Profile < ActiveRecord::Base
   #set information from omniauth from a user's linkedin api profile and also
   #setup a user's positions and educations
   def from_omniauth(profile=nil)
-    profile                  = self.linkedin.get_profile unless profile.present?
-    self.summary             = profile['summary']
-    self.number_connections  = profile['numConnections']
-    self.number_recommenders = profile['numRecommenders']
-    self.skills              = self.class.get_skills(profile)
-    self.save!
+    profile = self.linkedin.get_profile unless profile.present?
+    self.update(
+      summary: profile['summary'],
+      number_connections: profile['numConnections'],
+      number_recommenders: profile['numRecommenders'],
+      skills: self.class.get_skills(profile))
     Position.from_omniauth(profile, self.id, self.collected_position_keys)
     Education.from_omniauth(profile, self.id, self.collected_education_keys)
   end
@@ -37,7 +37,7 @@ class Profile < ActiveRecord::Base
   #determine which positions that are in our system have been removed from
   #linkedin's system
   def collected_position_keys
-    self.positions.collect { |pos| pos.company_key }
+    self.positions.collect { |pos| pos.position_key }
   end
 
   #get a collection of all the education keys from linkedin so that we can

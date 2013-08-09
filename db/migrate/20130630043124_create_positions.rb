@@ -5,7 +5,7 @@ class CreatePositions < ActiveRecord::Migration
       t.string     :company_type
       t.string     :name
       t.string     :size
-      t.string     :company_key
+      t.string     :position_key
       t.boolean    :is_current
       t.string     :title
       t.text       :summary
@@ -15,6 +15,6 @@ class CreatePositions < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :positions, :company_key
+    add_index :positions, :position_key
   end
 end

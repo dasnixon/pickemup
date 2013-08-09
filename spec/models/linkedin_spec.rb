@@ -49,7 +49,7 @@ describe Linkedin do
     end
     before :each do
       linkedin.stub(:get_profile).and_return(update_information)
-      expect(linkedin).to receive(:update_attributes).with({headline: 'headline', industry: 'industry', profile_url: 'url'}) { true }
+      expect(linkedin).to receive(:update).with({headline: 'headline', industry: 'industry', profile_url: 'url'}) { true }
     end
     context 'user has profile associated with linkedin' do
       let(:profile) { create(:profile, linkedin: linkedin) }

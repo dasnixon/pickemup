@@ -29,22 +29,23 @@ class Stackexchange < ActiveRecord::Base
   #the initial creation of a user's stackexchange account from their auth
   #information when they agree to link
   def from_omniauth(auth)
-    self.uid               = auth.uid
-    self.nickname          = auth.info.nickname
-    self.token             = auth.credentials.token
-    self.profile_url       = auth.info.urls.stackoverflow
-    self.reputation        = auth.extra.raw_info.reputation
-    self.age               = auth.extra.raw_info.age
-    self.badges            = auth.extra.raw_info.badge_counts
-    self.display_name      = auth.extra.raw_info.display_name
-    self.stackexchange_key = auth.extra.raw_info.user_id
-    self.save!
+    self.update(
+      uid:               auth.uid,
+      nickname:          auth.info.nickname,
+      token:             auth.credentials.token,
+      profile_url:       auth.info.urls.stackoverflow,
+      reputation:        auth.extra.raw_info.reputation,
+      age:               auth.extra.raw_info.age,
+      badges:            auth.extra.raw_info.badge_counts,
+      display_name:      auth.extra.raw_info.display_name,
+      stackexchange_key: auth.extra.raw_info.user_id
+    )
   end
 
   #update information that could change from a user's stackoverflow account
   def update_stackexchange
     stackexchange_info = get_stackexchange_user
-    self.update_attributes(
+    self.update(
       display_name:  stackexchange_info.display_name,
       reputation:    stackexchange_info.reputation,
       age:           stackexchange_info.age,
@@ -61,7 +62,7 @@ class Stackexchange < ActiveRecord::Base
   def get_stackexchange_user
     begin
       initialize_stackexchange.user
-    rescue => e
+    rescue Exception => e
       logger.error "Stackexchange #get_stackexchange_user error #{e}"
     end
   end

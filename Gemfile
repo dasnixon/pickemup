@@ -83,6 +83,7 @@ group :production do
 end
 
 group :test do
+  gem 'timecop'
   gem 'factory_girl_rails'
   gem 'pry' #debugging
   gem 'shoulda-matchers'

@@ -13,7 +13,7 @@ FactoryGirl.define do
   factory :company do
     name          { Faker::Company.name }
     email         { Faker::Internet.email }
-    password      { generate(:guid) }
+    password      'thisisapassword'
     description   { Faker::Lorem.sentences.join(' ') }
     website       { Faker::Internet.http_url }
     industry      { Faker::Lorem.word }
@@ -80,11 +80,11 @@ FactoryGirl.define do
 
   factory :position do
     profile
-    industry     { Faker::Lorem.words }
-    company_type { Faker::Lorem.words }
+    industry     { Faker::Lorem.word }
+    company_type { Faker::Lorem.word }
     name         { Faker::Company.name }
     size         '201-500 employees'
-    company_key  { generate(:guid) }
+    position_key { generate(:guid) }
     is_current   true
     title        { Faker::Company.position }
     summary      { Faker::Lorem.sentences.join(' ') }
@@ -112,11 +112,15 @@ FactoryGirl.define do
     token             { generate(:guid) }
     uid               { generate(:guid) }
     profile_url       { Faker::Internet.http_url }
-    repuation         100
+    reputation        100
     age               42
     badges            { { 'gold' => '0', 'bronze' => '0', 'silver' => '0' } }
     display_name      { Faker::Name.name }
     nickname          { Faker::Name.name }
     stackexchange_key { generate(:guid) }
+  end
+
+  factory :preference do
+    user
   end
 end

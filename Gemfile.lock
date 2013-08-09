@@ -284,6 +284,7 @@ GEM
     thread_safe (0.1.2)
       atomic
     tilt (1.4.1)
+    timecop (0.6.3)
     timers (1.1.0)
     treetop (1.4.14)
       polyglot
@@ -349,6 +350,7 @@ DEPENDENCIES
   sinatra
   slim
   stripe
+  timecop
   uglifier
   unicorn
   whenever
