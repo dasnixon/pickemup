@@ -9,8 +9,8 @@ module LinkedinLogin
   end
 
   def check_and_remove_existing_linkedin(uid)
-    user = User.where(linkedin_uid: uid)
-    user.first.destroy if user.present? && self != user.first
+    user = User.find_by(linkedin_uid: uid)
+    user.destroy if user && self != user
   end
 
   def update_linkedin_information(auth)

@@ -45,7 +45,7 @@ describe GithubLogin do
     context 'existing github found' do
       context 'not same user' do
         before :each do
-          User.stub(:where).and_return([invalid_user])
+          User.stub(:find_by).and_return(invalid_user)
           expect(invalid_user).to receive(:destroy)
         end
         it 'destroys user record' do
@@ -54,7 +54,7 @@ describe GithubLogin do
       end
       context 'same user' do
         before :each do
-          User.stub(:where).and_return([current_user])
+          User.stub(:find_by).and_return(current_user)
           expect(invalid_user).to_not receive(:destroy)
         end
         it 'does not destroy user record' do

@@ -1,6 +1,6 @@
 require 'subscription_handler'
 class SubscriptionsController < ApplicationController
-  before_filter :find_company
+  before_filter :find_company, except: [:listener]
   before_filter :get_credentials, only: [:edit, :update]
 
   def new

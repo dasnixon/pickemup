@@ -3,44 +3,34 @@ require 'spec_helper'
 describe Education do
   it { should belong_to(:profile) }
 
+  let(:auth) { OpenStruct.new(educations: education_all) }
+  let(:education_all) do
+    OpenStruct.new(all: education_values, total: 1)
+  end
+  let(:education_values) do
+    [OpenStruct.new(
+      id: 'education_key',
+      activities: 'activities',
+      degree: 'degree',
+      field_of_study: 'field of study',
+      notes: 'notes',
+      school_name: 'school name',
+      start_date: OpenStruct.new(year: '2011'),
+      end_date: OpenStruct.new(year: '2015')
+    )]
+  end
+
   describe '#from_omniauth' do
     context 'no educations present' do
+      let(:education_all) { OpenStruct.new(all: {}, total: 0) }
       before :each do
-        Education.should_not_receive(:find_or_initialize_by)
+        Education.should_not_receive(:where)
       end
-      it 'does not call .find_or_initialize' do
-        Education.from_omniauth({}, 1).should be_nil
-      end
-    end
-    context 'no values key' do
-      before :each do
-        Education.should_not_receive(:find_or_initialize_by)
-      end
-      it 'does not call .find_or_initialize' do
-        Education.from_omniauth({'education' => {}}, 1).should be_nil
+      it 'does not call .where' do
+        Education.from_omniauth(auth, 1).should be_nil
       end
     end
     context 'new education' do
-      let(:auth) do
-        {
-          'educations' => {
-            'values' => [{
-              'id'             => 'education_key',
-              'activities'     => 'activities',
-              'degree'         => 'degree',
-              'fieldOfStudy'   => 'field of study',
-              'notes'          => 'notes',
-              'schoolName'     => 'school name',
-              'startDate'      => {
-                'year'         => '2011'
-              },
-              'endDate'        => {
-                'year'         => '2015'
-              }
-            }]
-          }
-        }
-      end
       context 'initialization' do
         let(:profile) { create(:profile) }
         context 'calls update' do
@@ -59,7 +49,7 @@ describe Education do
         let(:education) { create(:education) }
         let(:profile)   { education.profile }
         before :each do
-          Education.stub(:find_or_initialize_by).and_return(education)
+          Education.stub_chain(:where, :first_or_initialize).and_return(education)
         end
         it 'finds and updates education with auth data' do
           Education.from_omniauth(auth, profile.id)

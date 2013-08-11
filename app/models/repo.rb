@@ -31,7 +31,7 @@ class Repo < ActiveRecord::Base
   def self.from_omniauth(repos, github_id, repo_keys=nil)
     Repo.remove_repos(repos, repo_keys) if repo_keys.present?
     repos.each do |repo|
-      found_repo = Repo.find_or_initialize_by(repo_key: repo.id.to_s, github_account_id: github_id)
+      found_repo = Repo.where(repo_key: repo.id.to_s, github_account_id: github_id).first_or_initialize
       found_repo.update(
         name:            repo.name,
         description:     repo.description,
@@ -52,7 +52,7 @@ class Repo < ActiveRecord::Base
   #github anymore for a particular user
   def self.remove_repos(repos, repo_keys)
     (repo_keys - repos.collect { |repo| repo.id.to_s }).each do |diff_id|
-      Repo.where(repo_key: diff_id).first.try(:destroy)
+      Repo.find_by(repo_key: diff_id).try(:destroy)
     end
   end
 end

@@ -43,7 +43,7 @@ describe Repo do
       let(:repo) { create(:repo, github_account: github_account) }
       let(:repo_keys) { [repo.id] }
       before :each do
-        Repo.stub(:where).and_return([repo])
+        Repo.stub(:find_by).and_return(repo)
         expect(repo).to receive(:destroy)
       end
       it 'removes old repos' do
@@ -56,7 +56,7 @@ describe Repo do
     let(:repo) { create(:repo, github_account: github_account) }
     let(:repo_keys) { [repo.id] }
     before :each do
-      Repo.stub(:where).and_return([repo])
+      Repo.stub(:find_by).and_return(repo)
       expect(repo).to receive(:destroy)
     end
     it 'removes old repos' do

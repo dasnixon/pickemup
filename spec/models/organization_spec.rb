@@ -45,7 +45,7 @@ describe Organization do
         let(:org_keys) { user_orgs.collect { |o| o.id } + [org.organization_key] }
         let(:org) { create(:organization, github_account: github_account, organization_key: generate(:guid)) }
         before :each do
-          expect(Organization).to receive(:where).and_return([org])
+          Organization.stub(:find_by).and_return(org)
           expect(org).to receive(:destroy) { true }
         end
         it 'destroys an organization that has been removed on github' do
@@ -59,7 +59,8 @@ describe Organization do
     let(:org_keys) { user_orgs.collect { |o| o.id } + [org.organization_key] }
     let(:org) { create(:organization, github_account: github_account, organization_key: generate(:guid)) }
     before :each do
-      expect(Organization).to receive(:where).and_return([org])
+      Organization.stub_chain(:where, :first_or_initialize).and_return(org)
+      Organization.stub(:find_by).and_return(org)
       expect(org).to receive(:destroy) { true }
     end
     it 'removes any orgs that are in our system no longer on github' do

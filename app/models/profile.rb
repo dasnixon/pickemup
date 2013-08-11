@@ -25,10 +25,10 @@ class Profile < ActiveRecord::Base
   def from_omniauth(profile=nil)
     profile = self.linkedin.get_profile unless profile.present?
     self.update(
-      summary: profile['summary'],
-      number_connections: profile['numConnections'],
-      number_recommenders: profile['numRecommenders'],
-      skills: self.class.get_skills(profile))
+      summary: profile.summary,
+      number_connections: profile.num_connections,
+      number_recommenders: profile.num_recommenders,
+      skills: self.class.get_skills(profile.skills))
     Position.from_omniauth(profile, self.id, self.collected_position_keys)
     Education.from_omniauth(profile, self.id, self.collected_education_keys)
   end
@@ -48,12 +48,7 @@ class Profile < ActiveRecord::Base
   end
 
   #get all the skills from the linkedin api for a user
-  def self.get_skills(profile)
-    if profile['skills'].present?
-      profile['skills']['values'].inject([]) do |code_skills, collection|
-        code_skills << collection['skill']['name']
-        code_skills
-      end
-    end
+  def self.get_skills(skills)
+    skills.all.collect { |s| s.skill.name } if skills.total > 0
   end
 end

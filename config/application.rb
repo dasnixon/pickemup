@@ -54,5 +54,9 @@ module Pickemup
     config.assets.version = '1.0'
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif) #for bootstrap-sass
+
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance|
+      "#{html_tag}".html_safe
+    }
   end
 end

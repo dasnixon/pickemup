@@ -9,8 +9,8 @@ module GithubLogin
   end
 
   def check_and_remove_existing_github(uid)
-    user = User.where(github_uid: uid)
-    user.first.destroy if user.present? && self != user.first
+    user = User.find_by(github_uid: uid)
+    user.destroy if user && self != user
   end
 
   #update information for a persisted user (not a new user) including all their

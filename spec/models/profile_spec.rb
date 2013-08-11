@@ -6,18 +6,16 @@ describe Profile do
   it { should belong_to(:linkedin) }
 
   let(:profile_auth) do
-    { 'summary'         => Faker::Lorem.sentences.join(' '),
-      'numConnections'  => 99,
-      'numRecommenders' => 54,
-      'skills'          => skills
-    }
+    OpenStruct.new(
+      summary: Faker::Lorem.sentences.join(' '),
+      num_connections: 99,
+      num_recommenders: 54,
+      skills: skills
+    )
   end
 
   let(:skills) do
-    { 'values' =>
-      [{'skill' => {'name' => 'Ruby'}},
-       {'skill' => {'name' => 'Python'}}]
-    }
+    OpenStruct.new(total: 2, all: [OpenStruct.new(skill: OpenStruct.new(name: 'Ruby')), OpenStruct.new(skill: OpenStruct.new(name: 'Python'))])
   end
 
   let(:profile) { create(:profile) }
@@ -31,9 +29,9 @@ describe Profile do
     end
     it 'updates the profile with data from auth' do
       profile.from_omniauth
-      profile.summary.should == profile_auth['summary']
-      profile.number_connections.should == profile_auth['numConnections']
-      profile.number_recommenders.should == profile_auth['numRecommenders']
+      profile.summary.should == profile_auth.summary
+      profile.number_connections.should == profile_auth.num_connections
+      profile.number_recommenders.should == profile_auth.num_recommenders
       profile.skills.should =~ ['Ruby', 'Python']
     end
     context 'receives update' do
@@ -68,7 +66,7 @@ describe Profile do
 
   describe '.get_skills' do
     it 'returns an array of skills from auth' do
-      Profile.get_skills({'skills' => skills}).should =~ ['Ruby', 'Python']
+      Profile.get_skills(skills).should =~ ['Ruby', 'Python']
     end
   end
 end

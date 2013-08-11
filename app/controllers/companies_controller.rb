@@ -4,18 +4,14 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    unless params[:company][:email].blank? || params[:company][:password].blank? || params[:company][:password_confirmation].blank?
-      @company.founded = Time.now
-      if @company.save
-        Notifier.new_company_confirmation(@company).deliver
-        session[:company_id] = @company.id
-        redirect_to company_purchase_options_path(:company_id => @company.id), notice: "You've just created a new company.  You will receive an email to verify your account in a moment."
-      else
-        @company.errors.messages.each { |error, message| flash[:error] = message.join(', ') }
-        redirect_to :back
-      end
+    @company.founded = Time.now
+    if @company.save
+      Notifier.new_company_confirmation(@company).deliver
+      session[:company_id] = @company.id
+      redirect_to company_purchase_options_path(:company_id => @company.id), notice: "You've just created a new company.  You will receive an email to verify your account in a moment."
     else
-      redirect_to sign_up_path, error: @company.errors.messages
+      flash[:error] = @company.clean_error_messages
+      render 'sessions/sign_up'
     end
   end
 

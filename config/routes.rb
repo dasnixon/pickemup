@@ -30,9 +30,9 @@ Pickemup::Application.routes.draw do
     end
     resources :messages, except: [:edit, :update, :destroy]
   end
-  get '/companies/validate_company', to: "companies#validate_company"
   resources :companies, except: [:new] do
-    match '/purchase_options' => 'subscriptions#purchase_options', via: [ :get ]
+    get :validate_company
+    get :purchase_options, to: 'subscriptions#purchase_options'
     get :get_users
     resources :conversations do
       member do
@@ -61,7 +61,7 @@ Pickemup::Application.routes.draw do
     end
   end
   post "/company_log_in" => "sessions#company"
-  match '/subscriptions_listener' => 'subscriptions#listener', :via => [ :post, :get ]
+  match '/subscriptions_listener' => 'subscriptions#listener', via: :all
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
 end

@@ -14,7 +14,9 @@
 #
 
 class Linkedin < ActiveRecord::Base
-  include LinkedinApi
+  PROFILE_FIELDS = %w(summary positions languages num-connections industry
+    skills certifications educations num-recommenders interests email-address
+    first-name last-name headline public-profile-url)
 
   attr_accessible :token, :headline, :industry,
     :uid, :profile_url
@@ -34,10 +36,9 @@ class Linkedin < ActiveRecord::Base
   end
 
   #get a user's profile information from linkedin using their oauth token
-  def get_profile(options={})
+  def get_profile
     begin
-      path = person_path(options)
-      simple_query(path, {oauth2_access_token: self.token, format: 'json'})
+      client.profile(fields: PROFILE_FIELDS)
     rescue Exception => e
       logger.error "Linkedin #get_profile error #{e}"
     end
@@ -48,14 +49,18 @@ class Linkedin < ActiveRecord::Base
   def update_linkedin
     profile = self.get_profile
     self.update(
-      headline: profile['headline'],
-      industry: profile['industry'],
-      profile_url: profile['publicProfileUrl']
+      headline: profile.headline,
+      industry: profile.industry,
+      profile_url: profile.public_profile_url
     )
     self.profile.from_omniauth(profile) if self.profile.present?
   end
 
   private
+
+  def client
+    @client ||= LinkedIn::Client.new(ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET'], self.token)
+  end
 
   def grab_user_information
     LinkedinWorker.perform_async(self.id)

@@ -39,11 +39,11 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user?(user)
-    current_user == user
+    user_signed_in? && current_user == user
   end
 
   def current_company?(company)
-    current_company == company
+    company_signed_in? && current_company == company
   end
 
   def current_company

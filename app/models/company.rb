@@ -36,25 +36,29 @@ class Company < ActiveRecord::Base
 
   before_save :encrypt_password
   before_update :clean_url, if: :website_changed? #TODO fix this validation
+  after_create :process_sign_up
 
-  validates_confirmation_of :password, message: "Password/Password Confirmation is invalid"
-  validates_presence_of :password, on: :create
+  validates :password, confirmation: { message: 'Password/Password Confirmation is invalid' }
+  validates :password, presence: true, on: :create
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
+  validates :name, presence: true, uniqueness: true
   validate :password_strength, on: :create
-  validates :name, presence: true
 
   has_one :subscription
   has_many :job_listings
   has_many :tech_stacks
-  after_create :process_sign_up
 
-
-  def process_sign_up
-    CrunchbaseWorker.perform_async(self.id)
-  end
 
   def get_logo
     self.logo.present? ? self.logo : 'default_logo.png'
+  end
+
+  def clean_error_messages
+    error_message = self.errors.messages.inject([]) do |clean_message, (error, message)|
+      clean_message << "#{error.capitalize} #{message.join(' ')}"
+      clean_message
+    end
+    error_message.to_sentence(two_words_connector: ' and ', last_word_connector: ', and ')
   end
 
   #Uses the crunchbase api to pre-populate information regarding companies
@@ -70,7 +74,7 @@ class Company < ActiveRecord::Base
       self.tags = info.tags
       self.logo = "http://crunchbase.com/#{info.image.first.flatten[-1]}" if info.image
       self.competitors = info.competitions.map { |company| company["competitor"]["name"] } if info.competitions
-    rescue => e
+    rescue Exception => e
       logger.error "Company #get_crunchbase_info error #{e}"
     ensure
       self.save
@@ -87,7 +91,7 @@ class Company < ActiveRecord::Base
   end
 
   def self.authenticate(email, password)
-    company = find_by_email(email)
+    company = find_by(email: email)
     if company && company.password_hash == BCrypt::Engine.hash_secret(password, company.password_salt)
       company
     else
@@ -95,10 +99,16 @@ class Company < ActiveRecord::Base
     end
   end
 
+  private
+
   def encrypt_password
     if password.present?
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
     end
+  end
+
+  def process_sign_up
+    CrunchbaseWorker.perform_async(self.id)
   end
 end

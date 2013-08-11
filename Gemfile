@@ -35,11 +35,11 @@ gem 'sinatra'
 gem 'slim'
 
 #APIs
-gem 'linkedin'
 gem 'github_api'
 gem 'serel', git: 'git://github.com/liamneesonsarm/serel.git' #stackoverflow may need to switch back to original if gets updated properly
 gem 'stripe'
 gem 'crunchbase'
+gem 'linkedin-oauth2'
 
 #AUTHENTICATION
 gem 'oauth2'
@@ -82,14 +82,18 @@ group :production do
   gem 'rails_12factor'
 end
 
+group :test, :development do
+  gem 'pry' #debugging
+end
+
 group :test do
   gem 'timecop'
   gem 'factory_girl_rails'
-  gem 'pry' #debugging
   gem 'shoulda-matchers'
   gem 'rspec-rails'
   gem 'fuubar'
   gem 'ffaker'
+  gem 'rspec-sidekiq'
 end
 
 group :development do

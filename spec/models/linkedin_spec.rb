@@ -45,7 +45,7 @@ describe Linkedin do
   describe '#update_linkedin' do
     let(:linkedin) { create(:linkedin) }
     let(:update_information) do
-      {'headline' => 'headline', 'industry' => 'industry', 'publicProfileUrl' => 'url'}
+      OpenStruct.new(headline: 'headline', industry: 'industry', public_profile_url: 'url')
     end
     before :each do
       linkedin.stub(:get_profile).and_return(update_information)

@@ -25,18 +25,18 @@ class Education < ActiveRecord::Base
 
   #CRUD operations for a user's linkedin educations
   def self.from_omniauth(profile, pro_id, education_keys=nil)
-    if profile['educations'] && profile['educations'].has_key?('values')
-      Education.remove_educations(profile['educations']['values'], education_keys) if education_keys.present?
-      profile['educations']['values'].each do |education|
-        edu = Education.find_or_initialize_by(education_key: education['id'].to_s, profile_id: pro_id)
+    if profile.educations.total > 0
+      Education.remove_educations(profile.educations.all, education_keys) if education_keys.present?
+      profile.educations.all.each do |education|
+        edu = Education.where(education_key: education.id.to_s, profile_id: pro_id).first_or_initialize
         edu.update(
-          activities:     education['activities'],
-          degree:         education['degree'],
-          field_of_study: education['fieldOfStudy'],
-          notes:          education['notes'],
-          school_name:    education['schoolName'],
-          start_year:     education['startDate']['year'],
-          end_year:       education['endDate']['year']
+          activities:     education.activities,
+          degree:         education.degree,
+          field_of_study: education.field_of_study,
+          notes:          education.notes,
+          school_name:    education.school_name,
+          start_year:     education.start_date.year,
+          end_year:       education.end_date.year
         )
       end
     end
@@ -45,8 +45,8 @@ class Education < ActiveRecord::Base
   #Remove any educations from our system that were removed from a user's
   #linkedin profile so that we stay up-to-date with the latest information
   def self.remove_educations(educations, education_keys)
-    (education_keys - educations.collect { |edu| edu['id'].to_s }).each do |diff_id|
-      Education.where(education_key: diff_id).first.try(:destroy)
+    (education_keys - educations.collect { |edu| edu.id.to_s }).each do |diff_id|
+      Education.find_by(education_key: diff_id).try(:destroy)
     end
   end
 end

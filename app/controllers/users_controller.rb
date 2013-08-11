@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     @job_listings = @user.mailbox.sentbox.collect do |conv|
       listing = JobListing.find(conv.job_listing_id)
       company = listing.company
-      {listing: listing, company: company, conversation: conv}
+      OpenStruct.new(listing: listing, company: company, conversation: conv)
     end
   end
 
@@ -42,7 +42,7 @@ class UsersController < ApplicationController
   def update_preference
     preference = @user.preference
     if preference.update_attributes(@bathed_preferences)
-      respond_with(preference)
+      respond_with preference
     else
       render json: { errors: preference.errors }, status: :bad_request
     end

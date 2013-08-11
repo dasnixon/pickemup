@@ -10,6 +10,53 @@ FactoryGirl.define do
     description   { Faker::Lorem.sentences.join(' ') }
   end
 
+  factory :conversation do
+    job_listing
+    subject { Faker::Lorem.sentences.join(' ') }
+  end
+
+  factory :job_listing do
+    company
+    job_title { Faker::Lorem.word }
+    job_description { Faker::Lorem.sentences.join(' ') }
+    salary_range_high 100000
+    salary_range_low 50000
+    vacation_days 15
+    equity { Faker::Lorem.word }
+    bonuses  { Faker::Lorem.word }
+    remote   false
+    hiring_time 2
+    location { Faker::Lorem.word }
+    sponsorship_available true
+    estimated_work_hours 40
+    active true
+    experience_level PreferenceConstants::EXPERIENCE_LEVEL.shuffle[0..2]
+    perks PreferenceConstants::PERKS.shuffle[0..2]
+    practices PreferenceConstants::PRACTICES.shuffle[0..2]
+    special_characteristics [PreferenceConstants::SPECIAL_CHARACTERISTICS.shuffle.first]
+    position_type PreferenceConstants::POSITION_TYPE.shuffle[0..1]
+    acceptable_languages PreferenceConstants::ACCEPTABLE_LANGUAGES.shuffle[0..2]
+    trait :unsponsored do
+      sponsorship_available false
+    end
+    trait :inactive do
+      active false
+    end
+    trait :remote do
+      remote true
+    end
+    trait :full_benefits do
+      healthcare true
+      dental true
+      vision true
+      life_insurance true
+      retirement true
+    end
+    trait :parttime do
+      fulltime false
+    end
+  end
+
   factory :company do
     name          { Faker::Company.name }
     email         { Faker::Internet.email }

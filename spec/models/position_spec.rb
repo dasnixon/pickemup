@@ -6,25 +6,25 @@ describe Position do
   let(:profile) { create(:profile) }
 
   let(:company) do
-    { 'industry' => Faker::Lorem.word,
-      'name'     => Faker::Company.name,
-      'size'     => Faker::Lorem.word,
-      'type'     => Faker::Lorem.word,
-      'id'       => generate(:guid) }
+    OpenStruct.new(
+      industry: Faker::Lorem.word,
+      name:     Faker::Company.name,
+      size:     Faker::Lorem.word,
+      type:     Faker::Lorem.word,
+      id:       generate(:guid)
+    )
   end
-  let(:position) do
-    { 'summary' => Faker::Lorem.sentences.join(' '),
-      'isCurrent' => true,
-      'startDate' =>
-        { 'year' => '2012',
-          'month' => '10'
-        },
-      'title' => Faker::Company.position }
+  let(:positions) do
+    [OpenStruct.new(
+      company: company,
+      summary: Faker::Lorem.sentences.join(' '),
+      is_current: true,
+      start_date: OpenStruct.new(year: '2012', month: '10'),
+      title: Faker::Company.position
+    )]
   end
 
-  let(:profile_auth) do
-    {'positions' => { 'values' => [position.merge('company' => company)] }}
-  end
+  let(:profile_auth) { OpenStruct.new(positions: OpenStruct.new(all: positions, total: 1)) }
 
   describe '.from_omniauth' do
     context 'valid auth data' do
@@ -40,7 +40,7 @@ describe Position do
         end
         before :each do
           expect(ar_position).to receive(:destroy) { true }
-          expect(Position).to receive(:where).and_return([ar_position])
+          expect(Position).to receive(:find_by).and_return(ar_position)
         end
         it 'removes any keys that should be removed' do
           expect { Position.from_omniauth(profile_auth, profile.id, position_keys) }.to change(Position, :count).by(1)
@@ -48,11 +48,9 @@ describe Position do
       end
     end
     context 'invalid auth data' do
-      let(:invalid_auth_data) do
-        { 'positions' => nil }
-      end
+      let(:invalid_auth_data) { OpenStruct.new(positions: OpenStruct.new(all: {}, total: 0)) }
       it 'does nothing' do
-        expect { Position.from_omniauth(invalid_auth_data, profile.id) }.to_not change(Position, :count).by(1)
+        expect { Position.from_omniauth(invalid_auth_data, profile.id) }.to change(Position, :count).by(0)
       end
     end
   end
@@ -64,8 +62,8 @@ describe Position do
     end
     it 'destroys records removed from linkedin profile' do
       expect(ar_position).to receive(:destroy) { true }
-      expect(Position).to receive(:where).and_return([ar_position])
-      Position.remove_positions(profile_auth['positions']['values'], position_keys)
+      expect(Position).to receive(:find_by).and_return(ar_position)
+      Position.remove_positions(profile_auth.positions.all, position_keys)
     end
   end
 end
