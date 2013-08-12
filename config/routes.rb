@@ -23,7 +23,7 @@ Pickemup::Application.routes.draw do
       get :get_preference
       put :update_preference
     end
-    resources :conversations do
+    resources :conversations, only: [:index, :show, :destroy] do
       member do
         put :untrash
       end
@@ -36,7 +36,7 @@ Pickemup::Application.routes.draw do
     end
     get :purchase_options, to: 'subscriptions#purchase_options'
     get :get_users
-    resources :conversations do
+    resources :conversations, only: [:index, :show, :destroy] do
       member do
         put :untrash
       end

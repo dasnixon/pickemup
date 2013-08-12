@@ -11,9 +11,9 @@ module Concerns
     def get_box
       if params[:box].blank? or !["inbox","sentbox","trash"].include?(params[:box])
         @box = params[:box] = 'inbox'
-        return
+      else
+        @box = params[:box]
       end
-      @box = params[:box]
     end
 
     def find_mailbox_for
@@ -23,6 +23,8 @@ module Concerns
       elsif params[:company_id]
         @mailbox_for = @company = Company.find(params[:company_id])
         check_invalid_permissions_company
+      else
+        redirect_to root_path, notice: 'Unable to find your mailbox.'
       end
     end
 

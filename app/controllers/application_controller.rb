@@ -9,11 +9,11 @@ class ApplicationController < ActionController::Base
   before_filter :check_company_messages, if: :company_signed_in?
 
   def check_invalid_permissions_user
-    redirect_to root_path, error: 'You do not have permissions to view this page' if not_valid_user?
+    redirect_to root_path, alert: 'You do not have permissions to view this page' if not_valid_user?
   end
 
   def check_invalid_permissions_company
-    redirect_to root_path, error: 'You do not have permissions to view this page' if not_valid_company?
+    redirect_to root_path, alert: 'You do not have permissions to view this page' if not_valid_company?
   end
 
   def get_and_check_user

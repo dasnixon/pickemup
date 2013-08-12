@@ -5,9 +5,9 @@ class ConversationsController < ApplicationController
   before_filter :find_conversation, only: [:show, :update, :destroy, :untrash]
 
   def index
-    if @box.eql? "inbox"
+    if @box.eql? 'inbox'
       @conversations = @mailbox.inbox
-    elsif @box.eql? "sentbox"
+    elsif @box.eql? 'sentbox'
       @conversations = @mailbox.sentbox
     else
       @conversations = @mailbox.trash
@@ -20,25 +20,6 @@ class ConversationsController < ApplicationController
     else
       @receipts = @mailbox.receipts_for(@conversation).not_trash
     end
-    @receipts.mark_as_read
-  end
-
-  def update
-    if params[:untrash].present?
-      @conversation.untrash(@mailbox_for)
-    end
-
-    if params[:reply_all].present?
-      last_receipt = @mailbox.receipts_for(@conversation).last
-      @receipt = @mailbox_for.reply_to_all(last_receipt, params[:body])
-    end
-
-    if @box.eql? 'trash'
-      @receipts = @mailbox.receipts_for(@conversation).trash
-    else
-      @receipts = @mailbox.receipts_for(@conversation).not_trash
-    end
-    redirect_to action: :show
     @receipts.mark_as_read
   end
 
@@ -59,9 +40,8 @@ class ConversationsController < ApplicationController
   private
 
   def find_conversation
-    @conversation = Conversation.find_by_id(params[:id])
-
-    if @conversation.nil? or !@conversation.is_participant?(@mailbox_for)
+    @conversation = Conversation.find(params[:id])
+    if @conversation.blank? or !@conversation.is_participant?(@mailbox_for)
       conversations_redirect('Unable to find conversation')
     end
   end

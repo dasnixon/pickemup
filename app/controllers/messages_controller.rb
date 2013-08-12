@@ -1,7 +1,8 @@
 class MessagesController < ApplicationController
   include Concerns::MailboxerHub
 
-  before_filter :find_mailbox_for, :get_mailbox, :get_box
+  before_filter :find_mailbox_for, except: [:index]
+  before_filter :get_box
   before_filter :validate_params, only: [:new, :create]
 
   def index
@@ -9,10 +10,9 @@ class MessagesController < ApplicationController
   end
 
   def show
-    if @message = Message.find_by_id(params[:id]) and @conversation = @message.conversation
+    if @message = Message.find(params[:id]) and @conversation = @message.conversation
       if @conversation.is_participant?(@mailbox_for)
-        specific_conversation_redirect
-      return
+        specific_conversation_redirect and return
       end
     end
     conversations_redirect
@@ -25,8 +25,7 @@ class MessagesController < ApplicationController
     elsif company_signed_in?
       @recipient = User.find(params[:receiver])
     end
-    return if @recipient.nil?
-    @recipient = nil if sending_to_self?
+    conversations_redirect and return if @recipient.nil? || sending_to_self?
   end
 
   def create

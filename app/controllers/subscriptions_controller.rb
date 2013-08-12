@@ -1,7 +1,7 @@
 require 'subscription_handler'
 class SubscriptionsController < ApplicationController
   before_filter :find_company, except: [:listener]
-  before_filter :get_credentials, only: [:edit, :update]
+  before_filter :get_credentials, only: [:edit, :update, :edit_card]
 
   def new
     @subscription = Subscription.new
@@ -22,20 +22,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def update
-    if params[:cancel_subscription] == "true"
-      @customer.cancel_subscription
-      @subscription.active = false
-    end
-    if params[:plan] != @subscription.plan
-      @customer.update_subscription(:plan => params[:plan])
-      @subscription.update_plan(params[:plan])
-    end
-    if params[:reactivate_subscription] == "true"
-      new_plan = param[:plan]
-      @customer.update_subscription(:plan => new_plan)
-      @subscription.update_plan(new_plan)
-      @subscription.active = true
-    end
+    check_for_cancellation
+    check_for_changed_plan
+    check_for_reactivation
     if @customer.save && @subscription.save_update
       flash[:success] = "Subscription info updated!"
       redirect_to edit_company_path(@subscription.company_id) #change path
@@ -46,13 +35,12 @@ class SubscriptionsController < ApplicationController
   end
 
   def edit_card
-    @subscription = Subscription.find(params[:id])
-    @customer = Stripe::Customer.retrieve(@subscription.stripe_customer_token)
     if params[:stripe_card_token].present?
-      @subscription.update(subscription_params)
       @customer.update_subscription(card: params[:stripe_card_token], plan: @subscription.plan)
-      if @subscription.save
-        redirect_to edit_company_path(@subscription.company_id) #change this path
+      if @subscription.update(subscription_params)
+        redirect_to edit_company_path(@subscription.company_id), notice: 'Successfully updated payment information.'
+      else
+        redirect_to edit_company_path(@subscription.company_id), notice: 'Unable to update payment information at this time.'
       end
     end
   end
@@ -70,6 +58,29 @@ class SubscriptionsController < ApplicationController
   end
 
   private
+
+  def check_for_reactivation
+    if params[:reactivate_subscription] == "true"
+      new_plan = params[:plan]
+      @customer.update_subscription(:plan => new_plan)
+      @subscription.update_plan(new_plan)
+      @subscription.active = true
+    end
+  end
+
+  def check_for_cancellation
+    if params[:cancel_subscription] == "true"
+      @customer.cancel_subscription
+      @subscription.active = false
+    end
+  end
+
+  def check_for_changed_plan
+    if params[:plan] != @subscription.plan
+      @customer.update_subscription(:plan => params[:plan])
+      @subscription.update_plan(params[:plan])
+    end
+  end
 
   def get_credentials
     @subscription = @company.subscription
