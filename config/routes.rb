@@ -31,7 +31,9 @@ Pickemup::Application.routes.draw do
     resources :messages, except: [:edit, :update, :destroy]
   end
   resources :companies, except: [:new] do
-    get :validate_company
+    collection do
+      get ':email/validate_company', to: 'companies#validate_company', as: :validate_company
+    end
     get :purchase_options, to: 'subscriptions#purchase_options'
     get :get_users
     resources :conversations do

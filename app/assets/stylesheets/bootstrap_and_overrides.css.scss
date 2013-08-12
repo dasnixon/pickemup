@@ -102,3 +102,19 @@ a.caret-after {
   width: 50px;
   background: transparent;
 }
+
+#error_explanation {
+  @extend .alert;
+  @extend .alert-error;
+  @extend .alert-block;
+}
+
+form .clearfix:before, form .clearfix:after {
+  display: inline;
+  margin: 0px;
+  padding: 0px;
+}
+
+form .clearfix {
+  @extend .control-group.error;
+}

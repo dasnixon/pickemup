@@ -1,10 +1,11 @@
 class CompaniesController < ApplicationController
   before_filter :find_company, only: [:show]
+  before_filter :find_by_email, :check_invalid_permissions_company, only: [:validate_company]
   before_filter :get_and_check_company, only: [:edit, :update]
+  before_filter :cleanup_password_info, only: [:update]
 
   def create
     @company = Company.new(company_params)
-    @company.founded = Time.now
     if @company.save
       Notifier.new_company_confirmation(@company).deliver
       session[:company_id] = @company.id
@@ -24,40 +25,38 @@ class CompaniesController < ApplicationController
   end
 
   def update
-    @company.update(company_params)
-    @company.password = params[:company][:password] if params[:company][:password] == params[:company][:password_confirmation]
-    if @company.save
-      redirect_to root_path, notice: "Info updated!"
+    if @company.update(company_params)
+      redirect_to company_path(id: @company.id), notice: 'Info updated!'
     else
-      flash[:error] = "Something went wrong"
+      @subscription = @company.subscription
+      flash[:error] = 'Unable to update your company information'
       render :edit
     end
   end
 
   def validate_company
-    @company = Company.find_by_email(params[:email])
-    if @company
-      @company.verified = true
-      @company.save
-      redirect_to root_path, notice: "You can now start searching for developers!"
-    end
-  end
-
-  def get_users
-    if company_signed_in?
-      @users = User.all
-    else
-      redirect_to root_path
-    end
+    @company.set_verified
+    redirect_to root_path, notice: "You can now start searching for developers!"
   end
 
   private
+
+  def find_by_email
+    @company = Company.find_by(email: params[:email])
+  end
 
   def find_company
     @company = Company.find(params[:id])
   end
 
   def company_params
-    params.require(:company).permit!.merge(:founded => DateTime.new(params[:company][:founded].to_i))
+    founded = params[:company][:founded].present? ? params[:company][:founded] : Time.now
+    params.require(:company).permit!.merge(founded: founded)
+  end
+
+  def cleanup_password_info
+    unless params[:company][:password].present? and params[:company][:password_confirmation].present?
+      [:password, :password_confirmation].each { |key| params[:company].delete(key) }
+    end
   end
 end

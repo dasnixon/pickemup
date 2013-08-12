@@ -34,23 +34,28 @@ class Company < ActiveRecord::Base
 
   attr_accessor :password
 
-  before_save :encrypt_password
+  before_save :encrypt_password, if: :password
   before_update :clean_url, if: :website_changed? #TODO fix this validation
   after_create :process_sign_up
 
-  validates :password, confirmation: { message: 'Password/Password Confirmation is invalid' }
-  validates :password, presence: true, on: :create
+  validates :password, presence:     true,
+                       confirmation: { message: 'Password/Password Confirmation do not match.' },
+                       length:       { :minimum => 6 },
+                       if:           :password
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :name, presence: true, uniqueness: true
-  validate :password_strength, on: :create
 
   has_one :subscription
   has_many :job_listings
   has_many :tech_stacks
 
-
   def get_logo
     self.logo.present? ? self.logo : 'default_logo.png'
+  end
+
+  def set_verified
+    self.verified = true
+    self.save
   end
 
   def clean_error_messages
@@ -81,10 +86,6 @@ class Company < ActiveRecord::Base
     end
   end
 
-  def password_strength
-    errors.add(:password_length, "Password must be at least 8 characters") unless password.length >= 8
-  end
-
   def clean_url
     new_url = website.gsub(/(https{0,1}:\/\/)|(www)./, "").prepend("http://")
     self.website = new_url
@@ -102,10 +103,8 @@ class Company < ActiveRecord::Base
   private
 
   def encrypt_password
-    if password.present?
-      self.password_salt = BCrypt::Engine.generate_salt
-      self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
-    end
+    self.password_salt = BCrypt::Engine.generate_salt
+    self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
   end
 
   def process_sign_up

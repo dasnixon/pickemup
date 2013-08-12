@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
   before_filter :check_if_logged_in, only: [:sign_in, :sign_up, :company]
+  before_filter :check_github_synced, only: [:github]
+  before_filter :check_linkedin_synced, only: [:linkedin]
+  before_filter :check_stackexchange_synced, only: [:stackoverflow]
 
   def sign_in
   end
@@ -16,43 +19,59 @@ class SessionsController < ApplicationController
     else
       session[:company_id] = nil
       flash[:error] = "Unable to sign you in."
-      redirect_to root_path
+      render :sign_in
     end
   end
 
   def github
-    redirect_to root_path, notice: 'Already have your github synced.' and return if user_signed_in? && current_user.github_uid.present?
-    if user_signed_in? && current_user.linkedin_uid.present? && current_user.github_uid.blank? #they already setup a profile from linkedin
-      current_user.setup_github_account(request.env['omniauth.auth'])
-    else
+    if sync_user_github?
+      if current_user.setup_github_account(request.env['omniauth.auth'])
+        redirect_to_root('Sweet, we got your Github account!')
+      else
+        redirect_to root_path, alert: 'Unable to add your Github, try again later.'
+      end
+    elsif !user_signed_in?
       user = User.from_omniauth(request.env['omniauth.auth'], :github)
-    end
-    if user_signed_in?
-      redirect_to_root('Sweet, we got your Github account!')
-    elsif user.present?
-      session[:user_id] = user.id
-      redirect_to_root('You are signed in!')
+      if user.present?
+        session[:user_id] = user.id
+        redirect_to_root('You are signed in!')
+      else
+        session[:user_id] = nil
+        redirect_to root_path, alert: 'Unable to add your Github, try again later.'
+      end
     else
       session[:user_id] = nil
-      redirect_to root_path, error: 'Unable to add your Github, try again.'
+      redirect_to root_path, alert: 'Unable to add your Github, try again later.'
     end
   end
 
   def linkedin
-    redirect_to root_path, notice: 'Already have your linkedin synced.' and return if user_signed_in? && current_user.linkedin_uid.present?
-    if user_signed_in? && current_user.github_uid.present? && current_user.linkedin_uid.blank?
-      current_user.setup_linkedin_account(request.env['omniauth.auth'])
-    else
+    if sync_user_linkedin?
+      if current_user.setup_linkedin_account(request.env['omniauth.auth'])
+        redirect_to_root('Sweet, we got your LinkedIn account!')
+      else
+        redirect_to root_path, alert: 'Unable to add your LinkedIn, try again later.'
+      end
+    elsif !user_signed_in?
       user = User.from_omniauth(request.env['omniauth.auth'], :linkedin)
-    end
-    if user_signed_in?
-      redirect_to_root('Sweet, we got your LinkedIn account!')
-    elsif user.present?
-      session[:user_id] = user.id unless user_signed_in?
-      redirect_to_root('You are signed in!')
+      if user.present?
+        session[:user_id] = user.id unless user_signed_in?
+        redirect_to_root('You are signed in!')
+      else
+        session[:user_id] = nil
+        redirect_to root_url, alert: 'Unable to add your LinkedIn, try again later.'
+      end
     else
       session[:user_id] = nil
-      redirect_to root_url, error: 'Unable to add your LinkedIn, try again.'
+      redirect_to root_path, alert: 'Unable to add your LinkedIn, try again later.'
+    end
+  end
+
+  def stackoverflow
+    if current_user.build_stackexchange.from_omniauth(request.env['omniauth.auth'])
+      redirect_to root_url, notice: 'Successfully linked your Stackoverflow profile!'
+    else
+      redirect_to root_url, alert: 'Unable to link your Stackoverflow profile!'
     end
   end
 
@@ -61,16 +80,27 @@ class SessionsController < ApplicationController
     redirect_to root_url, notice: 'Logged out!'
   end
 
-  def stackoverflow
-    redirect_to root_path, error: 'Must be logged in!' unless user_signed_in? && from_stackexchange?
-    if current_user.build_stackexchange.from_omniauth(request.env['omniauth.auth'])
-      redirect_to root_url, notice: 'Successfully linked your Stackoverflow profile!'
-    else
-      redirect_to root_url, error: 'Unable to link your Stackoverflow profile!'
-    end
+  private
+
+  def sync_user_linkedin?
+    !company_signed_in? && user_signed_in? && current_user.github_uid.present? && current_user.linkedin_uid.blank?
   end
 
-  private
+  def sync_user_github?
+    !company_signed_in? && user_signed_in? && current_user.linkedin_uid.present? && current_user.github_uid.blank?
+  end
+
+  def check_github_synced
+    redirect_to root_path, notice: 'Already have your github synced.' and return if user_signed_in? && current_user.github_uid.present?
+  end
+
+  def check_linkedin_synced
+    redirect_to root_path, notice: 'Already have your linkedin synced.' and return if user_signed_in? && current_user.linkedin_uid.present?
+  end
+
+  def check_stackexchange_synced
+    redirect_to root_path, alert: 'Must be logged in!' unless !company_signed_in? && user_signed_in? && from_stackexchange? && !current_user.stackexchange_synced
+  end
 
   def redirect_to_root(notice)
     redirect_to root_path, notice: notice
@@ -81,6 +111,6 @@ class SessionsController < ApplicationController
   end
 
   def check_if_logged_in
-    redirect_to root_path, error: 'Already logged in.' and return if user_signed_in? || company_signed_in?
+    redirect_to root_path, alert: 'Already logged in.' and return if user_signed_in? || company_signed_in?
   end
 end
