@@ -30,7 +30,8 @@ class Company < ActiveRecord::Base
 
   attr_accessible :name, :email, :description, :website,
     :industry, :password_salt, :password_hash, :description,
-    :num_employees, :public, :founded, :password, :logo
+    :num_employees, :public, :founded, :logo, :password,
+    :password_confirmation
 
   attr_accessor :password
 
@@ -60,7 +61,7 @@ class Company < ActiveRecord::Base
 
   def clean_error_messages
     error_message = self.errors.messages.inject([]) do |clean_message, (error, message)|
-      clean_message << "#{error.capitalize} #{message.join(' ')}"
+      clean_message << "#{error.capitalize} #{message.to_sentence(two_words_connector: ' and ', last_word_connector: ', and ')}"
       clean_message
     end
     error_message.to_sentence(two_words_connector: ' and ', last_word_connector: ', and ')
