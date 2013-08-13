@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
 
   before_filter :find_mailbox_for, except: [:index]
   before_filter :get_box
-  before_filter :validate_params, only: [:new, :create]
+  before_filter :validate_params, :lookup_info, only: [:new, :create]
 
   def index
     conversations_redirect
@@ -19,26 +19,16 @@ class MessagesController < ApplicationController
   end
 
   def new
-    @job_listing = JobListing.find(params[:job_listing_id])
-    if user_signed_in?
-      @recipient = Company.find(params[:receiver])
-    elsif company_signed_in?
-      @recipient = User.find(params[:receiver])
-    end
-    conversations_redirect and return if @recipient.nil? || sending_to_self?
   end
 
   def create
-    @job_listing = JobListing.find(params[:job_listing_id])
-    @recipient = user_signed_in? ? Company.find(params[:receiver]) : User.find(params[:receiver])
-
     @receipt = @mailbox_for.send_message(@recipient, params[:body], params[:subject], params[:job_listing_id])
-    if (@receipt.errors.blank?)
-      @conversation = @receipt.conversation
-      flash[:notice]= t('mailboxer.sent')
+    if @receipt.errors.blank?
+      @conversation  = @receipt.conversation
+      flash[:notice] = t('mailboxer.sent')
       specific_conversation_redirect
     else
-      render action: :new
+      render :new
     end
   end
 
@@ -64,5 +54,11 @@ class MessagesController < ApplicationController
     unless params[:receiver] && params[:job_listing_id]
       conversations_redirect
     end
+  end
+
+  def lookup_info
+    @job_listing = JobListing.find(params[:job_listing_id])
+    @recipient = user_signed_in? ? Company.find(params[:receiver]) : User.find(params[:receiver])
+    conversations_redirect('Missing a valid recipient or job listing') if @recipient.blank? || sending_to_self? || @job_listing.blank?
   end
 end

@@ -52,7 +52,6 @@ class Subscription < ActiveRecord::Base
   def update_plan(plan_type)
     self.started_at = Time.zone.now
     self.plan = plan_type
-    self.save!
   end
 
   def maxed_out?(num_listings)
@@ -65,5 +64,13 @@ class Subscription < ActiveRecord::Base
 
   def max_job_listings
     PLAN_TO_OPTIONS_MAPPING[self.plan]["max_job_listings"]
+  end
+
+  def retrieve_stripe_info
+    begin
+      Stripe::Customer.retrieve(self.stripe_customer_token)
+    rescue Exception
+      nil
+    end
   end
 end
