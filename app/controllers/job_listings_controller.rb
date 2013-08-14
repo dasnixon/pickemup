@@ -2,50 +2,35 @@ class JobListingsController < ApplicationController
   before_filter :find_company
   before_filter :check_invalid_permissions_company, except: [:index, :show]
   before_filter :check_for_subscription, only: [:new, :create]
-  before_filter :get_job_listing, only: [:show, :edit, :update, :destroy, :retrieve_listing]
+  before_filter :get_job_listing, except: [:index, :new, :create]
+  before_filter :cleanup_invalid_data, only: [:create, :update_listing]
   respond_to :json, :html
 
+  def index
+    @job_listings = @company.job_listings.order('active DESC')
+  end
+
+  def show
+    @conversations = @job_listing.conversations
+  end
+
   def new
-    @job_listing = JobListing.new
+    @job_listing = @company.job_listings.build
     listing_response
   end
 
   def create
     @job_listing = @company.job_listings.build
-    remaining_params = JobListing.cleanup_invalid_data(job_listing_params)
-    if @job_listing.update(remaining_params)
-      respond_with @job_listing
+    if @job_listing.update(@bathed_params)
+      respond_with(@job_listing, location: nil, status: :created)
     else
       render json: { errors: @job_listing.errors }, status: :bad_request
     end
   end
 
-  def show
-    @job_listing = JobListing.find(params[:id])
-    @conversations = @job_listing.conversations
-  end
-
-  def index
-    @job_listings = JobListing.find_all_by_company_id(params[:company_id], order: "active = false")
-  end
-
-  def edit
-  end
-
-  def update
-    if @job_listing.update(job_listing_params)
-      redirect_to root_path, notice: "Listing updated"
-    else
-      flash[:error] = "Something went wrong"
-      render :edit
-    end
-  end
-
   def update_listing
-    @job_listing = JobListing.find(params[:job_listing_id])
-    remaining_params = JobListing.cleanup_invalid_data(job_listing_params)
-    if @job_listing.update(remaining_params)
-      respond_with(@job_listing)
+    if @job_listing.update(@bathed_params)
+      respond_with @job_listing
     else
       render json: { errors: @job_listing.errors }, status: :bad_request
     end
@@ -57,48 +42,44 @@ class JobListingsController < ApplicationController
 
   def destroy
     @job_listing.destroy
-    redirect_to company_job_listings_path(company_id: @company.id), notice: "Listing has been removed."
+    redirect_to company_job_listings_path(company_id: @company.id), notice: 'Listing has been successfully removed.'
   end
 
   def toggle_active
-    job_listing = JobListing.find(params[:id])
-    if job_listing
-      job_listing.active = !job_listing.active
-      job_listing.save
-      redirect_to company_job_listings_path(company_id: params[:company_id], id: params[:id])
-    else
-      redirect_to :back
-    end
+    @job_listing.toggle_active
+    redirect_to company_job_listings_path(company_id: @company.id), notice: "Successfully #{@job_listing.active? ? 'activated' : 'deactivated'} your job listing."
   end
 
   private
+
+  def cleanup_invalid_data
+    @bathed_params = JobListing.cleanup_invalid_data(job_listing_params)
+  end
 
   def check_for_subscription
     subscription = @company.subscription
     unless subscription && subscription.active?
       click_here_subscription = "<a href='/companies/#{@company.id}/subscriptions/new'>here</a>"
       notice = "You need to setup a subscription before you can add job listings, click #{click_here_subscription} to add a subscription"
-      redirect_to company_job_listings_path(company_id: @company.id), notice: notice
+      redirect_to company_job_listings_path(company_id: @company.id), notice: notice and return
     end
   end
 
   def get_job_listing
-    @job_listing = @company.job_listings.find(params[:id])
+    @job_listing = JobListing.find(params[:id])
   end
 
   def job_listing_params
-    params.require(:job_listing).permit!.merge(company_id: params[:company_id])
+    params.require(:job_listing).permit!
   end
 
   def find_company
-    @company ||= Company.find(params[:company_id])
+    @company = Company.find(params[:company_id])
   end
 
   def listing_response
     @job_listing.get_preference_defaults
-    tech_stacks = Company.find(params[:company_id]).tech_stacks
-    @tech_stack_choices = tech_stacks.map { |stack| {name: stack.name, id: stack.id} }
-    @response = {job_listing: @job_listing, tech_stacks: @tech_stack_choices}
-    respond_with @response
+    listing_response = { job_listing: @job_listing , tech_stacks: @company.collected_tech_stacks }
+    respond_with listing_response
   end
 end

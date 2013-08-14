@@ -51,7 +51,7 @@ Pickemup::Application.routes.draw do
       member do
         get :retrieve_listing
         put :update_listing
-        get :toggle_active
+        put :toggle_active
       end
     end
     resources :messages, except: [:edit, :update, :destroy]

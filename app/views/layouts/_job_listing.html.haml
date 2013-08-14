@@ -4,7 +4,7 @@
       .media-heading
         = link_to 'Edit', edit_company_job_listing_path(id: job_listing.id, company_id: company.id), class: 'btn btn-primary'
         = link_to 'Remove', company_job_listing_path(id: job_listing.id, company_id: company.id), method: :delete, class: 'btn btn-danger'
-        = link_to (job_listing.active ? 'Deactivate' : 'Activate'), toggle_active_company_job_listing_path(company_id: company.id, id: job_listing.id), class: "#{job_listing.active ? 'btn btn-warning' : 'btn btn-success'}"
+        = link_to (job_listing.active ? 'Deactivate' : 'Activate'), toggle_active_company_job_listing_path(company_id: company.id, id: job_listing.id), class: "#{job_listing.active ? 'btn btn-warning' : 'btn btn-success'}", method: :put
     .pull-right
       - if user_signed_in?
         = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'

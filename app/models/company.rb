@@ -30,8 +30,7 @@ class Company < ActiveRecord::Base
 
   attr_accessible :name, :email, :description, :website,
     :industry, :password_salt, :password_hash, :description,
-    :num_employees, :public, :founded, :logo, :password,
-    :password_confirmation
+    :num_employees, :public, :founded, :logo, :password
 
   attr_accessor :password
 
@@ -57,6 +56,10 @@ class Company < ActiveRecord::Base
   def set_verified
     self.verified = true
     self.save
+  end
+
+  def collected_tech_stacks
+    self.tech_stacks.collect { |stack| { name: stack.name, id: stack.id } }
   end
 
   def clean_error_messages

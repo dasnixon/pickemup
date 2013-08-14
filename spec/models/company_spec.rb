@@ -191,4 +191,17 @@ describe Company do
       end
     end
   end
+
+  describe '#collected_tech_stacks' do
+    let(:tech_stacks) { create_list(:tech_stack, 2, company: company) }
+    let(:expected) do
+      tech_stacks.collect { |s| {name: s.name, id: s.id}}
+    end
+    before :each do
+      company.stub(:tech_stacks).and_return(tech_stacks)
+    end
+    it 'gets a collection of tech stack information' do
+      company.collected_tech_stacks.should =~ expected
+    end
+  end
 end

@@ -65,4 +65,8 @@ class JobListing < ActiveRecord::Base
   def attribute_default_values(attr)
     self.class.const_get(attr.upcase)
   end
+
+  def toggle_active
+    self.update(active: !self.active)
+  end
 end

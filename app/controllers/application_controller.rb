@@ -17,12 +17,12 @@ class ApplicationController < ActionController::Base
   end
 
   def get_and_check_user
-    @user ||= User.find(params[:id])
+    @user = User.find(params[:id])
     redirect_to root_path unless current_user?(@user)
   end
 
   def get_and_check_company
-    @company ||= Company.find(params[:id])
+    @company = Company.find(params[:id])
     redirect_to root_path unless current_company?(@company)
   end
 

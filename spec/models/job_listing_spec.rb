@@ -159,4 +159,21 @@ describe JobListing do
       end
     end
   end
+
+  describe '#toggle_active' do
+    context 'deactivate job listing' do
+      let(:job_listing) { create(:job_listing, active: true) }
+      before :each do
+        job_listing.toggle_active
+      end
+      it('is deactivated') { job_listing.should_not be_active }
+    end
+    context 'activate job listing' do
+      let(:job_listing) { create(:job_listing, active: false) }
+      before :each do
+        job_listing.toggle_active
+      end
+      it('is activated') { job_listing.should be_active }
+    end
+  end
 end

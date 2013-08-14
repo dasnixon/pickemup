@@ -42,7 +42,7 @@ class UsersController < ApplicationController
 
   def update_preference
     preference = @user.preference
-    if preference.update_attributes(@bathed_preferences)
+    if preference.update(@bathed_preferences)
       respond_with preference
     else
       render json: { errors: preference.errors }, status: :bad_request
@@ -52,7 +52,7 @@ class UsersController < ApplicationController
   private
 
   def eager_load_user
-    @user ||= User.includes(
+    @user = User.includes(
       stackexchange: [],
       preference: [],
       github_account: [:repos, :organizations],

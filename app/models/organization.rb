@@ -32,7 +32,7 @@ class Organization < ActiveRecord::Base
     organizations.each do |org|
       organization = Organization.where(organization_key: org.id.to_s, github_account_id: github_id).first_or_initialize
       org_info = organization.github_account.get_org_information(org.login)
-      organization.update_attributes(
+      organization.update(
         name:               (org_info.try(:name) || org.login),
         url:                org_info.html_url,
         location:           org_info.try(:location),

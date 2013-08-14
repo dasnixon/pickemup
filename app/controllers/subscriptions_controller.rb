@@ -93,7 +93,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def find_and_check_company
-    @company ||= Company.find(params[:company_id])
+    @company = Company.find(params[:company_id])
     check_invalid_permissions_company
   end
 end
