@@ -15,20 +15,20 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
       action: 'get_preference'
 
     , (response) ->
-      response.expected_salary = response.expected_salary.toLocaleString() if response.expected_salary
-      response.skills          = chunk response.skills, 6
-      response.locations       = chunk response.locations, 6
-      response.industries      = chunk response.industries, 6
-      response.positions       = chunk response.positions, 6
-      response.settings        = chunk response.settings, 6
-      response.dress_codes     = chunk response.dress_codes, 6
-      response.company_types   = chunk response.company_types, 6
-      response.perks           = chunk response.perks, 7
-      response.practices       = chunk response.practices, 6
-      response.levels          = chunk response.levels, 6
-      response.company_size    = chunk response.company_size, 6
-      $scope.preference        = response
-      $scope.original          = angular.copy($scope.preference)
+      $scope.preference                 = response
+      $scope.preference.expected_salary = $scope.preference.expected_salary.toLocaleString() if $scope.preference.expected_salary
+      $scope.preference.skills          = chunk $scope.preference.skills, 6
+      $scope.preference.locations       = chunk $scope.preference.locations, 6
+      $scope.preference.industries      = chunk $scope.preference.industries, 6
+      $scope.preference.positions       = chunk $scope.preference.positions, 6
+      $scope.preference.settings        = chunk $scope.preference.settings, 6
+      $scope.preference.dress_codes     = chunk $scope.preference.dress_codes, 6
+      $scope.preference.company_types   = chunk $scope.preference.company_types, 6
+      $scope.preference.perks           = chunk $scope.preference.perks, 7
+      $scope.preference.practices       = chunk $scope.preference.practices, 6
+      $scope.preference.levels          = chunk $scope.preference.levels, 6
+      $scope.preference.company_size    = chunk $scope.preference.company_size, 6
+      $scope.original                   = angular.copy($scope.preference)
 
     , (response) ->
       $scope.error_updating = 'Unable to fetch your preferences at this time.'

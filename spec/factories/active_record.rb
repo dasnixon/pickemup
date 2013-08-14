@@ -15,6 +15,15 @@ FactoryGirl.define do
     subject { Faker::Lorem.sentences.join(' ') }
   end
 
+  factory :tech_stack do
+    company
+    name                { Faker::Name.name }
+    back_end_languages  { PreferenceConstants::BACK_END_LANGUAGES.shuffle[0..1] }
+    front_end_languages { PreferenceConstants::FRONT_END_LANGUAGES.shuffle[0..1] }
+    frameworks          { PreferenceConstants::FRAMEWORKS.shuffle[0..1] }
+    dev_ops_tools       { PreferenceConstants::DEV_OPS_TOOLS.shuffle[0..1] }
+  end
+
   factory :job_listing do
     company
     job_title               { Faker::Lorem.word }

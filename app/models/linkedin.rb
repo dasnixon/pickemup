@@ -59,7 +59,7 @@ class Linkedin < ActiveRecord::Base
   private
 
   def client
-    @client ||= LinkedIn::Client.new(ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET'], self.token)
+    LinkedIn::Client.new(ENV['LINKEDIN_KEY'], ENV['LINKEDIN_SECRET'], self.token)
   end
 
   def grab_user_information

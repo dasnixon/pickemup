@@ -1,17 +1,17 @@
 class TechStacksController < ApplicationController
+  before_filter :find_and_validate_company
   before_filter :find_tech_stack, only: [:retrieve_tech_stack, :update_tech_stack, :edit]
-  before_filter :find_company, only: [:create, :index]
   respond_to :json, :html
 
   def new
     @tech_stack = TechStack.new(company_id: params[:company_id])
-    @tech_stack.populate_all_params
+    @tech_stack.get_preference_defaults
     respond_with @tech_stack
   end
 
   def create
     @tech_stack = @company.tech_stacks.build
-    remaining_params = @tech_stack.unhash_all_params(tech_stack_params)
+    remaining_params = TechStack.cleanup_invalid_data(tech_stack_params)
     if @tech_stack.update(remaining_params)
       respond_with @tech_stack
     else
@@ -24,12 +24,12 @@ class TechStacksController < ApplicationController
   end
 
   def retrieve_tech_stack
-    @tech_stack.populate_all_params
+    @tech_stack.get_preference_defaults
     respond_with @tech_stack
   end
 
   def update_tech_stack
-    remaining_params = @tech_stack.unhash_all_params(tech_stack_params)
+    remaining_params = TechStack.cleanup_invalid_data(tech_stack_params)
     if @tech_stack.update(remaining_params)
       respond_with(@tech_stack)
     else
@@ -43,11 +43,12 @@ class TechStacksController < ApplicationController
     @tech_stack = TechStack.find(params[:id])
   end
 
-  def find_company
-    @company = Company.find(params[:company_id])
+  def find_and_validate_company
+    @company ||= Company.find(params[:company_id])
+    check_invalid_permissions_company
   end
 
   def tech_stack_params
-    params.require(:tech_stack).permit!.merge(company_id: params[:company_id])
+    params.require(:tech_stack).permit!
   end
 end

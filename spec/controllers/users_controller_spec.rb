@@ -204,14 +204,14 @@ describe UsersController do
     context 'valid user' do
       let(:preference) { create(:preference) }
       before :each do
-        preference.stub(:get_preference_defaults).and_return('defaults')
+        preference.stub(:get_preference_defaults)
         User.stub(:find).and_return(user)
         user.stub(:preference).and_return(preference)
         get(:get_preference, {id: user.id})
       end
       it { should respond_with(:success) }
       it 'has preference object' do
-        response.body.should eq 'defaults'
+        response.body.should eq preference.to_json
       end
     end
   end

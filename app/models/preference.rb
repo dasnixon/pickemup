@@ -36,6 +36,9 @@
 
 class Preference < ActiveRecord::Base
   include PreferenceConstants
+  include PreferencesHelper
+
+  HASHABLE_PARAMS = %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills)
 
   attr_accessible :healthcare, :dentalcare, :visioncare, :life_insurance, :paid_vacation,
     :equity, :bonuses, :retirement, :fulltime, :remote, :open_source, :expected_salary,
@@ -49,64 +52,13 @@ class Preference < ActiveRecord::Base
   validates :work_hours, numericality: true, inclusion: { in: 0..168, message: 'Are you a machine?' }
   validates :potential_availability, numericality: true, inclusion: { in: 0..52, message: 'Start sooner!' }
 
-  def default_hash
-    { healthcare: self.healthcare, dentalcare: self.dentalcare, visioncare: self.visioncare,
-      life_insurance: self.life_insurance, paid_vacation: self.paid_vacation, equity: self.equity,
-      bonuses: self.bonuses, retirement: self.retirement, fulltime: self.fulltime, remote: self.remote,
-      open_source: self.open_source, expected_salary: self.expected_salary, us_citizen: self.us_citizen,
-      potential_availability: self.potential_availability, work_hours: self.work_hours }
-  end
-
-  def get_preference_defaults
-    %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills).inject(self.default_hash) do |preferences, attr|
-      preferences[attr] = get_attr_values(attr)
-      preferences
-    end
-  end
-
-  def get_attr_values(attr)
-    self.attribute_default_values(attr).inject([]) do |attr_array, value|
-      if self.send(attr).include?(value) #if user has checked this value for this particular attribute
-        attr_array << { name: value, checked: true } #set it into the returned hash for angular
-      else
-        attr_array << { name: value, checked: false } #set it into the returned hash for angular
-      end
-      attr_array
-    end
-  end
-
   def attribute_default_values(attr)
-    if attr == 'skills'
-      current_user = self.user
-      if current_user.linkedin_uid.present?
-        current_user.linkedin.profile.skills
+    case attr
+      when 'skills'
+        preference_user = self.user
+        preference_user.linkedin_uid ? preference_user.linkedin.profile.skills : []
       else
-        []
-      end
-    else
-      self.class.const_get(attr.upcase)
-    end
-  end
-
-  def self.cleanup_invalid_data(params)
-    %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills).each do |attr|
-      next unless params.has_key?(attr)
-      unless params[attr].is_a?(Array)
-        params.delete(attr)
-        next
-      end
-      params[attr] = reject_attrs(params[attr])
-      params[attr].collect! { |attrs| attrs['name'] }
-    end
-    params
-  end
-
-  def self.reject_attrs(param)
-    param.reject do |attributes|
-      !(attributes.has_key?('checked') && attributes.has_key?('name')) ||
-        attributes.keys.length > 2 ||
-        ![TrueClass, FalseClass].include?(attributes['checked'].class) ||
-        !attributes['checked']
+        self.class.const_get(attr.upcase)
     end
   end
 end

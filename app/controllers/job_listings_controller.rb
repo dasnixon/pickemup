@@ -12,7 +12,7 @@ class JobListingsController < ApplicationController
 
   def create
     @job_listing = @company.job_listings.build
-    remaining_params = @job_listing.unhash_all_params(job_listing_params)
+    remaining_params = JobListing.cleanup_invalid_data(job_listing_params)
     if @job_listing.update(remaining_params)
       respond_with @job_listing
     else
@@ -43,7 +43,7 @@ class JobListingsController < ApplicationController
 
   def update_listing
     @job_listing = JobListing.find(params[:job_listing_id])
-    remaining_params = @job_listing.unhash_all_params(job_listing_params)
+    remaining_params = JobListing.cleanup_invalid_data(job_listing_params)
     if @job_listing.update(remaining_params)
       respond_with(@job_listing)
     else
@@ -95,7 +95,7 @@ class JobListingsController < ApplicationController
   end
 
   def listing_response
-    @job_listing.populate_all_params
+    @job_listing.get_preference_defaults
     tech_stacks = Company.find(params[:company_id]).tech_stacks
     @tech_stack_choices = tech_stacks.map { |stack| {name: stack.name, id: stack.id} }
     @response = {job_listing: @job_listing, tech_stacks: @tech_stack_choices}

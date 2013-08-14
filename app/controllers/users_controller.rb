@@ -36,7 +36,8 @@ class UsersController < ApplicationController
 
   def get_preference
     preference = @user.preference
-    respond_with preference.get_preference_defaults
+    preference.get_preference_defaults
+    respond_with preference
   end
 
   def update_preference
