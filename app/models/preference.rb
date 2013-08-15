@@ -56,7 +56,7 @@ class Preference < ActiveRecord::Base
     case attr
       when 'skills'
         preference_user = self.user
-        preference_user.linkedin_uid ? preference_user.linkedin.profile.skills : []
+        preference_user.linkedin_uid ? preference_user.linkedin.profile.skills.sort : []
       else
         self.class.const_get(attr.upcase)
     end

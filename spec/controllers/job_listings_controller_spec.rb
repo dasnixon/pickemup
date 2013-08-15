@@ -29,27 +29,9 @@ describe JobListingsController do
     it('assigns company variable') { assigns(:company).should eq company }
   end
 
-  #describe '#new' do
-    #before :each do
-      #request.env["HTTP_ACCEPT"] = 'application/json'
-    #end
-    #let(:job_listing) { double(JobListing, get_preference_defaults: true) }
-    #let(:expected_repsonse) do
-      #{job_listing: job_listing, tech_stacks: []}.to_json
-    #end
-    #let(:subscription) { double(Subscription, active?: true) }
-    #before :each do
-      #company_login(company)
-      #Company.stub(:find).and_return(company)
-      #company.stub(:subscription).and_return(subscription)
-      #company.stub_chain(:job_listings, :build).and_return(job_listing)
-      #get(:new, {company_id: company.id})
-    #end
-    #it { should respond_with(:success) }
-    #it 'has listing information repsonse' do
-      #response.body.should eq expected_repsonse
-    #end
-  #end
+  describe '#new' do
+
+  end
 
   describe '#create' do
 

@@ -30,6 +30,7 @@
           - if company_signed_in?
             - subscription = current_company.subscription
             %li= link_to 'Job Listings', company_job_listings_path(company_id: current_company.id)
+            %li= link_to 'Tech Stacks', company_tech_stacks_path(company_id: current_company.id)
             %li.navigation_mailbox= link_to(raw("<span class='badge badge-success'>#{@unread_messages.length}</span> Mailbox"), company_conversations_path(company_id: current_company.id))
             %li.dropdown
               %a.dropdown-toggle.caret-after{'data-toggle' => 'dropdown'}

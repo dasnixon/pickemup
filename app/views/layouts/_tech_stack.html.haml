@@ -1,0 +1,21 @@
+%hr
+.media
+  .media-body
+    .media-heading
+      = link_to "Edit", edit_company_tech_stack_path(company_id: company.id, id: tech_stack.id), class: 'btn btn-primary'
+      = link_to "Remove", company_tech_stack_path(company_id: company.id, id: tech_stack.id), class: 'btn btn-danger', method: :delete
+    .lead.media-headling= "#{tech_stack.name} Tech Stack"
+    %blockquote
+      %ul.unstyled
+        %li
+          %strong Back-end Languages:
+          #{tech_stack.back_end_languages.join(', ')}
+        %li
+          %strong Front-end Languages:
+          #{tech_stack.front_end_languages.join(', ')}
+        %li
+          %strong Frameworks:
+          #{tech_stack.frameworks.join(', ')}
+        %li
+          %strong Dev-ops Tools:
+          #{tech_stack.dev_ops_tools.join(', ')}

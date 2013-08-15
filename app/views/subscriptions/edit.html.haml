@@ -2,6 +2,7 @@
   .container
     .section_header
       %h3 Edit Subscription
+      = link_to "Change Card", edit_card_company_subscription_path(company_id: @company.id, :id => @subscription.id), class: 'btn btn-primary pull-right'
       %h4 #{"Subscription Status: #{@subscription.active ? 'Active' : 'Inactive'}"}
     = form_for [@company, @subscription], html: { class: 'form-horizontal' } do |f|
       .control-group
@@ -30,6 +31,4 @@
               = radio_button_tag :reactivate_subscription, false
               No
 
-      = f.submit 'Update Subscription', class: 'btn'
-    %h4
-      = link_to "Change Card", edit_card_company_subscription_path(company_id: @company.id, :id => @subscription.id)
+      = f.submit 'Update Subscription', class: 'btn btn-success'

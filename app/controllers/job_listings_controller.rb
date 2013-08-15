@@ -58,7 +58,7 @@ class JobListingsController < ApplicationController
 
   def check_for_subscription
     subscription = @company.subscription
-    unless subscription && subscription.active?
+    unless subscription and subscription.active?
       click_here_subscription = "<a href='/companies/#{@company.id}/subscriptions/new'>here</a>"
       notice = "You need to setup a subscription before you can add job listings, click #{click_here_subscription} to add a subscription"
       redirect_to company_job_listings_path(company_id: @company.id), notice: notice and return
