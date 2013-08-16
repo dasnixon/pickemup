@@ -65,6 +65,36 @@
   </div>
 </div>
 
+<div class='control-group'>
+  <label class='control-label'>Relational Databases</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.relational_databases">
+        <td ng-repeat="tool in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="tool.checked"/>{{tool.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'>NoSQL Databases</label>
+  <div class='controls'>
+    <table class='table table-bordered'>
+      <tr ng-repeat="row in data.nosql_databases">
+        <td ng-repeat="tool in row">
+          <label class='checkbox'>
+            <input type="checkbox" ng-model="tool.checked"/>{{tool.name}}
+          </label>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
 <div class="control-group">
   <div class="controls">
     <button class='btn' type="submit">Submit</button>

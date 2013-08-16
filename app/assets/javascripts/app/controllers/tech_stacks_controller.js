@@ -10,11 +10,13 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
       company_id: $stateParams['company_id'],
       action: 'retrieve_tech_stack'
     }, function(response) {
-       response.back_end_languages = chunk(response.back_end_languages, 6)
-       response.front_end_languages = chunk(response.front_end_languages, 6)
-       response.dev_ops_tools = chunk(response.dev_ops_tools, 6)
-       response.frameworks = chunk(response.frameworks, 6)
-       $scope.data = response
+       response.back_end_languages = chunk(response.back_end_languages, 6);
+       response.front_end_languages = chunk(response.front_end_languages, 6);
+       response.dev_ops_tools = chunk(response.dev_ops_tools, 6);
+       response.frameworks = chunk(response.frameworks, 6);
+       response.relational_databases = chunk(response.relational_databases, 6);
+       response.nosql_databases = chunk(response.nosql_databases, 6);
+       $scope.data = response;
     });
     return $scope.update = function() {
       TechStack.editTechStack.update({
@@ -26,7 +28,9 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
           back_end_languages: unchunk($scope.data.back_end_languages),
           front_end_languages: unchunk($scope.data.front_end_languages),
           dev_ops_tools: unchunk($scope.data.dev_ops_tools),
-          frameworks: unchunk($scope.data.frameworks)
+          frameworks: unchunk($scope.data.frameworks),
+          relational_databases: unchunk($scope.data.relational_databases),
+          nosql_databases: unchunk($scope.data.nosql_databases)
         }},
         function(response) {
           return $scope.success;
@@ -37,11 +41,13 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
       company_id: $stateParams['company_id'],
       action: 'new'
     }, function(response) {
-       response.back_end_languages = chunk(response.back_end_languages, 6)
-       response.front_end_languages = chunk(response.front_end_languages, 6)
-       response.dev_ops_tools = chunk(response.dev_ops_tools, 6)
-       response.frameworks = chunk(response.frameworks, 6)
-       $scope.data = response
+       response.back_end_languages = chunk(response.back_end_languages, 6);
+       response.front_end_languages = chunk(response.front_end_languages, 6);
+       response.dev_ops_tools = chunk(response.dev_ops_tools, 6);
+       response.frameworks = chunk(response.frameworks, 6);
+       response.relational_databases = chunk(response.relational_databases, 6);
+       response.nosql_databases = chunk(response.nosql_databases, 6);
+       $scope.data = response;
     });
     return $scope.create = function() {
       TechStack.createTechStack.create({
@@ -52,7 +58,9 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
           back_end_languages: unchunk($scope.data.back_end_languages),
           front_end_languages: unchunk($scope.data.front_end_languages),
           dev_ops_tools: unchunk($scope.data.dev_ops_tools),
-          frameworks: unchunk($scope.data.frameworks)
+          frameworks: unchunk($scope.data.frameworks),
+          relational_databases: unchunk($scope.data.relational_databases),
+          nosql_databases: unchunk($scope.data.nosql_databases)
         }},
         function(response) {
           return $scope.success;

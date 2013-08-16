@@ -23,6 +23,25 @@ class ConversationsController < ApplicationController
     @receipts.mark_as_read
   end
 
+  def update
+    if params[:untrash].present?
+      @conversation.untrash(@mailbox_for)
+    end
+
+    if params[:reply_all].present?
+      last_receipt = @mailbox.receipts_for(@conversation).last
+      @receipt = @mailbox_for.reply_to_all(last_receipt, params[:body])
+    end
+
+    if @box.eql? 'trash'
+      @receipts = @mailbox.receipts_for(@conversation).trash
+    else
+      @receipts = @mailbox.receipts_for(@conversation).not_trash
+    end
+    redirect_to action: :show
+    @receipts.mark_as_read
+  end
+
   def destroy
     @conversation.move_to_trash(@mailbox_for)
     if params[:location].present? and params[:location] == 'conversation'

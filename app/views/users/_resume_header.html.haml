@@ -1,8 +1,19 @@
+- job_listings = current_company.try(:job_listings)
+- if job_listings.present?
+  .pull-right
+    .btn-group
+      %a.btn.dropdown-toggle{'data-toggle' => 'dropdown', href: '#'}
+        Send Message
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %h5.text-center Regarding Job Listing
+        - job_listings.each do |listing|
+          %li= link_to listing.job_title, new_company_message_path(company_id: current_company.id, receiver: @user.id, job_listing_id: listing.id)
+
 .section_header
   - if company_signed_in?
     .media
-      .pull-right
-        = link_to 'Send Message', new_company_message_path(company_id: current_company.id, receiver: @user.id), class: 'btn btn-success'
       .pull-left
         = image_tag(@user.profile_image, class: 'img-rounded', size: '50x50')
       .media-body

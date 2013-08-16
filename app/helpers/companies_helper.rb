@@ -25,6 +25,11 @@ module CompaniesHelper
   end
 
   def default_job_listing_company(listing, company, user)
-    "SWEET"
+    "<p>Hey #{user.name},</p><p>We are messaging you regarding a #{listing.fulltime? ? 'fulltime' : 'part-time'}
+    #{listing.remote? ? 'remote' : ''} #{listing.job_title} position in #{listing.location}. We think that you
+    would be an ideal candidate here at #{company.name} based on your preferences. You can find more information about us
+    #{link_to 'here', company_path(id: company.id) } and read more about the job listing
+    #{link_to 'here', company_job_listing_path(comapny_id: company.id, id: listing.id)}. We hope to hear
+    back from you as soon as possible, and we can work out an ideal time to schedule an interview.</p><p>Thanks.</p>"
   end
 end

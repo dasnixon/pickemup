@@ -1,0 +1,14 @@
+%div{class: "span3 pro"}
+  %div{class: "plan"}
+    %div{class: "wrapper"}
+      %h3 Enterprise
+      %div{class: "price"}
+        %span{class: "dollar"} $
+        %span{class: "qty"} 750
+        %span{class: "month"} /month
+      %div{class: "features"}
+        %h5 Unlimited Job Listings
+      - if company_signed_in?
+        = link_to "Select", new_company_subscription_path(company_id: @company.id, clicked_option: 3), class: "order"
+      - else
+        = link_to "Sign Up", sign_up_path, class: "order"

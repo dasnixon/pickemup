@@ -15,6 +15,7 @@ class SessionsController < ApplicationController
     company = Company.authenticate(params[:email], params[:password])
     if company.present?
       session[:company_id] = company.id
+      company.update_tracked_fields!(request)
       redirect_to root_path, notice: "Signed in!"
     else
       session[:company_id] = nil
@@ -34,6 +35,7 @@ class SessionsController < ApplicationController
       user = User.from_omniauth(request.env['omniauth.auth'], :github)
       if user.present?
         session[:user_id] = user.id
+        user.update_tracked_fields!(request)
         redirect_to_root('You are signed in!')
       else
         session[:user_id] = nil
@@ -55,7 +57,8 @@ class SessionsController < ApplicationController
     elsif !user_signed_in?
       user = User.from_omniauth(request.env['omniauth.auth'], :linkedin)
       if user.present?
-        session[:user_id] = user.id unless user_signed_in?
+        session[:user_id] = user.id
+        user.update_tracked_fields!(request)
         redirect_to_root('You are signed in!')
       else
         session[:user_id] = nil

@@ -27,6 +27,7 @@ class Company < ActiveRecord::Base
   acts_as_messageable #mailboxer
 
   include JobListingMessages #override mailboxer .send_message
+  include Trackable
 
   attr_accessible :name, :email, :description, :website,
     :industry, :password_salt, :password_hash, :description,

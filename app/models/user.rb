@@ -22,6 +22,7 @@ class User < ActiveRecord::Base
   include LinkedinLogin
   include GithubLogin
   include JobListingMessages #override mailboxer .send_message
+  include Trackable
 
   has_one :github_account, dependent: :destroy
   has_one :linkedin, dependent: :destroy

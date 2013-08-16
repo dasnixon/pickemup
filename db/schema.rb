@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130808022540) do
+ActiveRecord::Schema.define(version: 20130816042852) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,11 @@ ActiveRecord::Schema.define(version: 20130808022540) do
     t.string   "competitors",        default: [],    array: true
     t.string   "logo"
     t.boolean  "verified",           default: false
+    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at"
+    t.inet     "last_sign_in_ip"
+    t.inet     "current_sign_in_ip"
+    t.integer  "sign_in_count"
   end
 
   create_table "conversations", force: true do |t|
@@ -290,12 +295,14 @@ ActiveRecord::Schema.define(version: 20130808022540) do
   create_table "tech_stacks", force: true do |t|
     t.integer  "company_id"
     t.string   "name"
-    t.string   "back_end_languages",  default: [], array: true
-    t.string   "front_end_languages", default: [], array: true
-    t.string   "frameworks",          default: [], array: true
-    t.string   "dev_ops_tools",       default: [], array: true
+    t.string   "back_end_languages",   default: [], array: true
+    t.string   "front_end_languages",  default: [], array: true
+    t.string   "frameworks",           default: [], array: true
+    t.string   "dev_ops_tools",        default: [], array: true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "nosql_databases",      default: [], array: true
+    t.string   "relational_databases", default: [], array: true
   end
 
   create_table "users", force: true do |t|
@@ -310,6 +317,11 @@ ActiveRecord::Schema.define(version: 20130808022540) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "stackexchange_synced", default: false
+    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at"
+    t.inet     "last_sign_in_ip"
+    t.inet     "current_sign_in_ip"
+    t.integer  "sign_in_count"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree

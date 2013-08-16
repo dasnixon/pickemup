@@ -101,7 +101,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           active: true
         }},
         function(response) {
-          $scope.success = 'Successfully created the job listing.'
+          $scope.success = 'Successfully created the job listing.';
           return $scope.success;
         }
     )};

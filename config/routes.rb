@@ -23,7 +23,7 @@ Pickemup::Application.routes.draw do
       get :get_preference
       put :update_preference
     end
-    resources :conversations, only: [:index, :show, :destroy] do
+    resources :conversations, only: [:index, :show, :destroy, :update] do
       member do
         put :untrash
       end
