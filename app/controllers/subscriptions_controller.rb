@@ -13,6 +13,7 @@ class SubscriptionsController < ApplicationController
     if @subscription.save_with_payment
       redirect_to root_path, notice: 'Subscription created! Start by adding a job listing.'
     else
+      @clicked_option = params[:plan]
       flash[:error] = 'We had trouble adding your payment information, try again.'
       render :new
     end

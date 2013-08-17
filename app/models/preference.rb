@@ -34,6 +34,9 @@
 #  updated_at             :datetime
 #
 
+#http://www.postgresql.org/docs/7.3/static/functions-matching.html
+#SELECT * FROM ( SELECT *, unnest(skills) s FROM preferences) x WHERE s ~* 'ruby';
+
 class Preference < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
@@ -60,5 +63,15 @@ class Preference < ActiveRecord::Base
       else
         self.class.const_get(attr.upcase)
     end
+  end
+
+  def preference_total_filled
+    Preference.columns.inject(0) do |total, col|
+      self.send(col.name) == col.default ? total : total + 1
+    end
+  end
+
+  def preference_percentage_filled
+    (self.preference_total_filled.to_f / Preference.columns.length) * 100
   end
 end

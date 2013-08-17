@@ -155,7 +155,7 @@ describe SessionsController do
     context 'not signed in' do
       context 'create new user with github' do
         context 'user successfully created with github' do
-          let(:user) { double(User, id: 'ID', present?: true) }
+          let(:user) { double(User, id: 'ID', present?: true, update_tracked_fields!: true) }
           before :each do
             User.stub(:from_omniauth).and_return(user)
             get(:github)
@@ -251,7 +251,7 @@ describe SessionsController do
     context 'not signed in' do
       context 'create new user with linkedin' do
         context 'user successfully created with linkedin' do
-          let(:user) { double(User, id: 'ID', present?: true) }
+          let(:user) { double(User, id: 'ID', present?: true, update_tracked_fields!: true) }
           before :each do
             User.stub(:from_omniauth).and_return(user)
             get(:linkedin)

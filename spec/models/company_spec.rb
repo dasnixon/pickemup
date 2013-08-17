@@ -63,6 +63,21 @@ describe Company do
     end
   end
 
+  describe '#calculate_score' do
+    context 'num_employees present' do
+      let(:company) { create(:company, num_employees: '10') }
+      it 'returns integer value of num_employees' do
+        company.calculate_score.should eq 10
+      end
+    end
+    context 'num_employees not present' do
+      let(:company) { create(:company, num_employees: nil) }
+      it 'returns default of 1' do
+        company.calculate_score.should eq 1
+      end
+    end
+  end
+
   describe '#get_logo' do
     context 'company has logo present' do
       before :each do

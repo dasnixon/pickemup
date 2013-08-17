@@ -99,6 +99,12 @@ class User < ActiveRecord::Base
     self.save!
   end
 
+  def matching_companies
+    where_lang_statement = self.linkedin.profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
+    query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
+    JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company} }
+  end
+
   private
 
   #automatically generate a defaulted preference for a user upon creation

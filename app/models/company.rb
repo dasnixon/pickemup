@@ -29,6 +29,8 @@ class Company < ActiveRecord::Base
   include JobListingMessages #override mailboxer .send_message
   include Trackable
 
+  autocomplete :name, score: :calculate_score
+
   attr_accessible :name, :email, :description, :website,
     :industry, :password_salt, :password_hash, :description,
     :num_employees, :public, :founded, :logo, :password
@@ -49,6 +51,10 @@ class Company < ActiveRecord::Base
   has_one :subscription
   has_many :job_listings
   has_many :tech_stacks
+
+  def calculate_score
+    self.num_employees.present? ? self.num_employees.to_i : 1
+  end
 
   def get_logo
     self.logo.present? ? self.logo : 'default_logo.png'

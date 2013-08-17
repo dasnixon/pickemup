@@ -46,7 +46,7 @@ gem 'oauth2'
 gem 'omniauth-linkedin-oauth2'
 gem 'omniauth-github'
 gem 'omniauth-stackexchange'
-gem "bcrypt-ruby", :require => "bcrypt"
+gem 'bcrypt-ruby', require: 'bcrypt'
 
 #JAVASCRIPT
 gem 'angularjs-rails'
@@ -73,12 +73,21 @@ gem 'newrelic_rpm'
 #HTML TEXT EDITOR
 gem 'ckeditor_rails'
 
+#SEARCH AUTOCOMPLETION
+gem 'soulmate_rails'
+gem 'jquery-ui-rails'
+
 #OTHER
 gem 'annotate'
 gem 'httparty'
 gem 'jbuilder'
+gem 'redis'
+
+#HTML Truncate Text
+gem 'truncate_html'
 
 group :production do
+  #HEROKU
   gem 'rails_12factor'
 end
 
@@ -87,6 +96,7 @@ group :test, :development do
 end
 
 group :test do
+  gem 'fakeredis', require: 'fakeredis/rspec'
   gem 'timecop'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'

@@ -1,0 +1,32 @@
+.section_header
+  %h3 Your Matches
+
+%hr
+- if @matchings.present?
+  - @matchings.each do |matching|
+    - job_listing = matching[:job_listing]
+    - company = matching[:company]
+    .media
+      = link_to image_tag(company.logo, size: '100x100'), company_path(id: company.id), class: 'pull-left'
+      .pull-right
+        .pull-right
+          = link_to 'View Listing', company_job_listing_path(company_id: company.id, id: job_listing.id), class: 'btn btn-primary'
+          = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'
+        .clearfix
+        %dl.dl-horizontal
+          %dt Location
+          %dd= job_listing.location
+          %dt Salary
+          %dd= "#{number_to_currency(job_listing.salary_range_low)} - #{number_to_currency(job_listing.salary_range_high)}"
+          %dt Languages
+          %dd= truncate_html(job_listing.acceptable_languages.join(', '), length: 30, omission: '...and more')
+      .media-body
+        %h4.media-heading= link_to "#{company.name} - #{job_listing_title(job_listing)}", company_job_listing_path(company_id: company.id, id: job_listing.id)
+        %div
+          %p
+            = truncate_html(job_listing.job_description, length: 150, omission: "...#{link_to 'read more', company_job_listing_path(company_id: company.id, id: job_listing.id)}")
+    %hr
+- else
+  %p
+    Make sure you fill our your preferences to start getting matched with companies.
+    You can also start looking around by searching for companies that you may want to apply for.

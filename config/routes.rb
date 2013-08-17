@@ -12,6 +12,7 @@ Pickemup::Application.routes.draw do
   scope '/', controller: :home do
     get :about
     get :contact
+    get :company_search
   end
   get "log_out" => "sessions#destroy", as: "log_out"
   resources :users, only: [] do

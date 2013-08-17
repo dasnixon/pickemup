@@ -1,0 +1,5 @@
+%h4 Percentage of #{link_to 'Preferences', preferences_user_path(id: current_user.id)} Filled Out
+.progress.progress-success
+  - progress = current_user.preference.preference_percentage_filled
+  .bar{style: "width: #{progress}%"}
+    %strong #{progress.round(0)}%

@@ -21,7 +21,14 @@ describe TechStack do
     context 'data already set for attribute' do
       let(:tech_stack) { create(:tech_stack, dev_ops_tools: ['Chef', 'Puppet']) }
       let(:expected) do
-        [{ name: 'Chef', checked: true }, { name: 'Puppet', checked: true }, {name: 'Capistrano', checked: false}]
+        TechStack::DEV_OPS_TOOLS.collect do |p|
+          case p
+            when 'Chef', 'Puppet'
+              { name: p, checked: true }
+            else
+              { name: p, checked: false }
+          end
+        end
       end
       it 'returns default constant values with false checked values' do
         tech_stack.get_attr_values('dev_ops_tools').should =~ expected

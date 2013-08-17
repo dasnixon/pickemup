@@ -7,6 +7,12 @@
         %span.icon-bar
       = link_to raw('<strong>Pickemup</strong>'), root_path, class: 'brand'
       .nav-collapse.collapse
+        - if user_signed_in?
+          .nav.pull-left
+            .input-prepend
+              %span.add-on
+                %i.icon-search
+              = text_field_tag :search, params[:search], id: 'company_search', class: 'span2', placeholder: 'Company Search'
         %ul.nav.pull-right
           - if user_signed_in?
             %li= image_tag(current_user.profile_image.url(:thumb), class: 'img img-circle', size: '40x40')
@@ -53,23 +59,7 @@
           - if !user_signed_in? || company_signed_in?
             %li= link_to 'Pricing', root_path
           %li= link_to 'Contact Us', contact_path
-          - if user_signed_in?
-            - unless current_user.linkedin_uid.present?
-              %li
-                = link_to '/auth/linkedin' do
-                  %i.icon-linkedin
-                  %strong | Link your Linkedin
-            - unless current_user.github_uid.present?
-              %li
-                = link_to '/auth/github' do
-                  %i.icon-github
-                  %strong | Link your Github
-            - unless current_user.stackexchange_synced?
-              %li
-                = link_to '/auth/stackexchange' do
-                  %i.icon-stackexchange
-                  %strong | Link your Stackexchange
-          - elsif company_signed_in?
+          - if company_signed_in?
             %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)
           - else
             %li= link_to 'Sign In', sign_in_path
