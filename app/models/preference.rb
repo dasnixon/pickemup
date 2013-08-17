@@ -67,11 +67,12 @@ class Preference < ActiveRecord::Base
 
   def preference_total_filled
     Preference.columns.inject(0) do |total, col|
+      next total if col.name =~ /(user_id|id|created_at|updated_at)/
       self.send(col.name) == col.default ? total : total + 1
     end
   end
 
   def preference_percentage_filled
-    (self.preference_total_filled.to_f / Preference.columns.length) * 100
+    (self.preference_total_filled.to_f / (Preference.columns.length - 4)) * 100
   end
 end

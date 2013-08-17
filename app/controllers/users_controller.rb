@@ -1,8 +1,20 @@
 class UsersController < ApplicationController
   before_filter :eager_load_user, :check_permissions, only: [:resume]
-  before_filter :get_and_check_user, only: [:preferences, :get_preference, :update_preference, :listings]
+  before_filter :get_and_check_user, only: [:edit, :update, :preferences, :get_preference, :update_preference, :listings]
   before_filter :cleanup_preference_params, only: [:update_preference]
   respond_to :json, :html
+
+  def edit
+    respond_with @user
+  end
+
+  def update
+    if @user.update(params[:user])
+      respond_with(@user, location: nil, status: :created)
+    else
+      render json: { errors: @user.errors }, status: :bad_request
+    end
+  end
 
   def resume
     if @user

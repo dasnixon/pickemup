@@ -16,6 +16,7 @@
         %ul.nav.pull-right
           - if user_signed_in?
             %li= image_tag(current_user.profile_image.url(:thumb), class: 'img img-circle', size: '40x40')
+            %li= link_to 'Edit Profile', edit_user_path(id: current_user.id)
             %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
             %li= link_to 'Resume', resume_user_path(id: current_user.id)
             %li= link_to 'Briefcase', listings_user_path(id: current_user.id)
@@ -59,11 +60,12 @@
           - if !user_signed_in? || company_signed_in?
             %li= link_to 'Pricing', root_path
           %li= link_to 'Contact Us', contact_path
-          - if company_signed_in?
-            %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)
-          - else
-            %li= link_to 'Sign In', sign_in_path
-            %li= link_to 'Sign Up', sign_up_path
+          - if !user_signed_in?
+            - if company_signed_in?
+              %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)
+            - else
+              %li= link_to 'Sign In', sign_in_path
+              %li= link_to 'Sign Up', sign_up_path
           - if user_signed_in? || company_signed_in?
             %li= link_to 'Logout', log_out_path
 = render 'layouts/messages'

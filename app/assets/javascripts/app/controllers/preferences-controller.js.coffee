@@ -1,4 +1,4 @@
-preference_app.controller "PreferencesController", ($scope, $http, $location, $state, $stateParams, Preference) ->
+preference_app.controller "PreferencesController", ($scope, $location, $state, $stateParams, Preference) ->
 
   $scope.preference     = {}
   $scope.user_id        = ''
@@ -8,7 +8,7 @@ preference_app.controller "PreferencesController", ($scope, $http, $location, $s
   $scope.error_updating = ''
   $scope.dirty_message  = ''
 
-  if $state.current.name == 'edit'
+  if $state.current.name == 'edit_preferences'
     $scope.user_id = $stateParams['id']
     Preference.getPreference
       user_id: $stateParams['id'],

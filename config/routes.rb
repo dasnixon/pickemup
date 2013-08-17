@@ -15,7 +15,7 @@ Pickemup::Application.routes.draw do
     get :company_search
   end
   get "log_out" => "sessions#destroy", as: "log_out"
-  resources :users, only: [] do
+  resources :users, only: [:edit, :update] do
     member do
       get :listings
       get :resume

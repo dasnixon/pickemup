@@ -1,8 +1,21 @@
-preference_app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+userEdit.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
 
   $stateProvider
     .state "edit",
+      url: "/users/:id/edit"
+      views:
+        "":
+          controller: "UsersController"
+          templateUrl: "/assets/users/edit.html.erb"
+
+  $urlRouterProvider.otherwise("/")
+
+preference_app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+  $locationProvider.html5Mode(true)
+
+  $stateProvider
+    .state "edit_preferences",
       url: "/users/:id/preferences"
       views:
         "":

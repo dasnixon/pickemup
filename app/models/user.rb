@@ -29,6 +29,9 @@ class User < ActiveRecord::Base
   has_one :stackexchange, dependent: :destroy
   has_one :preference, dependent: :destroy
 
+  validates :name, presence: true
+  validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
+
   attr_accessor :newly_created
 
   attr_accessible :github_uid, :linkedin_uid, :email, :name, :location,

@@ -1,26 +1,9 @@
-preference_app.config ($httpProvider) ->
-  $httpProvider.defaults.transformRequest.push (data, headersGetter) ->
-    utf8_data = data
-    unless angular.isUndefined(data)
-      d = angular.fromJson(data)
-      d["_utf8"] = "&#9731;"
-      utf8_data = angular.toJson(d)
-    utf8_data
-
-jobListing.config ($httpProvider) ->
-  $httpProvider.defaults.transformRequest.push (data, headersGetter) ->
-    utf8_data = data
-    unless angular.isUndefined(data)
-      d = angular.fromJson(data)
-      d["_utf8"] = "&#9731;"
-      utf8_data = angular.toJson(d)
-    utf8_data
-
-techStack.config ($httpProvider) ->
-  $httpProvider.defaults.transformRequest.push (data, headersGetter) ->
-    utf8_data = data
-    unless angular.isUndefined(data)
-      d = angular.fromJson(data)
-      d["_utf8"] = "&#9731;"
-      utf8_data = angular.toJson(d)
-    utf8_data
+angular.module('utf8', [])
+  .config ($httpProvider) ->
+    $httpProvider.defaults.transformRequest.push (data, headersGetter) ->
+      utf8_data = data
+      unless angular.isUndefined(data)
+        d = angular.fromJson(data)
+        d["_utf8"] = "&#9731;"
+        utf8_data = angular.toJson(d)
+      utf8_data

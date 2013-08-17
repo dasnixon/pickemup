@@ -77,6 +77,9 @@ gem 'ckeditor_rails'
 gem 'soulmate_rails'
 gem 'jquery-ui-rails'
 
+#PAGINATION
+gem 'will_paginate-bootstrap'
+
 #OTHER
 gem 'annotate'
 gem 'httparty'
