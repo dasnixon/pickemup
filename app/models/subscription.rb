@@ -54,8 +54,8 @@ class Subscription < ActiveRecord::Base
     self.plan = plan_type
   end
 
-  def maxed_out?(num_listings)
-    (num_listings >= max_job_listings) || !self.active || expired?
+  def maxed_out?
+    (self.company.active_listings.count >= max_job_listings) || !self.active || expired?
   end
 
   def expired?
