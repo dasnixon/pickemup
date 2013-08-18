@@ -52,6 +52,10 @@ class Company < ActiveRecord::Base
   has_many :job_listings
   has_many :tech_stacks
 
+  def active_listings
+    self.job_listings.select { |listing| listing.active }
+  end
+
   def calculate_score
     self.num_employees.present? ? self.num_employees.to_i : 1
   end

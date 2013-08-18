@@ -15,8 +15,13 @@ class JobListingsController < ApplicationController
   end
 
   def new
-    @job_listing = @company.job_listings.build
-    listing_response
+    unless @company.subscription.maxed_out?
+      @job_listing = @company.job_listings.build
+      listing_response
+    else
+      flash[:error] = "Can't create a new job listing.  You've reached your subscription limit."
+      redirect_to company_job_listings_path(company_id: @company.id)
+    end
   end
 
   def create
@@ -46,8 +51,13 @@ class JobListingsController < ApplicationController
   end
 
   def toggle_active
-    @job_listing.toggle_active
-    redirect_to company_job_listings_path(company_id: @company.id), notice: "Successfully #{@job_listing.active? ? 'activated' : 'deactivated'} your job listing."
+    if !@company.subscription.maxed_out? || @job_listing.active
+      @job_listing.toggle_active
+      redirect_to company_job_listings_path(company_id: @company.id), notice: "Successfully #{@job_listing.active? ? 'activated' : 'deactivated'} your job listing."
+    else
+      flash[:error] = "Can't activate another job listing.  You've reached your subscription limit"
+      redirect_to company_job_listings_path(company_id: @company.id)
+    end
   end
 
   private
