@@ -110,19 +110,12 @@ class User < ActiveRecord::Base
   end
 
   def matching_companies
-<<<<<<< Updated upstream
     linkedin = self.linkedin
     if linkedin && linkedin.profile
       where_lang_statement = linkedin.profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
       query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
       JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company} }
     end
-=======
-    return nil unless self.linkedin
-    where_lang_statement = self.linkedin.profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
-    query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
-    JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company} }
->>>>>>> Stashed changes
   end
 
   private
