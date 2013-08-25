@@ -41,7 +41,10 @@ class Preference < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
 
-  HASHABLE_PARAMS = %w(locations industries positions settings dress_codes company_types perks practices levels company_size skills)
+  HASHABLE_PARAMS = %w(locations industries positions settings dress_codes company_types perks
+    practices levels company_size skills)
+  BENEFIT_ATTRS = %w(paid_vacation healthcare visioncare dentalcare life_insurance us_citizen equity
+    bonuses retirement fulltime open_source remote)
 
   attr_accessible :healthcare, :dentalcare, :visioncare, :life_insurance, :paid_vacation,
     :equity, :bonuses, :retirement, :fulltime, :remote, :open_source, :expected_salary,
@@ -65,18 +68,27 @@ class Preference < ActiveRecord::Base
     end
   end
 
+  def benefits_section_filled?
+    BENEFIT_ATTRS.any? { |attr| Preference.columns_hash[attr].default != self.send(attr) }
+  end
+
   def ignored_columns
-    @ignored ||= Preference.columns.select { |col| col.name =~ /(user_id|id)/ || col.type.to_s =~ /(datetime|boolean)/ }
+    @ignored ||= Preference.columns.select { |col| ignored_column?(col) }
+  end
+
+  def ignored_column?(col)
+    col.name =~ /(user_id|id)/ || col.type.to_s =~ /(datetime)/ || BENEFIT_ATTRS.include?(col.name)
   end
 
   def preference_total_filled
-    Preference.columns.inject(0) do |total, col|
+    current_total = Preference.columns.inject(0) do |total, col|
       next total if ignored_columns.include?(col)
       self.send(col.name) == col.default ? total : total + 1
     end
+    benefits_section_filled? ? current_total + 1 : current_total
   end
 
-  def preference_percentage_filled
-    (self.preference_total_filled.to_f / (Preference.columns.length - ignored_columns.length)) * 100
+  def preference_percentage_filled #add +1 for the benefits section, which is considered one change in itself
+    (self.preference_total_filled.to_f / (Preference.columns.length - ignored_columns.length + 1)) * 100
   end
 end

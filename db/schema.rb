@@ -11,11 +11,34 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130824205427) do
+ActiveRecord::Schema.define(version: 20130825222143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
+
+  create_table "code_snippet_files", force: true do |t|
+    t.string   "name"
+    t.text     "content"
+    t.integer  "size"
+    t.string   "url"
+    t.integer  "code_snippet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "code_snippets", force: true do |t|
+    t.text     "description"
+    t.string   "url"
+    t.string   "gist_key"
+    t.boolean  "public"
+    t.integer  "comments_count"
+    t.string   "comments_url"
+    t.datetime "gist_created_at"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "companies", force: true do |t|
     t.string   "name"

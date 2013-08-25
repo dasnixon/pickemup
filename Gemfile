@@ -80,6 +80,9 @@ gem 'jquery-ui-rails'
 #PAGINATION
 gem 'will_paginate-bootstrap'
 
+#TEXT EDITOR - BROSWER
+gem 'codemirror-rails'
+
 #OTHER
 gem 'annotate'
 gem 'httparty'
