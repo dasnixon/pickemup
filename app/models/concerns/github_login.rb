@@ -30,6 +30,7 @@ module GithubLogin
 
   #set attributes from the github auth information on the user
   def set_attributes_from_github(auth)
+    return if self.manually_setup_profile
     info             = auth.info
     extra_info       = auth.extra.raw_info
     self.name        = info.name

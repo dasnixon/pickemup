@@ -21,6 +21,7 @@ module LinkedinLogin
 
   #set attributes from the linkedin auth information on the user
   def set_attributes_from_linkedin(auth)
+    return if self.manually_setup_profile
     info             = auth.info
     extra_info       = auth.extra.raw_info
     self.name        = info.name

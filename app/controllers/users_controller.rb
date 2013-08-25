@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    if @user.update(params[:user])
+    if @user.update(params[:user].merge(manually_setup_profile: true))
       respond_with(@user, location: nil, status: :created)
     else
       render json: { errors: @user.errors }, status: :bad_request

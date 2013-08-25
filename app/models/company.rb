@@ -21,6 +21,11 @@
 #  competitors        :string(255)      default([])
 #  logo               :string(255)
 #  verified           :boolean          default(FALSE)
+#  last_sign_in_at    :datetime
+#  current_sign_in_at :datetime
+#  last_sign_in_ip    :inet
+#  current_sign_in_ip :inet
+#  sign_in_count      :integer
 #
 
 class Company < ActiveRecord::Base

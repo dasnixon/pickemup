@@ -2,18 +2,24 @@
 #
 # Table name: users
 #
-#  id                   :integer          not null, primary key
-#  github_uid           :string(255)
-#  linkedin_uid         :string(255)
-#  email                :string(255)
-#  name                 :string(255)
-#  location             :string(255)
-#  profile_image        :string(255)
-#  main_provider        :string(255)
-#  description          :text
-#  created_at           :datetime
-#  updated_at           :datetime
-#  stackexchange_synced :boolean          default(FALSE)
+#  id                     :integer          not null, primary key
+#  github_uid             :string(255)
+#  linkedin_uid           :string(255)
+#  email                  :string(255)
+#  name                   :string(255)
+#  location               :string(255)
+#  profile_image          :string(255)
+#  main_provider          :string(255)
+#  description            :text
+#  created_at             :datetime
+#  updated_at             :datetime
+#  stackexchange_synced   :boolean          default(FALSE)
+#  last_sign_in_at        :datetime
+#  current_sign_in_at     :datetime
+#  last_sign_in_ip        :inet
+#  current_sign_in_ip     :inet
+#  sign_in_count          :integer
+#  manually_setup_profile :boolean          default(FALSE)
 #
 
 class User < ActiveRecord::Base
@@ -35,7 +41,8 @@ class User < ActiveRecord::Base
   attr_accessor :newly_created
 
   attr_accessible :github_uid, :linkedin_uid, :email, :name, :location,
-    :current_company, :description, :profile_image, :main_provider
+    :current_company, :description, :profile_image, :main_provider,
+    :manually_setup_profile
 
   after_create :create_preference
 
@@ -103,12 +110,19 @@ class User < ActiveRecord::Base
   end
 
   def matching_companies
+<<<<<<< Updated upstream
     linkedin = self.linkedin
     if linkedin && linkedin.profile
       where_lang_statement = linkedin.profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
       query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
       JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company} }
     end
+=======
+    return nil unless self.linkedin
+    where_lang_statement = self.linkedin.profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
+    query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
+    JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company} }
+>>>>>>> Stashed changes
   end
 
   private
