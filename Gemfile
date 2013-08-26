@@ -107,7 +107,6 @@ group :test do
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
   gem 'rspec-rails'
-  gem 'fuubar'
   gem 'ffaker'
   gem 'rspec-sidekiq'
 end

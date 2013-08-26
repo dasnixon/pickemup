@@ -89,11 +89,11 @@ describe GithubAccount do
       end
     end
     context 'error occurs' do
-      let(:orgs)           { double(Github::Orgs, get: Github::Error::BadRequest) }
       before :each do
-        expect(Rails.logger).to receive(:error)
+        expect(Github).to receive(:new).with(oauth_token: github_account.token).and_return(Github::Error::BadRequest)
       end
       it 'logs an error' do
+        expect(Rails.logger).to receive(:error)
         github_account.get_org_information('test')
       end
     end

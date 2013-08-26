@@ -12,10 +12,9 @@ class SessionsController < ApplicationController
   end
 
   def company
-    company = Company.authenticate(params[:email], params[:password])
+    company = Company.authenticate(params[:email], params[:password], request)
     if company.present?
       session[:company_id] = company.id
-      company.update_tracked_fields!(request)
       redirect_to root_path, notice: "Signed in!"
     else
       session[:company_id] = nil
@@ -31,19 +30,15 @@ class SessionsController < ApplicationController
       else
         redirect_to root_path, alert: 'Unable to add your Github, try again later.'
       end
-    elsif !user_signed_in?
-      user = User.from_omniauth(request.env['omniauth.auth'], :github)
+    else
+      user = User.from_omniauth(request.env['omniauth.auth'], :github, request, true)
       if user.present?
         session[:user_id] = user.id
-        user.update_tracked_fields!(request)
         redirect_to_root('You are signed in!')
       else
         session[:user_id] = nil
-        redirect_to root_path, alert: 'Unable to add your Github, try again later.'
+        redirect_to root_path, alert: 'Unable to add your Github, try again later. You may have another account in our system with the same email address.'
       end
-    else
-      session[:user_id] = nil
-      redirect_to root_path, alert: 'Unable to add your Github, try again later.'
     end
   end
 
@@ -54,19 +49,15 @@ class SessionsController < ApplicationController
       else
         redirect_to root_path, alert: 'Unable to add your LinkedIn, try again later.'
       end
-    elsif !user_signed_in?
-      user = User.from_omniauth(request.env['omniauth.auth'], :linkedin)
+    else
+      user = User.from_omniauth(request.env['omniauth.auth'], :linkedin, request, true)
       if user.present?
         session[:user_id] = user.id
-        user.update_tracked_fields!(request)
         redirect_to_root('You are signed in!')
       else
         session[:user_id] = nil
-        redirect_to root_url, alert: 'Unable to add your LinkedIn, try again later.'
+        redirect_to root_url, alert: 'Unable to add your LinkedIn, try again later. You may have another account in our system with the same email address.'
       end
-    else
-      session[:user_id] = nil
-      redirect_to root_path, alert: 'Unable to add your LinkedIn, try again later.'
     end
   end
 

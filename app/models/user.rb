@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
 
-  attr_accessor :newly_created
+  attr_accessor :newly_created, :request, :track
 
   attr_accessible :github_uid, :linkedin_uid, :email, :name, :location,
     :current_company, :description, :profile_image, :main_provider,
@@ -49,25 +49,23 @@ class User < ActiveRecord::Base
   mount_uploader :profile_image, AvatarUploader #carrierwave
 
   #find or create a user from auth then update information on that user
-  def self.from_omniauth(auth, provider)
+  def self.from_omniauth(auth, provider, request=nil, track=false)
     case provider
       when :github
-        User.where(github_uid: auth.uid).first_or_create do |user|
-          user.set_user_github_information(auth)
+        User.where(github_uid: auth.uid).first_or_initialize do |user|
+          user.request, user.track = request, track
+          return nil unless user.set_user_github_information(auth)
         end.tap do |user|
-          StoreUserProfileImage.perform_async(user.id, auth.info.image) unless user.main_provider == 'linkedin'
-          if !user.newly_created
-            user.main_provider == 'linkedin' ? UserInformationWorker.perform_async(user.id) : user.update_github_information(auth)
-          end
+          user.request, user.track = request, track unless user.newly_created
+          user.post_github_setup(auth)
         end
       when :linkedin
-        User.where(linkedin_uid: auth.uid).first_or_create do |user|
-          user.set_user_linkedin_information(auth)
+        User.where(linkedin_uid: auth.uid).first_or_initialize do |user|
+          user.request, user.track = request, track
+          return nil unless user.set_user_linkedin_information(auth)
         end.tap do |user|
-          StoreUserProfileImage.perform_async(user.id, auth.info.image) unless user.main_provider == 'github'
-          if !user.newly_created
-            user.main_provider == 'github' ? UserInformationWorker.perform_async(user.id) : user.update_linkedin_information(auth)
-          end
+          user.request, user.track = request, track unless user.newly_created
+          user.post_linkedin_setup(auth)
         end
       else
         nil
