@@ -155,7 +155,7 @@ describe SessionsController do
     context 'not signed in' do
       context 'create new user with github' do
         context 'user successfully created with github' do
-          let(:user) { double(User, id: 'ID', present?: true, update_tracked_fields!: true) }
+          let(:user) { double(User, id: 'ID', present?: true) }
           before :each do
             User.stub(:from_omniauth).and_return(user)
             get(:github)
@@ -176,26 +176,7 @@ describe SessionsController do
           it { should respond_with(:redirect) }
           it { should redirect_to(root_path) }
           it 'has flash alert' do
-            flash[:alert].should eq 'Unable to add your Github, try again later.'
-          end
-          it('sets session user id to nil') { session[:user_id].should be_nil }
-        end
-      end
-    end
-    context 'extreme failsafe' do
-      context 'not sync github or linkedin' do
-        context 'but logged in' do
-          let(:user) { create(:user, github_uid: nil, linkedin_uid: nil, main_provider: nil) }
-          before :each do
-            expect(user).to_not receive(:setup_linkedin_account)
-            expect(User).to_not receive(:from_omniauth)
-            user_login(user)
-            get(:github)
-          end
-          it { should redirect_to(root_path) }
-          it { should respond_with(:redirect) }
-          it 'has flash alert' do
-            flash[:alert].should eq 'Unable to add your Github, try again later.'
+            flash[:alert].should eq 'Unable to add your Github, try again later. You may have another account in our system with the same email address.'
           end
           it('sets session user id to nil') { session[:user_id].should be_nil }
         end
@@ -272,26 +253,7 @@ describe SessionsController do
           it { should respond_with(:redirect) }
           it { should redirect_to(root_path) }
           it 'has flash alert' do
-            flash[:alert].should eq 'Unable to add your LinkedIn, try again later.'
-          end
-          it('sets session user id to nil') { session[:user_id].should be_nil }
-        end
-      end
-    end
-    context 'extreme failsafe' do
-      context 'not sync linkedin nor github' do
-        context 'but logged in' do
-          let(:user) { create(:user, github_uid: nil, linkedin_uid: nil, main_provider: nil) }
-          before :each do
-            expect(user).to_not receive(:setup_linkedin_account)
-            expect(User).to_not receive(:from_omniauth)
-            user_login(user)
-            get(:linkedin)
-          end
-          it { should redirect_to(root_path) }
-          it { should respond_with(:redirect) }
-          it 'has flash alert' do
-            flash[:alert].should eq 'Unable to add your LinkedIn, try again later.'
+            flash[:alert].should eq 'Unable to add your LinkedIn, try again later. You may have another account in our system with the same email address.'
           end
           it('sets session user id to nil') { session[:user_id].should be_nil }
         end
