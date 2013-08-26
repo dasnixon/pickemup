@@ -19,23 +19,34 @@ describe GithubLogin do
   describe '#set_user_github_information' do
     let(:user) { build(:user, main_provider: nil, newly_created: nil) }
     let(:github_account) { double(GithubAccount, from_omniauth: true) }
-    before :each do
-      expect(github_account).to receive(:from_omniauth)
-      user.stub(:build_github_account).and_return(github_account)
+    context 'valid setup' do
+      before :each do
+        expect(github_account).to receive(:from_omniauth)
+        user.stub(:build_github_account).and_return(github_account)
+      end
+      it 'sets newly_created virtual attribute to true' do
+        user.set_user_github_information(generic_auth_github)
+        user.newly_created.should be_true
+      end
+      it 'sets main_provider to github' do
+        user.set_user_github_information(generic_auth_github)
+        user.main_provider.should == 'github'
+      end
+      it 'sets attributes on user object from auth' do
+        user.set_user_github_information(generic_auth_github)
+        user.name.should == 'Your Name'
+        user.email.should == 'your@email.com'
+        user.location.should == 'San Francisco, CA'
+      end
     end
-    it 'sets newly_created virtual attribute to true' do
-      user.set_user_github_information(generic_auth_github)
-      user.newly_created.should be_true
-    end
-    it 'sets main_provider to github' do
-      user.set_user_github_information(generic_auth_github)
-      user.main_provider.should == 'github'
-    end
-    it 'sets attributes on user object from auth' do
-      user.set_user_github_information(generic_auth_github)
-      user.name.should == 'Your Name'
-      user.email.should == 'your@email.com'
-      user.location.should == 'San Francisco, CA'
+    context 'unable to set attributes from auth' do
+      before :each do
+        expect(github_account).to_not receive(:from_omniauth)
+        expect(user).to receive(:set_attributes_from_github).and_return(false)
+      end
+      it 'returns nil' do
+        user.set_user_github_information(generic_auth_github).should be_nil
+      end
     end
   end
 
@@ -105,14 +116,126 @@ describe GithubLogin do
 
   describe '#set_attributes_from_github' do
     let(:user) { create(:user) }
-    before :each do
-      expect(user).to receive(:save!)
+    context 'user has not manually setup their profile' do
+      before :each do
+        expect(user).to receive(:save)
+      end
+      it 'sets information from github auth' do
+        user.set_attributes_from_github(generic_auth_github)
+        user.name.should == 'Your Name'
+        user.email.should == 'your@email.com'
+        user.location.should == 'San Francisco, CA'
+      end
+      context 'tracking information set' do
+        before :each do
+          user.track = true
+          user.request = 'request'
+        end
+        it 'calls update_tracked_fields' do
+          expect(user).to receive(:update_tracked_fields!).with('request') { true }
+          user.set_attributes_from_github(generic_auth_github)
+        end
+      end
+      context 'no tracking information' do
+        it 'does not call update_tracked_fields' do
+          expect(user).to_not receive(:update_tracked_fields!).with('request') { true }
+          user.set_attributes_from_github(generic_auth_github)
+        end
+      end
     end
-    it 'sets information from github auth' do
-      user.set_attributes_from_github(generic_auth_github)
-      user.name.should == 'Your Name'
-      user.email.should == 'your@email.com'
-      user.location.should == 'San Francisco, CA'
+    context 'user manually setup profile' do
+      before :each do
+        user.manually_setup_profile = true
+        expect(user).to receive(:save)
+      end
+      it 'does not set information from github auth' do
+        user.set_attributes_from_github(generic_auth_github)
+        user.name.should_not == 'Your Name'
+        user.email.should_not == 'your@email.com'
+        user.location.should_not == 'San Francisco, CA'
+        user.name.should == user.name
+        user.email.should == user.email
+        user.location.should == user.location
+      end
+      context 'tracking information set' do
+        before :each do
+          user.track = true
+          user.request = 'request'
+        end
+        it 'calls update_tracked_fields' do
+          expect(user).to receive(:update_tracked_fields!).with('request') { true }
+          user.set_attributes_from_github(generic_auth_github)
+        end
+      end
+      context 'no tracking information' do
+        it 'does not call update_tracked_fields' do
+          expect(user).to_not receive(:update_tracked_fields!).with('request') { true }
+          user.set_attributes_from_github(generic_auth_github)
+        end
+      end
+    end
+  end
+
+  describe '#post_github_setup' do
+    context 'github main provider' do
+      let(:user) { create(:user, main_provider: 'github') }
+      context 'newly created' do
+        before :each do
+          user.newly_created = true
+        end
+        it 'stores user profile image' do
+          expect(StoreUserProfileImage).to receive(:perform_async)
+          user.post_github_setup(generic_auth_github)
+        end
+        it 'does not call update information worker' do
+          expect(UserInformationWorker).to_not receive(:perform_async)
+          user.post_github_setup(generic_auth_github)
+        end
+        it 'does not update github information' do
+          expect(user).to_not receive(:update_github_information)
+          user.post_github_setup(generic_auth_github)
+        end
+      end
+      context 'not newly created' do
+        before :each do
+          expect(user).to receive(:update_github_information)
+        end
+        it 'stores user profile image' do
+          expect(StoreUserProfileImage).to receive(:perform_async)
+          user.post_github_setup(generic_auth_github)
+        end
+        it 'does not call update information worker' do
+          expect(UserInformationWorker).to_not receive(:perform_async)
+          user.post_github_setup(generic_auth_github)
+        end
+      end
+    end
+    context 'linkedin main provider' do
+      let(:user) { create(:user, main_provider: 'linkedin') }
+      context 'newly created' do
+        before :each do
+          user.newly_created = true
+        end
+        it 'does nothing' do
+          expect(StoreUserProfileImage).to_not receive(:perform_async)
+          expect(UserInformationWorker).to_not receive(:perform_async)
+          expect(user).to_not receive(:update_github_information)
+          user.post_github_setup(auth_info)
+        end
+      end
+      context 'not newly created' do
+        before :each do
+          expect(UserInformationWorker).to receive(:perform_async)
+        end
+        it 'does not store user profile image' do
+          expect(StoreUserProfileImage).to_not receive(:perform_async)
+          user.post_github_setup(generic_auth_github)
+        end
+        it 'does not update github information' do
+          expect(user).to_not receive(:update_github_information)
+          user.post_github_setup(generic_auth_github)
+        end
+      end
     end
   end
 end

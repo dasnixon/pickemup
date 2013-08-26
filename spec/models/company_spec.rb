@@ -174,14 +174,15 @@ describe Company do
   end
 
   describe '.authenticate' do
+    let(:request) { OpenStruct.new(remote_ip: '127.0.0.1') }
     context 'company found' do
-      let(:found_company) { double(Company, password_hash: 'password_hash', password_salt: 'salt') }
+      let(:found_company) { double(Company, password_hash: 'password_hash', password_salt: 'salt', save_with_tracking_info: true) }
       before :each do
         Company.stub(:find_by).and_return(found_company)
         BCrypt::Engine.stub(:hash_secret).and_return(found_company.password_hash)
       end
       it 'returns company' do
-        Company.authenticate('email@email.com', 'password').should eq found_company
+        Company.authenticate('email@email.com', 'password', request).should eq found_company
       end
     end
     context 'invalid authentication' do
@@ -191,7 +192,7 @@ describe Company do
           Company.stub(:find_by).and_return(nil)
         end
         it 'returns company' do
-          Company.authenticate('email@email.com', 'password').should be_nil
+          Company.authenticate('email@email.com', 'password', request).should be_nil
         end
       end
       context 'invalid password' do
@@ -201,7 +202,7 @@ describe Company do
           BCrypt::Engine.stub(:hash_secret).and_return('blah')
         end
         it 'returns company' do
-          Company.authenticate('email@email.com', 'password').should be_nil
+          Company.authenticate('email@email.com', 'password', request).should be_nil
         end
       end
     end

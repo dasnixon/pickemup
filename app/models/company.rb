@@ -74,6 +74,11 @@ class Company < ActiveRecord::Base
     self.save
   end
 
+  def save_with_tracking_info(request)
+    self.update_tracked_fields!(request)
+    self.save
+  end
+
   def collected_tech_stacks
     self.tech_stacks.collect { |stack| { name: stack.name, id: stack.id } }
   end
@@ -111,9 +116,10 @@ class Company < ActiveRecord::Base
     self.website = new_url
   end
 
-  def self.authenticate(email, password)
+  def self.authenticate(email, password, request)
     company = find_by(email: email)
     if company && company.password_hash == BCrypt::Engine.hash_secret(password, company.password_salt)
+      company.save_with_tracking_info(request)
       company
     else
       nil

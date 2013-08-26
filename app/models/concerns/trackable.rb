@@ -12,7 +12,5 @@ module Trackable
 
     self.sign_in_count ||= 0
     self.sign_in_count += 1
-
-    save!
   end
 end

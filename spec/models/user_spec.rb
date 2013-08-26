@@ -44,51 +44,97 @@ describe User do
     end
     context 'user not found, instantiated' do
       context 'from github' do
-        before :each do
-          GithubAccount.any_instance.should_receive(:from_omniauth).with(generic_auth_github).and_return(true)
-          expect(StoreUserProfileImage).to receive(:perform_async)
+        context 'valid create' do
+          before :each do
+            GithubAccount.any_instance.should_receive(:from_omniauth).with(generic_auth_github).and_return(true)
+            expect(StoreUserProfileImage).to receive(:perform_async)
+          end
+          it 'sets newly_created virtual attribute to true' do
+            u = User.from_omniauth(generic_auth_github, :github)
+            u.newly_created.should be_true
+          end
+          it 'sets the main provider to github' do
+            u = User.from_omniauth(generic_auth_github, :github)
+            u.main_provider.should == 'github'
+          end
+          it 'sets attributes from auth' do
+            u = User.from_omniauth(generic_auth_github, :github)
+            u.github_uid.should == '123456789'
+            u.linkedin_uid.should be_nil
+            u.name.should == 'Your Name'
+            u.email.should == 'your@email.com'
+          end
+          context 'with tracking information' do
+            let(:request_info) { OpenStruct.new(remote_ip: '127.0.0.1') }
+            it 'sets sign in count' do
+              u = User.from_omniauth(generic_auth_github, :github, request_info, true)
+              u.sign_in_count.should eq 1
+            end
+            it 'sets request virtual attribute' do
+              u = User.from_omniauth(generic_auth_github, :github, request_info, true)
+              u.request.should eq request_info
+            end
+            it 'sets track virtual attribute' do
+              u = User.from_omniauth(generic_auth_github, :github, request_info, true)
+              u.track.should be_true
+            end
+          end
         end
-        it 'sets newly_created virtual attribute to true' do
-          u = User.from_omniauth(generic_auth_github, :github)
-          u.newly_created.should be_true
-        end
-        it 'sets the main provider to github' do
-          u = User.from_omniauth(generic_auth_github, :github)
-          u.main_provider.should == 'github'
-        end
-        it 'sets attributes from auth' do
-          u = User.from_omniauth(generic_auth_github, :github)
-          u.github_uid.should == '123456789'
-          u.linkedin_uid.should be_nil
-          u.name.should == 'Your Name'
-          u.email.should == 'your@email.com'
+        context 'invalid create' do
+          before :each do
+            User.any_instance.stub(:save).and_return(false)
+          end
+          it('returns nil') { User.from_omniauth(generic_auth_github, :github).should be_nil }
         end
       end
       context 'from linkedin' do
-        before :each do
-          Linkedin.any_instance.stub(:from_omniauth).with(generic_auth_linkedin).and_return(true)
-          expect(StoreUserProfileImage).to receive(:perform_async)
+        context 'valid create' do
+          before :each do
+            Linkedin.any_instance.stub(:from_omniauth).with(generic_auth_linkedin).and_return(true)
+            expect(StoreUserProfileImage).to receive(:perform_async)
+          end
+          it 'sets newly_created virtual attribute to true' do
+            u = User.from_omniauth(generic_auth_linkedin, :linkedin)
+            u.newly_created.should be_true
+          end
+          it 'sets the main provider to github' do
+            u = User.from_omniauth(generic_auth_linkedin, :linkedin)
+            u.main_provider.should == 'linkedin'
+          end
+          it 'sets attributes from auth' do
+            u = User.from_omniauth(generic_auth_linkedin, :linkedin)
+            u.github_uid.should be_nil
+            u.linkedin_uid.should == '123456789'
+            u.name.should == 'Your Name'
+            u.email.should == 'your@email.com'
+          end
+          context 'with tracking information' do
+            let(:request_info) { OpenStruct.new(remote_ip: '127.0.0.1') }
+            it 'sets sign in count' do
+              u = User.from_omniauth(generic_auth_linkedin, :linkedin, request_info, true)
+              u.sign_in_count.should eq 1
+            end
+            it 'sets request virtual attribute' do
+              u = User.from_omniauth(generic_auth_linkedin, :linkedin, request_info, true)
+              u.request.should eq request_info
+            end
+            it 'sets track virtual attribute' do
+              u = User.from_omniauth(generic_auth_linkedin, :linkedin, request_info, true)
+              u.track.should be_true
+            end
+          end
         end
-        it 'sets newly_created virtual attribute to true' do
-          u = User.from_omniauth(generic_auth_linkedin, :linkedin)
-          u.newly_created.should be_true
-        end
-        it 'sets the main provider to github' do
-          u = User.from_omniauth(generic_auth_linkedin, :linkedin)
-          u.main_provider.should == 'linkedin'
-        end
-        it 'sets attributes from auth' do
-          u = User.from_omniauth(generic_auth_linkedin, :linkedin)
-          u.github_uid.should be_nil
-          u.linkedin_uid.should == '123456789'
-          u.name.should == 'Your Name'
-          u.email.should == 'your@email.com'
+        context 'invalid create' do
+          before :each do
+            User.any_instance.stub(:save).and_return(false)
+          end
+          it('returns nil') { User.from_omniauth(generic_auth_linkedin, :linkedin).should be_nil }
         end
       end
     end
     context 'user found on lookup' do
       before :each do
-        User.stub_chain(:where, :first_or_create).and_return(user)
+        User.stub_chain(:where, :first_or_initialize).and_return(user)
       end
       context 'from github provider' do
         context 'main provider is github' do
@@ -191,7 +237,7 @@ describe User do
         user.linkedin_uid = nil
       end
       it 'calls #setup_information' do
-        expect(github_account).to receive(:setup_information)
+        expect(github_account).to receive(:setup_information).and_return(true)
         user.update_resume
       end
     end

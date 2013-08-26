@@ -4,13 +4,20 @@ module GithubLogin
   def set_user_github_information(auth)
     self.newly_created = true
     self.main_provider = 'github'
-    self.set_attributes_from_github(auth)
+    return nil unless self.set_attributes_from_github(auth)
     self.build_github_account.from_omniauth(auth)
   end
 
   def check_and_remove_existing_github(uid)
     user = User.find_by(github_uid: uid)
     user.destroy if user && self != user
+  end
+
+  def post_github_setup(auth)
+    StoreUserProfileImage.perform_async(self.id, auth.info.image) unless self.main_provider == 'linkedin'
+    if !self.newly_created
+      self.main_provider == 'linkedin' ? UserInformationWorker.perform_async(self.id) : self.update_github_information(auth)
+    end
   end
 
   #update information for a persisted user (not a new user) including all their
@@ -30,13 +37,15 @@ module GithubLogin
 
   #set attributes from the github auth information on the user
   def set_attributes_from_github(auth)
-    return if self.manually_setup_profile
-    info             = auth.info
-    extra_info       = auth.extra.raw_info
-    self.name        = info.name
-    self.email       = info.email
-    self.description = info.description
-    self.location    = extra_info.location
-    self.save! if !self.newly_created && self.changed?
+    self.update_tracked_fields!(self.request) if self.track and self.request
+    if !self.manually_setup_profile
+      info             = auth.info
+      extra_info       = auth.extra.raw_info
+      self.name        = info.name
+      self.email       = info.email
+      self.description = info.description
+      self.location    = extra_info.location
+    end
+    self.save
   end
 end
