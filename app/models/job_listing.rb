@@ -40,12 +40,6 @@ class JobListing < ActiveRecord::Base
 
   HASHABLE_PARAMS = ['practices', 'perks', 'experience_level', 'special_characteristics', 'acceptable_languages', 'position_type']
 
-  attr_accessible :job_title, :job_description, :experience_level, :estimated_work_hours, :salary_range_low,
-                  :salary_range_high, :vacation_days, :healthcare, :equity, :bonuses, :retirement,
-                  :perks, :fulltime, :remote, :hiring_time, :tech_stack_id, :location, :position_type,
-                  :special_characteristics, :company_id, :active, :sponsorship_available, :practices,
-                  :acceptable_languages, :dental, :vision, :life_insurance
-
   belongs_to :company
   has_many :conversations
 

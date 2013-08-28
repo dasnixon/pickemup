@@ -21,9 +21,6 @@ class TechStack < ActiveRecord::Base
 
   HASHABLE_PARAMS = ['back_end_languages', 'front_end_languages', 'dev_ops_tools', 'frameworks', 'relational_databases', 'nosql_databases']
 
-  attr_accessible :name, :back_end_languages, :front_end_languages,
-    :frameworks, :dev_ops_tools, :nosql_databases, :relational_databases
-
   belongs_to :company
 
   def attribute_default_values(attr)

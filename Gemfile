@@ -26,9 +26,6 @@ gem 'rmagick'
 #MESSAGING
 gem 'mailboxer'
 
-#ATTR SUPPORT
-gem 'protected_attributes' #needed for mailboxer gem
-
 #QUEUES
 gem 'sidekiq'
 gem 'sinatra'
@@ -55,6 +52,7 @@ gem 'coffee-rails'
 
 #ENGLISH LANGUAGE MAGIC
 gem 'indefinite_article'
+gem 'possessive'
 
 #DOCUMENTING
 group :doc do

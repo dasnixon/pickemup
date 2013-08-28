@@ -18,9 +18,6 @@ class Linkedin < ActiveRecord::Base
     skills certifications educations num-recommenders interests email-address
     first-name last-name headline public-profile-url)
 
-  attr_accessible :token, :headline, :industry,
-    :uid, :profile_url
-
   after_create :grab_user_information
 
   belongs_to :user
