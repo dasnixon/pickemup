@@ -31,4 +31,15 @@ module UserAlgorithm
   def valid_work_hours?(job_listing)
     ((job_listing.estimated_work_hours - 5)..(job_listing.estimated_work_hours + 5)).include?(self.work_hours)
   end
+
+  def valid_position?(job_listing)
+    intersected_levels = self.levels & job_listing.experience_level
+    return false unless intersected_levels.present? && (self.levels.length - 1..self.levels.length + 1).include?(intersected_levels.length)
+    self.valid_position_type?(job_listing)
+  end
+
+  def valid_position_type?(job_listing)
+    intersected_positions = self.positions & job_listing.position_type
+    intersected_positions.present? && (self.positions.length - 1..self.positions.length + 1).include?(intersected_positions.length)
+  end
 end

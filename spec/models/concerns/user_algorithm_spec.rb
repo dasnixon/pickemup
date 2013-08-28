@@ -171,4 +171,61 @@ describe UserAlgorithm do
       end
     end
   end
+
+  describe '#valid_position?' do
+    before :each do
+      preference.stub(:valid_position_type?).and_return(true)
+    end
+    context 'invalid position' do
+      context 'incorrect experience level' do
+        context 'no intersected matches' do
+          before :each do
+            preference.levels = ['Mid-level']
+            job_listing.experience_level = ['Senior-level']
+          end
+          it('returns false') { preference.valid_position?(job_listing).should be_false }
+        end
+        context 'amount of levels preferred is out of range of amount job listing specifies' do
+          before :each do
+            preference.levels = ['Mid-level', 'Senior-level', 'Junior', 'Executive']
+            job_listing.experience_level = ['Senior-level']
+          end
+          it('returns false') { preference.valid_position?(job_listing).should be_false }
+        end
+      end
+      context 'correct experience level' do
+        before :each do
+          preference.levels = ['Mid-level', 'Senior-level']
+          job_listing.experience_level = ['Senior-level']
+        end
+        it('returns true') { preference.valid_position?(job_listing).should be_true }
+      end
+    end
+  end
+
+  describe '#valid_position_type?' do
+    context 'invalid position type' do
+      context 'no intersected matches' do
+        before :each do
+          preference.positions = ['Software Engineer']
+          job_listing.position_type = ['DevOps Engineer']
+        end
+        it('returns false') { preference.valid_position_type?(job_listing).should be_false }
+      end
+      context 'amount of positions preferred is out of range of amount job listing specifies' do
+        before :each do
+          preference.positions = ['Software Engineer', 'QA Engineer', 'Architect', 'CEO']
+          job_listing.position_type = ['Software Engineer']
+        end
+        it('returns false') { preference.valid_position_type?(job_listing).should be_false }
+      end
+    end
+    context 'valid position type' do
+      before :each do
+        preference.positions = ['Software Engineer', 'QA Engineer']
+        job_listing.position_type = ['Software Engineer']
+      end
+      it('returns true') { preference.valid_position_type?(job_listing).should be_true }
+    end
+  end
 end
