@@ -18,9 +18,6 @@
 
 #Get all the education information from a user's linkedin profile
 class Education < ActiveRecord::Base
-  attr_accessible :activities, :degree, :field_of_study, :notes,
-    :school_name, :start_year, :end_year
-
   belongs_to :profile
 
   #CRUD operations for a user's linkedin educations

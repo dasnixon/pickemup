@@ -40,10 +40,6 @@ class User < ActiveRecord::Base
 
   attr_accessor :newly_created, :request, :track
 
-  attr_accessible :github_uid, :linkedin_uid, :email, :name, :location,
-    :current_company, :description, :profile_image, :main_provider,
-    :manually_setup_profile
-
   after_create :create_preference
 
   mount_uploader :profile_image, AvatarUploader #carrierwave
@@ -109,10 +105,13 @@ class User < ActiveRecord::Base
 
   def matching_companies
     linkedin = self.linkedin
-    if linkedin && linkedin.profile
-      where_lang_statement = linkedin.profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
-      query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
-      JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company} }
+    if linkedin
+      profile = linkedin.profile
+      if profile
+        where_lang_statement = profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
+        query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
+        JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company} }
+      end
     end
   end
 

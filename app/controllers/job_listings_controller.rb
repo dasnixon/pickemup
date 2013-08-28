@@ -80,7 +80,13 @@ class JobListingsController < ApplicationController
   end
 
   def job_listing_params
-    params.require(:job_listing).permit!
+    params.require(:job_listing).permit(:job_title, :job_description, :estimated_work_hours, :salary_range_low,
+    :salary_range_high, :vacation_days, :healthcare, :equity, :bonuses, :retirement, :fulltime, :remote, :hiring_time,
+    :tech_stack_id, :location, :company_id, :active, :sponsorship_available, :dental, :vision, :life_insurance).tap do |whitelisted|
+      JobListing::HASHABLE_PARAMS.each do |hash_param|
+        whitelisted[hash_param] = params[:job_listing][hash_param] #our cleanup_invalid_data method handles invalid data here
+      end
+    end
   end
 
   def find_company

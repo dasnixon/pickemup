@@ -13,9 +13,6 @@
 #
 
 class Profile < ActiveRecord::Base
-  attr_accessible :number_connections, :number_recommenders, :summary,
-    :skills
-
   has_many :positions, dependent: :destroy
   has_many :educations, dependent: :destroy
   belongs_to :linkedin

@@ -21,10 +21,6 @@
 #
 
 class Repo < ActiveRecord::Base
-  attr_accessible :name, :description, :private, :url,
-    :language, :number_forks, :number_watchers, :size,
-    :open_issues, :started, :last_updated
-
   belongs_to :github_account
 
   #CRUD operations for a user's github repositories

@@ -19,9 +19,6 @@
 #
 
 class Position < ActiveRecord::Base
-  attr_accessible :industry, :company_type, :name, :size,
-    :is_current, :title, :summary, :start_year, :start_month
-
   belongs_to :profile
 
   #CRUD operations for a user's linkedin positions

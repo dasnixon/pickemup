@@ -46,12 +46,6 @@ class Preference < ActiveRecord::Base
   BENEFIT_ATTRS = %w(paid_vacation healthcare visioncare dentalcare life_insurance us_citizen equity
     bonuses retirement fulltime open_source remote)
 
-  attr_accessible :healthcare, :dentalcare, :visioncare, :life_insurance, :paid_vacation,
-    :equity, :bonuses, :retirement, :fulltime, :remote, :open_source, :expected_salary,
-    :potential_availability, :company_size, :work_hours, :skills, :locations,
-    :industries, :positions, :settings, :dress_codes, :company_types, :perks,
-    :practices, :levels, :us_citizen
-
   belongs_to :user
 
   validates :expected_salary, numericality: true, inclusion: { in: 0..99999999, message: 'Nice try money bags.' }

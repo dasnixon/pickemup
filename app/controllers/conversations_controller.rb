@@ -1,5 +1,5 @@
 class ConversationsController < ApplicationController
-  include Concerns::MailboxerHub
+  include MailboxerHub
 
   before_filter :find_mailbox_for, :get_mailbox, :get_box
   before_filter :find_conversation, only: [:show, :update, :destroy, :untrash]
