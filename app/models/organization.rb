@@ -19,10 +19,6 @@
 #
 
 class Organization < ActiveRecord::Base
-  attr_accessible :name, :avatar_url, :url, :location,
-    :number_followers, :number_following, :blog,
-    :public_repos_count, :company_type
-
   belongs_to :github_account
 
   mount_uploader :logo, AvatarUploader #carrierwave

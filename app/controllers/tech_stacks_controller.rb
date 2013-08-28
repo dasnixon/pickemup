@@ -49,6 +49,10 @@ class TechStacksController < ApplicationController
   end
 
   def tech_stack_params
-    params.require(:tech_stack).permit!
+    params.require(:tech_stack).permit(:name).tap do |whitelisted|
+      TechStack::HASHABLE_PARAMS.each do |hash_param|
+        whitelisted[hash_param] = params[:tech_stack][hash_param]
+      end
+    end
   end
 end

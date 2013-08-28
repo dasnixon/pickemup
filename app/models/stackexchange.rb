@@ -18,9 +18,6 @@
 #
 
 class Stackexchange < ActiveRecord::Base
-  attr_accessible :token, :uid, :profile_url, :reputation, :age,
-    :badges, :display_name, :nickname, :stackexchange_key
-
   belongs_to :user
 
   after_create :set_user_synced

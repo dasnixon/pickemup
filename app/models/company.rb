@@ -36,10 +36,6 @@ class Company < ActiveRecord::Base
 
   autocomplete :name, score: :calculate_score
 
-  attr_accessible :name, :email, :description, :website,
-    :industry, :password_salt, :password_hash, :description,
-    :num_employees, :public, :founded, :logo, :password
-
   attr_accessor :password
 
   before_save :encrypt_password, if: :password

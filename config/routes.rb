@@ -37,7 +37,7 @@ Pickemup::Application.routes.draw do
     end
     get :purchase_options, to: 'subscriptions#purchase_options'
     get :get_users
-    resources :conversations, only: [:index, :show, :destroy] do
+    resources :conversations, only: [:index, :show, :destroy, :update] do
       member do
         put :untrash
       end

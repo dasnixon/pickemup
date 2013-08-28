@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  include Concerns::MailboxerHub
+  include MailboxerHub
 
   before_filter :find_mailbox_for, except: [:index]
   before_filter :get_box
