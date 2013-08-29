@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130829005319) do
+ActiveRecord::Schema.define(version: 20130829074009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20130829005319) do
     t.inet     "last_sign_in_ip"
     t.inet     "current_sign_in_ip"
     t.integer  "sign_in_count"
+    t.string   "size_definition"
   end
 
   create_table "conversations", force: true do |t|
@@ -212,10 +213,10 @@ ActiveRecord::Schema.define(version: 20130829005319) do
 
   create_table "preferences", force: true do |t|
     t.boolean  "healthcare",             default: false
-    t.boolean  "dentalcare",             default: false
-    t.boolean  "visioncare",             default: false
+    t.boolean  "dental",                 default: false
+    t.boolean  "vision",                 default: false
     t.boolean  "life_insurance",         default: false
-    t.boolean  "paid_vacation",          default: false
+    t.boolean  "vacation_days",          default: false
     t.boolean  "equity",                 default: false
     t.boolean  "bonuses",                default: false
     t.boolean  "retirement",             default: false
@@ -238,6 +239,7 @@ ActiveRecord::Schema.define(version: 20130829005319) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "willing_to_relocate",    default: false
   end
 
   create_table "profiles", force: true do |t|

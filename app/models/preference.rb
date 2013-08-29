@@ -4,10 +4,10 @@
 #
 #  id                     :integer          not null, primary key
 #  healthcare             :boolean          default(FALSE)
-#  dentalcare             :boolean          default(FALSE)
-#  visioncare             :boolean          default(FALSE)
+#  dental                 :boolean          default(FALSE)
+#  vision                 :boolean          default(FALSE)
 #  life_insurance         :boolean          default(FALSE)
-#  paid_vacation          :boolean          default(FALSE)
+#  vacation_days          :boolean          default(FALSE)
 #  equity                 :boolean          default(FALSE)
 #  bonuses                :boolean          default(FALSE)
 #  retirement             :boolean          default(FALSE)
@@ -30,6 +30,7 @@
 #  user_id                :integer
 #  created_at             :datetime
 #  updated_at             :datetime
+#  willing_to_relocate    :boolean          default(FALSE)
 #
 
 #http://www.postgresql.org/docs/7.3/static/functions-matching.html
@@ -41,8 +42,9 @@ class Preference < ActiveRecord::Base
 
   HASHABLE_PARAMS = %w(locations industries position_titles company_types perks
     practices experience_levels company_size skills)
-  BENEFIT_ATTRS = %w(paid_vacation healthcare visioncare dentalcare life_insurance us_citizen equity
+  BENEFIT_ATTRS = %w(vacation_days healthcare vision dental life_insurance us_citizen equity
     bonuses retirement fulltime open_source remote)
+  COMPANY_SIZE_RANGES = {'1-10 Employees' => 1..10, '11-50 Employees' => 11..50, '51-200 Employees' => 51..200, '201-500 Employees' => 201..500, '501+ Employees' => 501..Float::INFINITY}
 
   belongs_to :user
 

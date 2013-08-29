@@ -49,10 +49,10 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
 
   $scope.selectAllBenefits = ->
     $scope.preference.healthcare     = true
-    $scope.preference.dentalcare     = true
-    $scope.preference.visioncare     = true
+    $scope.preference.dental         = true
+    $scope.preference.vision         = true
     $scope.preference.life_insurance = true
-    $scope.preference.paid_vacation  = true
+    $scope.preference.vacation_days  = true
     $scope.preference.equity         = true
     $scope.preference.bonuses        = true
     $scope.preference.retirement     = true
@@ -63,10 +63,10 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
 
   $scope.unselectAllBenefits = ->
     $scope.preference.healthcare     = false
-    $scope.preference.dentalcare     = false
-    $scope.preference.visioncare     = false
+    $scope.preference.dental         = false
+    $scope.preference.vision         = false
     $scope.preference.life_insurance = false
-    $scope.preference.paid_vacation  = false
+    $scope.preference.vacation_days  = false
     $scope.preference.equity         = false
     $scope.preference.bonuses        = false
     $scope.preference.retirement     = false
@@ -81,10 +81,10 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
       action: 'update_preference',
       preference:
         healthcare: $scope.preference.healthcare
-        dentalcare: $scope.preference.dentalcare
-        visioncare: $scope.preference.visioncare
+        dental: $scope.preference.dental
+        vision: $scope.preference.vision
         life_insurance: $scope.preference.life_insurance
-        paid_vacation: $scope.preference.paid_vacation
+        vacation_days: $scope.preference.vacation_days
         equity: $scope.preference.equity
         bonuses: $scope.preference.bonuses
         retirement: $scope.preference.retirement
@@ -104,6 +104,7 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
         perks: unchunk $scope.preference.perks
         practices: unchunk $scope.preference.practices
         experience_levels: unchunk $scope.preference.experience_levels
+        willing_to_relocate: $scope.preference.willing_to_relocate
 
     , (response) ->
       $scope.preference.expected_salary = addCommas(response.preference.expected_salary)

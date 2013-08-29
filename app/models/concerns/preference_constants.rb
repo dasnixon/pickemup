@@ -14,7 +14,7 @@ module PreferenceConstants
   POSITION_TITLES         = ['Software Engineer', 'DevOps Engineer', 'QA Engineer', 'Manager', 'Architect',
                              'Senior Director of Engineering', 'VP of Engineering', 'SVP of Engineering', 'CEO']
 
-  COMPANY_TYPES           = ['Bootstrapped', 'VC Backed', 'Small Business', 'Publicly-Owned Business']
+  COMPANY_TYPES           = ['Angel Invested', 'Crowdfunded', 'Bootstrapped', 'VC Backed', 'Small Business', 'Publicly-Owned Business']
 
   PERKS                   = ['Kegs', 'Ping-pong table', 'Snacks', 'Catered Meals', 'Offsites', 'Flexible Work Hours', 'Conference Travel',
                              'Work from Home', 'Lunch Stipend', 'Phone Stipend', 'Public Transit Stipend', 'Tuition Reimbursement', 'Choice of Equipment',

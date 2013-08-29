@@ -38,7 +38,7 @@ class JobListing < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
 
-  HASHABLE_PARAMS = ['practices', 'perks', 'experience_levels', 'special_characteristics', 'acceptable_languages', 'position_titles']
+  HASHABLE_PARAMS = %w(practices perks experience_levels special_characteristics acceptable_languages position_titles)
 
   belongs_to :company
   has_many :conversations

@@ -1,6 +1,6 @@
 module UsersHelper
   def user_benefits(preference)
-    benefits = %w(healthcare dentalcare visioncare life_insurance retirement paid_vacation equity bonuses).collect do |benefit|
+    benefits = %w(healthcare dental vision life_insurance retirement vacation_days equity bonuses).collect do |benefit|
       benefit.gsub(/_/, ' ').capitalize if preference.send("#{benefit}?")
     end
     benefits.compact.join(', ')
