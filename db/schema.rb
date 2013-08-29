@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130825222143) do
+ActiveRecord::Schema.define(version: 20130829005319) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,9 +133,9 @@ ActiveRecord::Schema.define(version: 20130825222143) do
     t.string   "practices",               default: [],    array: true
     t.string   "acceptable_languages",    default: [],    array: true
     t.string   "special_characteristics", default: [],    array: true
-    t.string   "experience_level",        default: [],    array: true
+    t.string   "experience_levels",       default: [],    array: true
     t.string   "perks",                   default: [],    array: true
-    t.string   "position_type",           default: [],    array: true
+    t.string   "position_titles",         default: [],    array: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "company_id"
@@ -230,13 +230,11 @@ ActiveRecord::Schema.define(version: 20130825222143) do
     t.string   "skills",                 default: [],    array: true
     t.string   "locations",              default: [],    array: true
     t.string   "industries",             default: [],    array: true
-    t.string   "positions",              default: [],    array: true
-    t.string   "settings",               default: [],    array: true
-    t.string   "dress_codes",            default: [],    array: true
+    t.string   "position_titles",        default: [],    array: true
     t.string   "company_types",          default: [],    array: true
     t.string   "perks",                  default: [],    array: true
     t.string   "practices",              default: [],    array: true
-    t.string   "levels",                 default: [],    array: true
+    t.string   "experience_levels",      default: [],    array: true
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"

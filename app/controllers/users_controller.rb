@@ -83,9 +83,7 @@ class UsersController < ApplicationController
   def preference_params
     params.require(:preference).permit(:healthcare, :dentalcare, :visioncare, :life_insurance,
     :equity, :bonuses, :retirement, :fulltime, :remote, :open_source, :expected_salary,
-    :potential_availability, :company_size, :work_hours, :skills, :locations,
-    :industries, :positions, :settings, :dress_codes, :company_types, :perks,
-    :practices, :levels, :us_citizen, :paid_vacation).tap do |whitelisted|
+    :potential_availability, :company_size, :work_hours, :us_citizen, :paid_vacation).tap do |whitelisted|
       Preference::HASHABLE_PARAMS.each do |hash_param|
         whitelisted[hash_param] = params[:preference][hash_param] #our cleanup_invalid_data method handles invalid data here
       end

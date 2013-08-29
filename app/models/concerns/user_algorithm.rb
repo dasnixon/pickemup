@@ -33,13 +33,13 @@ module UserAlgorithm
   end
 
   def valid_position?(job_listing)
-    intersected_levels = self.levels & job_listing.experience_level
-    return false unless intersected_levels.present? && (self.levels.length - 1..self.levels.length + 1).include?(intersected_levels.length)
+    intersected_levels = self.experience_levels & job_listing.experience_levels
+    return false unless intersected_levels.present? && (self.experience_levels.length - 1..self.experience_levels.length + 1).include?(intersected_levels.length)
     self.valid_position_type?(job_listing)
   end
 
   def valid_position_type?(job_listing)
-    intersected_positions = self.positions & job_listing.position_type
-    intersected_positions.present? && (self.positions.length - 1..self.positions.length + 1).include?(intersected_positions.length)
+    intersected_positions = self.position_titles & job_listing.position_titles
+    intersected_positions.present? && (self.position_titles.length - 1..self.position_titles.length + 1).include?(intersected_positions.length)
   end
 end

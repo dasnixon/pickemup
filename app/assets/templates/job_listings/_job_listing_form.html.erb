@@ -44,7 +44,7 @@
   <label class='control-label'>Position Type</label>
   <div class='controls'>
     <table class='table table-bordered'>
-      <tr ng-repeat="row in data.position_type">
+      <tr ng-repeat="row in data.position_titles">
         <td ng-repeat="type in row">
           <label class='checkbox'>
             <input type="checkbox" ng-model="type.checked"/>{{type.name}}
@@ -59,7 +59,7 @@
   <label class='control-label'>Experience Level</label>
   <div class='controls'>
     <table class='table table-bordered'>
-      <tr ng-repeat="row in data.experience_level">
+      <tr ng-repeat="row in data.experience_levels">
         <td ng-repeat="level in row">
           <label class='checkbox'>
             <input type="checkbox" ng-model="level.checked"/>{{level.name}}

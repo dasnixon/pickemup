@@ -9,14 +9,10 @@ module PreferenceConstants
                              'Security', 'Transportation', 'Banking', 'Real Estate', 'Legal', 'Industrial', 'Gaming', 'Food',
                              'Fitness', 'Sports', 'Architecture', 'Agriculture', 'Art', 'Hardware', 'Non-profit']
 
-  LEVELS                  = ['N/A', 'Intern', 'Co-op', 'Junior', 'Mid-level', 'Senior-level', 'Executive']
+  EXPERIENCE_LEVELS       = ['N/A', 'Intern', 'Co-op', 'Junior', 'Mid-level', 'Senior-level', 'Executive']
 
-  POSITIONS               = ['Software Engineer', 'DevOps Engineer', 'QA Engineer', 'Manager', 'Architect',
+  POSITION_TITLES         = ['Software Engineer', 'DevOps Engineer', 'QA Engineer', 'Manager', 'Architect',
                              'Senior Director of Engineering', 'VP of Engineering', 'SVP of Engineering', 'CEO']
-
-  SETTINGS                = ['Urban', 'Rural', 'Office Park']
-
-  DRESS_CODES             = ['Professional', 'Business Casual', 'Casual']
 
   COMPANY_TYPES           = ['Bootstrapped', 'VC Backed', 'Small Business', 'Publicly-Owned Business']
 
@@ -32,13 +28,9 @@ module PreferenceConstants
 
   COMPANY_SIZE            = ["1-10 Employees", "11-50 Employees", "51-200 Employees", "201-500 Employees", "501+ Employees"]
 
-  EXPERIENCE_LEVEL        = LEVELS
-
   SPECIAL_CHARACTERISTICS = ['Entrepreneur', 'Blogger', 'Open Source Committer']
 
   ACCEPTABLE_LANGUAGES    = ['Ruby', 'Python', 'Javascript', 'Java', 'PHP', 'Scala', 'C', 'C++', 'C#', 'Objective C', 'Clojure']
-
-  POSITION_TYPE           = POSITIONS
 
   DEV_OPS_TOOLS           = ['Chef', 'Puppet', 'Capistrano', 'Fai', 'Kickstart', 'Preseed', 'Cobbler',
                              'Cfengine', 'bcfg2', 'Jenkins', 'Maven', 'Ant', 'Cruisecontrol', 'Hudson']

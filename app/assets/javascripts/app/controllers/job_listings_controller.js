@@ -13,8 +13,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
        response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6)
        response.job_listing.practices = chunk(response.job_listing.practices, 6)
        response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6)
-       response.job_listing.experience_level = chunk(response.job_listing.experience_level, 5)
-       response.job_listing.position_type = chunk(response.job_listing.position_type, 5)
+       response.job_listing.experience_levels = chunk(response.job_listing.experience_levels, 5)
+       response.job_listing.position_titles = chunk(response.job_listing.position_titles, 5)
        response.job_listing.perks = chunk(response.job_listing.perks, 6)
        $scope.tech_stacks = response.tech_stacks
        $scope.data = response.job_listing
@@ -28,8 +28,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           job_title: $scope.data.job_title,
           job_description: $scope.data.job_description,
           location: $scope.data.location,
-          position_type: unchunk($scope.data.position_type),
-          experience_level: unchunk($scope.data.experience_level),
+          position_titles: unchunk($scope.data.position_titles),
+          experience_levels: unchunk($scope.data.experience_levels),
           salary_range_low: $scope.data.salary_range_low,
           salary_range_high: $scope.data.salary_range_high,
           vacation_days: $scope.data.vacation_days,
@@ -63,8 +63,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
        response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6)
        response.job_listing.practices = chunk(response.job_listing.practices, 6)
        response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6)
-       response.job_listing.experience_level = chunk(response.job_listing.experience_level, 5)
-       response.job_listing.position_type = chunk(response.job_listing.position_type, 5)
+       response.job_listing.experience_levels = chunk(response.job_listing.experience_levels, 5)
+       response.job_listing.position_titles = chunk(response.job_listing.position_titles, 5)
        response.job_listing.perks = chunk(response.job_listing.perks, 6)
        $scope.tech_stacks = response.tech_stacks
        $scope.data = response.job_listing
@@ -77,8 +77,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
           job_title: $scope.data.job_title,
           job_description: $scope.data.job_description,
           location: $scope.data.location,
-          position_type: unchunk($scope.data.position_type),
-          experience_level: unchunk($scope.data.experience_level),
+          position_titles: unchunk($scope.data.position_titles),
+          experience_levels: unchunk($scope.data.experience_levels),
           salary_range_low: $scope.data.salary_range_low,
           salary_range_high: $scope.data.salary_range_high,
           vacation_days: $scope.data.vacation_days,

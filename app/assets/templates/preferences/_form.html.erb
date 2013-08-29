@@ -243,10 +243,10 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'><strong>Levels</strong></label>
+  <label class='control-label'><strong>Experience Levels</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.levels">
+      <tr ng-repeat="row in preference.experience_levels">
         <td ng-repeat="attributes in row">
           <label class='checkbox'>
             <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
@@ -261,37 +261,7 @@
   <label class='control-label'><strong>Positions</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.positions">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class='control-label'><strong>Company Settings</strong></label>
-  <div class="controls">
-    <table class="table table-bordered">
-      <tr ng-repeat="row in preference.settings">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class='control-label'><strong>Dress Codes</strong></label>
-  <div class="controls">
-    <table class="table table-bordered">
-      <tr ng-repeat="row in preference.dress_codes">
+      <tr ng-repeat="row in preference.position_titles">
         <td ng-repeat="attributes in row">
           <label class='checkbox'>
             <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}

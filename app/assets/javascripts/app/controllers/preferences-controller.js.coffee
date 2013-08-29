@@ -20,13 +20,11 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
       $scope.preference.skills          = chunk $scope.preference.skills, 6
       $scope.preference.locations       = chunk $scope.preference.locations, 6
       $scope.preference.industries      = chunk $scope.preference.industries, 6
-      $scope.preference.positions       = chunk $scope.preference.positions, 6
-      $scope.preference.settings        = chunk $scope.preference.settings, 6
-      $scope.preference.dress_codes     = chunk $scope.preference.dress_codes, 6
+      $scope.preference.position_titles       = chunk $scope.preference.position_titles, 6
       $scope.preference.company_types   = chunk $scope.preference.company_types, 6
       $scope.preference.perks           = chunk $scope.preference.perks, 7
       $scope.preference.practices       = chunk $scope.preference.practices, 6
-      $scope.preference.levels          = chunk $scope.preference.levels, 6
+      $scope.preference.experience_levels          = chunk $scope.preference.experience_levels, 6
       $scope.preference.company_size    = chunk $scope.preference.company_size, 6
       $scope.original                   = angular.copy($scope.preference)
 
@@ -101,13 +99,11 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
         skills: unchunk $scope.preference.skills
         locations: unchunk $scope.preference.locations
         industries: unchunk $scope.preference.industries
-        positions: unchunk $scope.preference.positions
-        settings: unchunk $scope.preference.settings
-        dress_codes: unchunk $scope.preference.dress_codes
+        position_titles: unchunk $scope.preference.position_titles
         company_types: unchunk $scope.preference.company_types
         perks: unchunk $scope.preference.perks
         practices: unchunk $scope.preference.practices
-        levels: unchunk $scope.preference.levels
+        experience_levels: unchunk $scope.preference.experience_levels
 
     , (response) ->
       $scope.preference.expected_salary = addCommas(response.preference.expected_salary)

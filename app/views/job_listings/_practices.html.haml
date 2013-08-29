@@ -1,6 +1,0 @@
-%p
-  Practices:
-- if @job_listing.practices
-  - @job_listing.practices.each do |practice|
-    = practice.keys.first
-    <input id=#{practice.keys.first} name="practices[#{practice.keys.first}]" type="checkbox" multiple=true value=#{{'checked' => true}} #{practice.values.first["checked"] ? checked : ""}>

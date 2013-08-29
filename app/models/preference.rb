@@ -22,13 +22,11 @@
 #  skills                 :string(255)      default([])
 #  locations              :string(255)      default([])
 #  industries             :string(255)      default([])
-#  positions              :string(255)      default([])
-#  settings               :string(255)      default([])
-#  dress_codes            :string(255)      default([])
+#  position_titles        :string(255)      default([])
 #  company_types          :string(255)      default([])
 #  perks                  :string(255)      default([])
 #  practices              :string(255)      default([])
-#  levels                 :string(255)      default([])
+#  experience_levels      :string(255)      default([])
 #  user_id                :integer
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -41,8 +39,8 @@ class Preference < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
 
-  HASHABLE_PARAMS = %w(locations industries positions settings dress_codes company_types perks
-    practices levels company_size skills)
+  HASHABLE_PARAMS = %w(locations industries position_titles company_types perks
+    practices experience_levels company_size skills)
   BENEFIT_ATTRS = %w(paid_vacation healthcare visioncare dentalcare life_insurance us_citizen equity
     bonuses retirement fulltime open_source remote)
 
