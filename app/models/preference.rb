@@ -39,7 +39,6 @@
 class Preference < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
-  include UserAlgorithm
 
   HASHABLE_PARAMS = %w(locations industries position_titles company_types perks
     practices experience_levels company_size skills)
