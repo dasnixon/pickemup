@@ -16,7 +16,12 @@ module LinkedinLogin
   def post_linkedin_setup(auth)
     StoreUserProfileImage.perform_async(self.id, auth.info.image) unless self.main_provider == 'github'
     if !self.newly_created
-      self.main_provider == 'github' ? UserInformationWorker.perform_async(self.id) : self.update_linkedin_information(auth)
+      if self.main_provider == 'github'
+        self.linkedin.update(token: auth.credentials.token)
+        UserInformationWorker.perform_async(self.id)
+      else
+        self.update_linkedin_information(auth)
+      end
     end
   end
 

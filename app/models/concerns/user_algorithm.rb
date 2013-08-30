@@ -3,6 +3,12 @@ module UserAlgorithm
 
   BOOLEAN_COMPARATORS = %w(healthcare dental vision life_insurance vacation_days equity bonuses retirement special_characteristics)
 
+  TOTAL_POINTS = 20.0
+
+  def score(job_listing)
+    ((company_preferred_count(job_listing) + valid_count(job_listing) + benefits_matching_count(job_listing))/TOTAL_POINTS) * 100
+  end
+
   def benefits_matching_count(obj)
     BOOLEAN_COMPARATORS.count do |attr|
       case attr
@@ -18,8 +24,12 @@ module UserAlgorithm
     end
   end
 
-  #check if the user's expected salary is within the range of the job listing's
-  #specified salary
+  def valid_count(job_listing)
+    %w(salary work_hours position vacation_days perks practices availability_to_start location).count do |meth|
+      self.send("valid_#{meth}?", job_listing)
+    end
+  end
+
   def valid_salary?(job_listing)
     job_listing.salary_range.include?(self.expected_salary)
   end
@@ -39,7 +49,7 @@ module UserAlgorithm
     intersected_positions.present? and (self.position_titles.length - 1..self.position_titles.length + 1).include?(intersected_positions.length)
   end
 
-  def satisfies_vacation_days?(job_listing)
+  def valid_vacation_days?(job_listing)
     self.vacation_days? ? job_listing.vacation_days > 0 : true
   end
 

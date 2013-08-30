@@ -47,6 +47,15 @@
 </div>
 
 <div class="control-group">
+  <label class='control-label'><strong>Are you a U.S. Citizen?</strong></label>
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" ng-model="preference.us_citizen"/>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
   <label class='control-label'><strong>Willing to Relocate?</strong></label>
   <div class="controls">
     <label class="checkbox">
@@ -60,6 +69,24 @@
   <div class="controls">
     <label class="checkbox">
       <input type="checkbox" ng-model="preference.remote"/>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Seeking Fulltime Job?</strong></label>
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" ng-model="preference.fulltime"/>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Open Source Contributions?</strong></label>
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" ng-model="preference.open_source"/>
     </label>
   </div>
 </div>
@@ -113,6 +140,8 @@
             </li>
           </ul>
         </td>
+      </tr>
+      <tr>
         <td>
           <label class="checkbox">
             <input type="checkbox" ng-model="preference.life_insurance">Life Insurance?
@@ -123,18 +152,6 @@
             </li>
           </ul>
         </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.us_citizen">U.S. Citizen?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.us_citizen">
-              <span class="error_message">{{error}}</span>
-            </li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
         <td>
           <label class="checkbox">
             <input type="checkbox" ng-model="preference.equity">Equity?
@@ -161,26 +178,6 @@
           </label>
           <ul class="unstyled">
             <li ng-repeat="error in preference.errors.retirement">
-              <span class="error_message">{{error}}</span>
-            </li>
-          </ul>
-        </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.fulltime">Fulltime?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.fulltime">
-              <span class="error_message">{{error}}</span>
-            </li>
-          </ul>
-        </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.open_source">Open Source?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.open_source">
               <span class="error_message">{{error}}</span>
             </li>
           </ul>

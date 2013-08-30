@@ -222,28 +222,28 @@ describe UserAlgorithm do
     end
   end
 
-  describe '#satisfies_vacation_days?' do
+  describe '#valid_vacation_days?' do
     context 'user wants vacation days' do
       context 'job listings offers no vacation' do
         before :each do
           preference.vacation_days = true
           job_listing.vacation_days = 0
         end
-        it('returns false') { preference.satisfies_vacation_days?(job_listing).should be_false }
+        it('returns false') { preference.valid_vacation_days?(job_listing).should be_false }
       end
       context 'job listing offers vacation' do
         before :each do
           preference.vacation_days = true
           job_listing.vacation_days = 10
         end
-        it('returns true') { preference.satisfies_vacation_days?(job_listing).should be_true }
+        it('returns true') { preference.valid_vacation_days?(job_listing).should be_true }
       end
     end
     context 'user does not care about vacation' do
       before :each do
         preference.vacation_days = false
       end
-      it('always returns true') { preference.satisfies_vacation_days?(job_listing).should be_true }
+      it('always returns true') { preference.valid_vacation_days?(job_listing).should be_true }
     end
   end
 

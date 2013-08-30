@@ -22,9 +22,9 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
       $scope.preference.industries        = chunk $scope.preference.industries, 6
       $scope.preference.position_titles   = chunk $scope.preference.position_titles, 6
       $scope.preference.company_types     = chunk $scope.preference.company_types, 6
-      $scope.preference.perks             = chunk $scope.preference.perks, 7
+      $scope.preference.perks             = chunk $scope.preference.perks, 5
       $scope.preference.practices         = chunk $scope.preference.practices, 6
-      $scope.preference.experience_levels = chunk $scope.preference.experience_levels, 6
+      $scope.preference.experience_levels = chunk $scope.preference.experience_levels, 7
       $scope.preference.company_size      = chunk $scope.preference.company_size, 6
       $scope.original                     = angular.copy($scope.preference)
 

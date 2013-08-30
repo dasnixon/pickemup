@@ -39,11 +39,12 @@
 class Preference < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
+  include UserAlgorithm
 
   HASHABLE_PARAMS = %w(locations industries position_titles company_types perks
     practices experience_levels company_size skills)
   BENEFIT_ATTRS = %w(vacation_days healthcare vision dental life_insurance us_citizen equity
-    bonuses retirement fulltime open_source remote)
+    bonuses retirement fulltime open_source)
   COMPANY_SIZE_RANGES = {'1-10 Employees' => 1..10, '11-50 Employees' => 11..50, '51-200 Employees' => 51..200, '201-500 Employees' => 201..500, '501+ Employees' => 501..Float::INFINITY}
 
   belongs_to :user
@@ -71,7 +72,7 @@ class Preference < ActiveRecord::Base
   end
 
   def ignored_column?(col)
-    col.name =~ /(user_id|id)/ || col.type.to_s =~ /(datetime)/ || BENEFIT_ATTRS.include?(col.name)
+    col.name =~ /(user_id|id|remote|willing_to_relocate)/ || col.type.to_s =~ /(datetime)/ || BENEFIT_ATTRS.include?(col.name)
   end
 
   def preference_total_filled

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe LinkedinLogin do
   let(:generic_auth_linkedin) {
-    OpenStruct.new(uid: '123456789', info: auth_info, extra: extra_info_linkedin)
+    OpenStruct.new(uid: '123456789', info: auth_info, extra: extra_info_linkedin, credentials: OpenStruct.new(token: '1234567'))
   }
   let(:extra_info_linkedin) do
     OpenStruct.new(raw_info: OpenStruct.new(location: OpenStruct.new(name: 'San Francisco, CA')))
@@ -224,8 +224,10 @@ describe LinkedinLogin do
         end
       end
       context 'not newly created' do
+        let(:linkedin) { create(:linkedin) }
         before :each do
           expect(UserInformationWorker).to receive(:perform_async)
+          expect(user).to receive(:linkedin) { linkedin }
         end
         it 'does not store user profile image' do
           expect(StoreUserProfileImage).to_not receive(:perform_async)
