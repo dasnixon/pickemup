@@ -55,6 +55,7 @@ class UsersController < ApplicationController
   def update_preference
     preference = @user.preference
     if preference.update(@bathed_preferences)
+      preference.api_update
       respond_with preference
     else
       render json: { errors: preference.errors }, status: :bad_request
