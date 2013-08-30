@@ -67,4 +67,5 @@ Pickemup::Application.routes.draw do
   match '/subscriptions_listener' => 'subscriptions#listener', via: :all
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
+  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
 end

@@ -9,21 +9,16 @@ module PreferenceConstants
                              'Security', 'Transportation', 'Banking', 'Real Estate', 'Legal', 'Industrial', 'Gaming', 'Food',
                              'Fitness', 'Sports', 'Architecture', 'Agriculture', 'Art', 'Hardware', 'Non-profit']
 
-  LEVELS                  = ['Intern', 'Co-op', 'Junior Engineer', 'Mid-level Engineer', 'Senior-level Engineer', 'Executive']
+  EXPERIENCE_LEVELS       = ['N/A', 'Intern', 'Co-op', 'Junior', 'Mid-level', 'Senior-level', 'Executive']
 
-  POSITIONS               = ['Associative Engineer', 'Software Engineer', 'DevOps Engineer', 'Senior Engineer', 'Staff Engineer', 'Engineering Manager',
-                             'Principal Engineer', 'Senior Principal Engineer', 'Senior Engineering Manager', 'Architect', 'Director of Engineering',
-                             'Senior Architect', 'Senior Director of Engineering', 'VP of Engineering', 'SVP of Engineering']
+  POSITION_TITLES         = ['Software Engineer', 'DevOps Engineer', 'QA Engineer', 'Manager', 'Architect',
+                             'Senior Director of Engineering', 'VP of Engineering', 'SVP of Engineering', 'CEO']
 
-  SETTINGS                = ['Urban', 'Rural', 'Office Park']
-
-  DRESS_CODES             = ['Professional', 'Business Casual', 'Casual']
-
-  COMPANY_TYPES           = ['Bootstrapped', 'VC Backed', 'Small Business', 'Publicly-Owned Business']
+  COMPANY_TYPES           = ['Angel Invested', 'Crowdfunded', 'Bootstrapped', 'VC Backed', 'Small Business', 'Publicly-Owned Business']
 
   PERKS                   = ['Kegs', 'Ping-pong table', 'Snacks', 'Catered Meals', 'Offsites', 'Flexible Work Hours', 'Conference Travel',
                              'Work from Home', 'Lunch Stipend', 'Phone Stipend', 'Public Transit Stipend', 'Tuition Reimbursement', 'Choice of Equipment',
-                             'Swag']
+                             'Swag', 'Gym Membership Stipend']
 
   PRACTICES               = ['Test-driven Development', 'Agile Development', 'Pair Programming', 'Behavior-driven Development', 'Scrum',
                              'Cowboy Coding', 'Object Oriented Design', 'Waterfall Model', 'Service-oriented Design', 'Don\'t Repeat Yourself (DRY)',
@@ -33,13 +28,9 @@ module PreferenceConstants
 
   COMPANY_SIZE            = ["1-10 Employees", "11-50 Employees", "51-200 Employees", "201-500 Employees", "501+ Employees"]
 
-  EXPERIENCE_LEVEL        = ['N/A', 'Junior', 'Mid-level', 'Senior', 'Executive']
-
   SPECIAL_CHARACTERISTICS = ['Entrepreneur', 'Blogger', 'Open Source Committer']
 
   ACCEPTABLE_LANGUAGES    = ['Ruby', 'Python', 'Javascript', 'Java', 'PHP', 'Scala', 'C', 'C++', 'C#', 'Objective C', 'Clojure']
-
-  POSITION_TYPE           = ['Individual Contributor', 'Manager', 'Tech Lead', 'Executive']
 
   DEV_OPS_TOOLS           = ['Chef', 'Puppet', 'Capistrano', 'Fai', 'Kickstart', 'Preseed', 'Cobbler',
                              'Cfengine', 'bcfg2', 'Jenkins', 'Maven', 'Ant', 'Cruisecontrol', 'Hudson']

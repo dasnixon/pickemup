@@ -44,21 +44,23 @@ describe Preference do
 
   describe '#get_attr_values' do
     context 'defaults only' do
-      let(:preference) { create(:preference, settings: []) }
+      let(:preference) { create(:preference, experience_levels: []) }
       let(:expected) do
-        Preference::SETTINGS.collect { |p| { name: p, checked: false } }
+        Preference::EXPERIENCE_LEVELS.collect { |p| { name: p, checked: false } }
       end
       it 'returns default constant values with false checked values' do
-        preference.get_attr_values('settings').should eq expected
+        preference.get_attr_values('experience_levels').should eq expected
       end
     end
     context 'data already set for attribute' do
-      let(:preference) { create(:preference, settings: ['Urban', 'Office Park']) }
+      let(:preference) { create(:preference, experience_levels: ['Intern']) }
       let(:expected) do
-        [{ name: 'Urban', checked: true }, { name: 'Rural', checked: false }, {name: 'Office Park', checked: true}]
+        [{ name: 'Intern', checked: true }, { name: 'Co-op', checked: false }, {name: 'N/A', checked: false},
+         { name: 'Junior', checked: false}, {name: 'Mid-level', checked: false}, {name: 'Senior-level', checked: false},
+         { name: 'Executive', checked: false}]
       end
       it 'returns default constant values with false checked values' do
-        preference.get_attr_values('settings').should =~ expected
+        preference.get_attr_values('experience_levels').should =~ expected
       end
     end
   end
@@ -92,7 +94,7 @@ describe Preference do
     context 'all other attributes, not skills' do
       let(:preference) { create(:preference) }
       it 'returns the constant for the attribute' do
-        preference.attribute_default_values('positions').should eq Preference::POSITIONS
+        preference.attribute_default_values('position_titles').should eq Preference::POSITION_TITLES
       end
     end
   end

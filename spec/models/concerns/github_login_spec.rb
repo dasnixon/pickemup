@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe GithubLogin do
   let(:generic_auth_github) {
-    OpenStruct.new(uid: '123456789', info: auth_info, extra: extra_info_github)
+    OpenStruct.new(uid: '123456789', info: auth_info, extra: extra_info_github, credentials: OpenStruct.new(token: '1234567'))
   }
   let(:extra_info_github) do
     OpenStruct.new(raw_info: OpenStruct.new(location: 'San Francisco, CA'))
@@ -224,8 +224,10 @@ describe GithubLogin do
         end
       end
       context 'not newly created' do
+        let(:github_account) { create(:github_account) }
         before :each do
           expect(UserInformationWorker).to receive(:perform_async)
+          expect(user).to receive(:github_account).and_return(github_account)
         end
         it 'does not store user profile image' do
           expect(StoreUserProfileImage).to_not receive(:perform_async)

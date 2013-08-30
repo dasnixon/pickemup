@@ -5,9 +5,13 @@
 - if @matchings.present?
   - @matchings.each do |matching|
     - job_listing = matching[:job_listing]
-    - company = matching[:company]
+    - company     = matching[:company]
+    - score       = matching[:score]
     .media
-      = link_to image_tag(company.logo, size: '100x100'), company_path(id: company.id), class: 'pull-left'
+      .left_hub
+        .score
+          #{score} %
+        = link_to image_tag(company.logo, size: '100x100'), company_path(id: company.id), class: 'pull-left'
       .pull-right
         .pull-right
           = link_to 'View Listing', company_job_listing_path(company_id: company.id, id: job_listing.id), class: 'btn btn-primary'

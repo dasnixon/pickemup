@@ -1,6 +1,6 @@
 module UsersHelper
   def user_benefits(preference)
-    benefits = %w(healthcare dentalcare visioncare life_insurance retirement paid_vacation equity bonuses).collect do |benefit|
+    benefits = %w(healthcare dental vision life_insurance retirement vacation_days equity bonuses).collect do |benefit|
       benefit.gsub(/_/, ' ').capitalize if preference.send("#{benefit}?")
     end
     benefits.compact.join(', ')
@@ -29,8 +29,6 @@ module UsersHelper
     positions_statement(first_block, preference)
     locations_statement(first_block, preference)
     first_sentence = first_block.join(' ')
-    settings_statement(second_block, preference)
-    dress_codes_statment(second_block, preference)
     company_size_statement(second_block, preference)
     industries_statement(second_block, preference)
     second_block.blank? ? second_block << "." : second_block.last.insert(-1, ".")
@@ -57,8 +55,8 @@ module UsersHelper
   end
 
   def positions_statement(bio, preference)
-    if preference.positions.present?
-      bio << " as #{preference.positions.to_sentence(two_words_connector: ' or ', last_word_connector: ', or ').indefinitize.downcase}"
+    if preference.position_titles.present?
+      bio << " as #{preference.position_titles.to_sentence(two_words_connector: ' or ', last_word_connector: ', or ').indefinitize.downcase}"
     end
   end
 
@@ -70,26 +68,6 @@ module UsersHelper
 
   def set_initial_statements(user, bio, preference)
     bio << "#{user.name} is looking for a #{preference.remote? ? 'remote' : '' } #{preference.fulltime? ? 'fulltime' : 'part-time'} job"
-  end
-
-  def settings_statement(bio, preference)
-    if preference.settings.present?
-      add_company_info(bio, preference)
-      @gone_already = true
-      bio.last << " with #{preference.settings.to_sentence(two_words_connector: ' or ', last_word_connector: ', or ').indefinitize.downcase} setting"
-    end
-  end
-
-  def dress_codes_statment(bio, preference)
-    if preference.dress_codes.present?
-      add_company_info(bio, preference)
-      if @gone_already
-        bio << " a #{preference.dress_codes.to_sentence(two_words_connector: ' or ', last_word_connector: ', or ').downcase} dress code"
-      else
-        @gone_already = true
-        bio.last << " with a #{preference.dress_codes.to_sentence(two_words_connector: ' or ', last_word_connector: ', or ').downcase} dress code"
-      end
-    end
   end
 
   def industries_statement(bio, preference)
