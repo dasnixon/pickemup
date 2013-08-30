@@ -50,7 +50,7 @@ class Linkedin < ActiveRecord::Base
       industry: profile.industry,
       profile_url: profile.public_profile_url
     )
-    self.profile.from_omniauth(profile) if self.profile.present?
+    self.profile.present? ? self.profile.from_omniauth(profile) : self.build_profile.from_omniauth(profile)
   end
 
   private

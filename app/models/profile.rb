@@ -46,6 +46,6 @@ class Profile < ActiveRecord::Base
 
   #get all the skills from the linkedin api for a user
   def self.get_skills(skills)
-    skills.all.collect { |s| s.skill.name } if skills.total > 0
+    (skills.present? and skills.total > 0) ? skills.all.collect { |s| s.skill.name } : []
   end
 end

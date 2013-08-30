@@ -64,9 +64,9 @@ describe Linkedin do
     context 'no profile made yet' do
       before :each do
         linkedin.stub(:profile).and_return(nil)
-        Profile.any_instance.should_not_receive(:from_omniauth)
+        Profile.any_instance.should_receive(:from_omniauth)
       end
-      it 'runs expectations' do
+      it 'still creates a brand new profile with updated information' do
         linkedin.update_linkedin
       end
     end

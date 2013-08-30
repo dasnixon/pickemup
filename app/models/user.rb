@@ -107,7 +107,7 @@ class User < ActiveRecord::Base
     linkedin = self.linkedin
     if linkedin
       profile = linkedin.profile
-      if profile
+      if profile && profile.skills.present?
         where_lang_statement = profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
         query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
         pref = self.preference
