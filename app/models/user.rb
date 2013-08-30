@@ -110,7 +110,8 @@ class User < ActiveRecord::Base
       if profile
         where_lang_statement = profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
         query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
-        JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company} }
+        pref = self.preference
+        JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company, score: pref.score(job_listing)} }
       end
     end
   end

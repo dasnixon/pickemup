@@ -97,14 +97,16 @@ end
 
 group :test, :development do
   gem 'pry' #debugging
+  gem 'rspec-rails'
+  gem 'jasmine-rails'
 end
 
 group :test do
+  gem 'cucumber-rails', require: false
   gem 'fakeredis', require: 'fakeredis/rspec'
   gem 'timecop'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers'
-  gem 'rspec-rails'
   gem 'ffaker'
   gem 'rspec-sidekiq'
 end

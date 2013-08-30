@@ -15,20 +15,18 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
       action: 'get_preference'
 
     , (response) ->
-      $scope.preference                 = response
-      $scope.preference.expected_salary = $scope.preference.expected_salary.toLocaleString() if $scope.preference.expected_salary
-      $scope.preference.skills          = chunk $scope.preference.skills, 6
-      $scope.preference.locations       = chunk $scope.preference.locations, 6
-      $scope.preference.industries      = chunk $scope.preference.industries, 6
-      $scope.preference.positions       = chunk $scope.preference.positions, 6
-      $scope.preference.settings        = chunk $scope.preference.settings, 6
-      $scope.preference.dress_codes     = chunk $scope.preference.dress_codes, 6
-      $scope.preference.company_types   = chunk $scope.preference.company_types, 6
-      $scope.preference.perks           = chunk $scope.preference.perks, 7
-      $scope.preference.practices       = chunk $scope.preference.practices, 6
-      $scope.preference.levels          = chunk $scope.preference.levels, 6
-      $scope.preference.company_size    = chunk $scope.preference.company_size, 6
-      $scope.original                   = angular.copy($scope.preference)
+      $scope.preference                   = response
+      $scope.preference.expected_salary   = $scope.preference.expected_salary.toLocaleString() if $scope.preference.expected_salary
+      $scope.preference.skills            = chunk $scope.preference.skills, 6
+      $scope.preference.locations         = chunk $scope.preference.locations, 6
+      $scope.preference.industries        = chunk $scope.preference.industries, 6
+      $scope.preference.position_titles   = chunk $scope.preference.position_titles, 6
+      $scope.preference.company_types     = chunk $scope.preference.company_types, 6
+      $scope.preference.perks             = chunk $scope.preference.perks, 5
+      $scope.preference.practices         = chunk $scope.preference.practices, 6
+      $scope.preference.experience_levels = chunk $scope.preference.experience_levels, 7
+      $scope.preference.company_size      = chunk $scope.preference.company_size, 6
+      $scope.original                     = angular.copy($scope.preference)
 
     , (response) ->
       $scope.error_updating = 'Unable to fetch your preferences at this time.'
@@ -51,10 +49,10 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
 
   $scope.selectAllBenefits = ->
     $scope.preference.healthcare     = true
-    $scope.preference.dentalcare     = true
-    $scope.preference.visioncare     = true
+    $scope.preference.dental         = true
+    $scope.preference.vision         = true
     $scope.preference.life_insurance = true
-    $scope.preference.paid_vacation  = true
+    $scope.preference.vacation_days  = true
     $scope.preference.equity         = true
     $scope.preference.bonuses        = true
     $scope.preference.retirement     = true
@@ -65,10 +63,10 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
 
   $scope.unselectAllBenefits = ->
     $scope.preference.healthcare     = false
-    $scope.preference.dentalcare     = false
-    $scope.preference.visioncare     = false
+    $scope.preference.dental         = false
+    $scope.preference.vision         = false
     $scope.preference.life_insurance = false
-    $scope.preference.paid_vacation  = false
+    $scope.preference.vacation_days  = false
     $scope.preference.equity         = false
     $scope.preference.bonuses        = false
     $scope.preference.retirement     = false
@@ -83,10 +81,10 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
       action: 'update_preference',
       preference:
         healthcare: $scope.preference.healthcare
-        dentalcare: $scope.preference.dentalcare
-        visioncare: $scope.preference.visioncare
+        dental: $scope.preference.dental
+        vision: $scope.preference.vision
         life_insurance: $scope.preference.life_insurance
-        paid_vacation: $scope.preference.paid_vacation
+        vacation_days: $scope.preference.vacation_days
         equity: $scope.preference.equity
         bonuses: $scope.preference.bonuses
         retirement: $scope.preference.retirement
@@ -101,13 +99,12 @@ preference_app.controller "PreferencesController", ($scope, $location, $state, $
         skills: unchunk $scope.preference.skills
         locations: unchunk $scope.preference.locations
         industries: unchunk $scope.preference.industries
-        positions: unchunk $scope.preference.positions
-        settings: unchunk $scope.preference.settings
-        dress_codes: unchunk $scope.preference.dress_codes
+        position_titles: unchunk $scope.preference.position_titles
         company_types: unchunk $scope.preference.company_types
         perks: unchunk $scope.preference.perks
         practices: unchunk $scope.preference.practices
-        levels: unchunk $scope.preference.levels
+        experience_levels: unchunk $scope.preference.experience_levels
+        willing_to_relocate: $scope.preference.willing_to_relocate
 
     , (response) ->
       $scope.preference.expected_salary = addCommas(response.preference.expected_salary)

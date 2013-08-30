@@ -23,10 +23,10 @@ describe User do
     )
   end
   let(:linkedin_auth) do
-    OpenStruct.new(uid: user.linkedin_uid, info: auth_info, extra: extra_info_linkedin)
+    OpenStruct.new(uid: user.linkedin_uid, info: auth_info, extra: extra_info_linkedin, credentials: OpenStruct.new(token: '1234567'))
   end
   let(:github_auth) do
-    OpenStruct.new(uid: user.github_uid, info: auth_info, extra: extra_info_github)
+    OpenStruct.new(uid: user.github_uid, info: auth_info, extra: extra_info_github, credentials: OpenStruct.new(token: '1234567'))
   end
 
   it { should have_one(:github_account) }
@@ -152,9 +152,12 @@ describe User do
           end
         end
         context 'main provider is linkedin' do
+          let(:github_account) { create(:github_account) }
           before :each do
             user.main_provider = 'linkedin'
             expect(user).to_not receive(:update_github_information)
+            expect(user).to receive(:github_account).and_return(github_account)
+            expect(github_account).to receive(:update) { true }
             expect(UserInformationWorker).to receive(:perform_async).with(user.id)
             expect(StoreUserProfileImage).to_not receive(:perform_async)
           end
@@ -168,9 +171,12 @@ describe User do
         end
       end
       context 'from linkedin provider' do
+        let(:linkedin) { create(:linkedin) }
         context 'main provider is github' do
           before :each do
             expect(user).to_not receive(:update_linkedin_information)
+            expect(user).to receive(:linkedin).and_return(linkedin)
+            expect(linkedin).to receive(:update) { true }
             expect(UserInformationWorker).to receive(:perform_async).with(user.id)
             expect(StoreUserProfileImage).to_not receive(:perform_async)
           end

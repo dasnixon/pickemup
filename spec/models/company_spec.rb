@@ -61,6 +61,13 @@ describe Company do
         it { should have(1).errors_on(:password) }
       end
     end
+
+    context 'size_definition' do
+      context 'inclusion' do
+        let(:subject) { with_attrs({size_definition: 'Blah'}) }
+        it { should have(1).errors_on(:size_definition) }
+      end
+    end
   end
 
   describe '#calculate_score' do

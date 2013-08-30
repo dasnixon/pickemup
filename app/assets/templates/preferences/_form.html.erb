@@ -47,6 +47,51 @@
 </div>
 
 <div class="control-group">
+  <label class='control-label'><strong>Are you a U.S. Citizen?</strong></label>
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" ng-model="preference.us_citizen"/>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Willing to Relocate?</strong></label>
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" ng-model="preference.willing_to_relocate"/>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Open to Remote Work?</strong></label>
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" ng-model="preference.remote"/>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Seeking Fulltime Job?</strong></label>
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" ng-model="preference.fulltime"/>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Open Source Contributions?</strong></label>
+  <div class="controls">
+    <label class="checkbox">
+      <input type="checkbox" ng-model="preference.open_source"/>
+    </label>
+  </div>
+</div>
+
+<div class="control-group">
   <label class='control-label' for="title"><strong>Benefits</strong></label>
   <div class="controls">
     <button type="button" ng-click="selectAllBenefits()" class="btn btn-info">Select All</button>
@@ -57,10 +102,10 @@
       <tr>
         <td>
           <label class="checkbox">
-            <input type="checkbox" ng-model="preference.paid_vacation">Paid vacation?
+            <input type="checkbox" ng-model="preference.vacation_days">Paid vacation?
           </label>
           <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.paid_vacation">
+            <li ng-repeat="error in preference.errors.vacation_days">
               <span class="error_message">{{error}}</span>
             </li>
           </ul>
@@ -77,24 +122,26 @@
         </td>
         <td>
           <label class="checkbox">
-            <input type="checkbox" ng-model="preference.dentalcare">Dental?
+            <input type="checkbox" ng-model="preference.dental">Dental?
           </label>
           <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.dentalcare">
+            <li ng-repeat="error in preference.errors.dental">
               <span class="error_message">{{error}}</span>
             </li>
           </ul>
         </td>
         <td>
           <label class="checkbox">
-            <input type="checkbox" ng-model="preference.visioncare">Vision?
+            <input type="checkbox" ng-model="preference.vision">Vision?
           </label>
           <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.visioncare">
+            <li ng-repeat="error in preference.errors.vision">
               <span class="error_message">{{error}}</span>
             </li>
           </ul>
         </td>
+      </tr>
+      <tr>
         <td>
           <label class="checkbox">
             <input type="checkbox" ng-model="preference.life_insurance">Life Insurance?
@@ -105,18 +152,6 @@
             </li>
           </ul>
         </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.us_citizen">U.S. Citizen?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.us_citizen">
-              <span class="error_message">{{error}}</span>
-            </li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
         <td>
           <label class="checkbox">
             <input type="checkbox" ng-model="preference.equity">Equity?
@@ -143,36 +178,6 @@
           </label>
           <ul class="unstyled">
             <li ng-repeat="error in preference.errors.retirement">
-              <span class="error_message">{{error}}</span>
-            </li>
-          </ul>
-        </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.fulltime">Fulltime?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.fulltime">
-              <span class="error_message">{{error}}</span>
-            </li>
-          </ul>
-        </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.open_source">Open Source?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.open_source">
-              <span class="error_message">{{error}}</span>
-            </li>
-          </ul>
-        </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.remote">Open to Remote Work?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.remote">
               <span class="error_message">{{error}}</span>
             </li>
           </ul>
@@ -243,10 +248,10 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'><strong>Levels</strong></label>
+  <label class='control-label'><strong>Experience Levels</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.levels">
+      <tr ng-repeat="row in preference.experience_levels">
         <td ng-repeat="attributes in row">
           <label class='checkbox'>
             <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
@@ -261,37 +266,7 @@
   <label class='control-label'><strong>Positions</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.positions">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class='control-label'><strong>Company Settings</strong></label>
-  <div class="controls">
-    <table class="table table-bordered">
-      <tr ng-repeat="row in preference.settings">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
-        </td>
-      </tr>
-    </table>
-  </div>
-</div>
-
-<div class="control-group">
-  <label class='control-label'><strong>Dress Codes</strong></label>
-  <div class="controls">
-    <table class="table table-bordered">
-      <tr ng-repeat="row in preference.dress_codes">
+      <tr ng-repeat="row in preference.position_titles">
         <td ng-repeat="attributes in row">
           <label class='checkbox'>
             <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}

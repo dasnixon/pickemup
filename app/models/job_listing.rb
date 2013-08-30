@@ -26,9 +26,9 @@
 #  practices               :string(255)      default([])
 #  acceptable_languages    :string(255)      default([])
 #  special_characteristics :string(255)      default([])
-#  experience_level        :string(255)      default([])
+#  experience_levels       :string(255)      default([])
 #  perks                   :string(255)      default([])
-#  position_type           :string(255)      default([])
+#  position_titles         :string(255)      default([])
 #  created_at              :datetime
 #  updated_at              :datetime
 #  company_id              :integer
@@ -38,7 +38,7 @@ class JobListing < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
 
-  HASHABLE_PARAMS = ['practices', 'perks', 'experience_level', 'special_characteristics', 'acceptable_languages', 'position_type']
+  HASHABLE_PARAMS = %w(practices perks experience_levels special_characteristics acceptable_languages position_titles)
 
   belongs_to :company
   has_many :conversations

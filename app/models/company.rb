@@ -26,6 +26,7 @@
 #  last_sign_in_ip    :inet
 #  current_sign_in_ip :inet
 #  sign_in_count      :integer
+#  size_definition    :string(255)
 #
 
 class Company < ActiveRecord::Base
@@ -48,6 +49,7 @@ class Company < ActiveRecord::Base
                        if:           :password
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :name, presence: true, uniqueness: true
+  validates :size_definition, inclusion: { in: PreferenceConstants::COMPANY_TYPES }, allow_nil: true
 
   has_one :subscription
   has_many :job_listings

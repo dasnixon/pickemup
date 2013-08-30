@@ -8,3 +8,22 @@
   height: 100%;
   margin-bottom: 20px;
 }
+
+.left_hub {
+  float: left;
+  margin-right: 10px;
+}
+
+.score {
+  background: green;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  overflow: visible;
+  margin-bottom: 10px;
+  vertical-align: middle;
+  line-height: 60px;
+  color: white;
+  font-weight: bold;
+}

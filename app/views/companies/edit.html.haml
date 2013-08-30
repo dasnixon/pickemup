@@ -27,6 +27,10 @@
         .controls
           = f.text_field :industry
       .control-group
+        = f.label "Type", class: 'control-label'
+        .controls
+          = f.select :size_definition, Preference::COMPANY_TYPES, include_blank: true
+      .control-group
         = f.label "Number of Employees", class: 'control-label'
         .controls
           = f.text_field :num_employees

@@ -39,11 +39,11 @@ FactoryGirl.define do
     sponsorship_available   true
     estimated_work_hours    40
     active                  true
-    experience_level        PreferenceConstants::EXPERIENCE_LEVEL.shuffle[0..2]
+    experience_levels       PreferenceConstants::EXPERIENCE_LEVELS.shuffle[0..2]
     perks                   PreferenceConstants::PERKS.shuffle[0..2]
     practices               PreferenceConstants::PRACTICES.shuffle[0..2]
     special_characteristics [PreferenceConstants::SPECIAL_CHARACTERISTICS.shuffle.first]
-    position_type           PreferenceConstants::POSITION_TYPE.shuffle[0..1]
+    position_titles         PreferenceConstants::POSITION_TITLES.shuffle[0..1]
     acceptable_languages    PreferenceConstants::ACCEPTABLE_LANGUAGES.shuffle[0..2]
     trait :unsponsored do
       sponsorship_available false
