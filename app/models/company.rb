@@ -124,6 +124,22 @@ class Company < ActiveRecord::Base
     end
   end
 
+  def matching_users
+    self.job_listings.inject({}) do |matches, job_listing|
+      where_skills_statement = job_listing.acceptable_languages.collect { |a| "a ~* '#{a}'" }.join(' OR ')
+      query = "SELECT * FROM ( SELECT *, unnest(skills) a FROM profiles) x WHERE #{where_skills_statement}"
+      user_profiles = Profile.find_by_sql(query)
+      user_profiles.each do |user_profile|
+        user = user_profile.linkedin.user
+        preference = user.preference
+        matches[job_listing.job_title] ||= []
+        matches[job_listing.job_title] << { job_listing: job_listing, user: user, preference: preference, score: Algorithm.new(preference, job_listing).score }
+        matches[job_listing.job_title].uniq!
+      end
+      matches
+    end
+  end
+
   private
 
   def encrypt_password

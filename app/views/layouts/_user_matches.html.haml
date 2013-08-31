@@ -8,10 +8,7 @@
     - company     = matching[:company]
     - score       = matching[:score]
     .media
-      .left_hub
-        .score
-          #{score} %
-        = link_to image_tag(company.logo, size: '100x100'), company_path(id: company.id), class: 'pull-left'
+      = link_to image_tag(company.logo, size: '100x100'), company_path(id: company.id), class: 'pull-left'
       .pull-right
         .pull-right
           = link_to 'View Listing', company_job_listing_path(company_id: company.id, id: job_listing.id), class: 'btn btn-primary'
@@ -25,7 +22,11 @@
           %dt Languages
           %dd= truncate_html(job_listing.acceptable_languages.join(', '), length: 30, omission: '...and more')
       .media-body
-        %h4.media-heading= link_to "#{company.name} - #{job_listing_title(job_listing)}", company_job_listing_path(company_id: company.id, id: job_listing.id)
+        %h4.media-heading
+          .label.label-success{style: 'font-size: 20px;'} #{score}% Match
+          = link_to company.name, company_path(id: company.id)
+          %i.icon-hand-right.icon-large
+          = link_to "#{job_listing.job_title}", company_job_listing_path(company_id: company.id, id: job_listing.id)
         %div
           %p
             = truncate_html(job_listing.job_description, length: 150, omission: "...#{link_to 'read more', company_job_listing_path(company_id: company.id, id: job_listing.id)}")
