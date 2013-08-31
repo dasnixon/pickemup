@@ -14,11 +14,11 @@
       .span6.flexslider
         %ul.slides
           %li
-            %img{:src => "#{image_path('about_slide1.jpg')}"}/
+            = image_tag('about_slide1.jpg')
           %li
-            %img{:src => "#{image_path('about_slide1.jpg')}"}/
+            = image_tag('about_slide1.jpg')
           %li
-            %img{:src => "#{image_path('about_slide1.jpg')}"}/
+            = image_tag('about_slide1.jpg')
 #team
   .container
     .section_header
@@ -26,39 +26,39 @@
     .row.people
       .row.row1
         .span6.bio_box
-          %img{:alt => "", :src => "#{image_path('ale.png')}"}
-            .info
-              %p.name Tom Depplito
-              %p.area Co-Founder/CEO
-              %a.facebook{:href => "#"}
-                %span.socialicons.ico1
-                %span.socialicons_h.ico1h
-              %a.twitter{:href => "#"}
-                %span.socialicons.ico2
-                %span.socialicons_h.ico2h
-              %a.flickr{:href => "#"}
-                %span.socialicons.ico4
-                %span.socialicons_h.ico4h
-              %a.dribble{:href => "#"}
-                %span.socialicons.ico6
-                %span.socialicons_h.ico6h
+          = image_tag('ale.png')
+          .info
+            %p.name Tom Depplito
+            %p.area Co-Founder/CEO
+            %a.facebook{:href => "#"}
+              %span.socialicons.ico1
+              %span.socialicons_h.ico1h
+            %a.twitter{:href => "#"}
+              %span.socialicons.ico2
+              %span.socialicons_h.ico2h
+            %a.flickr{:href => "#"}
+              %span.socialicons.ico4
+              %span.socialicons_h.ico4h
+            %a.dribble{:href => "#"}
+              %span.socialicons.ico6
+              %span.socialicons_h.ico6h
         .span6.bio_box.bio_boxr
-          %img{:alt => "", :src => "#{image_path('ale.png')}"}
-            .info
-              %p.name Chris Nixon
-              %p.area Co-Founter/CTO
-              %a.facebook{:href => "#"}
-                %span.socialicons.ico1
-                %span.socialicons_h.ico1h
-              %a.twitter{:href => "#"}
-                %span.socialicons.ico2
-                %span.socialicons_h.ico2h
-              %a.flickr{:href => "#"}
-                %span.socialicons.ico4
-                %span.socialicons_h.ico4h
-              %a.dribble{:href => "#"}
-                %span.socialicons.ico6
-                %span.socialicons_h.ico6h
+          = image_tag('ale.png')
+          .info
+            %p.name Chris Nixon
+            %p.area Co-Founter/CTO
+            %a.facebook{:href => "#"}
+              %span.socialicons.ico1
+              %span.socialicons_h.ico1h
+            %a.twitter{:href => "#"}
+              %span.socialicons.ico2
+              %span.socialicons_h.ico2h
+            %a.flickr{:href => "#"}
+              %span.socialicons.ico4
+              %span.socialicons_h.ico4h
+            %a.dribble{:href => "#"}
+              %span.socialicons.ico6
+              %span.socialicons_h.ico6h
 #process
   .container
     .section_header
@@ -80,11 +80,11 @@
             There are many variations of passages of  this suffered alteration in some form, by injected look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to making this the first true generator  Internet.
       .span7.areas
         .circle.active
-          %img{:src => "#{image_path('plan.png')}"}/
+          = image_tag('plan.png')
           %span Plan
         .circle
-          %img{:src => "#{image_path('develop.png')}"}/
+          = image_tag('develop.png')
           %span Develop
         .circle.last_circle
-          %img{:src => "#{image_path('design.png')}"}/
+          = image_tag('design.png')
           %span Design
