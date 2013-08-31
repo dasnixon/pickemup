@@ -129,12 +129,12 @@
 	display: inline-block !important;
 }
 .socialicons{
-	background: url(/assets/socialicons.png) no-repeat;
+	background: image-url('socialicons.png') no-repeat;
 	width: 265px;
 	height: 36px;
 }
 .socialicons_h{
-	background: url(/assets/socialicons_h.png) no-repeat;
+	background: image-url('socialicons_h.png') no-repeat;
 	width: 265px;
 	height: 36px;
 	display: none !important;

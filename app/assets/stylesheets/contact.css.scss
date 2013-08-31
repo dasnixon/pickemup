@@ -29,13 +29,13 @@
 	width: 89%;
 }
 #contact .form .box input.name{
-	background: url(/assets/formname.png) #fff no-repeat 5px;
+	background: image-url('formname.png') #fff no-repeat 5px;
 }
 #contact .form .box input.mail{
-	background: url(/assets/formmail.png) #fff no-repeat 5px;
+	background: image-url('formmail.png') #fff no-repeat 5px;
 }
 #contact .form .box input.phone{
-	background: url(/assets/formphone.png) #fff no-repeat 5px;
+	background: image-url('formphone.png') #fff no-repeat 5px;
 }
 #contact .form .box_r{
 	float: right;
@@ -177,7 +177,7 @@
 	background: #252528;
 }
 .contacticos{
-	background: url(/assets/contact_icos.png) no-repeat;
+	background: image-url('contact_icos.png') no-repeat;
 	width: 24px;
 	height: 44px;
 }

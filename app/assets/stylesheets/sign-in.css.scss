@@ -1,6 +1,6 @@
 /* Sign In Option 1 */
 #sign_in1{
-    background: url(/assets/backgrounds/aqua.jpg)  no-repeat;
+    background: image-url('backgrounds/aqua.jpg')  no-repeat;
     display: block;
     height: 650px;
     -webkit-background-size: cover;
@@ -254,7 +254,7 @@
     background: #252528;
 }
 #sign_in2 .icos{
-    background: url(/assets/signin_icos.png) no-repeat;
+    background: image-url('signin_icos.png') no-repeat;
     width: 96px;
     height: 30px;
 }

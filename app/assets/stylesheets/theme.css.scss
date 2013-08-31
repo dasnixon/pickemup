@@ -3,7 +3,7 @@ html {
 }
 body {
 	position: relative;
-	background: #DDDCE2 url(/assets/body_bg.jpg) repeat left top;
+	background: #DDDCE2 image-url('body_bg.jpg') repeat left top;
 	-webkit-font-smoothing: antialiased;
 	font-family: 'Lato', sans-serif !important;
 	padding-top: 107px;
@@ -300,12 +300,12 @@ header {
 	display: none;
 }
 .socialicons{
-	background: url(/assets/socialicons.png) no-repeat;
+	background: image-url('socialicons.png') no-repeat;
 	width: 265px;
 	height: 36px;
 }
 .socialicons_h{
-	background: url(/assets/socialicons_h.png) no-repeat;
+	background: image-url('socialicons_h.png') no-repeat;
 	width: 265px;
 	height: 36px;
 }
@@ -356,12 +356,12 @@ header {
 	padding: 0px 18px;
 }
 .social_icon{
-	background: url(assets/social_icons.png) no-repeat;
+	background: image-url('social_icons.png') no-repeat;
 	width: 110px;
 	height: 18px;
 }
 .contact_social{
-	background: url(/assets/contact_social.png) no-repeat;
+	background: image-url('contact_social.png') no-repeat;
 	width: 180px;
 	height: 34px;
 }

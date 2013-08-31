@@ -1,6 +1,6 @@
 /* Sign Up Option 1 */
 #sign_up1{
-	background: url(/assets/backgrounds/ocean.jpg)  no-repeat;
+	background: image-url('backgrounds/ocean.jpg')  no-repeat;
 	display: block;
 	height: 650px;
 	-webkit-background-size: cover;
@@ -238,7 +238,7 @@
 	background: #252528;
 }
 #sign_up2 .icos{
-	background: url(/assets/signin_icos.png) no-repeat;
+	background: image-url('signin_icos.png') no-repeat;
 	width: 96px;
 	height: 30px;
 }
