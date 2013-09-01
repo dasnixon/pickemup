@@ -1,11 +1,12 @@
 function stripeResponseHandler(status, response) {
    if (response.error) {
-      $('#stripe_error').text(response.error.message)
-      $('input[type=submit]').attr('disabled', false)
+      $('#stripe_error').text(response.error.message);
+      $('.submit-button').prop('disabled', false);
    } else {
-      $('#_stripe_card_token').val(response.id)
-      $('#new_subscription')[0].submit()
-    };
+      var token = response.id;
+      $('#new_subscription').append($('<input type="hidden" name="stripe_card_token" />').val(token));
+      $('#new_subscription').get(0).submit();
+   }
 }
 
 $(function() {
@@ -13,7 +14,7 @@ $(function() {
     // Disable the submit button to prevent repeated clicks
     $('.submit-button').prop('disabled', true);
 
-    Stripe.createToken({
+    Stripe.card.createToken({
       number: $('.card-number').val(),
       cvc: $('.card-cvc').val(),
       exp_month: $('.card-expiry-month').val(),

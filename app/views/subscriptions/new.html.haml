@@ -13,7 +13,6 @@
 
         = hidden_field_tag :email, @company.email
         = hidden_field_tag :company_id, @company.id
-        = hidden_field nil, :stripe_card_token
         .control-group
           .controls
             = f.submit 'Save Subscription', class: 'btn'

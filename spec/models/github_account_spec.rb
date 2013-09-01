@@ -48,7 +48,7 @@ describe GithubAccount do
     end
     context 'calling save' do
       before :each do
-        expect(github_account).to receive(:save!)
+        expect(github_account).to receive(:save)
       end
       it 'calls save!' do
         github_account.from_omniauth(generic_auth_github)
