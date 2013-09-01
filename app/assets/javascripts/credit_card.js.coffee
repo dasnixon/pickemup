@@ -11,4 +11,6 @@ $ ->
     cardGrandParent.removeClass().addClass "control-group success"
   ).on("cc:onCardChange", (event, card, niceName) ->
     $("#credit-card-type-text").text niceName
-  ).cardcheck iconLocation: "#accepted-cards-images"
+  ).cardcheck
+    iconLocation: "#accepted-cards-images",
+    iconDir: '/card_images/'
