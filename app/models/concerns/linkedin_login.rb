@@ -26,7 +26,8 @@ module LinkedinLogin
   end
 
   def update_linkedin_information(auth)
-    self.linkedin.from_omniauth(auth)
+    linkedin = self.linkedin
+    linkedin.present? ? linkedin.from_omniauth(auth) : self.build_linkedin.from_omniauth(auth)
     self.set_attributes_from_linkedin(auth)
     UserInformationWorker.perform_async(self.id) #this will call the update_resume method
   end

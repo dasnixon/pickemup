@@ -29,7 +29,8 @@ module GithubLogin
   #github, linkedin, and stackexchange information, and any updated inforation
   #on the user
   def update_github_information(auth)
-    self.github_account.from_omniauth(auth)
+    github_account = self.github_account
+    github_account.present? ? github_account.from_omniauth(auth) : self.build_github_account.from_omniauth(auth)
     self.set_attributes_from_github(auth)
     UserInformationWorker.perform_async(self.id) #this will call the update_resume method
   end

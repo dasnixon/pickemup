@@ -42,7 +42,7 @@ class GithubAccount < ActiveRecord::Base
     self.token              = auth.credentials.token
     self.uid                = auth.uid
     self.github_account_key = extra_info.id
-    self.save! if self.changed?
+    self.save
   end
 
   #this method is used to setup the repos and orgs from a user's github oauth token
