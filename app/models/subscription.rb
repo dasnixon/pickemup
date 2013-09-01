@@ -17,7 +17,7 @@
 class Subscription < ActiveRecord::Base
   belongs_to :company
 
-  validates_presence_of :company_id, :plan, :stripe_card_token
+  validates :plan, :stripe_card_token, presence: true
 
   PLAN_TO_OPTIONS_MAPPING = { 1 => {"time_limit" => 1.month, "max_job_listings" => 1},
                               2 => {"time_limit" => 1.month, "max_job_listings" => 5},

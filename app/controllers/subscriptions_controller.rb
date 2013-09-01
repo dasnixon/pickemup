@@ -90,7 +90,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def subscription_params
-    params.permit(:company_id, :email, :plan, :stripe_card_token)
+    params.permit(:email, :plan, :stripe_card_token)
   end
 
   def find_and_check_company
