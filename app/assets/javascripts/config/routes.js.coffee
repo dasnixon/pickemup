@@ -1,4 +1,5 @@
-userEdit.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
+userEdit.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
+
   $locationProvider.html5Mode(true)
 
   $stateProvider
@@ -10,9 +11,8 @@ userEdit.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($
           templateUrl: "/assets/users/edit.html.erb"
 
   $urlRouterProvider.otherwise("/")
-])
 
-preference_app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
+preference_app.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
 
   $stateProvider
@@ -24,9 +24,8 @@ preference_app.config(['$stateProvider', '$urlRouterProvider', '$locationProvide
           templateUrl: "/assets/preferences/edit.html.erb"
 
   $urlRouterProvider.otherwise("/")
-])
 
-jobListing.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
+jobListing.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
 
   $stateProvider
@@ -45,9 +44,9 @@ jobListing.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 
           templateUrl: "/assets/job_listings/new.html.erb",
 
   $urlRouterProvider.otherwise("/")
-])
 
-techStack.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
+
+techStack.config ($stateProvider, $urlRouterProvider, $locationProvider) ->
   $locationProvider.html5Mode(true)
 
   $stateProvider
@@ -66,4 +65,3 @@ techStack.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', (
           templateUrl: "/assets/tech_stacks/new.html.erb",
 
   $urlRouterProvider.otherwise("/")
-])
