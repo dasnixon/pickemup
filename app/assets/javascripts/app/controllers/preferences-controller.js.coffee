@@ -1,4 +1,4 @@
-preference_app.controller("PreferencesController", ['$scope', '$location', '$state', '$stateParams', 'Preference', ($scope, $location, $state, $stateParams, Preference) ->
+preference_app.controller "PreferencesController", ['$scope', '$location', '$state', '$stateParams', 'Preference', ($scope, $location, $state, $stateParams, Preference) ->
 
   $scope.preference     = {}
   $scope.user_id        = ''
@@ -118,4 +118,4 @@ preference_app.controller("PreferencesController", ['$scope', '$location', '$sta
       $scope.preference.errors = response['data']['errors']
       $scope.error_updating    = 'Unable to update your preferences. See specific error messages below.'
       $scope.success           = ''
-)]
+]
