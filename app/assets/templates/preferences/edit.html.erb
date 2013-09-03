@@ -8,5 +8,5 @@
   {{error_updating}}
 </div>
 <form name="preferenceForm" class='form-horizontal' ng-submit="update()">
-  <ng-include src="'/assets/preferences/_form.html.erb'" />
+  <ng-include src="<%= asset_path('preferences/_form.html.erb') %>" />
 </form>
