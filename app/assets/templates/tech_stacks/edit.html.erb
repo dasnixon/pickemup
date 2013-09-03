@@ -3,6 +3,6 @@
 </div>
 <div ng-controller = "TechStackCtrl">
   <form class='form-horizontal techStack', name='techStackForm', ng-submit="update()">
-    <ng-include src="<%= asset_path('tech_stacks/_tech_stack_form.html.erb') %>" />
+    <ng-include src="'<%= asset_path("tech_stacks/_tech_stack_form.html.erb") %>'" />
   </form>
 </div>
