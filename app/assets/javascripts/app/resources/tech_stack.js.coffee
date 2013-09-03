@@ -1,4 +1,4 @@
-techStack.factory('TechStack', ['$resource', ($resource) ->
+techStack.factory 'TechStack', ($resource) ->
   editTechStack: $resource('/companies/:company_id/tech_stacks/:tech_stack_id/:action',
     {company_id: '@company_id', tech_stack_id: '@tech_stack_id', action: '@action'},
     'get':    {method:'GET'},
@@ -13,4 +13,3 @@ techStack.factory('TechStack', ['$resource', ($resource) ->
     {company_id: '@company_id'},
     'create': {method: 'POST'}
   )
-])

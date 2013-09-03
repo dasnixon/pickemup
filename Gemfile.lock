@@ -38,8 +38,8 @@ GEM
       rake
     arel (4.0.0)
     atomic (1.1.13)
-    bcrypt-ruby (3.1.1)
-    bootstrap-sass (2.3.2.1)
+    bcrypt-ruby (3.1.2)
+    bootstrap-sass (2.3.2.2)
       sass (~> 3.2)
     builder (3.1.4)
     callsite (0.0.11)
@@ -55,7 +55,7 @@ GEM
       json (>= 1.7)
     celluloid (0.14.1)
       timers (>= 1.0.0)
-    chronic (0.10.0)
+    chronic (0.10.1)
     ckeditor_rails (4.2)
       railties (>= 3.0)
     codemirror-rails (3.16)
@@ -84,7 +84,7 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     excon (0.25.3)
-    execjs (2.0.0)
+    execjs (2.0.1)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.2.1)
@@ -172,7 +172,7 @@ GEM
       rack-contrib
       railties
     method_source (0.8.2)
-    mime-types (1.24)
+    mime-types (1.25)
     mini_portile (0.5.1)
     minitest (4.7.5)
     multi_json (1.7.9)
@@ -183,6 +183,8 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.6.8)
     newrelic_rpm (3.6.6.147)
+    ngmin-rails (0.4.0)
+      rails (>= 3.1)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     oauth2 (0.8.1)
@@ -234,13 +236,13 @@ GEM
       rails_serve_static_assets
       rails_stdout_logging
     rails_serve_static_assets (0.0.1)
-    rails_stdout_logging (0.0.1)
+    rails_stdout_logging (0.0.2)
     railties (4.0.0)
       actionpack (= 4.0.0)
       activesupport (= 4.0.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    raindrops (0.11.0)
+    raindrops (0.12.0)
     rake (10.1.0)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -265,7 +267,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    rspec-sidekiq (0.4.0)
+    rspec-sidekiq (0.5.0)
       rspec (~> 2.0)
       sidekiq (>= 2.4.0)
     ruby-hmac (0.4.0)
@@ -322,7 +324,7 @@ GEM
       polyglot (>= 0.3.1)
     truncate_html (0.9.2)
     tzinfo (0.3.37)
-    uglifier (2.2.0)
+    uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
     unicorn (4.6.3)
@@ -370,6 +372,7 @@ DEPENDENCIES
   mailboxer
   meta_request
   newrelic_rpm
+  ngmin-rails
   oauth2
   omniauth-github
   omniauth-linkedin-oauth2

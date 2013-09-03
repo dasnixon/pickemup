@@ -1,4 +1,4 @@
-techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'TechStack', function($scope, $http, $state, $stateParams, $location, TechStack) {
+techStack.controller("TechStackCtrl", function($scope, $http, $state, $stateParams, $location, TechStack) {
   $scope.techStack     = {}
   $scope.errors         = []
   $scope.success        = ''
@@ -67,4 +67,4 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
         }
     )};
   }
-}]);
+});

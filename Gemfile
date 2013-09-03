@@ -15,6 +15,9 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'font-awesome-rails'
 
+#AngularJS Pre-minifier
+gem 'ngmin-rails'
+
 #CRON
 gem 'whenever', require: false
 

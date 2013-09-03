@@ -1,4 +1,4 @@
-userEdit.controller("UsersController", ['$scope', '$location', '$state', '$stateParams', 'User', ($scope, $location, $state, $stateParams, User) ->
+userEdit.controller "UsersController", ($scope, $location, $state, $stateParams, User) ->
 
   $scope.user           = {}
   $scope.original       = {}
@@ -47,4 +47,3 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
       $scope.success = ''
       $scope.dirty_message = 'You have made changes, make sure to click the \'Save\' button below.'
   ), true
-])

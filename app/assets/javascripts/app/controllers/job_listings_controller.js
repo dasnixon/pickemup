@@ -1,4 +1,4 @@
-jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'JobListing', function($scope, $http, $state, $stateParams, $location, JobListing) {
+jobListing.controller("JobListingCtrl", function($scope, $http, $state, $stateParams, $location, JobListing) {
   $scope.jobListing     = {}
   $scope.errors         = []
   $scope.success        = ''
@@ -106,4 +106,4 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
         }
     )};
   }
-}]);
+});

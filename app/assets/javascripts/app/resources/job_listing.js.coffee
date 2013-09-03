@@ -1,4 +1,4 @@
-jobListing.factory('JobListing', ['$resource', ($resource) ->
+jobListing.factory 'JobListing', ($resource) ->
   editListing: $resource('/companies/:company_id/job_listings/:job_listing_id/:action',
     {job_listing_id: '@job_listing_id', company_id: '@company_id', action: '@action'},
     'get':    {method:'GET'},
@@ -13,4 +13,3 @@ jobListing.factory('JobListing', ['$resource', ($resource) ->
     {company_id: '@company_id'},
     'create': {method: 'POST'}
   )
-])
