@@ -1,11 +1,38 @@
-angular.module('ck-editor', []).directive "ckEditor", ->
-  require: "?ngModel"
-  link: (scope, elm, attr, ngModel) ->
-    ck = CKEDITOR.replace(elm[0])
-    return  unless ngModel
-    ck.on "pasteState", ->
-      scope.$apply ->
-        ngModel.$setViewValue ck.getData()
+angular.module('ck-editor', []).directive('ckEditor', ->
+  loaded = false
+  calledEarly = false
+  {
+    require: '?ngModel',
+    compile: (element, attributes, transclude) ->
+      local = @
+      loadIt = ->
+        calledEarly = true
 
-    ngModel.$render = (value) ->
-      ck.setData ngModel.$viewValue
+      element.ready ->
+        loadIt()
+      post: ($scope, element, attributes, controller) ->
+        return local.link $scope, element, attributes, controller if calledEarly
+
+        loadIt = (($scope, element, attributes, controller) ->
+          return ->
+            local.link $scope, element, attributes, controller
+        )($scope, element, attributes, controller)
+    link: ($scope, elm, attr, ngModel) ->
+      return unless ngModel
+
+      if (calledEarly and not loaded)
+        return loaded = true
+      loaded = false
+
+      ck = CKEDITOR.replace(elm[0])
+
+      ck.on('pasteState', ->
+        $scope.$apply( ->
+          ngModel.$setViewValue(ck.getData())
+        )
+      )
+
+      ngModel.$render = (value) ->
+        ck.setData(ngModel.$viewValue)
+  }
+)

@@ -183,8 +183,6 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.6.8)
     newrelic_rpm (3.6.6.147)
-    ngmin-rails (0.4.0)
-      rails (>= 3.1)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     oauth2 (0.8.1)
@@ -372,7 +370,6 @@ DEPENDENCIES
   mailboxer
   meta_request
   newrelic_rpm
-  ngmin-rails
   oauth2
   omniauth-github
   omniauth-linkedin-oauth2

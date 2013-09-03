@@ -1,8 +1,8 @@
-techStack.controller("TechStackCtrl", function($scope, $http, $state, $stateParams, $location, TechStack) {
-  $scope.techStack     = {}
-  $scope.errors         = []
-  $scope.success        = ''
-  $scope.error_updating = ''
+techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'TechStack', function($scope, $http, $state, $stateParams, $location, TechStack) {
+  $scope.techStack      = {};
+  $scope.errors         = [];
+  $scope.success        = '';
+  $scope.error_updating = '';
 
   if ($state.current.name == "edit") {
     TechStack.editTechStack.retrieveTechStack({
@@ -67,4 +67,4 @@ techStack.controller("TechStackCtrl", function($scope, $http, $state, $statePara
         }
     )};
   }
-});
+}]);

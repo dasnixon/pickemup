@@ -1,8 +1,8 @@
-jobListing.controller("JobListingCtrl", function($scope, $http, $state, $stateParams, $location, JobListing) {
-  $scope.jobListing     = {}
-  $scope.errors         = []
-  $scope.success        = ''
-  $scope.error_updating = ''
+jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'JobListing', function($scope, $http, $state, $stateParams, $location, JobListing) {
+  $scope.jobListing     = {};
+  $scope.errors         = [];
+  $scope.success        = '';
+  $scope.error_updating = '';
 
   if ($state.current.name == "edit") {
     JobListing.editListing.retrieveListing({
@@ -10,14 +10,14 @@ jobListing.controller("JobListingCtrl", function($scope, $http, $state, $statePa
       company_id: $stateParams['company_id'],
       action: 'retrieve_listing'
     }, function(response) {
-       response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6)
-       response.job_listing.practices = chunk(response.job_listing.practices, 6)
-       response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6)
-       response.job_listing.experience_levels = chunk(response.job_listing.experience_levels, 5)
-       response.job_listing.position_titles = chunk(response.job_listing.position_titles, 5)
-       response.job_listing.perks = chunk(response.job_listing.perks, 6)
-       $scope.tech_stacks = response.tech_stacks
-       $scope.data = response.job_listing
+       response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6);
+       response.job_listing.practices = chunk(response.job_listing.practices, 6);
+       response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6);
+       response.job_listing.experience_levels = chunk(response.job_listing.experience_levels, 5);
+       response.job_listing.position_titles = chunk(response.job_listing.position_titles, 5);
+       response.job_listing.perks = chunk(response.job_listing.perks, 6);
+       $scope.tech_stacks = response.tech_stacks;
+       $scope.data = response.job_listing;
     });
     return $scope.update = function() {
       JobListing.editListing.update({
@@ -51,7 +51,7 @@ jobListing.controller("JobListingCtrl", function($scope, $http, $state, $statePa
           tech_stack_id: $scope.data.tech_stack_id
         }},
         function(response) {
-          $scope.success = 'Successfully updated the job listing.'
+          $scope.success = 'Successfully updated the job listing.';
           return $scope.success;
         }
     )};
@@ -60,14 +60,14 @@ jobListing.controller("JobListingCtrl", function($scope, $http, $state, $statePa
       company_id: $stateParams['company_id'],
       action: 'new'
     }, function(response) {
-       response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6)
-       response.job_listing.practices = chunk(response.job_listing.practices, 6)
-       response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6)
-       response.job_listing.experience_levels = chunk(response.job_listing.experience_levels, 5)
-       response.job_listing.position_titles = chunk(response.job_listing.position_titles, 5)
-       response.job_listing.perks = chunk(response.job_listing.perks, 6)
-       $scope.tech_stacks = response.tech_stacks
-       $scope.data = response.job_listing
+       response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6);
+       response.job_listing.practices = chunk(response.job_listing.practices, 6);
+       response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6);
+       response.job_listing.experience_levels = chunk(response.job_listing.experience_levels, 5);
+       response.job_listing.position_titles = chunk(response.job_listing.position_titles, 5);
+       response.job_listing.perks = chunk(response.job_listing.perks, 6);
+       $scope.tech_stacks = response.tech_stacks;
+       $scope.data = response.job_listing;
     });
     return $scope.create = function() {
       JobListing.createListing.create({
@@ -106,4 +106,4 @@ jobListing.controller("JobListingCtrl", function($scope, $http, $state, $statePa
         }
     )};
   }
-});
+}]);
