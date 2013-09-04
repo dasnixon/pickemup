@@ -13,7 +13,26 @@ class HomeController < ApplicationController
   def contact
   end
 
+  def create_contact
+    @contact = Contact.new(contact_params)
+    if @contact.save
+      redirect_to root_path, notice: 'Thanks for sending us a message, we will try to respond as quickly as possible'
+    else
+      flash[:error] = 'We had trouble trying to send your message.'
+      render :contact
+    end
+  end
+
+  def pricing
+  end
+
   def company_search
     render json: Company.search_by(:name, params[:term])
+  end
+
+  private
+
+  def contact_params
+    params.require(:contact_us).permit(:name, :phone, :email, :message)
   end
 end

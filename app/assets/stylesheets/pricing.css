@@ -1,7 +1,7 @@
 /*Pricing Option 1*/
 #in_pricing{
-	margin-bottom: 100px;
-	margin-top: 70px;
+	margin-bottom: 40px;
+	margin-top: 110px;
 }
 #in_pricing .head{
     text-align: center;
@@ -236,13 +236,13 @@
 @media (max-width: 979px) {
 }
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) { 
+@media (min-width: 768px) and (max-width: 979px) {
 	#in_pricing .plan a.order, #in_pricing2 .plan a.order{
 		width: 64%;
 	}
 }
 /* Landscape phone to portrait tablet */
-@media (max-width: 767px) {	
+@media (max-width: 767px) {
 	#in_pricing .charts_wrapp, #in_pricing2 .charts_wrapp{
 		margin-left: 0;
 	}
@@ -250,7 +250,7 @@
 		margin: 0 auto 30px;
 		width: 95%;
 	}
-	#in_pricing .plan .wrapper, 
+	#in_pricing .plan .wrapper,
 	#in_pricing2 .plan .wrapper{
 		margin: 0 auto;
 		text-align: center;

@@ -58,7 +58,7 @@
               %li= link_to 'Add Subscription', new_company_subscription_path(company_id: current_company.id)
           %li= link_to 'About', about_path
           - if !user_signed_in? || company_signed_in?
-            %li= link_to 'Pricing', root_path
+            %li= link_to 'Pricing', pricing_path
           %li= link_to 'Contact Us', contact_path
           - if !user_signed_in?
             - if company_signed_in?

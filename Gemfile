@@ -16,7 +16,7 @@ gem 'uglifier'
 gem 'font-awesome-rails'
 
 #CRON
-gem 'whenever', require: false
+#gem 'whenever', require: false
 
 #STORE FILES/IMAGES
 gem 'carrierwave'
@@ -59,6 +59,9 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+#PHONE # VALIDATION
+gem 'phony_rails'
+
 #WEB SERVERS
 gem 'unicorn'
 
@@ -79,10 +82,9 @@ gem 'jquery-ui-rails'
 gem 'will_paginate-bootstrap'
 
 #TEXT EDITOR - BROSWER
-gem 'codemirror-rails'
+#gem 'codemirror-rails'
 
 #OTHER
-gem 'annotate'
 gem 'httparty'
 gem 'jbuilder'
 gem 'redis'
@@ -96,6 +98,7 @@ group :production do
 end
 
 group :test, :development do
+  gem 'annotate'
   gem 'pry' #debugging
   gem 'rspec-rails'
   gem 'jasmine-rails'
