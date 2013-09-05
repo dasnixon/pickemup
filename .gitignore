@@ -26,3 +26,4 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
+/config/prod-application.yml

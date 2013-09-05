@@ -3,7 +3,7 @@ html {
 }
 body {
 	position: relative;
-	background: #DDDCE2 image-url('body_bg.jpg') repeat left top;
+	background: #fff;
 	-webkit-font-smoothing: antialiased;
 	font-family: 'Lato', sans-serif !important;
 	padding-top: 107px;
@@ -110,7 +110,6 @@ header {
 -------------------------------------------------- */
 #footer {
 	min-height: 260px;
-	margin-top: 140px;
 	background-color: #252528;
 	color: #fff;
 	padding-top: 35px;

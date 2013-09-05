@@ -1,8 +1,16 @@
 #contact {
-	margin-top: 110px;
+  background: image-url('backgrounds/water.jpg')  no-repeat;
+  display: block;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 #contact .contact{
 	margin: 40px 0 100px 0;
+}
+.lower {
+  margin-top: 110px;
 }
 #contact .contact p{
 	color: #939394;
