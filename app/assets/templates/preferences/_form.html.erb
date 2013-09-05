@@ -47,47 +47,87 @@
 </div>
 
 <div class="control-group">
-  <label class='control-label'><strong>Are you a U.S. Citizen?</strong></label>
+  <label class='control-label'></label>
   <div class="controls">
-    <label class="checkbox">
-      <input type="checkbox" ng-model="preference.us_citizen"/>
-    </label>
+    <table class="table table-bordered">
+      <tr class='preference'>
+        <td ng-click="toggleActive('us_citizen')" ng-class="{active: preference.us_citizen}">
+          <ul>
+            <li class="preference-list unstyled">
+              Are you a citizen of the United States of America?
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label'><strong>Willing to Relocate?</strong></label>
+  <label class='control-label'></label>
   <div class="controls">
-    <label class="checkbox">
-      <input type="checkbox" ng-model="preference.willing_to_relocate"/>
-    </label>
+    <table class="table table-bordered">
+      <tr class='preference'>
+        <td ng-click="toggleActive('willing_to_relocate')" ng-class="{active: preference.willing_to_relocate}">
+          <ul>
+            <li class="preference-list unstyled">
+              Would you be willing and/or want to relocate?
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label'><strong>Open to Remote Work?</strong></label>
+  <label class='control-label'></label>
   <div class="controls">
-    <label class="checkbox">
-      <input type="checkbox" ng-model="preference.remote"/>
-    </label>
+    <table class="table table-bordered">
+      <tr class='preference'>
+        <td ng-click="toggleActive('remote')" ng-class="{active: preference.remote}">
+          <ul>
+            <li class="preference-list unstyled">
+              Would you be willing and/or want to work remotely?
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label'><strong>Seeking Fulltime Job?</strong></label>
+  <label class='control-label'></label>
   <div class="controls">
-    <label class="checkbox">
-      <input type="checkbox" ng-model="preference.fulltime"/>
-    </label>
+    <table class="table table-bordered">
+      <tr class='preference'>
+        <td ng-click="toggleActive('fulltime')" ng-class="{active: preference.fulltime}">
+          <ul>
+            <li class="preference-list unstyled">
+              Seeking a fulltime position?
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
 <div class="control-group">
-  <label class='control-label'><strong>Open Source Contributions?</strong></label>
+  <label class='control-label'></label>
   <div class="controls">
-    <label class="checkbox">
-      <input type="checkbox" ng-model="preference.open_source"/>
-    </label>
+    <table class="table table-bordered">
+      <tr class='preference'>
+        <td ng-click="toggleActive('open_source')" ng-class="{active: preference.open_source}">
+          <ul>
+            <li class="preference-list unstyled">
+              You prefer a company that makes open source contributions?
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>
 
@@ -99,86 +139,62 @@
     <br />
     <br />
     <table class="table table-bordered">
-      <tr>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.vacation_days">Paid vacation?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.vacation_days">
-              <span class="error_message">{{error}}</span>
+      <tr class='preference'>
+        <td ng-click="toggleActive('vacation_days')" ng-class="{active: preference.vacation_days}">
+          <ul>
+            <li class="preference-list unstyled">
+              Paid vacation?
             </li>
           </ul>
         </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.healthcare">Healthcare?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.healthcare">
-              <span class="error_message">{{error}}</span>
+        <td ng-click="toggleActive('healthcare')" ng-class="{active: preference.healthcare}">
+          <ul>
+            <li class="preference-list unstyled">
+              Healthcare?
             </li>
           </ul>
         </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.dental">Dental?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.dental">
-              <span class="error_message">{{error}}</span>
+        <td ng-click="toggleActive('dental')" ng-class="{active: preference.dental}">
+          <ul>
+            <li class="preference-list unstyled">
+              Dental?
             </li>
           </ul>
         </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.vision">Vision?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.vision">
-              <span class="error_message">{{error}}</span>
+        <td ng-click="toggleActive('vision')" ng-class="{active: preference.vision}">
+          <ul>
+            <li class="preference-list unstyled">
+              Vision?
             </li>
           </ul>
         </td>
       </tr>
-      <tr>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.life_insurance">Life Insurance?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.life_insurance">
-              <span class="error_message">{{error}}</span>
+      <tr class='preference'>
+        <td ng-click="toggleActive('life_insurance')" ng-class="{active: preference.life_insurance}">
+          <ul>
+            <li class="preference-list unstyled">
+              Life Insurance?
             </li>
           </ul>
         </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.equity">Equity?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.equity">
-              <span class="error_message">{{error}}</span>
+        <td ng-click="toggleActive('equity')" ng-class="{active: preference.equity}">
+          <ul>
+            <li class="preference-list unstyled">
+              Equity?
             </li>
           </ul>
         </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.bonuses">Bonuses?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.bonuses">
-              <span class="error_message">{{error}}</span>
+        <td ng-click="toggleActive('bonuses')" ng-class="{active: preference.bonuses}">
+          <ul>
+            <li class="preference-list unstyled">
+              Bonuses?
             </li>
           </ul>
         </td>
-        <td>
-          <label class="checkbox">
-            <input type="checkbox" ng-model="preference.retirement">Retirement?
-          </label>
-          <ul class="unstyled">
-            <li ng-repeat="error in preference.errors.retirement">
-              <span class="error_message">{{error}}</span>
+        <td ng-click="toggleActive('retirement')" ng-class="{active: preference.retirement}">
+          <ul>
+            <li class="preference-list unstyled">
+              Retirement?
             </li>
           </ul>
         </td>
@@ -191,11 +207,13 @@
   <label class='control-label'><strong>Company Sizes</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.company_size">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.company_size">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul>
+            <li class="preference-list unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -206,11 +224,13 @@
   <label class='control-label'><strong>Skills</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.skills">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.skills">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul>
+            <li class="preference-list unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -221,11 +241,13 @@
   <label class='control-label'><strong>Locations</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.locations">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.locations">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul class="preference-list">
+            <li class="unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -236,11 +258,13 @@
   <label class='control-label'><strong>Industries</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.industries">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.industries">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul>
+            <li class="preference-list unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -251,11 +275,13 @@
   <label class='control-label'><strong>Experience Levels</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.experience_levels">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.experience_levels">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul>
+            <li class="preference-list unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -266,11 +292,13 @@
   <label class='control-label'><strong>Positions</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.position_titles">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.position_titles">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul>
+            <li class="preference-list unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -281,11 +309,13 @@
   <label class='control-label'><strong>Company Types</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.company_types">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.company_types">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul>
+            <li class="preference-list unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -300,11 +330,13 @@
     <br />
     <br />
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.perks">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.perks">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul>
+            <li class="preference-list unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -315,11 +347,13 @@
   <label class='control-label'><strong>Practices</strong></label>
   <div class="controls">
     <table class="table table-bordered">
-      <tr ng-repeat="row in preference.practices">
-        <td ng-repeat="attributes in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="attributes.checked"/>{{attributes.name}}
-          </label>
+      <tr class="preference" ng-repeat="row in preference.practices">
+        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          <ul>
+            <li class="preference-list unstyled">
+              {{attributes.name}}
+            </li>
+          </ul>
         </td>
       </tr>
     </table>
@@ -328,6 +362,7 @@
 
 <div class="control-group">
   <div class="controls">
-    <button class='btn' type="submit">Save</button>
+    <button class='btn btn-primary' type="submit">Save Your Preferences</button>
   </div>
+</div>
 </div>

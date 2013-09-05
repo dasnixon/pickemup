@@ -47,6 +47,12 @@ preference_app.controller("PreferencesController", ['$scope', '$location', '$sta
     for object in unchunk objectScope
       object.checked = false
 
+  $scope.toggleActive = (attr) ->
+    $scope.preference[attr] = !$scope.preference[attr]
+
+  $scope.toggleActiveHash = (attr) ->
+    attr.checked = !attr.checked
+
   $scope.selectAllBenefits = ->
     $scope.preference.healthcare     = true
     $scope.preference.dental         = true

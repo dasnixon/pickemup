@@ -390,6 +390,16 @@ header {
 		color: #fff;
 		opacity: 0.7;
 	}
+  .sidebar-status {
+    position: static;
+    float: left;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+  .sidebar-status ul {
+    position: static;
+    width: 80%;
+  }
 }
 /* Portrait tablet to landscape and desktop */
 @media (min-width: 768px) and (max-width: 979px) {
@@ -399,6 +409,16 @@ header {
 		position: relative;
 		top: 999;
 	}
+  .sidebar-status {
+    position: static;
+    float: left;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+  .sidebar-status ul {
+    position: static;
+    width: 80%;
+  }
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
@@ -448,6 +468,17 @@ header {
 	#footer .info .touch ul{
 		margin:15px 0 15px;
 	}
+  .sidebar-status {
+    position: static;
+    float: left;
+    width: 100%;
+    margin-bottom: 25px;
+  }
+
+  .sidebar-status ul {
+    position: static;
+    width: 80%;
+  }
 }
 /* Landscape phones and down */
 @media (max-width: 480px) {

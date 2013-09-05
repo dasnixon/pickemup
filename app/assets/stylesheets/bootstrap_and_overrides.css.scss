@@ -162,3 +162,32 @@ ul.ui-autocomplete {
 #responsize {
   background: image-url('backgrounds/indigo.jpg') repeat-x top center;
 }
+
+tr.preference {
+  color:#fff;
+}
+
+tr.preference td {
+  background-color:#e35885;
+  box-shadow:0 1px 1px rgba(0,0,0,0.1);
+  cursor:pointer;
+}
+
+tr.preference td.active {
+  background-color:#8ec16d;
+}
+
+.preference-list {
+  font-size:16px;
+  font-weight:bold;
+  list-style: none;
+}
+
+.sidebar-status {
+  position: absolute;
+  left: 0;
+}
+
+.sidebar-status ul {
+  width: 175px;
+}

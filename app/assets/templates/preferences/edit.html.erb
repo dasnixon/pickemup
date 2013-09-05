@@ -1,12 +1,19 @@
-<div ng-show="success.length > 0" class="alert alert-success">
-  {{success}}
-</div>
-<div ng-show="dirty_message.length > 0" class="alert alert-info">
-  {{dirty_message}}
-</div>
-<div ng-show="error_updating.length > 0" class="alert alert-error">
-  {{error_updating}}
-</div>
 <form name="preferenceForm" class='form-horizontal' ng-submit="update()">
+  <div class="row-fluid sidebar-status">
+    <ul class="nav nav-list affix">
+      <li ng-show="success.length > 0" class="alert alert-success">
+        {{success}}
+      </li>
+      <li ng-show="dirty_message.length > 0" class="alert alert-info">
+        {{dirty_message}}
+      </li>
+      <li ng-show="error_updating.length > 0" class="alert alert-error">
+        {{error_updating}}
+      </li>
+      <li ng-show="dirty_message.length > 0">
+        <button class='btn btn-primary' type="submit">Save Your Preferences</button>
+      </li>
+    </ul>
+  </div>
   <ng-include src="'<%= asset_path("preferences/_form.html.erb") %>'" />
 </form>
