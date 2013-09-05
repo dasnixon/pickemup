@@ -6,10 +6,3 @@
 $(window).bind('setup', ->
   $(".collapse").collapse()
 )
-
-$ ->
-  $('#preference-sidebar').affix({
-    offset: {
-      bottom: 450
-    }
-   })
