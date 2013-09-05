@@ -183,11 +183,24 @@ tr.preference td.active {
   list-style: none;
 }
 
-.sidebar-status {
-  position: absolute;
-  left: 0;
+.means-no {
+  color:#fff;
+  background-color:#e35885;
+  box-shadow:0 1px 1px rgba(0,0,0,0.1);
+  font-size:16px;
+  font-weight:bold;
 }
 
-.sidebar-status ul {
-  width: 175px;
+.means-yes {
+  color:#fff;
+  background-color:#8ec16d;
+  box-shadow:0 1px 1px rgba(0,0,0,0.1);
+  font-size:16px;
+  font-weight:bold;
+}
+
+.affix-bottom {
+  position: absolute;
+  top: auto;
+  bottom: 400px;
 }

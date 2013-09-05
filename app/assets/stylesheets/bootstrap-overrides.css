@@ -1,6 +1,6 @@
-/* 
+/*
   Override .container and .span sizes on 1200px media query to be like a 980 screen size for design purposes.
-  
+
   This override is useful when changing the bootstrap files version instead of editing directly on the
   included bootstrap file.
 */

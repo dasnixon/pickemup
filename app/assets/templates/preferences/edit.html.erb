@@ -1,19 +1,31 @@
 <form name="preferenceForm" class='form-horizontal' ng-submit="update()">
-  <div class="row-fluid sidebar-status">
-    <ul class="nav nav-list affix">
-      <li ng-show="success.length > 0" class="alert alert-success">
-        {{success}}
-      </li>
-      <li ng-show="dirty_message.length > 0" class="alert alert-info">
-        {{dirty_message}}
-      </li>
-      <li ng-show="error_updating.length > 0" class="alert alert-error">
-        {{error_updating}}
-      </li>
-      <li ng-show="dirty_message.length > 0">
-        <button class='btn btn-primary' type="submit">Save Your Preferences</button>
-      </li>
-    </ul>
+  <div class="row-fluid">
+    <div class="span2">
+      <div data-spy="affix" class="span2" id="preference-sidebar">
+        <ul class="unstyled">
+          <li class="means-yes alert">
+            This means yes or preferred
+          </li>
+          <li class="means-no alert">
+            This means no or not preferred
+          </li>
+          <li ng-show="success.length > 0" class="alert alert-success">
+            {{success}}
+          </li>
+          <li ng-show="dirty_message.length > 0" class="alert alert-info">
+            {{dirty_message}}
+          </li>
+          <li ng-show="error_updating.length > 0" class="alert alert-error">
+            {{error_updating}}
+          </li>
+          <li ng-show="dirty_message.length > 0">
+            <button class='btn btn-primary' type="submit">Save Your Preferences</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="span10 span-fixed-sidebar">
+      <ng-include src="'<%= asset_path("preferences/_form.html.erb") %>'" />
+    </div>
   </div>
-  <ng-include src="'<%= asset_path("preferences/_form.html.erb") %>'" />
 </form>
