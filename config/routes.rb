@@ -44,7 +44,7 @@ Pickemup::Application.routes.draw do
         put :untrash
       end
     end
-    resources :tech_stacks do
+    resources :tech_stacks, only: [:index, :new, :create, :edit, :destroy] do
       member do
         get :retrieve_tech_stack
         put :update_tech_stack

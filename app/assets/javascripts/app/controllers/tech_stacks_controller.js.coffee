@@ -46,11 +46,7 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
         relational_databases: unchunk($scope.data.relational_databases)
         nosql_databases: unchunk($scope.data.nosql_databases)
     , (response) ->
-      $scope.success        = 'Successfully created your tech stack.'
-      $scope.data.errors    = []
-      $scope.error_updating = ''
-      $scope.dirty_message  = ''
-      $scope.original       = angular.copy($scope.data)
+      changeLocation($scope, $location, '/companies/' + $stateParams['company_id'] + '/tech_stacks', true)
     , (response) ->
       $scope.error_updating = 'Unable to create your tech stack.'
       $scope.success        = ''

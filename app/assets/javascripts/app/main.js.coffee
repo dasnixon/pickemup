@@ -23,3 +23,11 @@
   rgx = /(\d+)(\d{3})/
   x1 = x1.replace(rgx, "$1" + "," + "$2")  while rgx.test(x1)
   x1 + x2
+
+@changeLocation = (scope, location, url, forceReload) ->
+  $scope = $scope or angular.element(document).scope()
+  if forceReload or $scope.$$phase
+    window.location = url
+  else
+    $location.path(url)
+    $scope.$apply()

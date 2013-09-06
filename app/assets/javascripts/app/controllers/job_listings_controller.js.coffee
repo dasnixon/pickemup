@@ -74,11 +74,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
         tech_stack_id: $scope.data.tech_stack_id
         active: true
     , (response) ->
-      $scope.success        = 'Successfully created the job listing.'
-      $scope.data.errors    = []
-      $scope.error_updating = ''
-      $scope.dirty_message  = ''
-      $scope.original       = angular.copy($scope.data)
+      changeLocation($scope, $location, '/companies/' + $stateParams['company_id'] + '/job_listings', true)
     , (response) ->
       $scope.error_updating = 'Unable to create your job listing.'
       $scope.success        = ''

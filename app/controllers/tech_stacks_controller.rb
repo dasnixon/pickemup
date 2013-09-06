@@ -1,6 +1,6 @@
 class TechStacksController < ApplicationController
   before_filter :find_and_validate_company
-  before_filter :find_tech_stack, only: [:retrieve_tech_stack, :update_tech_stack, :edit]
+  before_filter :find_tech_stack, only: [:retrieve_tech_stack, :update_tech_stack, :edit, :destroy]
   respond_to :json, :html
 
   def index
@@ -35,6 +35,11 @@ class TechStacksController < ApplicationController
     else
       render json: { errors: @tech_stack.errors }, status: :bad_request
     end
+  end
+
+  def destroy
+    @tech_stack.destroy
+    redirect_to company_tech_stacks_path(company_id: @company.id), notice: 'Successfully removed the tech stack.'
   end
 
   private
