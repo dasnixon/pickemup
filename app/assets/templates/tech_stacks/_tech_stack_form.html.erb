@@ -1,94 +1,82 @@
 <div class='control-group'>
-  <label class='control-label'>Name</label>
+  <label class='control-label'><strong>Name</strong></label>
   <div class='controls'>
     <input id="tech_stack_name" name="name" ng-model="data.name" type="text" required \> <span class='client-error', ng-show = 'techStackForm.name.$invalid'></span>
   </div>
 </div>
 
-<div class='control-group'>
-  <label class='control-label'>Back-end Languages</label>
-  <div class='controls'>
-    <table class='table table-bordered'>
-      <tr ng-repeat="row in data.back_end_languages">
-        <td ng-repeat="language in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="language.checked"/>{{language.name}}
-          </label>
+<div class="control-group">
+  <label class='control-label'><strong>Back-end Languages</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.back_end_languages">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
   </div>
 </div>
 
-<div class='control-group'>
-  <label class='control-label'>Front-end Languages</label>
-  <div class='controls'>
-    <table class='table table-bordered'>
-      <tr ng-repeat="row in data.front_end_languages">
-        <td ng-repeat="language in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="language.checked"/>{{language.name}}
-          </label>
+<div class="control-group">
+  <label class='control-label'><strong>Front-end Languages</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.front_end_languages">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
   </div>
 </div>
 
-<div class='control-group'>
-  <label class='control-label'>Frameworks</label>
-  <div class='controls'>
-    <table class='table table-bordered'>
-      <tr ng-repeat="row in data.frameworks">
-        <td ng-repeat="framework in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="framework.checked"/>{{framework.name}}
-          </label>
+<div class="control-group">
+  <label class='control-label'><strong>Frameworks</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.frameworks">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
   </div>
 </div>
 
-<div class='control-group'>
-  <label class='control-label'>Dev Ops Tools</label>
-  <div class='controls'>
-    <table class='table table-bordered'>
-      <tr ng-repeat="row in data.dev_ops_tools">
-        <td ng-repeat="tool in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="tool.checked"/>{{tool.name}}
-          </label>
+<div class="control-group">
+  <label class='control-label'><strong>Dev Ops Tools</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.dev_ops_tools">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
   </div>
 </div>
 
-<div class='control-group'>
-  <label class='control-label'>Relational Databases</label>
-  <div class='controls'>
-    <table class='table table-bordered'>
-      <tr ng-repeat="row in data.relational_databases">
-        <td ng-repeat="tool in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="tool.checked"/>{{tool.name}}
-          </label>
+<div class="control-group">
+  <label class='control-label'><strong>Relational Databases</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.relational_databases">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
   </div>
 </div>
 
-<div class='control-group'>
-  <label class='control-label'>NoSQL Databases</label>
-  <div class='controls'>
-    <table class='table table-bordered'>
-      <tr ng-repeat="row in data.nosql_databases">
-        <td ng-repeat="tool in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="tool.checked"/>{{tool.name}}
-          </label>
+<div class="control-group">
+  <label class='control-label'><strong>NoSQL Databases</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.nosql_databases">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -97,6 +85,6 @@
 
 <div class="control-group">
   <div class="controls">
-    <button class='btn' type="submit">Submit</button>
+    <button class='btn btn-primary' type="submit">Save Your Tech Stack</button>
   </div>
 </div>

@@ -1,68 +1,80 @@
-<div ng-show="success.length > 0" class="alert alert-success">
-  {{success}}
-</div>
-<div ng-show="dirty_message.length > 0" class="alert alert-info">
-  {{dirty_message}}
-</div>
-<div ng-show="error_updating.length > 0" class="alert alert-error">
-  {{error_updating}}
-</div>
-
 <form class='form-horizontal' ng-submit="update()">
-
-  <input type="hidden" ng-model="user.id" />
-
-  <div class="control-group">
-    <label class='control-label'><strong>Name</strong></label>
-    <div class="controls">
-      <input type="text" ng-model="user.name" required/>
-      <ul class="unstyled">
-        <li ng-repeat="error in user.errors.name">
-          <span class="error_message">{{error}}</span>
-        </li>
-      </ul>
+  <div class="row-fluid">
+    <div class="span2">
+      <div class="span2 affix">
+        <ul class="unstyled">
+          <li ng-show="success.length > 0" class="alert alert-success">
+            {{success}}
+          </li>
+          <li ng-show="dirty_message.length > 0" class="alert alert-info">
+            {{dirty_message}}
+          </li>
+          <li ng-show="error_updating.length > 0" class="alert alert-error">
+            {{error_updating}}
+          </li>
+          <li ng-show="dirty_message.length > 0">
+            <button class='btn btn-primary' type="submit">Save Your Profile</button>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
 
-  <div class="control-group">
-    <label class='control-label'><strong>Email</strong></label>
-    <div class="controls">
-      <input type="email" ng-model="user.email" required/>
-      <ul class="unstyled">
-        <li ng-repeat="error in user.errors.email">
-          <span class="error_message">{{error}}</span>
-        </li>
-      </ul>
-    </div>
-  </div>
+    <div class="span9 span-fixed-sidebar">
+      <input type="hidden" ng-model="user.id" />
 
-  <div class="control-group">
-    <label class='control-label'><strong>Location</strong></label>
-    <div class="controls">
-      <input type="text" ng-model="user.location" />
-      <ul class="unstyled">
-        <li ng-repeat="error in user.errors.location">
-          <span class="error_message">{{error}}</span>
-        </li>
-      </ul>
-    </div>
-  </div>
+      <div class="control-group">
+        <label class='control-label'><strong>Name</strong></label>
+        <div class="controls">
+          <input type="text" ng-model="user.name" required/>
+          <ul class="unstyled">
+            <li ng-repeat="error in user.errors.name">
+              <span class="error_message">{{error}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-  <div class='control-group'>
-    <label class='control-label'><strong>Description</strong></label>
-    <div class='controls'>
-      <textarea ck-editor ng-model="user.description"></textarea>
-      <ul class="unstyled">
-        <li ng-repeat="error in user.errors.description">
-          <span class="error_message">{{error}}</span>
-        </li>
-      </ul>
-    </div>
-  </div>
+      <div class="control-group">
+        <label class='control-label'><strong>Email</strong></label>
+        <div class="controls">
+          <input type="email" ng-model="user.email" required/>
+          <ul class="unstyled">
+            <li ng-repeat="error in user.errors.email">
+              <span class="error_message">{{error}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-  <div class="control-group">
-    <div class="controls">
-      <button class='btn btn-primary' type="submit">Save</button>
+      <div class="control-group">
+        <label class='control-label'><strong>Location</strong></label>
+        <div class="controls">
+          <input type="text" ng-model="user.location" />
+          <ul class="unstyled">
+            <li ng-repeat="error in user.errors.location">
+              <span class="error_message">{{error}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <label class='control-label'><strong>Description</strong></label>
+        <div class='controls'>
+          <textarea ck-editor ng-model="user.description"></textarea>
+          <ul class="unstyled">
+            <li ng-repeat="error in user.errors.description">
+              <span class="error_message">{{error}}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <button class='btn btn-primary' type="submit">Save Your Profile</button>
+        </div>
+      </div>
     </div>
   </div>
 </form>

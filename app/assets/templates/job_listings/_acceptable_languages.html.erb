@@ -1,12 +1,10 @@
-<div class='control-group'>
-  <label class='control-label'>Acceptable Languages</label>
-  <div class='controls'>
-    <table class='table table-bordered'>
-      <tr ng-repeat="row in data.acceptable_languages">
-        <td ng-repeat="language in row">
-          <label class='checkbox'>
-            <input type="checkbox" ng-model="language.checked"\>{{language.name}}
-          </label>
+<div class="control-group">
+  <label class='control-label'><strong>Acceptable Languages</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.acceptable_languages">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
