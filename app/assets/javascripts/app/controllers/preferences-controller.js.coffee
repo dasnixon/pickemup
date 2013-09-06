@@ -62,10 +62,6 @@ preference_app.controller("PreferencesController", ['$scope', '$location', '$sta
     $scope.preference.equity         = true
     $scope.preference.bonuses        = true
     $scope.preference.retirement     = true
-    $scope.preference.fulltime       = true
-    $scope.preference.us_citizen     = true
-    $scope.preference.open_source    = true
-    $scope.preference.remote         = true
 
   $scope.unselectAllBenefits = ->
     $scope.preference.healthcare     = false
@@ -76,10 +72,6 @@ preference_app.controller("PreferencesController", ['$scope', '$location', '$sta
     $scope.preference.equity         = false
     $scope.preference.bonuses        = false
     $scope.preference.retirement     = false
-    $scope.preference.fulltime       = false
-    $scope.preference.us_citizen     = false
-    $scope.preference.open_source    = false
-    $scope.preference.remote         = false
 
   $scope.update = ->
     Preference.update

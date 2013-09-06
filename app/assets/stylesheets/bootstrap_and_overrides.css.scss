@@ -171,6 +171,12 @@ tr.preference td {
   background-color:#e35885;
   box-shadow:0 1px 1px rgba(0,0,0,0.1);
   cursor:pointer;
+  text-align: center;
+  vertical-align: middle;
+}
+
+table.table.table-bordered {
+  table-layout: fixed;
 }
 
 tr.preference td.active {
@@ -180,7 +186,6 @@ tr.preference td.active {
 .preference-list {
   font-size:16px;
   font-weight:bold;
-  list-style: none;
 }
 
 .means-no {

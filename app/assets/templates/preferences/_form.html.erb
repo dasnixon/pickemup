@@ -51,12 +51,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class='preference'>
-        <td ng-click="toggleActive('us_citizen')" ng-class="{active: preference.us_citizen}">
-          <ul>
-            <li class="preference-list unstyled">
-              Are you a citizen of the United States of America?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('us_citizen')" ng-class="{active: preference.us_citizen}">
+          Are you a citizen of the United States of America?
         </td>
       </tr>
     </table>
@@ -68,12 +64,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class='preference'>
-        <td ng-click="toggleActive('willing_to_relocate')" ng-class="{active: preference.willing_to_relocate}">
-          <ul>
-            <li class="preference-list unstyled">
-              Would you be willing and/or want to relocate?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('willing_to_relocate')" ng-class="{active: preference.willing_to_relocate}">
+          Would you be willing and/or want to relocate?
         </td>
       </tr>
     </table>
@@ -85,12 +77,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class='preference'>
-        <td ng-click="toggleActive('remote')" ng-class="{active: preference.remote}">
-          <ul>
-            <li class="preference-list unstyled">
-              Would you be willing and/or want to work remotely?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('remote')" ng-class="{active: preference.remote}">
+          Would you be willing and/or want to work remotely?
         </td>
       </tr>
     </table>
@@ -102,12 +90,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class='preference'>
-        <td ng-click="toggleActive('fulltime')" ng-class="{active: preference.fulltime}">
-          <ul>
-            <li class="preference-list unstyled">
-              Seeking a fulltime position?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('fulltime')" ng-class="{active: preference.fulltime}">
+          Seeking a fulltime position?
         </td>
       </tr>
     </table>
@@ -119,12 +103,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class='preference'>
-        <td ng-click="toggleActive('open_source')" ng-class="{active: preference.open_source}">
-          <ul>
-            <li class="preference-list unstyled">
-              You prefer a company that makes open source contributions?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('open_source')" ng-class="{active: preference.open_source}">
+          You prefer a company that makes open source contributions?
         </td>
       </tr>
     </table>
@@ -140,63 +120,31 @@
     <br />
     <table class="table table-bordered">
       <tr class='preference'>
-        <td ng-click="toggleActive('vacation_days')" ng-class="{active: preference.vacation_days}">
-          <ul>
-            <li class="preference-list unstyled">
-              Paid vacation?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('vacation_days')" ng-class="{active: preference.vacation_days}">
+          Paid vacation?
         </td>
-        <td ng-click="toggleActive('healthcare')" ng-class="{active: preference.healthcare}">
-          <ul>
-            <li class="preference-list unstyled">
-              Healthcare?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('healthcare')" ng-class="{active: preference.healthcare}">
+          Healthcare?
         </td>
-        <td ng-click="toggleActive('dental')" ng-class="{active: preference.dental}">
-          <ul>
-            <li class="preference-list unstyled">
-              Dental?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('dental')" ng-class="{active: preference.dental}">
+          Dental?
         </td>
-        <td ng-click="toggleActive('vision')" ng-class="{active: preference.vision}">
-          <ul>
-            <li class="preference-list unstyled">
-              Vision?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('vision')" ng-class="{active: preference.vision}">
+          Vision?
         </td>
       </tr>
       <tr class='preference'>
-        <td ng-click="toggleActive('life_insurance')" ng-class="{active: preference.life_insurance}">
-          <ul>
-            <li class="preference-list unstyled">
-              Life Insurance?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('life_insurance')" ng-class="{active: preference.life_insurance}">
+          Life Insurance?
         </td>
-        <td ng-click="toggleActive('equity')" ng-class="{active: preference.equity}">
-          <ul>
-            <li class="preference-list unstyled">
-              Equity?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('equity')" ng-class="{active: preference.equity}">
+          Equity?
         </td>
-        <td ng-click="toggleActive('bonuses')" ng-class="{active: preference.bonuses}">
-          <ul>
-            <li class="preference-list unstyled">
-              Bonuses?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('bonuses')" ng-class="{active: preference.bonuses}">
+          Bonuses?
         </td>
-        <td ng-click="toggleActive('retirement')" ng-class="{active: preference.retirement}">
-          <ul>
-            <li class="preference-list unstyled">
-              Retirement?
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActive('retirement')" ng-class="{active: preference.retirement}">
+          Retirement?
         </td>
       </tr>
     </table>
@@ -208,12 +156,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.company_size">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul>
-            <li class="preference-list unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -225,12 +169,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.skills">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul>
-            <li class="preference-list unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -242,12 +182,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.locations">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul class="preference-list">
-            <li class="unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -259,12 +195,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.industries">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul>
-            <li class="preference-list unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -276,12 +208,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.experience_levels">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul>
-            <li class="preference-list unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -293,12 +221,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.position_titles">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul>
-            <li class="preference-list unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -310,12 +234,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.company_types">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul>
-            <li class="preference-list unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -331,12 +251,8 @@
     <br />
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.perks">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul>
-            <li class="preference-list unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
@@ -348,12 +264,8 @@
   <div class="controls">
     <table class="table table-bordered">
       <tr class="preference" ng-repeat="row in preference.practices">
-        <td ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
-          <ul>
-            <li class="preference-list unstyled">
-              {{attributes.name}}
-            </li>
-          </ul>
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
         </td>
       </tr>
     </table>
