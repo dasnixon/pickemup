@@ -1,11 +1,11 @@
 class CreateProfiles < ActiveRecord::Migration
   def change
-    create_table :profiles do |t|
+    create_table :profiles, id: :uuid do |t|
       t.integer    :number_connections
       t.integer    :number_recommenders
       t.text       :summary
       t.string     :skills, array: true, default: []
-      t.belongs_to :linkedin
+      t.uuid       :linkedin_id
       t.timestamps
     end
   end

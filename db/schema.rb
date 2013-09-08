@@ -15,19 +15,22 @@ ActiveRecord::Schema.define(version: 20130829074009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
   enable_extension "hstore"
 
-  create_table "code_snippet_files", force: true do |t|
+  create_table "code_snippet_files", id: false, force: true do |t|
+    t.uuid     "id",              null: false
     t.string   "name"
     t.text     "content"
     t.integer  "size"
     t.string   "url"
-    t.integer  "code_snippet_id"
+    t.uuid     "code_snippet_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "code_snippets", force: true do |t|
+  create_table "code_snippets", id: false, force: true do |t|
+    t.uuid     "id",              null: false
     t.text     "description"
     t.string   "url"
     t.string   "gist_key"
@@ -35,12 +38,13 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.integer  "comments_count"
     t.string   "comments_url"
     t.datetime "gist_created_at"
-    t.integer  "user_id"
+    t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "companies", force: true do |t|
+  create_table "companies", id: false, force: true do |t|
+    t.uuid     "id",                                 null: false
     t.string   "name"
     t.string   "email"
     t.string   "password_salt"
@@ -54,9 +58,9 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "acquired_by"
-    t.string   "tags",               default: [],    array: true
+    t.string   "tags",               default: [],                 array: true
     t.string   "total_money_raised"
-    t.string   "competitors",        default: [],    array: true
+    t.string   "competitors",        default: [],                 array: true
     t.string   "logo"
     t.boolean  "verified",           default: false
     t.datetime "last_sign_in_at"
@@ -67,14 +71,16 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.string   "size_definition"
   end
 
-  create_table "conversations", force: true do |t|
+  create_table "conversations", id: false, force: true do |t|
+    t.uuid     "id",                          null: false
     t.string   "subject",        default: ""
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-    t.integer  "job_listing_id",              null: false
+    t.uuid     "job_listing_id",              null: false
   end
 
-  create_table "educations", force: true do |t|
+  create_table "educations", id: false, force: true do |t|
+    t.uuid     "id",             null: false
     t.text     "activities"
     t.string   "degree"
     t.string   "field_of_study"
@@ -83,14 +89,15 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.string   "start_year"
     t.string   "end_year"
     t.string   "education_key"
-    t.integer  "profile_id"
+    t.uuid     "profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "educations", ["education_key"], name: "index_educations_on_education_key", using: :btree
 
-  create_table "github_accounts", force: true do |t|
+  create_table "github_accounts", id: false, force: true do |t|
+    t.uuid     "id",                 null: false
     t.string   "nickname"
     t.boolean  "hireable"
     t.text     "bio"
@@ -102,7 +109,7 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.string   "token"
     t.string   "github_account_key"
     t.string   "uid"
-    t.integer  "user_id"
+    t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -110,7 +117,8 @@ ActiveRecord::Schema.define(version: 20130829074009) do
   add_index "github_accounts", ["github_account_key"], name: "index_github_accounts_on_github_account_key", using: :btree
   add_index "github_accounts", ["uid"], name: "index_github_accounts_on_uid", using: :btree
 
-  create_table "job_listings", force: true do |t|
+  create_table "job_listings", id: false, force: true do |t|
+    t.uuid     "id",                                      null: false
     t.string   "job_title"
     t.text     "job_description"
     t.integer  "salary_range_high"
@@ -131,42 +139,44 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.boolean  "life_insurance",          default: false
     t.boolean  "retirement",              default: false
     t.integer  "estimated_work_hours"
-    t.string   "practices",               default: [],    array: true
-    t.string   "acceptable_languages",    default: [],    array: true
-    t.string   "special_characteristics", default: [],    array: true
-    t.string   "experience_levels",       default: [],    array: true
-    t.string   "perks",                   default: [],    array: true
-    t.string   "position_titles",         default: [],    array: true
+    t.string   "practices",               default: [],                 array: true
+    t.string   "acceptable_languages",    default: [],                 array: true
+    t.string   "special_characteristics", default: [],                 array: true
+    t.string   "experience_levels",       default: [],                 array: true
+    t.string   "perks",                   default: [],                 array: true
+    t.string   "position_titles",         default: [],                 array: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "company_id"
+    t.uuid     "company_id"
   end
 
-  create_table "linkedins", force: true do |t|
+  create_table "linkedins", id: false, force: true do |t|
+    t.uuid     "id",          null: false
     t.string   "token"
     t.string   "headline"
     t.string   "industry"
     t.string   "uid"
     t.string   "profile_url"
-    t.integer  "user_id"
+    t.uuid     "user"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "linkedins", ["uid"], name: "index_linkedins_on_uid", using: :btree
 
-  create_table "notifications", force: true do |t|
+  create_table "notifications", id: false, force: true do |t|
+    t.uuid     "id",                                   null: false
     t.string   "type"
     t.text     "body"
     t.string   "subject",              default: ""
-    t.integer  "sender_id"
+    t.uuid     "sender_id"
     t.string   "sender_type"
-    t.integer  "conversation_id"
+    t.uuid     "conversation_id"
     t.boolean  "draft",                default: false
     t.datetime "updated_at",                           null: false
     t.datetime "created_at",                           null: false
-    t.integer  "notified_object_id"
-    t.string   "notified_object_type"
+    t.uuid     "notified_object_id"
+    t.uuid     "notified_object_type"
     t.string   "notification_code"
     t.string   "attachment"
     t.boolean  "global",               default: false
@@ -175,7 +185,8 @@ ActiveRecord::Schema.define(version: 20130829074009) do
 
   add_index "notifications", ["conversation_id"], name: "index_notifications_on_conversation_id", using: :btree
 
-  create_table "organizations", force: true do |t|
+  create_table "organizations", id: false, force: true do |t|
+    t.uuid     "id",                 null: false
     t.string   "name"
     t.string   "logo"
     t.string   "url"
@@ -186,14 +197,15 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.string   "blog"
     t.integer  "public_repos_count"
     t.string   "company_type"
-    t.integer  "github_account_id"
+    t.uuid     "github_account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "organizations", ["organization_key"], name: "index_organizations_on_organization_key", using: :btree
 
-  create_table "positions", force: true do |t|
+  create_table "positions", id: false, force: true do |t|
+    t.uuid     "id",           null: false
     t.string   "industry"
     t.string   "company_type"
     t.string   "name"
@@ -204,14 +216,15 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.text     "summary"
     t.string   "start_year"
     t.string   "start_month"
-    t.integer  "profile_id"
+    t.uuid     "profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "positions", ["position_key"], name: "index_positions_on_position_key", using: :btree
 
-  create_table "preferences", force: true do |t|
+  create_table "preferences", id: false, force: true do |t|
+    t.uuid     "id",                                     null: false
     t.boolean  "healthcare",             default: false
     t.boolean  "dental",                 default: false
     t.boolean  "vision",                 default: false
@@ -227,35 +240,37 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.integer  "expected_salary",        default: 0
     t.integer  "potential_availability", default: 0
     t.integer  "work_hours",             default: 0
-    t.string   "company_size",           default: [],    array: true
-    t.string   "skills",                 default: [],    array: true
-    t.string   "locations",              default: [],    array: true
-    t.string   "industries",             default: [],    array: true
-    t.string   "position_titles",        default: [],    array: true
-    t.string   "company_types",          default: [],    array: true
-    t.string   "perks",                  default: [],    array: true
-    t.string   "practices",              default: [],    array: true
-    t.string   "experience_levels",      default: [],    array: true
-    t.integer  "user_id"
+    t.string   "company_size",           default: [],                 array: true
+    t.string   "skills",                 default: [],                 array: true
+    t.string   "locations",              default: [],                 array: true
+    t.string   "industries",             default: [],                 array: true
+    t.string   "position_titles",        default: [],                 array: true
+    t.string   "company_types",          default: [],                 array: true
+    t.string   "perks",                  default: [],                 array: true
+    t.string   "practices",              default: [],                 array: true
+    t.string   "experience_levels",      default: [],                 array: true
+    t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "willing_to_relocate",    default: false
   end
 
-  create_table "profiles", force: true do |t|
+  create_table "profiles", id: false, force: true do |t|
+    t.uuid     "id",                               null: false
     t.integer  "number_connections"
     t.integer  "number_recommenders"
     t.text     "summary"
-    t.string   "skills",              default: [], array: true
-    t.integer  "linkedin_id"
+    t.string   "skills",              default: [],              array: true
+    t.uuid     "linkedin_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "receipts", force: true do |t|
-    t.integer  "receiver_id"
+  create_table "receipts", id: false, force: true do |t|
+    t.uuid     "id",                                         null: false
+    t.uuid     "receiver_id"
     t.string   "receiver_type"
-    t.integer  "notification_id",                            null: false
+    t.uuid     "notification_id",                            null: false
     t.boolean  "is_read",                    default: false
     t.boolean  "trashed",                    default: false
     t.boolean  "deleted",                    default: false
@@ -266,7 +281,8 @@ ActiveRecord::Schema.define(version: 20130829074009) do
 
   add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id", using: :btree
 
-  create_table "repos", force: true do |t|
+  create_table "repos", id: false, force: true do |t|
+    t.uuid     "id",                null: false
     t.string   "name"
     t.text     "description"
     t.boolean  "private"
@@ -279,14 +295,15 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.datetime "started"
     t.datetime "last_updated"
     t.string   "repo_key"
-    t.integer  "github_account_id"
+    t.uuid     "github_account_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "repos", ["repo_key"], name: "index_repos_on_repo_key", using: :btree
 
-  create_table "stackexchanges", force: true do |t|
+  create_table "stackexchanges", id: false, force: true do |t|
+    t.uuid     "id",                null: false
     t.string   "token"
     t.string   "uid"
     t.string   "profile_url"
@@ -296,16 +313,17 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.string   "display_name"
     t.string   "nickname"
     t.string   "stackexchange_key"
-    t.integer  "user_id"
+    t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "stackexchanges", ["stackexchange_key"], name: "index_stackexchanges_on_stackexchange_key", using: :btree
 
-  create_table "subscriptions", force: true do |t|
+  create_table "subscriptions", id: false, force: true do |t|
+    t.uuid     "id",                                    null: false
     t.integer  "plan"
-    t.integer  "company_id",                            null: false
+    t.uuid     "company_id",                            null: false
     t.string   "stripe_customer_token"
     t.string   "stripe_card_token"
     t.boolean  "active",                default: false
@@ -315,20 +333,22 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.datetime "started_at"
   end
 
-  create_table "tech_stacks", force: true do |t|
-    t.integer  "company_id"
+  create_table "tech_stacks", id: false, force: true do |t|
+    t.uuid     "id",                                null: false
+    t.uuid     "company_id"
     t.string   "name"
-    t.string   "back_end_languages",   default: [], array: true
-    t.string   "front_end_languages",  default: [], array: true
-    t.string   "frameworks",           default: [], array: true
-    t.string   "dev_ops_tools",        default: [], array: true
+    t.string   "back_end_languages",   default: [],              array: true
+    t.string   "front_end_languages",  default: [],              array: true
+    t.string   "frameworks",           default: [],              array: true
+    t.string   "dev_ops_tools",        default: [],              array: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "nosql_databases",      default: [], array: true
-    t.string   "relational_databases", default: [], array: true
+    t.string   "nosql_databases",      default: [],              array: true
+    t.string   "relational_databases", default: [],              array: true
   end
 
-  create_table "users", force: true do |t|
+  create_table "users", id: false, force: true do |t|
+    t.uuid     "id",                                     null: false
     t.string   "github_uid"
     t.string   "linkedin_uid"
     t.string   "email"

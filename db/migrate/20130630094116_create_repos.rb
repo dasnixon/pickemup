@@ -1,6 +1,6 @@
 class CreateRepos < ActiveRecord::Migration
   def change
-    create_table :repos do |t|
+    create_table :repos, id: :uuid do |t|
       t.string     :name
       t.text       :description
       t.boolean    :private
@@ -13,7 +13,7 @@ class CreateRepos < ActiveRecord::Migration
       t.datetime   :started
       t.datetime   :last_updated
       t.string     :repo_key
-      t.belongs_to :github_account
+      t.uuid       :github_account_id
       t.timestamps
     end
 

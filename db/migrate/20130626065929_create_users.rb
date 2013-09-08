@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration
   def change
-    create_table :users do |t|
+    create_table :users, id: :uuid do |t|
       t.string  :github_uid,   unique: true
       t.string  :linkedin_uid, unique: true
       t.string  :email,        unique: true

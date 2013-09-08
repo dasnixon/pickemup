@@ -1,6 +1,6 @@
 class CreatePositions < ActiveRecord::Migration
   def change
-    create_table :positions do |t|
+    create_table :positions, id: :uuid do |t|
       t.string     :industry
       t.string     :company_type
       t.string     :name
@@ -11,7 +11,7 @@ class CreatePositions < ActiveRecord::Migration
       t.text       :summary
       t.string     :start_year
       t.string     :start_month
-      t.belongs_to :profile
+      t.uuid       :profile_id
       t.timestamps
     end
 

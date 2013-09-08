@@ -1,6 +1,6 @@
 class CreateOrganizations < ActiveRecord::Migration
   def change
-    create_table :organizations do |t|
+    create_table :organizations, id: :uuid do |t|
       t.string     :name
       t.string     :logo
       t.string     :url
@@ -11,7 +11,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.string     :blog
       t.integer    :public_repos_count
       t.string     :company_type
-      t.belongs_to :github_account
+      t.uuid       :github_account_id
       t.timestamps
     end
 

@@ -1,6 +1,6 @@
 class CreateGithubAccounts < ActiveRecord::Migration
   def change
-    create_table :github_accounts do |t|
+    create_table :github_accounts, id: :uuid do |t|
       t.string     :nickname
       t.boolean    :hireable
       t.text       :bio
@@ -12,7 +12,7 @@ class CreateGithubAccounts < ActiveRecord::Migration
       t.string     :token
       t.string     :github_account_key
       t.string     :uid
-      t.belongs_to :user
+      t.uuid       :user_id
       t.timestamps
     end
 

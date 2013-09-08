@@ -1,6 +1,6 @@
 class CreateStackexchanges < ActiveRecord::Migration
   def change
-    create_table :stackexchanges do |t|
+    create_table :stackexchanges, id: :uuid do |t|
       t.string     :token
       t.string     :uid
       t.string     :profile_url
@@ -10,7 +10,7 @@ class CreateStackexchanges < ActiveRecord::Migration
       t.string     :display_name
       t.string     :nickname
       t.string     :stackexchange_key
-      t.belongs_to :user
+      t.uuid       :user_id
       t.timestamps
     end
 

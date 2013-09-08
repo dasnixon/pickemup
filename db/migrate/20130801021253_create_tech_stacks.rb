@@ -1,7 +1,7 @@
 class CreateTechStacks < ActiveRecord::Migration
   def change
-    create_table :tech_stacks do |t|
-      t.integer :company_id
+    create_table :tech_stacks, id: :uuid do |t|
+      t.uuid   :company_id
       t.string :name
       t.string :back_end_languages, array: true, default: []
       t.string :front_end_languages, array: true, default: []

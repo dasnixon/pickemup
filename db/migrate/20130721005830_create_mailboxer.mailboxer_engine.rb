@@ -1,59 +1,62 @@
 # This migration comes from mailboxer_engine (originally 20110511145103)
 class CreateMailboxer < ActiveRecord::Migration
-  def self.up    
+  def self.up
   #Tables
   	#Conversations
-    create_table :conversations do |t|
+    create_table :conversations, id: :uuid do |t|
       t.column :subject, :string, :default => ""
       t.column :created_at, :datetime, :null => false
       t.column :updated_at, :datetime, :null => false
-    end    
+    end
   	#Receipts
-    create_table :receipts do |t|
-      t.references :receiver, :polymorphic => true
-      t.column :notification_id, :integer, :null => false
+    create_table :receipts, id: :uuid do |t|
+      t.uuid   :receiver_id
+      t.string :receiver_type
+      t.column :notification_id, :uuid, :null => false
       t.column :read, :boolean, :default => false
       t.column :trashed, :boolean, :default => false
       t.column :deleted, :boolean, :default => false
       t.column :mailbox_type, :string, :limit => 25
       t.column :created_at, :datetime, :null => false
       t.column :updated_at, :datetime, :null => false
-    end    
+    end
   	#Notifications and Messages
-    create_table :notifications do |t|
+    create_table :notifications, id: :uuid do |t|
       t.column :type, :string
       t.column :body, :text
       t.column :subject, :string, :default => ""
-      t.references :sender, :polymorphic => true
-      t.references :object, :polymorphic => true
-      t.column :conversation_id, :integer
+      t.uuid   :sender_id
+      t.string :sender_type
+      t.uuid   :object_id
+      t.string :object_type
+      t.column :conversation_id, :uuid
       t.column :draft, :boolean, :default => false
       t.column :updated_at, :datetime, :null => false
       t.column :created_at, :datetime, :null => false
-    end    
-    
-    
+    end
+
+
   #Indexes
   	#Conversations
   	#Receipts
   	add_index "receipts","notification_id"
 
-  	#Messages  
+  	#Messages
   	add_index "notifications","conversation_id"
-  
-  #Foreign keys    
+
+  #Foreign keys
   	#Conversations
   	#Receipts
   	add_foreign_key "receipts", "notifications", :name => "receipts_on_notification_id"
-  	#Messages  
+  	#Messages
   	add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
   end
-  
+
   def self.down
-  #Tables  	
+  #Tables
   	remove_foreign_key "receipts", :name => "receipts_on_notification_id"
   	remove_foreign_key "notifications", :name => "notifications_on_conversation_id"
-  	
+
   #Indexes
     drop_table :receipts
     drop_table :conversations

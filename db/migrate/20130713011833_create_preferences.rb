@@ -1,6 +1,6 @@
 class CreatePreferences < ActiveRecord::Migration
   def change
-    create_table :preferences do |t|
+    create_table :preferences, id: :uuid do |t|
       t.boolean    :healthcare,             default: false
       t.boolean    :dentalcare,             default: false
       t.boolean    :visioncare,             default: false
@@ -27,7 +27,7 @@ class CreatePreferences < ActiveRecord::Migration
       t.string     :perks,                  array: true, default: []
       t.string     :practices,              array: true, default: []
       t.string     :levels,                 array: true, default: []
-      t.belongs_to :user
+      t.uuid       :user_id
       t.timestamps
     end
   end

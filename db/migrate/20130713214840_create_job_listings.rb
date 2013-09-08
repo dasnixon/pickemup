@@ -1,6 +1,6 @@
 class CreateJobListings < ActiveRecord::Migration
   def change
-    create_table :job_listings do |t|
+    create_table :job_listings, id: :uuid do |t|
       t.string   :job_title
       t.text     :job_description
       t.integer  :salary_range_high
@@ -28,7 +28,7 @@ class CreateJobListings < ActiveRecord::Migration
       t.string   :perks,                   default: [],                 array: true
       t.string   :position_type,           default: [],                 array: true
       t.timestamps
-      t.belongs_to :company
+      t.uuid     :company_id
     end
   end
 end
