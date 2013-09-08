@@ -169,11 +169,12 @@
 
 .sign-up-front {
   font-size: 20px;
+  line-height: 110%;
 }
 
 /* Sign Up Option 2 */
 #sign_up2 {
-  background: image-url('backgrounds/indigo.jpg') repeat-x;
+  background: image-url('backgrounds/front-page2.jpg') repeat-x;
   display: block;
   width: 110%;
   margin-left: -5%;
@@ -187,14 +188,10 @@
   margin-top: 100px;
 }
 #sign_up2 .left_box{
-	color: white;
-  font-weight: 5700;
+	color: black;
 }
-#sign_up2 .left_box h4{
+#sign_up2 .left_box h1{
 	margin: 20px 0 40px 0;
-	line-height: 43px;
-	font-size: 40px;
-	font-weight: 300;
 }
 #sign_up2 .left_box .perk_box{
 	float: left;
@@ -202,7 +199,7 @@
 }
 #sign_up2 .left_box .perk_box .perk{
 	width: 100%;
-	color: white;
+	color: black;
 	margin-bottom: 31px;
 }
 #sign_up2 .left_box .perk_box .perk .icos{
@@ -409,7 +406,7 @@
 		margin-right: 10px;
 	}
   .sign-up-front {
-    font-size: 14px;
+    font-size: 18px;
   }
 }
 /* Landscape phone to portrait tablet */
@@ -475,6 +472,8 @@
 	#sign_up2 .left_box{
 		overflow: hidden;
 		margin-bottom: 70px;
+    padding-left: 10px;
+    width: 95%;
 	}
 	#sign_up2 .signin_box{
 		float: none;
