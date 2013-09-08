@@ -39,6 +39,10 @@
 	padding: 35px 0 25px;
 	margin: 0;
 	background: image-url('backgrounds/indigo.jpg') no-repeat;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	margin-bottom: 90px;
 }
 #team .section_header{
