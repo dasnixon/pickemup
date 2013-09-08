@@ -26,6 +26,4 @@ Pickemup::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-
-  ENV['SECRET_TOKEN_BASE'] = "1b67e74336a25db8eec827504f9531e5f43e31832621cf5468135bc47cd167679e42d03e46616dbd8b9b896ca0d0f5b669f6003ed98394714b8e04751e48ee60"
 end
