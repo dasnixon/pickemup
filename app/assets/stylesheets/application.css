@@ -12,6 +12,3 @@
  *= require_self
  *= require_tree .
  */
-.deactivated {
-  color: #BDBBBB
-}

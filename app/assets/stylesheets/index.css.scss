@@ -22,65 +22,21 @@
     font-size: 14px;
     margin: 0 0 20px;
 }
-#pagination {
-    position: absolute;
-    top: 505px;
-    z-index: 3;
-    margin: 0;
-    padding: 0;
-    display: none;
-    list-style-type: none;
-}
-#pagination li {
-    text-indent: -99999em;
-    float: left;
-    padding: 0 6px;
-    cursor: pointer;
-}
-#pagination li a {
-    width: 7px;
-    height: 7px;
-    box-shadow: 0px 0px 1px 2px #ccc;
-    background: rgb(0, 0, 0);
-    border-radius: 10px;
-    display: block;
-    /*border: 1px solid #fff;*/
-    opacity: .7;
-    -webkit-transition: opacity .1s linear;
-    -moz-transition: opacity .1s linear;
-    transition: opacity .1s linear;
-}
-#pagination li.active a {
-    background: rgb(46, 92, 177);
-    box-shadow: none;
-    width: 8px;
-    height: 8px;
-}
-
-#pagination li:hover a {
-    opacity: 1;
-}
 .slide {
     width: 100%;
     /*height: 720px;*/
     height: 480px;
     position: absolute;
-    display: none;
     overflow: hidden;
     z-index: 1;
     -webkit-background-size: cover !important;
        -moz-background-size: cover !important;
          -o-background-size: cover !important;
             background-size: cover !important;
-}
-.slide.previous {
-    z-index: 1;
+
 }
 .slide.active {
     z-index: 2;
-}
-.slide.hiddden {
-    display: none;
 }
 
 /* Custom styles for each slide */
@@ -90,8 +46,7 @@
     position: absolute;
     top: 160px;
     left: 13%;
-    width: 30%;
-    display: none;
+    width: 35%;
     z-index: 10;
 }
 .slide#showcasing .info h2 {
@@ -101,101 +56,37 @@
     line-height: 56px;
     text-shadow: 1px 1px 1px rgb(49, 57, 61);
 }
-/* Slide 2 */
-.slide#ideas .info {
-    position: relative;
-    top: 110px;
-    text-align: center;
-}
-.slide#ideas .info h2 {
-    color: #fff;
-    font-weight: normal;
-}
-
-/* Slide 3 */
-.slide#tour .info {
-    position: absolute;
-    top: 150px;
-    right: 6%;
-    width: 24%;
-}
-.slide#tour .info h2 {
-    color: #fff;
-    font-size: 45px;
-    font-weight: normal;
-    text-shadow: 1px 1px 1px #3b3262;
-    line-height: 57px;
-}
-.slide#tour .info a {
-    color: #fff;
-    font-weight: bold;
-    background-color: #2a205d;
-    padding: 13px 30px;
-    font-size: 19px;
-    border-radius: 5px;
-    margin-top: 40px;
-    display: inline-block;
-    -webkit-transition: opacity .1s linear;
-    -moz-transition: opacity .1s linear;
-    transition: opacity .1s linear;
-}
-.slide#tour .info a:hover { }
-
-/* Slide 4 */
-.slide#responsive .info {
-    position: absolute;
-    top: 170px;
-    right: 9%;
-    width: 25%;
-}
-.slide#responsive .info h2 {
-    color: #fff;
-    font-size: 47px;
-    font-weight: normal;
-    text-shadow: 1px 1px 1px #3b3262;
-    line-height: 56px;
-}
-.slide#responsive .info h2 strong {
-    font-size: 42px;
-}
-
 .slide .info h2 { }
 .slide .info {
-    display: none;
     z-index: 10;
 }
 .slide .info a:hover {
     opacity: .8;
 }
+.slide#showcasing .sign-up {
+    position: absolute;
+    top: 160px;
+    left: 63%;
+    width: 20%;
+    z-index: 10;
+}
+.slide#showcasing .sign-up h2 {
+    color: #fff;
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 56px;
+    text-shadow: 1px 1px 1px rgb(49, 57, 61);
+}
+.slide .sign-up h2 { }
+.slide .sign-up {
+    z-index: 10;
+}
+.slide .sign-up a:hover {
+    opacity: .8;
+}
 .asset,
 .fade {
     position: absolute;
-    display: none;
-}
-#slide-left,
-#slide-right {
-    width: 31px;
-    height: 37px;
-    display: block;
-    position: absolute;
-    top: 250px;
-    left: 0;
-    background: image-url('leftright-arrows.png') no-repeat;
-    opacity: .5;
-    -webkit-transition: opacity .1s linear;
-    -moz-transition: opacity .1s linear;
-    transition: opacity .1s linear;
-    display: none;
-    z-index: 2;
-}
-#slide-right {
-    left: auto;
-    right: 0;
-    background-position: -31px 0;
-}
-#slide-left:hover,
-#slide-right:hover {
-    opacity: 1;
 }
 
 

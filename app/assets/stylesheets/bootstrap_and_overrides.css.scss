@@ -14,6 +14,10 @@
   background-color: #C0C0C0;
 }
 
+.deactived {
+  color: #BDBBBB
+}
+
 .same_line_padder {
   display: inline-block;
   padding-left: 10px;
@@ -149,20 +153,6 @@ ul.ui-autocomplete {
   margin-top: 5px;
   margin-bottom: 0px;
 }
-
-#ideas {
-  background: image-url('backgrounds/aqua.jpg') repeat-x top center;
-}
-#showcasing {
-  background: image-url('backgrounds/golden-gate.jpg') repeat-x center center fixed;
-}
-#tour {
-  background: image-url('backgrounds/color-splash.jpg') repeat-x top center;
-}
-#responsize {
-  background: image-url('backgrounds/indigo.jpg') repeat-x top center;
-}
-
 tr.preference {
   color:#fff;
 }
@@ -173,10 +163,6 @@ tr.preference td {
   cursor:pointer;
   text-align: center;
   vertical-align: middle;
-}
-
-table.table.table-bordered {
-  table-layout: fixed;
 }
 
 tr.preference td.active {

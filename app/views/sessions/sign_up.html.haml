@@ -12,7 +12,7 @@
         %span or
         .line.r
       .span12.footer
-        %div{class: 'form_errors'}
+        .form_errors
         %h4 Companies
         = form_for @company, url: companies_path, method: :post do |f|
           = f.text_field :name, placeholder: 'Company Name'

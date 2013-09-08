@@ -4,6 +4,8 @@ class HomeController < ApplicationController
       @matchings = current_user.matching_companies
     elsif company_signed_in?
       @matchings = current_company.matching_users
+    else
+      @company = Company.new
     end
   end
 

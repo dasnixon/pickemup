@@ -1,31 +1,49 @@
-%section#feature_slider
-  %article#showcasing.slide
-    = image_tag('slides/scene1/macbook.png', class: 'asset left-30 sp600 t120 z1')
-    .info
-      %h2 Beautiful theme for showcasing your works.
-  %article#ideas.slide
-    .info
-      %h2 We love to turn ideas into beautiful things.
-    = image_tag('slides/scene2/left.png', class: 'asset left-480 sp600 t260 z1')
-    = image_tag('slides/scene2/middle.png', class: 'asset left-210 sp600 t213 z2')
-    = image_tag('slides/scene2/right.png', class: 'asset left60 sp600 t260 z1')
-  %article#tour.slide
-    = image_tag('slides/scene3/ipad.png', class: 'asset left-472 sp650 t210 z3')
-    = image_tag('slides/scene3/iphone.png', class: 'asset left-365 sp600 t270 z4')
-    = image_tag('slides/scene3/desktop.png', class: 'asset left-350 sp450 t135 z2')
-    = image_tag('slides/scene3/macbook.png', class: 'asset left-185 sp550 t220 z1')
-    .info
-      %h2 Fully Responsive theme
-      %a{:href => "features.html"} TOUR THE PRODUCT
-  %article#responsive.slide
-    = image_tag('slides/scene4/html5.png', class: 'asset left-472 sp600 t120 z3')
-    = image_tag('slides/scene4/css3.png', class: 'asset left-190 sp500 t120 z2')
-    .info
-      %h2
-        Developers login with
-        %strong
-          GitHub or Twitter
-
+#sign_up2
+  .container
+    .row.login
+      .span5.left_box
+        %h4 Sign up today
+        .perk_box
+          .media
+            .pull-left
+              = image_tag('Briefcase.png', size: '70x70', style: 'float: left; margin-right: 16px;')
+            .media-body.sign-up-front
+              No more sorting through resumes or job listings, quickly find exactly what you're looking for based on what you prefer in a company or developer.
+          .media
+            .pull-left
+              = image_tag('clock.png', size: '70x70', style: 'float: left; margin-right: 16px;')
+            .media-body.sign-up-front
+              Save time, money, and energy on recruiting, let us carry the heavy load while you focus on other aspects of your business and life.
+          .media
+            .pull-left
+              = image_tag('target.png', size: '70x70', style: 'float: left; margin-right: 16px;')
+            .media-body.sign-up-front
+              Get precisely matched with companies or developers based on skills, tech stacks, benefits, locations, experience levels, job positions, and much more.
+      .span6.signin_box
+        .box
+          .box_cont
+            .developer-title
+              .title-signup2 Developers
+            .social
+              = link_to raw("<i class='icon-github-sign icon-5x'></i>"), '/auth/github', class: 'circle github_link'
+              = link_to raw("<i class='icon-linkedin-sign icon-5x'></i>"), '/auth/linkedin', class: 'circle github_link'
+            .division
+              .line.l
+              %span or
+              .line.r
+            .form
+              .form_errors
+              .title-signup2 Companies
+              = form_for @company, url: companies_path, method: :post do |f|
+                = f.text_field :name, placeholder: 'Company Name'
+                = f.text_field :email, placeholder: 'Email'
+                .inline
+                  = f.password_field :password, placeholder: 'Password'
+                  = f.password_field :password_confirmation, placeholder: 'Password Confirmation'
+                .forgot
+                  %span Already have an account?
+                  = link_to 'Sign in', sign_in_path
+                = f.submit 'Sign Up'
 #showcase
   .container
     .section_header
@@ -97,53 +115,29 @@
           Simple and clean coming soon page
         %p
           There are many variations of passages of Lorem Ipsum available, but the randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.
-#in_pricing
+
+#in_pricing{style: 'margin-top: 10px;'}
   .container
     .section_header
-      %h3 Pricing
-    .row.charts_wrapp
-      .span4.pro
-        .plan
-          .wrapper
-            = image_tag('badge.png', class: 'ribbon')
-            %h3 Pro
-            .price.text-center
-              %span.dollar $
-              %span.qty 99
-              %span.month /month
-            .features.text-center
-              %p
-                %strong 10
-                Shared Projects
-              %p
-                %strong 25
-                Team Members
-              %p
-                %strong Unlimited
-                Storage
-              %p
-                %strong Plus
-                Phone Support
-            %a.order{:href => "pricing.html"} ORDER NOW
-    .start
-      %p Start your free, no-risk, 14 day trial!
-      %a{:href => "pricing.html"} Start Now!
-#clients
-  .container
-    .section_header
-      %h3 Clients
-    .row
-      .span2.client
-        .img.client1
-      .span2.client
-        .img.client2
-      .span2.client
-        .img.client3
-      .span2.client
-        .img.client1
-      .span2.client
-        .img.client2
-      .span2.client
-        .img.client3
+      %h3 Pricing Plans
+    = render 'layouts/pricing'
+
+-##clients
+  -#.container
+    -#.section_header
+      -#%h3 Clients
+    -#.row
+      -#.span2.client
+        -#.img.client1
+      -#.span2.client
+        -#.img.client2
+      -#.span2.client
+        -#.img.client3
+      -#.span2.client
+        -#.img.client1
+      -#.span2.client
+        -#.img.client2
+      -#.span2.client
+        -#.img.client3
 
 %hr
