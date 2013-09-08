@@ -176,7 +176,6 @@
 #sign_up2 {
   background: image-url('backgrounds/front-page2.jpg') repeat-x;
   display: block;
-  width: 100%;
   height: 650px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -459,6 +458,8 @@
 		border-color: #187CCC;
 	}
   #sign_up2{
+    margin-left: -20px;
+    margin-right: -20px;
     height: auto;
   }
   #sign_up2 .row.login {
@@ -468,6 +469,10 @@
 		text-align: center;
 		margin-bottom: 30px;
 	}
+  #sign_up2 .signin_box .box .form input[type="password"]{
+    width: 93%;
+    float: none;
+  }
 	#sign_up2 .left_box{
 		overflow: hidden;
 		margin-bottom: 70px;

@@ -6,7 +6,7 @@ class CreateLinkedins < ActiveRecord::Migration
       t.string     :industry
       t.string     :uid
       t.string     :profile_url
-      t.uuid       :user
+      t.uuid       :user_id
       t.timestamps
     end
 

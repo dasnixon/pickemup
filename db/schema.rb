@@ -157,7 +157,7 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.string   "industry"
     t.string   "uid"
     t.string   "profile_url"
-    t.uuid     "user"
+    t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
