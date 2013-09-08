@@ -31,7 +31,7 @@
                 = "#{user.name}"
               %div
                 %p
-                  = truncate_html(user.description.html_safe, length: 250, omission: "...#{link_to 'read more', resume_user_path(id: user.id)}")
+                  = truncate_html(user.description.try(:html_safe), length: 250, omission: "...#{link_to 'read more', resume_user_path(id: user.id)}")
         %hr
     - else
       %p
