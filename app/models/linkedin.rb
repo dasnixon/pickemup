@@ -2,13 +2,13 @@
 #
 # Table name: linkedins
 #
-#  id          :integer          not null, primary key
+#  id          :uuid             not null, primary key
 #  token       :string(255)
 #  headline    :string(255)
 #  industry    :string(255)
 #  uid         :string(255)
 #  profile_url :string(255)
-#  user_id     :integer
+#  user_id     :uuid
 #  created_at  :datetime
 #  updated_at  :datetime
 #

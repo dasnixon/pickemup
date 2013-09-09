@@ -2,12 +2,12 @@
 #
 # Table name: profiles
 #
-#  id                  :integer          not null, primary key
+#  id                  :uuid             not null, primary key
 #  number_connections  :integer
 #  number_recommenders :integer
 #  summary             :text
 #  skills              :string(255)      default([])
-#  linkedin_id         :integer
+#  linkedin_id         :uuid
 #  created_at          :datetime
 #  updated_at          :datetime
 #

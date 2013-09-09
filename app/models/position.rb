@@ -2,7 +2,7 @@
 #
 # Table name: positions
 #
-#  id           :integer          not null, primary key
+#  id           :uuid             not null, primary key
 #  industry     :string(255)
 #  company_type :string(255)
 #  name         :string(255)
@@ -13,7 +13,7 @@
 #  summary      :text
 #  start_year   :string(255)
 #  start_month  :string(255)
-#  profile_id   :integer
+#  profile_id   :uuid
 #  created_at   :datetime
 #  updated_at   :datetime
 #

@@ -2,7 +2,7 @@
 #
 # Table name: stackexchanges
 #
-#  id                :integer          not null, primary key
+#  id                :uuid             not null, primary key
 #  token             :string(255)
 #  uid               :string(255)
 #  profile_url       :string(255)
@@ -12,7 +12,7 @@
 #  display_name      :string(255)
 #  nickname          :string(255)
 #  stackexchange_key :string(255)
-#  user_id           :integer
+#  user_id           :uuid
 #  created_at        :datetime
 #  updated_at        :datetime
 #

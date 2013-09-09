@@ -2,7 +2,7 @@
 #
 # Table name: job_listings
 #
-#  id                      :integer          not null, primary key
+#  id                      :uuid             not null, primary key
 #  job_title               :string(255)
 #  job_description         :text
 #  salary_range_high       :integer
@@ -31,7 +31,7 @@
 #  position_titles         :string(255)      default([])
 #  created_at              :datetime
 #  updated_at              :datetime
-#  company_id              :integer
+#  company_id              :uuid
 #
 
 class JobListing < ActiveRecord::Base

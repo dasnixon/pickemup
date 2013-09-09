@@ -2,7 +2,7 @@
 #
 # Table name: github_accounts
 #
-#  id                 :integer          not null, primary key
+#  id                 :uuid             not null, primary key
 #  nickname           :string(255)
 #  hireable           :boolean
 #  bio                :text
@@ -14,7 +14,7 @@
 #  token              :string(255)
 #  github_account_key :string(255)
 #  uid                :string(255)
-#  user_id            :integer
+#  user_id            :uuid
 #  created_at         :datetime
 #  updated_at         :datetime
 #

@@ -2,8 +2,8 @@
 #
 # Table name: tech_stacks
 #
-#  id                   :integer          not null, primary key
-#  company_id           :integer
+#  id                   :uuid             not null, primary key
+#  company_id           :uuid
 #  name                 :string(255)
 #  back_end_languages   :string(255)      default([])
 #  front_end_languages  :string(255)      default([])

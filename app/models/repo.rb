@@ -2,7 +2,7 @@
 #
 # Table name: repos
 #
-#  id                :integer          not null, primary key
+#  id                :uuid             not null, primary key
 #  name              :string(255)
 #  description       :text
 #  private           :boolean
@@ -15,7 +15,7 @@
 #  started           :datetime
 #  last_updated      :datetime
 #  repo_key          :string(255)
-#  github_account_id :integer
+#  github_account_id :uuid
 #  created_at        :datetime
 #  updated_at        :datetime
 #

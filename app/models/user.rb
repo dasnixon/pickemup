@@ -2,7 +2,7 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
+#  id                     :uuid             not null, primary key
 #  github_uid             :string(255)
 #  linkedin_uid           :string(255)
 #  email                  :string(255)
@@ -20,13 +20,13 @@
 #  current_sign_in_ip     :inet
 #  sign_in_count          :integer
 #  manually_setup_profile :boolean          default(FALSE)
+#  active                 :boolean          default(TRUE)
 #
 
 class User < ActiveRecord::Base
   acts_as_messageable #mailboxer
 
-  include LinkedinLogin
-  include GithubLogin
+  include Login
   include JobListingMessages #override mailboxer .send_message
   include Trackable
 
@@ -44,27 +44,30 @@ class User < ActiveRecord::Base
 
   mount_uploader :profile_image, AvatarUploader #carrierwave
 
-  #find or create a user from auth then update information on that user
-  def self.from_omniauth(auth, provider, request=nil, track=false)
-    case provider
-      when :github
-        User.where(github_uid: auth.uid).first_or_initialize do |user|
+  class << self
+    #find or create a user from auth then update information on that user
+    def from_omniauth(auth, provider, request=nil, track=false)
+      case provider
+        when :github
+          from_github_account(auth, provider, request, track)
+        when :linkedin
+          from_linkedin(auth, provider, request, track)
+        else
+          nil
+      end
+    end
+
+    %w(github_account linkedin).each do |method|
+      associated = method == 'github_account' ? 'github' : method
+      define_method "from_#{method}" do |auth, provider, request=nil, track=false|
+        User.where("#{associated}_uid" => auth.uid).first_or_initialize do |user|
           user.request, user.track = request, track
-          return nil unless user.set_user_github_information(auth)
+          return nil unless user.send("set_user_#{method}_information", auth)
         end.tap do |user|
           user.request, user.track = request, track unless user.newly_created
-          user.post_github_setup(auth)
+          user.send("post_#{method}_setup", auth)
         end
-      when :linkedin
-        User.where(linkedin_uid: auth.uid).first_or_initialize do |user|
-          user.request, user.track = request, track
-          return nil unless user.set_user_linkedin_information(auth)
-        end.tap do |user|
-          user.request, user.track = request, track unless user.newly_created
-          user.post_linkedin_setup(auth)
-        end
-      else
-        nil
+      end
     end
   end
 
@@ -114,6 +117,11 @@ class User < ActiveRecord::Base
         JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company, score: Algorithm.new(pref, job_listing).score} }
       end
     end
+  end
+
+  def toggle_activation
+    self.active = !self.active
+    self.save
   end
 
   private

@@ -2,7 +2,7 @@
 #
 # Table name: organizations
 #
-#  id                 :integer          not null, primary key
+#  id                 :uuid             not null, primary key
 #  name               :string(255)
 #  logo               :string(255)
 #  url                :string(255)
@@ -13,7 +13,7 @@
 #  blog               :string(255)
 #  public_repos_count :integer
 #  company_type       :string(255)
-#  github_account_id  :integer
+#  github_account_id  :uuid
 #  created_at         :datetime
 #  updated_at         :datetime
 #

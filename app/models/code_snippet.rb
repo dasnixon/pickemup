@@ -2,7 +2,7 @@
 #
 # Table name: code_snippets
 #
-#  id              :integer          not null, primary key
+#  id              :uuid             not null, primary key
 #  description     :text
 #  url             :string(255)
 #  gist_key        :string(255)
@@ -10,7 +10,7 @@
 #  comments_count  :integer
 #  comments_url    :string(255)
 #  gist_created_at :datetime
-#  user_id         :integer
+#  user_id         :uuid
 #  created_at      :datetime
 #  updated_at      :datetime
 #

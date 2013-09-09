@@ -2,7 +2,7 @@
 #
 # Table name: companies
 #
-#  id                 :integer          not null, primary key
+#  id                 :uuid             not null, primary key
 #  name               :string(255)
 #  email              :string(255)
 #  password_salt      :string(255)
@@ -27,6 +27,7 @@
 #  current_sign_in_ip :inet
 #  sign_in_count      :integer
 #  size_definition    :string(255)
+#  active             :boolean          default(TRUE)
 #
 
 class Company < ActiveRecord::Base

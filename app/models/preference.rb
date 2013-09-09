@@ -2,7 +2,7 @@
 #
 # Table name: preferences
 #
-#  id                     :integer          not null, primary key
+#  id                     :uuid             not null, primary key
 #  healthcare             :boolean          default(FALSE)
 #  dental                 :boolean          default(FALSE)
 #  vision                 :boolean          default(FALSE)
@@ -27,7 +27,7 @@
 #  perks                  :string(255)      default([])
 #  practices              :string(255)      default([])
 #  experience_levels      :string(255)      default([])
-#  user_id                :integer
+#  user_id                :uuid
 #  created_at             :datetime
 #  updated_at             :datetime
 #  willing_to_relocate    :boolean          default(FALSE)

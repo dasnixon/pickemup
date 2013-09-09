@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130829074009) do
+ActiveRecord::Schema.define(version: 20130909020455) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.inet     "current_sign_in_ip"
     t.integer  "sign_in_count"
     t.string   "size_definition"
+    t.boolean  "active",             default: true
   end
 
   create_table "conversations", id: false, force: true do |t|
@@ -366,6 +367,7 @@ ActiveRecord::Schema.define(version: 20130829074009) do
     t.inet     "current_sign_in_ip"
     t.integer  "sign_in_count"
     t.boolean  "manually_setup_profile", default: false
+    t.boolean  "active",                 default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", using: :btree
