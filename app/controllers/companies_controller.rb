@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
   before_filter :find_company, only: [:show]
   before_filter :find_by_email, :check_invalid_permissions_company, only: [:validate_company]
-  before_filter :get_and_check_company, only: [:edit, :update]
+  before_filter :get_and_check_company, only: [:edit, :update, :toggle_activation]
   before_filter :cleanup_password_info, only: [:update]
 
   def create
@@ -37,6 +37,15 @@ class CompaniesController < ApplicationController
   def validate_company
     @company.set_verified
     redirect_to root_path, notice: "You can now start searching for developers!"
+  end
+
+  def toggle_activation
+    subscription = @company.toggle_activation
+    if @company.active
+      redirect_to edit_company_subscription_path(company_id: @company.id, id: subscription.id), notice: 'Please update your subscription to begin getting matched with developers.'
+    else
+      redirect_to root_path, notice: "Successfully deactivated your account and put your subscription on hold."
+    end
   end
 
   private

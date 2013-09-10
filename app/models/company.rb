@@ -33,6 +33,7 @@
 class Company < ActiveRecord::Base
   acts_as_messageable #mailboxer
 
+  include Shared
   include JobListingMessages #override mailboxer .send_message
   include Trackable
 
@@ -126,6 +127,7 @@ class Company < ActiveRecord::Base
   end
 
   def matching_users
+    return nil unless self.fully_activated?
     self.job_listings.inject({}) do |matches, job_listing|
       where_skills_statement = job_listing.acceptable_languages.collect { |a| "a ~* '#{a}'" }.join(' OR ')
       query = "SELECT * FROM ( SELECT *, unnest(skills) a FROM profiles) x WHERE #{where_skills_statement}"
@@ -139,6 +141,10 @@ class Company < ActiveRecord::Base
       end
       matches
     end
+  end
+
+  def fully_activated?
+    self.active? and self.subscription and self.subscription.active?
   end
 
   private

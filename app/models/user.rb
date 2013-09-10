@@ -26,6 +26,7 @@
 class User < ActiveRecord::Base
   acts_as_messageable #mailboxer
 
+  include Shared
   include Login
   include JobListingMessages #override mailboxer .send_message
   include Trackable
@@ -107,6 +108,7 @@ class User < ActiveRecord::Base
   end
 
   def matching_companies
+    return nil unless self.active?
     linkedin = self.linkedin
     if linkedin
       profile = linkedin.profile
@@ -117,11 +119,6 @@ class User < ActiveRecord::Base
         JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company, score: Algorithm.new(pref, job_listing).score} }
       end
     end
-  end
-
-  def toggle_activation
-    self.active = !self.active
-    self.save
   end
 
   private
