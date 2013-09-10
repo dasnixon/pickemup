@@ -1,10 +1,15 @@
 #housing
   .container
+    .pull-right
+      - if @company.subscription
+        #{link_to "Change Billing Info", edit_company_subscription_path(id: @subscription.id, company_id: @company.id), class: 'btn btn-success'}
+      - if current_company.active?
+        = link_to 'Deactivate Account', toggle_activation_company_path(id: current_company.id), method: :put, class: 'btn btn-danger', style: 'margin-left: 5px;',
+          confirm: 'Are you sure you want to deactivate your account? We will also be sure to put your subscription on hold.'
+      - else
+        = link_to 'Activate Account', toggle_activation_company_path(id: current_company.id), method: :put, class: 'btn btn-success', style: 'margin-left: 5px;'
     .section_header
       %h3 Company Info
-      - if @company.subscription
-        .pull-right
-          %h4 #{link_to "Change Billing Info", edit_company_subscription_path(id: @subscription.id, company_id: @company.id), class: 'btn btn-success'}
     = form_for @company, html: { class: 'form-horizontal' } do |f|
       .control-group
         = f.label :email, class: 'control-label'

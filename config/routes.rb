@@ -25,6 +25,7 @@ Pickemup::Application.routes.draw do
       get :preferences
       get :get_preference
       put :update_preference
+      put :toggle_activation
     end
     resources :conversations, only: [:index, :show, :destroy, :update] do
       member do
@@ -36,6 +37,9 @@ Pickemup::Application.routes.draw do
   resources :companies, except: [:new] do
     collection do
       get ':email/validate_company', to: 'companies#validate_company', as: :validate_company
+    end
+    member do
+      put :toggle_activation
     end
     get :purchase_options, to: 'subscriptions#purchase_options'
     get :get_users

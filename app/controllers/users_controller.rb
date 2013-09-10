@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :eager_load_user, :check_permissions, only: [:resume]
-  before_filter :get_and_check_user, only: [:edit, :update, :preferences, :get_preference, :update_preference, :listings]
+  before_filter :get_and_check_user, except: [:resume]
   before_filter :cleanup_preference_params, only: [:update_preference]
   respond_to :json, :html
 
@@ -59,6 +59,11 @@ class UsersController < ApplicationController
     else
       render json: { errors: preference.errors }, status: :bad_request
     end
+  end
+
+  def toggle_activation
+    @user.toggle_activation
+    redirect_to root_path, notice: "Successfully #{@user.active? ? 'activated' : 'deactivated'} your account."
   end
 
   private
