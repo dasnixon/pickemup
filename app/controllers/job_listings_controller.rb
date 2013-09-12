@@ -11,7 +11,7 @@ class JobListingsController < ApplicationController
   end
 
   def show
-    @conversations = @job_listing.conversations
+    @conversations = @job_listing.conversations if current_company?(@company)
   end
 
   def new
