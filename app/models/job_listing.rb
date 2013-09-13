@@ -37,11 +37,13 @@
 class JobListing < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
+  include PickemupAPI
 
   HASHABLE_PARAMS = %w(practices perks experience_levels special_characteristics acceptable_languages position_titles)
 
   belongs_to :company
   has_many :conversations
+  belongs_to :tech_stack
 
   validates :salary_range_high, :salary_range_low, presence: true, numericality: { only_integer: true }
   validates :job_description, presence: true
@@ -62,5 +64,21 @@ class JobListing < ActiveRecord::Base
 
   def toggle_active
     self.update(active: !self.active)
+  end
+
+  def api_attributes
+    attrs = self.attributes
+    attrs.merge!(listing_id: attrs.delete("id"), expiration_time: self.company.subscription.expiration_time, skills: skills, locations: [self.location])
+  end
+
+  def skills
+    stack_skills = []
+    self.try(:tech_stack).attributes.each { |key, val| stack_skills += val if val.class.name == "Array" } if self.try(:tech_stack)
+    self.acceptable_languages + stack_skills
+  end
+
+  def live?
+    return false if self.company.subscription.expired?
+    self.active
   end
 end

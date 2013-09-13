@@ -39,6 +39,7 @@
 class Preference < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
+  include PickemupAPI
 
   HASHABLE_PARAMS = %w(locations industries position_titles company_types perks
     practices experience_levels company_size skills)
@@ -84,5 +85,9 @@ class Preference < ActiveRecord::Base
 
   def preference_percentage_filled #add +1 for the benefits section, which is considered one change in itself
     (self.preference_total_filled.to_f / (Preference.columns.length - ignored_columns.length + 1)) * 100
+  end
+
+  def api_attributes
+    self.attributes
   end
 end
