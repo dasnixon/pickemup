@@ -60,6 +60,10 @@ class Subscription < ActiveRecord::Base
     Time.now  > (self.started_at + PLAN_TO_OPTIONS_MAPPING[self.plan]["time_limit"])
   end
 
+  def expiration_time
+    self.started_at + PLAN_TO_OPTIONS_MAPPING[self.plan]["time_limit"]
+  end
+
   def max_job_listings
     PLAN_TO_OPTIONS_MAPPING[self.plan]["max_job_listings"]
   end

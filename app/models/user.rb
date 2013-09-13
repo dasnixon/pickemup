@@ -126,5 +126,6 @@ class User < ActiveRecord::Base
   #automatically generate a defaulted preference for a user upon creation
   def create_preference
     self.build_preference.save
+    self.preference.api_create
   end
 end
