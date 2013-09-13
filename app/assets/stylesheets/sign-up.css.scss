@@ -1,6 +1,6 @@
 /* Sign Up Option 1 */
 #sign_up1{
-	background: image-url('backgrounds/ocean.jpg') no-repeat;
+	background: image-url('backgrounds/sign-up-page.jpg') no-repeat;
 	display: block;
 	height: 650px;
 	-webkit-background-size: cover;
@@ -11,9 +11,10 @@
 #sign_up1 .header{
 	text-align: center;
 	margin: 0;
-	color: #fff;
+	color: black;
 	margin-top: 115px;
 	padding-left: 20px;
+  font-weight: bold;
 }
 #sign_up1 .header h4{
 	font-size: 38px;
@@ -88,7 +89,7 @@
 	right: 0;
 }
 #sign_up1 .division span{
-	color: #fff;
+	color: black;
 	font-size: 17px;
 }
 #sign_up1 .footer form{
@@ -98,12 +99,12 @@
     padding-right: 20px;
     text-align: center;
     margin: 0;
-    color: #fff;
+    color: black;
     font-size: 38px;
     margin-top: 0;
     margin-bottom: 25px;
     line-height: 38px;
-    font-weight: 300;
+    font-weight: 400;
     text-shadow: 1px 1px 0px #143C4E;
 }
 
@@ -140,21 +141,24 @@
 	color: #fff;
 }
 #sign_up1 .remember a{
-	color: #fff;
+	color: black;
+  text-decoration: none;
 	font-size: 14px;
 	border-bottom: 1px solid white;
 	font-weight: bold;
 }
 #sign_up1 .dosnt{
 	text-align: center;
-	color: #fff;
+	color: black;
+  text-decoration: none;
 	font-size: 14px;
 }
 #sign_up1 .dosnt span{
 	margin-right: 8px;
 }
 #sign_up1 .dosnt a{
-	color: #fff;
+	color: black;
+  text-decoration: none;
 	border-bottom: 1px solid white;
 }
 #sign_up1 .dosnt a:hover,
@@ -389,7 +393,7 @@
 
 }
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 979px) {
+@media (min-width: 768px) and (max-width: 1200px) {
 	#sign_up1 .header .social{
 		width: 35%;
 	}
@@ -405,6 +409,10 @@
 	}
   .sign-up-front {
     font-size: 18px;
+  }
+  #sign_up2 .signin_box .box .form input[type="password"]{
+    width: 93%;
+    float: none;
   }
 }
 /* Landscape phone to portrait tablet */

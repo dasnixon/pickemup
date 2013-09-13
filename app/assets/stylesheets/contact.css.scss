@@ -209,11 +209,25 @@
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
+  #contact {
+    margin-left: -18px;
+    margin-right: -18px;
+    height: auto;
+  }
 	#contact .contact .submit .box{
 		margin: 10px 0 24px;
 	}
 	#contact .form .box input[type="text"]{
-		width: 87%;
+		width: 80%;
+		display: block;
+    float: none;
+    margin: 10px auto;
+	}
+	#contact .form .box.box_r {
+		width: 92%;
+		display: block;
+    float: none;
+    margin: 10px auto;
 	}
 	#contact .contact .submit .right input[type="submit"]{
 		margin: 0 auto;
