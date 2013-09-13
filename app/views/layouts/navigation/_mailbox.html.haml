@@ -21,8 +21,3 @@
               = link_to raw("<i class='icon-folder-open-alt'></i> " + message.subject), user_conversation_path(id: message.id, user_id: current_user.id)
             - else
               = link_to raw("<i class='icon-folder-open-alt'></i> " + message.subject), company_conversation_path(id: message.id, company_id: current_company.id)
-    - else
-      - if is_user
-        %li= link_to 'Go To Your Inbox', user_conversations_path(user_id: current_user.id)
-      - else
-        %li= link_to 'Go To Your Inbox', company_conversations_path(company_id: current_company.id)

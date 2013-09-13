@@ -14,12 +14,12 @@
       .span12.footer
         .form_errors
         %h4 Companies
-        = form_for @company, url: companies_path, method: :post do |f|
-          = f.text_field :name, placeholder: 'Company Name'
-          = f.text_field :email, placeholder: 'Email'
-          = f.password_field :password, placeholder: 'Password'
-          = f.password_field :password_confirmation, placeholder: 'Password Confirmation'
-          = f.submit 'Sign Up', {id: 'company_sign_in'}
+        = form_tag companies_path, method: :post do |f|
+          = text_field_tag 'company[name]', nil, placeholder: 'Company Name'
+          = text_field_tag 'company[email]', nil, placeholder: 'Email'
+          = password_field_tag 'company[password]', nil, placeholder: 'Password'
+          = password_field_tag 'company[password_confirmation]', nil, placeholder: 'Password Confirmation'
+          = submit_tag 'Sign Up', {id: 'company_sign_in'}
       .span12.proof
         .span5.remember
           %a{:href => "reset.html"} Forgot password?

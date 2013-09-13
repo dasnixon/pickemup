@@ -38,7 +38,7 @@
 #team{
 	padding: 35px 0 25px;
 	margin: 0;
-	background: image-url('backgrounds/indigo.jpg') no-repeat;
+	background: image-url('backgrounds/team-background.jpg') no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -49,7 +49,8 @@
 	margin-bottom: 60px;
 }
 #team .section_header h3{
-	color: #9D9D9E;
+	color: black;
+  font-weight: bold;
 	border-color: #9D9D9E;
 	margin: 0;
 }
@@ -79,13 +80,15 @@
 	margin-bottom: 0;
 }
 #team .people .bio_box .info p.name{
-	color: #fff;
+	color: blue;
+  font-weight: bold;
 	font-style: italic;
 	margin-bottom: 4px;
 	font-size: 21px;
 }
 #team .people .bio_box .info p.area{
-	color: #98989A;
+	color: black;
+  font-weight: bold;
 	font-style: italic;
 	font-style: 16px;
 	margin-bottom: 18px;
@@ -126,10 +129,10 @@
 #team .people .bio_box .info span.ico7h{
 	background-position: -226px 0px;
 }
-#team .people .bio_box .info a:hover span.socialicons{
+#team .people .bio_box .info a span.socialicons{
 	display: none;
 }
-#team .people .bio_box .info a:hover span.socialicons_h{
+#team .people .bio_box .info a span.socialicons_h{
 	display: inline-block !important;
 }
 .socialicons{

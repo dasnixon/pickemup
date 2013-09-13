@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
   end
 
   def sign_up
-    @company = Company.new
   end
 
   def company
