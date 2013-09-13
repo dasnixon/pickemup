@@ -7,59 +7,28 @@
         %span.icon-bar
       = link_to raw('<strong>Pickemup</strong>'), root_path, class: 'brand'
       .nav-collapse.collapse
-        - if user_signed_in?
-          .nav.pull-left
-            .input-prepend
-              %span.add-on
-                %i.icon-search
-              = text_field_tag :search, params[:search], id: 'company_search', class: 'span2', placeholder: 'Company Search'
+        = render 'layouts/navigation/search'
         %ul.nav.pull-right
           - if user_signed_in?
             %li= image_tag(current_user.profile_image.url(:thumb), class: 'img img-circle', size: '40x40')
-            %li= link_to 'Edit Profile', edit_user_path(id: current_user.id)
+            %li= link_to 'Profile', edit_user_path(id: current_user.id)
             %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
             %li= link_to 'Resume', resume_user_path(id: current_user.id)
             %li= link_to 'Briefcase', listings_user_path(id: current_user.id)
-            %li.navigation_mailbox= link_to(raw("<span class='badge badge-success'>#{@unread_messages.length}</span> Mailbox"), user_conversations_path(user_id: current_user.id))
-            %li.dropdown
-              %a.dropdown-toggle.caret-after{'data-toggle' => 'dropdown'}
-                %b.caret
-              %ul.dropdown-menu
-                - if @messages.present?
-                  - @messages.each do |message|
-                    %li
-                      - if @unread_messages.include?(message)
-                        = link_to raw("<i class='icon-folder-close-alt'></i> " + message.subject), user_conversation_path(id: message.id, user_id: current_user.id)
-                      - else
-                        = link_to raw("<i class='icon-folder-open-alt'></i> " + message.subject), user_conversation_path(id: message.id, user_id: current_user.id)
-                - else
-                  %li= link_to 'No messages', user_conversations_path(user_id: current_user.id)
+            = render partial: 'layouts/navigation/mailbox', locals: {messages_for: current_user}
           - if company_signed_in?
             - subscription = current_company.subscription
             %li= link_to 'Job Listings', company_job_listings_path(company_id: current_company.id)
             %li= link_to 'Tech Stacks', company_tech_stacks_path(company_id: current_company.id)
-            %li.navigation_mailbox= link_to(raw("<span class='badge badge-success'>#{@unread_messages.length}</span> Mailbox"), company_conversations_path(company_id: current_company.id))
-            %li.dropdown
-              %a.dropdown-toggle.caret-after{'data-toggle' => 'dropdown'}
-                %b.caret
-              %ul.dropdown-menu
-                - if @messages.present?
-                  - @messages.each do |message|
-                    %li
-                      - if @unread_messages.include?(message)
-                        = link_to raw("<i class='icon-folder-close-alt'></i> " + message.subject), company_conversation_path(id: message.id, company_id: current_company.id)
-                      - else
-                        = link_to raw("<i class='icon-folder-open-alt'></i> " + message.subject), company_conversation_path(id: message.id, company_id: current_company.id)
-                - else
-                  %li= link_to 'No messages', company_conversations_path(company_id: current_company.id)
+            = render partial: 'layouts/navigation/mailbox', locals: {messages_for: current_company}
             - if subscription
               %li= link_to 'Subscription', edit_company_subscription_path(id: subscription.id, company_id: current_company.id)
             - else
               %li= link_to 'Add Subscription', new_company_subscription_path(company_id: current_company.id)
-          %li= link_to 'About', about_path
-          - if !user_signed_in? || company_signed_in?
+          - if !user_signed_in? and !company_signed_in?
+            %li= link_to 'About', about_path
             %li= link_to 'Pricing', pricing_path
-          %li= link_to 'Contact Us', contact_path
+            %li= link_to 'Contact Us', contact_path
           - if !user_signed_in?
             - if company_signed_in?
               %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)

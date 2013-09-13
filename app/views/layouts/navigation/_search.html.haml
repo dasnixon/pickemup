@@ -1,0 +1,7 @@
+- if user_signed_in?
+  .nav.pull-left
+    .input-prepend
+      %span.add-on
+        %i.icon-search
+      = text_field_tag :search, params[:search], id: 'company_search', class: 'span2', placeholder: 'Company Search'
+
