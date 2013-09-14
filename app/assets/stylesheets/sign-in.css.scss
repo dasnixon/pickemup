@@ -1,6 +1,6 @@
 /* Sign In Option 1 */
 #sign_in1{
-    background: image-url('backgrounds/aqua.jpg')  no-repeat;
+    background: image-url('backgrounds/sign-in-page.jpg')  no-repeat;
     display: block;
     height: 650px;
     -webkit-background-size: cover;
@@ -11,7 +11,7 @@
 #sign_in1 .header{
     text-align: center;
     margin: 0;
-    color: #fff;
+    color: black;
     margin-top: 115px;
     padding-left: 20px;
 }
@@ -20,8 +20,7 @@
     margin-top: 0;
     margin-bottom: 25px;
     line-height: 38px;
-    font-weight: 300;
-    text-shadow: 1px 1px 0px #143C4E;
+    font-weight: 400;
 }
 #sign_in1 .header p{
     font-style: italic;
@@ -85,7 +84,7 @@
     right: 0;
 }
 #sign_in1 .division span{
-    color: #fff;
+    color: black;
     font-size: 17px;
 }
 #sign_in1 .proof{
@@ -102,14 +101,13 @@
 #sign_in1 .footer h4{
     text-align: center;
     margin: 0;
-    color: #fff;
+    color: black;
     padding-left: 30px;
     font-size: 38px;
     margin-top: 0;
     margin-bottom: 25px;
     line-height: 38px;
-    font-weight: 300;
-    text-shadow: 1px 1px 0px #143C4E;
+    font-weight: 400;
 }
 #sign_in1 .footer form{
     margin: 0 0 46px 0;
@@ -147,12 +145,12 @@
     font-weight: bold;
     width: 30%;
     font-size: 14px;
-    color: #fff;
+    color: black;
 }
 #sign_in1 .remember a{
-    color: #fff;
+    color: black;
     font-size: 14px;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid black;
     font-weight: bold;
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
@@ -161,17 +159,18 @@
 }
 #sign_in1 .dosnt{
     text-align: center;
-    color: #fff;
+    color: black;
     float: right;
     font-size: 14px;
     margin: 0 18px 0 0;
+    font-weight: bold;
 }
 #sign_in1 .dosnt span{
     margin-right: 8px;
 }
 #sign_in1 .dosnt a{
-    color: #fff;
-    border-bottom: 1px solid white;
+    color: black;
+    border-bottom: 1px solid black;
     -webkit-transition: all .2s;
     -moz-transition: all .2s;
     -ms-transition: all .2s;
@@ -428,8 +427,9 @@
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
     #sign_in1{
-        background: none;
         height: auto;
+        margin-left: -20px;
+        margin-right: -20px;
     }
     #sign_in1 .header h4{
         color: #333;
@@ -449,7 +449,7 @@
     #sign_in1 .footer input[type="text"],
     #sign_in1 .footer input[type="password"]{
         font-size: 13px;
-        width: 97%;
+        width: 90%;
         margin-bottom: 12px;
     }
     #sign_in1 .footer input[type="submit"]{

@@ -1,5 +1,4 @@
 module PickemupAPI
-  require 'JSON'
   extend ActiveSupport::Concern
   include HTTParty
 
@@ -30,7 +29,7 @@ module PickemupAPI
     timeout = 5
     begin
       Timeout::timeout(timeout) do
-        return JSON.parse(HTTParty.get(ENV["PICKEMUP_API_BASE_URL"] + "#{path}/retrieve?", body: {path.singularize => query_params}.to_json, basic_auth: auth_info, :headers => { 'Content-Type' => 'application/json' }).body)
+        return MultiJson.load(HTTParty.get(ENV["PICKEMUP_API_BASE_URL"] + "#{path}/retrieve?", body: {path.singularize => query_params}.to_json, basic_auth: auth_info, :headers => { 'Content-Type' => 'application/json' }).body)
       end
     rescue
       attempts += 1

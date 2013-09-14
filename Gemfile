@@ -15,6 +15,9 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'font-awesome-rails'
 
+#JSON PARSING
+gem 'multi_json'
+
 #CRON
 #gem 'whenever', require: false
 
