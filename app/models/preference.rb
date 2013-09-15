@@ -88,6 +88,6 @@ class Preference < ActiveRecord::Base
   end
 
   def api_attributes
-    self.attributes
+    self.attributes.merge("preference_id" => self.id)
   end
 end
