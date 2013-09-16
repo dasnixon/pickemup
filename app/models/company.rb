@@ -39,6 +39,8 @@ class Company < ActiveRecord::Base
 
   autocomplete :name, score: :calculate_score
 
+  mount_uploader :logo, AvatarUploader #carrierwave
+
   attr_accessor :password
 
   before_save :encrypt_password, if: :password

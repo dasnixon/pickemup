@@ -10,7 +10,12 @@
         = link_to 'Activate Account', toggle_activation_company_path(id: current_company.id), method: :put, class: 'btn btn-success', style: 'margin-left: 5px;'
     .section_header
       %h3 Company Info
-    = form_for @company, html: { class: 'form-horizontal' } do |f|
+    = form_for @company, html: { class: 'form-horizontal', multipart: true } do |f|
+      .control-group
+        = f.label :logo, class: 'control-label'
+        .controls
+          = image_tag(@company.logo, class: 'img-rounded', size: '100x100')
+          = f.file_field :logo
       .control-group
         = f.label :email, class: 'control-label'
         .controls
