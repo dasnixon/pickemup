@@ -25,6 +25,7 @@ gem 'multi_json'
 gem 'carrierwave'
 gem 'fog'
 gem 'rmagick'
+gem 'jquery-fileupload-rails'
 
 #MESSAGING
 gem 'mailboxer'
