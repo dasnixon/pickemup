@@ -68,7 +68,7 @@ class JobListing < ActiveRecord::Base
 
   def api_attributes
     attrs = self.attributes
-    attrs.merge!(listing_id: attrs.delete("id"), expiration_time: self.company.subscription.expiration_time, skills: skills, locations: [self.location])
+    attrs.merge!(job_listing_id: attrs.delete("id"), expiration_time: self.company.subscription.expiration_time, skills: skills, locations: [self.location])
   end
 
   def skills
