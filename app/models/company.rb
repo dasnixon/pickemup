@@ -36,6 +36,7 @@ class Company < ActiveRecord::Base
   include Shared
   include JobListingMessages #override mailboxer .send_message
   include Trackable
+  include PickemupAPI
 
   autocomplete :name, score: :calculate_score
 
@@ -147,6 +148,11 @@ class Company < ActiveRecord::Base
 
   def fully_activated?
     self.active? and self.subscription and self.subscription.active?
+  end
+
+  def api_attributes
+    attrs = self.attributes
+    attrs.merge!(company_id: attrs.delete("id"))
   end
 
   private
