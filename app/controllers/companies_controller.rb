@@ -59,7 +59,7 @@ class CompaniesController < ApplicationController
   end
 
   def company_params
-    founded = params[:company][:founded].present? ? params[:company][:founded] : Time.now
+    founded = params[:company]['founded(1i)'].present? ? Date.new(params[:company]['founded(1i)'].to_i, params[:company]['founded(2i)'].to_i, params[:company]['founded(3i)'].to_i) : Date.today
     params.require(:company).permit(:name, :email, :description, :website, :industry, :description, :size_definition,
       :num_employees, :public, :logo, :password, :password_confirmation).merge(founded: founded)
   end
