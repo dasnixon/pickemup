@@ -25,7 +25,7 @@ gem 'multi_json'
 gem 'carrierwave'
 gem 'fog'
 gem 'rmagick'
-gem 'jquery-fileupload-rails'
+gem 'carrierwave_backgrounder' #background with sidekiq
 
 #MESSAGING
 gem 'mailboxer'

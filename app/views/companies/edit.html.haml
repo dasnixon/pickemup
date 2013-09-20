@@ -10,18 +10,18 @@
         = link_to 'Activate Account', toggle_activation_company_path(id: current_company.id), method: :put, class: 'btn btn-success', style: 'margin-left: 5px;'
     .section_header
       %h3 Company Info
-    = form_for @company, html: { class: 'form-horizontal', multipart: true, id: 'fileupload' } do |f|
+    = form_for @company, html: { class: 'form-horizontal', multipart: true } do |f|
       .control-group
         .controls
-          = image_tag(@company.get_logo, size: '100x100', class: 'img-rounded')
-          %br
-          %br
-          %span.btn.btn-success.fileinput-button
-            %i.icon-plus.icon-white
-            %span Change Logo
-            = f.file_field :logo
-          %table.table.table-striped
-            %tbody.files
+          .fileupload.fileupload-new{"data-provides" => "fileupload"}
+            .fileupload-new.thumbnail{style: "width: 200px; height: 150px;"}
+              = image_tag(@company.logo)
+            .fileupload-preview.fileupload-exists.thumbnail{style: "width: 200px; height: 150px;"}
+            .clearfix
+              %span.btn.btn-primary.btn-file
+                %span.fileupload-new Select image
+                %span.fileupload-exists Change
+                %input{type: 'file', name: 'company[logo]'}/
       .control-group
         = f.label :email, class: 'control-label'
         .controls
@@ -70,76 +70,3 @@
       .control-group
         .controls
           = f.submit 'Save Company', class: 'btn', id: 'company_save'
-:javascript
-  var fileUploadErrors = {
-    maxFileSize: 'File is too big',
-    minFileSize: 'File is too small',
-    acceptFileTypes: 'Filetype not allowed',
-    maxNumberOfFiles: 'Max number of files exceeded',
-    uploadedBytes: 'Uploaded bytes exceed file size',
-    emptyResult: 'Empty file upload result'
-  };
-/ The template to display files available for upload
-%script#template-upload{type: "text/x-tmpl"}
-  {% for (var i=0, file; file=o.files[i]; i++) { %}
-  <br />
-  <tr class="template-upload">
-  <td class="preview"><span class="img-rounded"></span></td>
-  <td class="name"><span>{%=file.name%}</span></td>
-  <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-  {% if (file.error) { %}
-  <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
-  {% } else if (o.files.valid && !i) { %}
-  {% } else { %}
-  <td colspan="2"></td>
-  {% } %}
-  <td class="cancel">{% if (!i) { %}
-  <button class="btn btn-warning">
-  <i class="icon-ban-circle icon-white"></i>
-  <span>{%=locale.fileupload.cancel%}</span>
-  </button>
-  {% } %}</td>
-  </tr>
-  {% } %}
-/ The template to display files available for download
-%script#template-download{type: "text/x-tmpl"}
-  {% for (var i=0, file; file=o.files[i]; i++) { %}
-  <br />
-  <tr class="template-download">
-  {% if (file.error) { %}
-  <td></td>
-  <td class="name"><span>{%=file.name%}</span></td>
-  <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-  <td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
-  {% } else { %}
-  <td class="preview">{% if (file.thumbnail_url) { %}
-  <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
-  {% } %}</td>
-  <td class="name">
-  <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
-  </td>
-  <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
-  <td colspan="2"></td>
-  {% } %}
-  <td class="delete">
-  <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
-  <i class="icon-trash icon-white"></i>
-  <span>{%=locale.fileupload.destroy%}</span>
-  </button>
-  <input type="checkbox" name="delete" value="1">
-  </td>
-  </tr>
-  {% } %}
-%script{charset: "utf-8", type: "text/javascript"}
-  $(function () {
-  \// Initialize the jQuery File Upload widget:
-  $('#fileupload').fileupload({
-  maxNumberOfFiles: 1,
-  dataType: 'json',
-  add: function (e, data) {
-  $('#company_save').on('click', function() {
-  data.submit();
-  });
-  },
-  });
-  });

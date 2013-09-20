@@ -1,4 +1,5 @@
 class AvatarUploader < CarrierWave::Uploader::Base
+  include ::CarrierWave::Backgrounder::Delay
   include CarrierWave::RMagick
 
   def store_dir

@@ -13,12 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.ui.autocomplete
-//= require jquery-fileupload
 //= require bootstrap
 //= require angular
 //= require angular-resource
 //= require angular-ui-states
 //= require cardcheck.min
+//= require fileupload.min
 //= require app/main
 //= require ckeditor-jquery
 //= require_tree .

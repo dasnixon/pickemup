@@ -4,3 +4,5 @@ $ ->
 
   shiftWindow() if location.hash
   window.addEventListener "hashchange", shiftWindow
+
+  $('.fileupload').fileupload()

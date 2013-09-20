@@ -9,7 +9,7 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require jquery.ui.autocomplete
- *= require jquery.fileupload-ui
+ *= require fileupload.min
  *= require_self
  *= require_tree .
  */
