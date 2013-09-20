@@ -57,7 +57,7 @@
       .control-group
         = f.label "Year Founded", class: 'control-label'
         .controls
-          = f.date_select :founded, start_year: 1995
+          = f.date_select :founded, start_year: 1970, end_year: Date.today.year
       %h4 Change Password
       .control-group
         = f.label "New Password", class: 'control-label'
