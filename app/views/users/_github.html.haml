@@ -17,7 +17,7 @@
     .accordion
       = render 'repos'
       = render 'organizations'
-  - else
+  - elsif user_signed_in?
     %p
       = link_to '/auth/github', class: 'btn btn-inverse' do
         %i.icon-github

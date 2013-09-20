@@ -19,7 +19,7 @@
       = render 'skills'
       = render 'positions'
       = render 'education'
-  - else
+  - elsif user_signed_in?
     %p
       = link_to '/auth/linkedin', class: 'btn btn-info' do
         %i.icon-linkedin
