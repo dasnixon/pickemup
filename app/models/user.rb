@@ -121,6 +121,12 @@ class User < ActiveRecord::Base
     end
   end
 
+  def search_attributes(job_listing_id)
+    user_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|name|profile_image|description|location/ }
+    preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills/ }.merge(score: self.preference.score(job_listing_id)['score'])
+    user_attrs.merge(preference_attrs)
+  end
+
   private
 
   #automatically generate a defaulted preference for a user upon creation

@@ -3,7 +3,8 @@ jobListing.factory('JobListing', ['$resource', ($resource) ->
     {job_listing_id: '@job_listing_id', company_id: '@company_id', action: '@action'},
     'get':    {method:'GET'},
     'update': {method:'PUT'},
-    'retrieveListing': {method: 'GET'}
+    'retrieveListing': {method: 'GET'},
+    'searchUsers': {method:'GET'},
   )
   newListing: $resource('/companies/:company_id/job_listings/new',
     {company_id: '@company_id'},

@@ -63,6 +63,12 @@ class JobListingsController < ApplicationController
     end
   end
 
+  def search_users
+    @users = User.all.map { |user| user.search_attributes(params[:id]) }
+    @users.sort! { |a, b| a['score'] <=> b['score'] }
+    respond_with({ job_listing_id: params[:id], company_id: params[:company_id], users: @users })
+  end
+
   private
 
   def cleanup_invalid_data
