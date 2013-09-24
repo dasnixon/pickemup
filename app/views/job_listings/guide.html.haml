@@ -1,0 +1,59 @@
+#housing
+  .container
+    .alert
+      %button.close{"data-dismiss" => "alert", :type => "button"} &times;
+      %strong Heads Up!
+      You won't see this page again once you have added/activated a subscription, created a tech stack, and created a job listing.
+    .pull-right
+      - unless @subscription and @subscription.active?
+        = link_to 'Add Subscription', new_company_subscription_path(company_id: current_company.id), class: 'btn btn-primary'
+      - else
+        = link_to 'Continue Adding Job Listing', new_company_job_listing_path(company_id: current_company.id), class: 'btn btn-primary'
+      - unless @has_tech_stacks
+        = link_to 'Add Tech Stack', new_company_tech_stack_path(company_id: current_company.id), class: 'btn btn-primary'
+    .page-header
+      %h1
+        Before You Get Started
+        %small Read Below
+    - unless @subscription and @subscription.active?
+      .row.feature
+        .span12.info
+          %h3
+            %i.icon-credit-card.icon-2x
+            Add/Activate a Subscription
+          %p
+            Before you can get started adding job listings make sure you setup a subscription
+            #{link_to 'here.', new_company_subscription_path(company_id: current_company.id)} You can't add a job listing
+            until you do so. Thanks.
+    - unless @has_tech_stacks
+      .row.feature.ss
+        .span12.info
+          %h3
+            %i.icon-code.icon-2x
+            Add a Tech Stack!
+          %p
+            You should add a tech stack to your arsenal to further help find the best developer possible. A tech stack
+            allows you to specifically describe all the different languages, tools, databases, frameworks, and dev ops tools
+            the developer may be using on a daily basis, for a particular job. You can add as many tech stacks as you want,
+            and you will be able to select the tech stack when creating a new job listing. You can add a tech stack
+            #{link_to 'here', new_company_tech_stack_path(company_id: current_company.id)} or there is a link in the
+            navigation menu.
+    .row.feature.ss
+      .span12.info
+        %h3
+          %i.icon-building.icon-2x
+          Accuracy
+        %p
+          Make sure your job listing is as accurate as possible. If you want the perfect developer, then be honest, transparent,
+          and descriptive with what your company has to offer. It's important for you to get as much detail up front so the
+          process can move as quickly as possible, and the chances of landing a developer the first time increase.
+    .row.feature.ss
+      .span12.info
+        %h3
+          %i.icon-beaker.icon-2x
+          Let Us Know
+        %p
+          We are here to help you with any issues you may have. If you see something you think should be changed, removed
+          or added, then please feel free to email, send feedback, or call us. We want you to have the best experience
+          possible, and we especially want you to find top talent. We know this process is not easy, but we want to do our
+          best to change that.

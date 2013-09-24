@@ -60,6 +60,9 @@ Pickemup::Application.routes.draw do
         put :update_listing
         put :toggle_active
       end
+      collection do
+        get :guide
+      end
     end
     resources :messages, except: [:edit, :update, :destroy]
     resources :subscriptions, except: [:destroy] do

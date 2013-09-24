@@ -1,2 +1,3 @@
 - @tech_stacks.each do |stack|
   = render partial: 'layouts/tech_stack', locals: {tech_stack: stack, company: @company}
+= will_paginate @tech_stacks, renderer: BootstrapPagination::Rails

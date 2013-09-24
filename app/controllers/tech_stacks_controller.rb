@@ -4,7 +4,7 @@ class TechStacksController < ApplicationController
   respond_to :json, :html
 
   def index
-    @tech_stacks = @company.tech_stacks
+    @tech_stacks = @company.tech_stacks.order('updated_at DESC').paginate(page: params[:page], per_page: 3)
   end
 
   def new

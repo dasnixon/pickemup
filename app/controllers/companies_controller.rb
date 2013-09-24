@@ -18,7 +18,7 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @job_listings = @company.job_listings
+    @job_listings = @company.job_listings.order('active DESC, updated_at DESC').paginate(page: params[:page], per_page: 25)
   end
 
   def edit

@@ -48,61 +48,61 @@ preference_app.controller("PreferencesController", ['$scope', '$location', '$sta
       object.checked = false
 
   $scope.toggleActive = (attr) ->
-    $scope.preference[attr] = !$scope.preference[attr]
+    @preference[attr] = !@preference[attr]
 
   $scope.toggleActiveHash = (attr) ->
     attr.checked = !attr.checked
 
   $scope.selectAllBenefits = ->
-    $scope.preference.healthcare     = true
-    $scope.preference.dental         = true
-    $scope.preference.vision         = true
-    $scope.preference.life_insurance = true
-    $scope.preference.vacation_days  = true
-    $scope.preference.equity         = true
-    $scope.preference.bonuses        = true
-    $scope.preference.retirement     = true
+    @preference.healthcare     = true
+    @preference.dental         = true
+    @preference.vision         = true
+    @preference.life_insurance = true
+    @preference.vacation_days  = true
+    @preference.equity         = true
+    @preference.bonuses        = true
+    @preference.retirement     = true
 
   $scope.unselectAllBenefits = ->
-    $scope.preference.healthcare     = false
-    $scope.preference.dental         = false
-    $scope.preference.vision         = false
-    $scope.preference.life_insurance = false
-    $scope.preference.vacation_days  = false
-    $scope.preference.equity         = false
-    $scope.preference.bonuses        = false
-    $scope.preference.retirement     = false
+    @preference.healthcare     = false
+    @preference.dental         = false
+    @preference.vision         = false
+    @preference.life_insurance = false
+    @preference.vacation_days  = false
+    @preference.equity         = false
+    @preference.bonuses        = false
+    @preference.retirement     = false
 
   $scope.update = ->
     Preference.update
       user_id: $scope.user_id,
       action: 'update_preference',
       preference:
-        healthcare: $scope.preference.healthcare
-        dental: $scope.preference.dental
-        vision: $scope.preference.vision
-        life_insurance: $scope.preference.life_insurance
-        vacation_days: $scope.preference.vacation_days
-        equity: $scope.preference.equity
-        bonuses: $scope.preference.bonuses
-        retirement: $scope.preference.retirement
-        fulltime: $scope.preference.fulltime
-        us_citizen: $scope.preference.us_citizen
-        open_source: $scope.preference.open_source
-        expected_salary: $scope.preference.expected_salary.replace(/,/g, "") if $scope.preference.expected_salary
-        remote: $scope.preference.remote
-        potential_availability: $scope.preference.potential_availability
-        work_hours: $scope.preference.work_hours
-        company_size: unchunk $scope.preference.company_size
-        skills: unchunk $scope.preference.skills
-        locations: unchunk $scope.preference.locations
-        industries: unchunk $scope.preference.industries
-        position_titles: unchunk $scope.preference.position_titles
-        company_types: unchunk $scope.preference.company_types
-        perks: unchunk $scope.preference.perks
-        practices: unchunk $scope.preference.practices
-        experience_levels: unchunk $scope.preference.experience_levels
-        willing_to_relocate: $scope.preference.willing_to_relocate
+        healthcare:             @preference.healthcare
+        dental:                 @preference.dental
+        vision:                 @preference.vision
+        life_insurance:         @preference.life_insurance
+        vacation_days:          @preference.vacation_days
+        equity:                 @preference.equity
+        bonuses:                @preference.bonuses
+        retirement:             @preference.retirement
+        fulltime:               @preference.fulltime
+        us_citizen:             @preference.us_citizen
+        open_source:            @preference.open_source
+        expected_salary:        @preference.expected_salary.replace(/,/g, "") if $scope.preference.expected_salary
+        remote:                 @preference.remote
+        potential_availability: @preference.potential_availability
+        work_hours:             @preference.work_hours
+        willing_to_relocate:    @preference.willing_to_relocate
+        company_size:           unchunk @preference.company_size
+        skills:                 unchunk @preference.skills
+        locations:              unchunk @preference.locations
+        industries:             unchunk @preference.industries
+        position_titles:        unchunk @preference.position_titles
+        company_types:          unchunk @preference.company_types
+        perks:                  unchunk @preference.perks
+        practices:              unchunk @preference.practices
+        experience_levels:      unchunk @preference.experience_levels
 
     , (response) ->
       $scope.preference.expected_salary = addCommas(response.preference.expected_salary)

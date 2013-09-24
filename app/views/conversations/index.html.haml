@@ -4,3 +4,4 @@
     .section_header
       %h3 Conversations - #{@box.capitalize}
       = render @conversations
+      = will_paginate @conversations, renderer: BootstrapPagination::Rails

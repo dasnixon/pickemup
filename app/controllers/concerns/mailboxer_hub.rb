@@ -17,10 +17,10 @@ module MailboxerHub
 
   def find_mailbox_for
     if params[:user_id]
-      @mailbox_for = @user = User.find(params[:user_id])
+      @mailbox_for = @user = current_user
       check_invalid_permissions_user
     elsif params[:company_id]
-      @mailbox_for = @company = Company.find(params[:company_id])
+      @mailbox_for = @company = current_company
       check_invalid_permissions_company
     else
       redirect_to root_path, notice: 'Unable to find your mailbox.'

@@ -2,15 +2,20 @@ class JobListingsController < ApplicationController
   before_filter :find_company
   before_filter :check_invalid_permissions_company, except: [:index, :show]
   before_filter :check_for_subscription, only: [:new, :create]
-  before_filter :get_job_listing, except: [:index, :new, :create]
+  before_filter :get_job_listing, except: [:index, :new, :create, :guide]
   before_filter :cleanup_invalid_data, only: [:create, :update_listing]
   respond_to :json, :html
 
   def index
-    @job_listings = @company.job_listings.order('active DESC')
+    @job_listings = @company.job_listings.order('active DESC, updated_at DESC').paginate(page: params[:page], per_page: 4)
   end
 
   def show
+  end
+
+  def guide
+    @subscription = current_company.subscription
+    @has_tech_stacks = current_company.tech_stacks.exists?
   end
 
   def new

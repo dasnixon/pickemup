@@ -1,2 +1,4 @@
 - @job_listings.each do |listing|
   = render partial: 'layouts/job_listing', locals: {job_listing: listing, company: @company}
+  %hr
+= will_paginate @job_listings, renderer: BootstrapPagination::Rails

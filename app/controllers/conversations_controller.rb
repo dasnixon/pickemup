@@ -1,4 +1,6 @@
 class ConversationsController < ApplicationController
+  PER_PAGE = 5
+
   include MailboxerHub
 
   before_filter :find_mailbox_for, :get_mailbox, :get_box
@@ -6,11 +8,11 @@ class ConversationsController < ApplicationController
 
   def index
     if @box.eql? 'inbox'
-      @conversations = @mailbox.inbox
+      @conversations = @mailbox.inbox.paginate(page: params[:page], per_page: PER_PAGE)
     elsif @box.eql? 'sentbox'
-      @conversations = @mailbox.sentbox
+      @conversations = @mailbox.sentbox.paginate(page: params[:page], per_page: PER_PAGE)
     else
-      @conversations = @mailbox.trash
+      @conversations = @mailbox.trash.paginate(page: params[:page], per_page: PER_PAGE)
     end
   end
 
