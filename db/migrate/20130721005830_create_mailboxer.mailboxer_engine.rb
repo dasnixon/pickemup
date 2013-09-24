@@ -29,7 +29,7 @@ class CreateMailboxer < ActiveRecord::Migration
       t.string :sender_type
       t.uuid   :object_id
       t.string :object_type
-      t.column :conversation_id, :uuid
+      t.uuid   :conversation_id
       t.column :draft, :boolean, :default => false
       t.column :updated_at, :datetime, :null => false
       t.column :created_at, :datetime, :null => false

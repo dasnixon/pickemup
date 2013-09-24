@@ -374,8 +374,8 @@ ActiveRecord::Schema.define(version: 20130909020455) do
   add_index "users", ["github_uid"], name: "index_users_on_github_uid", using: :btree
   add_index "users", ["linkedin_uid"], name: "index_users_on_linkedin_uid", using: :btree
 
-  add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
+  add_foreign_key "notifications", "conversations", name: "notifications_on_conversation_id"
 
-  add_foreign_key "receipts", "notifications", :name => "receipts_on_notification_id"
+  add_foreign_key "receipts", "notifications", name: "receipts_on_notification_id"
 
 end
