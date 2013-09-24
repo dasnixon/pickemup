@@ -12,7 +12,7 @@ class CreateMailboxer < ActiveRecord::Migration
     create_table :receipts, id: :uuid do |t|
       t.uuid   :receiver_id
       t.string :receiver_type
-      t.column :notification_id, :uuid, :null => false
+      t.uuid   :notification_id, :null => false
       t.column :read, :boolean, :default => false
       t.column :trashed, :boolean, :default => false
       t.column :deleted, :boolean, :default => false
@@ -43,13 +43,6 @@ class CreateMailboxer < ActiveRecord::Migration
 
   	#Messages
   	add_index "notifications","conversation_id"
-
-  #Foreign keys
-  	#Conversations
-  	#Receipts
-  	add_foreign_key "receipts", "notifications", :name => "receipts_on_notification_id"
-  	#Messages
-  	add_foreign_key "notifications", "conversations", :name => "notifications_on_conversation_id"
   end
 
   def self.down

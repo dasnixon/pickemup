@@ -99,6 +99,7 @@ class Company < ActiveRecord::Base
   def get_crunchbase_info
     begin
       info = Crunchbase::Company.get(self.name)
+      self.process_logo_upload = true
       self.website = info.homepage_url
       self.num_employees = info.number_of_employees
       self.public = info.ipo ? true : false
