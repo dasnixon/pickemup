@@ -18,5 +18,6 @@ class CreateGithubAccounts < ActiveRecord::Migration
 
     add_index :github_accounts, :github_account_key
     add_index :github_accounts, :uid
+    add_index :github_accounts, :user_id, unique: true
   end
 end

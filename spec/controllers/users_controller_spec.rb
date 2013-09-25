@@ -51,14 +51,14 @@ describe UsersController do
           assigns(:user).should eq user
           assigns(:preference).should eq preference
           assigns(:github_account).should eq github_account
-          assigns(:repos).should eq repos
-          assigns(:orgs).should eq orgs
+          assigns(:repos).should =~ repos
+          assigns(:orgs).should =~ orgs
           assigns(:stackexchange).should eq stackexchange
           assigns(:linkedin).should eq linkedin
           assigns(:profile).should eq profile
-          assigns(:positions).should eq positions
-          assigns(:educations).should eq educations
-          assigns(:skills).should eq skills
+          assigns(:positions).should =~ positions
+          assigns(:educations).should =~ educations
+          assigns(:skills).should =~ skills
         end
       end
       context 'company viewing user resume' do
@@ -91,14 +91,14 @@ describe UsersController do
           assigns(:user).should eq user
           assigns(:preference).should eq preference
           assigns(:github_account).should eq github_account
-          assigns(:repos).should eq repos
-          assigns(:orgs).should eq orgs
+          assigns(:repos).should =~ repos
+          assigns(:orgs).should =~ orgs
           assigns(:stackexchange).should eq stackexchange
           assigns(:linkedin).should eq linkedin
           assigns(:profile).should eq profile
-          assigns(:positions).should eq positions
-          assigns(:educations).should eq educations
-          assigns(:skills).should eq skills
+          assigns(:positions).should =~ positions
+          assigns(:educations).should =~ educations
+          assigns(:skills).should =~ skills
         end
       end
     end
@@ -202,7 +202,7 @@ describe UsersController do
       end
     end
     context 'valid user' do
-      let(:preference) { create(:preference) }
+      let(:preference) { user.preference }
       before :each do
         preference.stub(:get_preference_defaults)
         User.stub(:find).and_return(user)
@@ -241,10 +241,9 @@ describe UsersController do
       end
     end
     context 'valid user' do
-      let(:preference) { create(:preference) }
+      let(:preference) { user.preference }
       before :each do
         User.stub(:find).and_return(user)
-        user.stub(:preference).and_return(preference)
       end
       context' unable to update' do
         let(:invalid_params) do

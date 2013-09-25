@@ -18,5 +18,6 @@ class CreateRepos < ActiveRecord::Migration
     end
 
     add_index :repos, :repo_key
+    add_index :repos, :github_account_id
   end
 end

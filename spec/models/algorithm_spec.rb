@@ -1,12 +1,17 @@
 require 'spec_helper'
 
 describe Algorithm do
-  let(:preference) { create(:preference, dental: true, healthcare: true, vision: true, life_insurance: true,
-                            vacation_days: false, bonuses: true, retirement: true, open_source: true, equity: true) }
+  let(:user) { create(:user) }
+  let(:preference) { user.preference }
   let(:job_listing) { create(:job_listing, dental: true, healthcare: true, vision: true, life_insurance: true,
                              vacation_days: 0, bonuses: 'Yes', retirement: true, equity: 'Yes', special_characteristics: ['Open Source Committer'], company: company) }
   let(:company) { create(:company) }
   let(:algorithm) { Algorithm.new(preference, job_listing, run_score: false, company: company) }
+
+  before :each do
+    preference.update(dental: true, healthcare: true, vision: true, life_insurance: true,
+                      vacation_days: false, bonuses: true, retirement: true, open_source: true, equity: true)
+  end
 
   describe '#benefits_matching_count' do
     context 'all matches' do

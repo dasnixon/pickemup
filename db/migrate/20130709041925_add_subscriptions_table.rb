@@ -9,5 +9,7 @@ class AddSubscriptionsTable < ActiveRecord::Migration
       t.string  :email
       t.timestamps
     end
+
+    add_index :subscriptions, :company_id, unique: true
   end
 end
