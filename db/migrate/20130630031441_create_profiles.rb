@@ -8,5 +8,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.uuid       :linkedin_id
       t.timestamps
     end
+
+    add_index :profiles, :linkedin_id, unique: true
   end
 end

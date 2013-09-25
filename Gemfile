@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 #MAGIC
-gem 'rails'
+gem 'rails', git: 'git://github.com/rails/rails.git', branch: '4-0-stable'
 
 #DATABASES
 gem 'pg'
@@ -72,9 +72,6 @@ gem 'unicorn'
 #ENV VARIABLES (application.yml)
 gem 'figaro'
 
-#MANAGEMENT SYSTEMS
-gem 'newrelic_rpm'
-
 #HTML TEXT EDITOR
 gem 'ckeditor_rails'
 
@@ -99,6 +96,9 @@ gem 'truncate_html'
 group :production do
   #HEROKU
   gem 'rails_12factor'
+
+  #MANAGEMENT SYSTEMS
+  gem 'newrelic_rpm'
 end
 
 group :test, :development do
@@ -119,6 +119,8 @@ group :test do
 end
 
 group :development do
+  gem 'consistency_fail'
   gem 'railroady' #schema diagrams
   gem 'meta_request' #for RailsPanel Google Chrome extension
+  gem 'lol_dba'
 end

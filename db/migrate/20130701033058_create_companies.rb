@@ -2,7 +2,7 @@ class CreateCompanies < ActiveRecord::Migration
   def change
     create_table :companies, id: :uuid do |t|
       t.string :name
-      t.string :email, :index => true, :unique => true
+      t.string :email
       t.string :password_salt
       t.string :password_hash
       t.text   :description
@@ -13,5 +13,8 @@ class CreateCompanies < ActiveRecord::Migration
       t.date :founded
       t.timestamps
     end
+
+    add_index :companies, :name, unique: true
+    add_index :companies, :email, unique: true
   end
 end

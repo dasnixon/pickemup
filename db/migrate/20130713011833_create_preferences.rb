@@ -30,5 +30,7 @@ class CreatePreferences < ActiveRecord::Migration
       t.uuid       :user_id
       t.timestamps
     end
+
+    add_index :preferences, :user_id, unique: true
   end
 end

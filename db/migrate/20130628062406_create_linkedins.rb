@@ -11,5 +11,6 @@ class CreateLinkedins < ActiveRecord::Migration
     end
 
     add_index :linkedins, :uid
+    add_index :linkedins, :user_id, unique: true
   end
 end

@@ -17,11 +17,19 @@ module MailboxerHub
 
   def find_mailbox_for
     if params[:user_id]
-      @mailbox_for = @user = current_user
-      check_invalid_permissions_user
+      if user_signed_in? and params[:user_id] == current_user.id
+        @mailbox_for = @user = current_user
+        check_invalid_permissions_user
+      else
+        redirect_to root_path, alert: 'You do not have permissions to view this page'
+      end
     elsif params[:company_id]
-      @mailbox_for = @company = current_company
-      check_invalid_permissions_company
+      if company_signed_in? and params[:company_id] == current_company.id
+        @mailbox_for = @company = current_company
+        check_invalid_permissions_company
+      else
+        redirect_to root_path, alert: 'You do not have permissions to view this page'
+      end
     else
       redirect_to root_path, notice: 'Unable to find your mailbox.'
     end

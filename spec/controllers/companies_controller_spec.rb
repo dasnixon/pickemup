@@ -31,7 +31,7 @@ describe CompaniesController do
     let(:job_listings) { create_list(:job_listing, 3, company: company) }
     before :each do
       expect(Company).to receive(:find).and_return(company)
-      company.stub(:job_listings).and_return(job_listings)
+      company.stub_chain(:job_listings, :order, :paginate).and_return(job_listings)
       get(:show, {id: company.id})
     end
     it 'finds the company' do

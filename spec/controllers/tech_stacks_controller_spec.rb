@@ -29,7 +29,7 @@ describe TechStacksController do
       before :each do
         company_login(company)
         Company.stub(:find).and_return(company)
-        expect(company).to receive(:tech_stacks).and_return(tech_stacks)
+        company.stub_chain(:tech_stacks, :order, :paginate).and_return(tech_stacks)
         get(:index, {company_id: company.id})
       end
       it { should respond_with(:success) }
