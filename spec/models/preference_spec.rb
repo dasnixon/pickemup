@@ -40,24 +40,29 @@ describe Preference do
     end
   end
 
-  let(:user_preference) { create(:preference) }
-
   describe '#get_attr_values' do
+    let(:user) { create(:user) }
     context 'defaults only' do
-      let(:preference) { create(:preference, experience_levels: []) }
+      let(:preference) { user.preference }
       let(:expected) do
         Preference::EXPERIENCE_LEVELS.collect { |p| { name: p, checked: false } }
+      end
+      before :each do
+        preference.experience_levels = []
       end
       it 'returns default constant values with false checked values' do
         preference.get_attr_values('experience_levels').should eq expected
       end
     end
     context 'data already set for attribute' do
-      let(:preference) { create(:preference, experience_levels: ['Intern']) }
+      let(:preference) { user.preference }
       let(:expected) do
         [{ name: 'Intern', checked: true }, { name: 'Co-op', checked: false }, {name: 'N/A', checked: false},
          { name: 'Junior', checked: false}, {name: 'Mid-level', checked: false}, {name: 'Senior-level', checked: false},
          { name: 'Executive', checked: false}]
+      end
+      before :each do
+        preference.experience_levels = ['Intern']
       end
       it 'returns default constant values with false checked values' do
         preference.get_attr_values('experience_levels').should =~ expected
@@ -68,7 +73,7 @@ describe Preference do
   describe '#attribute_default_values' do
     context 'skills attribute' do
       context 'user has linkedin synced' do
-        let(:preference) { create(:preference, user: user) }
+        let(:preference) { user.preference }
         let(:user) { create(:user, linkedin_uid: generate(:guid)) }
         let(:linkedin) { double(Linkedin, profile: profile) }
         let(:profile) { double(Profile, skills: ['Ruby', 'Python']) }
@@ -81,7 +86,7 @@ describe Preference do
         end
       end
       context 'user linkedin not synced' do
-        let(:preference) { create(:preference, user: user) }
+        let(:preference) { user.preference }
         let(:user) { create(:user, linkedin_uid: nil) }
         before :each do
           preference.stub(:user).and_return(user)
@@ -92,7 +97,8 @@ describe Preference do
       end
     end
     context 'all other attributes, not skills' do
-      let(:preference) { create(:preference) }
+      let(:preference) { user.preference }
+      let(:user) { create(:user) }
       it 'returns the constant for the attribute' do
         preference.attribute_default_values('position_titles').should eq Preference::POSITION_TITLES
       end

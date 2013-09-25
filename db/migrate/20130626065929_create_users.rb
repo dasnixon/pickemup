@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users, id: :uuid do |t|
       t.string  :github_uid,   unique: true
       t.string  :linkedin_uid, unique: true
-      t.string  :email,        unique: true
+      t.string  :email
       t.string  :name
       t.string  :location
       t.string  :profile_image
@@ -14,6 +14,6 @@ class CreateUsers < ActiveRecord::Migration
 
     add_index :users, :github_uid
     add_index :users, :linkedin_uid
-    add_index :users, :email
+    add_index :users, :email, unique: true
   end
 end

@@ -1,6 +1,10 @@
 require 'spec_helper'
 
 describe ConversationsController do
+  before :each do
+    controller.stub(:check_user_messages)
+    controller.stub(:check_company_messages)
+  end
   context 'user\'s mailbox' do
     let(:user) { create(:user) }
     describe '#index' do
@@ -8,7 +12,6 @@ describe ConversationsController do
         context 'company signed in' do
           let(:company) { create(:company) }
           before :each do
-            User.stub(:find).and_return(user)
             company_login(company)
             get(:index, {user_id: company.id})
           end
@@ -42,18 +45,19 @@ describe ConversationsController do
         end
       end
       context 'valid permissions' do
-        let(:mailbox) { double('mailbox', inbox: inbox_conversations, sentbox: sent_conversations, trash: trash_conversations) }
+        let(:mailbox) { double('mailbox') }
         let(:job_listing) { create(:job_listing) }
         let(:inbox_conversations) { create_list(:conversation, 2, job_listing_id: job_listing.id) }
         let(:sent_conversations) { create_list(:conversation, 2, job_listing_id: job_listing.id) }
         let(:trash_conversations) { create_list(:conversation, 2, job_listing_id: job_listing.id) }
         before :each do
           user_login(user)
+          User.stub(:find).and_return(user)
         end
         context 'inbox' do
           before :each do
-            User.stub(:find).and_return(user)
             user.stub(:mailbox).and_return(mailbox)
+            mailbox.stub_chain(:inbox, :paginate).and_return(inbox_conversations)
             get(:index, {user_id: user.id, box: 'inbox'})
           end
           it { should respond_with(:success) }
@@ -66,8 +70,8 @@ describe ConversationsController do
         end
         context 'sentbox' do
           before :each do
-            User.stub(:find).and_return(user)
             user.stub(:mailbox).and_return(mailbox)
+            mailbox.stub_chain(:sentbox, :paginate).and_return(sent_conversations)
             get(:index, {user_id: user.id, box: 'sentbox'})
           end
           it { should respond_with(:success) }
@@ -80,8 +84,8 @@ describe ConversationsController do
         end
         context 'trash' do
           before :each do
-            User.stub(:find).and_return(user)
             user.stub(:mailbox).and_return(mailbox)
+            mailbox.stub_chain(:trash, :paginate).and_return(trash_conversations)
             get(:index, {user_id: user.id, box: 'trash'})
           end
           it { should respond_with(:success) }
@@ -94,8 +98,8 @@ describe ConversationsController do
         end
         context 'no box passed in, defaults to inbox' do
           before :each do
-            User.stub(:find).and_return(user)
             user.stub(:mailbox).and_return(mailbox)
+            mailbox.stub_chain(:inbox, :paginate).and_return(inbox_conversations)
             get(:index, {user_id: user.id})
           end
           it { should respond_with(:success) }
@@ -120,7 +124,6 @@ describe ConversationsController do
         context 'conversation not found' do
           before :each do
             user_login(user)
-            User.stub(:find).and_return(user)
             user.stub(:mailbox).and_return(mailbox)
             Conversation.stub(:find).and_return(nil)
             get(:show, {id: conversation.id, box: 'inbox', user_id: user.id})
@@ -132,7 +135,6 @@ describe ConversationsController do
         context 'user not participant in conversation' do
           before :each do
             user_login(user)
-            User.stub(:find).and_return(user)
             user.stub(:mailbox).and_return(mailbox)
             Conversation.stub(:find).and_return(conversation)
             conversation.stub(:is_participant?).and_return(false)
@@ -194,7 +196,6 @@ describe ConversationsController do
       let(:job_listing) { create(:job_listing) }
       before :each do
         user_login(user)
-        User.stub(:find).and_return(user)
         user.stub(:mailbox).and_return(mailbox)
         Conversation.stub(:find).and_return(conversation)
         conversation.stub(:is_participant?).and_return(true)
@@ -246,7 +247,6 @@ describe ConversationsController do
       let(:job_listing) { create(:job_listing) }
       before :each do
         user_login(user)
-        User.stub(:find).and_return(user)
         user.stub(:mailbox).and_return(mailbox)
         Conversation.stub(:find).and_return(conversation)
         conversation.stub(:is_participant?).and_return(true)
@@ -277,7 +277,6 @@ describe ConversationsController do
         context 'user signed in' do
           let(:user) { create(:user) }
           before :each do
-            Company.stub(:find).and_return(company)
             user_login(user)
             get(:index, {company_id: user.id})
           end
@@ -311,18 +310,19 @@ describe ConversationsController do
         end
       end
       context 'valid permissions' do
-        let(:mailbox) { double('mailbox', inbox: inbox_conversations, sentbox: sent_conversations, trash: trash_conversations) }
+        let(:mailbox) { double('mailbox') }
         let(:job_listing) { create(:job_listing) }
         let(:inbox_conversations) { create_list(:conversation, 2, job_listing_id: job_listing.id) }
         let(:sent_conversations) { create_list(:conversation, 2, job_listing_id: job_listing.id) }
         let(:trash_conversations) { create_list(:conversation, 2, job_listing_id: job_listing.id) }
         before :each do
           company_login(company)
+          Company.stub(:find).and_return(company)
         end
         context 'inbox' do
           before :each do
-            Company.stub(:find).and_return(company)
             company.stub(:mailbox).and_return(mailbox)
+            mailbox.stub_chain(:inbox, :paginate).and_return(inbox_conversations)
             get(:index, {company_id: company.id, box: 'inbox'})
           end
           it { should respond_with(:success) }
@@ -335,8 +335,8 @@ describe ConversationsController do
         end
         context 'sentbox' do
           before :each do
-            Company.stub(:find).and_return(company)
             company.stub(:mailbox).and_return(mailbox)
+            mailbox.stub_chain(:sentbox, :paginate).and_return(sent_conversations)
             get(:index, {company_id: company.id, box: 'sentbox'})
           end
           it { should respond_with(:success) }
@@ -349,8 +349,8 @@ describe ConversationsController do
         end
         context 'trash' do
           before :each do
-            Company.stub(:find).and_return(company)
             company.stub(:mailbox).and_return(mailbox)
+            mailbox.stub_chain(:trash, :paginate).and_return(trash_conversations)
             get(:index, {company_id: company.id, box: 'trash'})
           end
           it { should respond_with(:success) }
@@ -363,8 +363,8 @@ describe ConversationsController do
         end
         context 'no box passed in, defaults to inbox' do
           before :each do
-            Company.stub(:find).and_return(company)
             company.stub(:mailbox).and_return(mailbox)
+            mailbox.stub_chain(:inbox, :paginate).and_return(inbox_conversations)
             get(:index, {company_id: company.id})
           end
           it { should respond_with(:success) }
@@ -389,7 +389,6 @@ describe ConversationsController do
         context 'conversation not found' do
           before :each do
             company_login(company)
-            Company.stub(:find).and_return(company)
             company.stub(:mailbox).and_return(mailbox)
             Conversation.stub(:find).and_return(nil)
             get(:show, {id: conversation.id, box: 'inbox', company_id: company.id})
@@ -401,7 +400,6 @@ describe ConversationsController do
         context 'company not participant in conversation' do
           before :each do
             company_login(company)
-            Company.stub(:find).and_return(company)
             company.stub(:mailbox).and_return(mailbox)
             Conversation.stub(:find).and_return(conversation)
             conversation.stub(:is_participant?).and_return(false)
@@ -463,7 +461,6 @@ describe ConversationsController do
       let(:job_listing) { create(:job_listing) }
       before :each do
         company_login(company)
-        Company.stub(:find).and_return(company)
         company.stub(:mailbox).and_return(mailbox)
         Conversation.stub(:find).and_return(conversation)
         conversation.stub(:is_participant?).and_return(true)
@@ -515,7 +512,6 @@ describe ConversationsController do
       let(:job_listing) { create(:job_listing) }
       before :each do
         company_login(company)
-        Company.stub(:find).and_return(company)
         company.stub(:mailbox).and_return(mailbox)
         Conversation.stub(:find).and_return(conversation)
         conversation.stub(:is_participant?).and_return(true)

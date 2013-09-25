@@ -15,5 +15,6 @@ class CreateStackexchanges < ActiveRecord::Migration
     end
 
     add_index :stackexchanges, :stackexchange_key
+    add_index :stackexchanges, :user_id, unique: true
   end
 end

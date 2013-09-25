@@ -30,10 +30,9 @@ module Login
     end
 
     define_method "post_#{method}_setup" do |auth|
-      opposite = auth.provider == 'github' ? 'linkedin' : 'github'
-      StoreUserProfileImage.perform_async(self.id, auth.info.image) unless self.main_provider == opposite
+      StoreUserProfileImage.perform_async(self.id, auth.info.image) if self.main_provider == auth.provider
       if !self.newly_created
-        if self.main_provider == opposite
+        if self.main_provider != auth.provider
           self.send(method).update(token: auth.credentials.token)
           UserInformationWorker.perform_async(self.id)
         else
