@@ -35,6 +35,16 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.data = response.job_listing
       $scope.original = angular.copy($scope.data)
 
+  else if $state.current.name == "search_users"
+    JobListing.editListing.searchUsers
+      job_listing_id: $stateParams['job_listing_id'],
+      company_id: $stateParams['company_id'],
+      action: 'search_users'
+    , (response) ->
+      $scope.users = response.users
+      $scope.job_listing_id = response.job_listing_id
+      $scope.company_id = response.company_id
+
   $scope.$watch 'data', ( ->
     if angular.equals($scope.data, $scope.original)
       $scope.dirty_message = ''

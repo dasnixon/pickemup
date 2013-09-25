@@ -81,4 +81,15 @@ class JobListing < ActiveRecord::Base
     return false if self.company.subscription.expired?
     self.active
   end
+
+  def score(preference_id)
+    score = $redis.get("score.#{self.id}.#{preference_id}")
+    score ? JSON(score) : {}
+  end
+
+  def search_attributes(preference_id)
+    listing_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|job_title|languages|company_id|salary|description|location/ }.merge(score: self.score(preference_id)['score'])
+    company_attrs = self.company.attributes.keep_if { |k,v| k =~ /name|get_logo|website|industry/ }
+    company_attrs.merge(listing_attrs)
+  end
 end
