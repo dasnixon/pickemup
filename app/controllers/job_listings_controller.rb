@@ -52,10 +52,9 @@ class JobListingsController < ApplicationController
   end
 
   def destroy
-    if @job_listing.destroy
-      @job_listing.api_destroy
-      redirect_to company_job_listings_path(company_id: @company.id), notice: 'Listing has been successfully removed.'
-    end
+    @job_listing.destroy
+    @job_listing.api_destroy
+    redirect_to company_job_listings_path(company_id: @company.id), notice: 'Listing has been successfully removed.'
   end
 
   def toggle_active

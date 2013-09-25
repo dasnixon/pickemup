@@ -55,7 +55,7 @@ class Company < ActiveRecord::Base
                        if:           :password
   validates :email, presence: true, uniqueness: true, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :name, presence: true, uniqueness: true
-  validates :size_definition, inclusion: { in: PreferenceConstants::COMPANY_TYPES }, allow_nil: true
+  validates :size_definition, inclusion: { in: PreferenceConstants::COMPANY_TYPES }, allow_blank: true
 
   has_one :subscription
   has_many :job_listings
@@ -100,15 +100,15 @@ class Company < ActiveRecord::Base
     begin
       info = Crunchbase::Company.get(self.name)
       self.process_logo_upload = true
-      self.website = info.homepage_url
-      self.num_employees = info.number_of_employees
-      self.public = info.ipo ? true : false
-      self.description = info.overview.present? ? info.overview : info.description
-      self.founded = info.founded
-      self.total_money_raised = info.total_money_raised
-      self.tags = info.tags
-      self.logo = "http://crunchbase.com/#{info.image.first.flatten[-1]}" if info.image
-      self.competitors = info.competitions.map { |company| company["competitor"]["name"] } if info.competitions
+      self.website             = info.homepage_url
+      self.num_employees       = info.number_of_employees
+      self.public              = info.ipo ? true : false
+      self.description         = info.overview.present? ? info.overview : info.description
+      self.founded             = info.founded
+      self.total_money_raised  = info.total_money_raised
+      self.tags                = info.tags
+      self.remote_logo_url     = "http://crunchbase.com/#{info.image.first.flatten[-1]}" if info.image
+      self.competitors         = info.competitions.map { |company| company["competitor"]["name"] } if info.competitions
     rescue Exception => e
       logger.error "Company #get_crunchbase_info error #{e}"
     ensure

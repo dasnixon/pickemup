@@ -2,11 +2,17 @@ require 'spec_helper'
 
 describe User do
   let(:user) { create(:user) }
+  let(:github_account) { create(:github_account) }
+  let(:linkedin) { create(:linkedin) }
+  before :each do
+    user.stub(:github_account).and_return(github_account)
+    user.stub(:linkedin).and_return(linkedin)
+  end
   let(:generic_auth_github) {
-    OpenStruct.new(uid: '123456789', info: auth_info, extra: extra_info_github)
+    OpenStruct.new(provider: 'github', uid: '123456789', info: auth_info, extra: extra_info_github)
   }
   let(:generic_auth_linkedin) {
-    OpenStruct.new(uid: '123456789', info: auth_info, extra: extra_info_linkedin)
+    OpenStruct.new(provider: 'linkedin', uid: '123456789', info: auth_info, extra: extra_info_linkedin)
   }
   let(:extra_info_github) do
     OpenStruct.new(raw_info: OpenStruct.new(location: 'San Francisco, CA'))
@@ -23,10 +29,10 @@ describe User do
     )
   end
   let(:linkedin_auth) do
-    OpenStruct.new(uid: user.linkedin_uid, info: auth_info, extra: extra_info_linkedin, credentials: OpenStruct.new(token: '1234567'))
+    OpenStruct.new(provider: 'linkedin', uid: user.linkedin_uid, info: auth_info, extra: extra_info_linkedin, credentials: OpenStruct.new(token: '1234567'))
   end
   let(:github_auth) do
-    OpenStruct.new(uid: user.github_uid, info: auth_info, extra: extra_info_github, credentials: OpenStruct.new(token: '1234567'))
+    OpenStruct.new(provider: 'github', uid: user.github_uid, info: auth_info, extra: extra_info_github, credentials: OpenStruct.new(token: '1234567'))
   end
 
   it { should have_one(:github_account) }
@@ -139,7 +145,7 @@ describe User do
       context 'from github provider' do
         context 'main provider is github' do
           before :each do
-            expect(user).to receive(:update_github_information).with(github_auth) { true }
+            expect(user).to receive(:update_github_account_information).with(github_auth).and_return(true)
             expect(UserInformationWorker).to_not receive(:perform_async)
             expect(StoreUserProfileImage).to receive(:perform_async)
           end
@@ -155,7 +161,7 @@ describe User do
           let(:github_account) { create(:github_account) }
           before :each do
             user.main_provider = 'linkedin'
-            expect(user).to_not receive(:update_github_information)
+            expect(user).to_not receive(:update_github_account_information)
             expect(user).to receive(:github_account).and_return(github_account)
             expect(github_account).to receive(:update) { true }
             expect(UserInformationWorker).to receive(:perform_async).with(user.id)

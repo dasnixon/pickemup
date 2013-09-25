@@ -88,7 +88,7 @@ describe Company do
   describe '#get_logo' do
     context 'company has logo present' do
       before :each do
-        company.logo = 'logo.png'
+        company.logo = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'vim_recruit.png'))
       end
       it('returns company logo') { company.get_logo.should eq company.logo }
     end

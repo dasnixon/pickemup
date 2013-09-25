@@ -13,7 +13,7 @@ describe JobListingsController do
     let(:job_listings) { create_list(:job_listing, 3, company: company) }
     before :each do
       Company.stub(:find).and_return(company)
-      company.stub_chain(:job_listings, :order).and_return(job_listings)
+      company.stub_chain(:job_listings, :order, :paginate).and_return(job_listings)
       get(:index, {company_id: company.id})
     end
     it { should respond_with(:success) }
@@ -32,7 +32,6 @@ describe JobListingsController do
     end
     it { should respond_with(:success) }
     it('assigns job_listing variable') { assigns(:job_listing).should eq job_listing }
-    it('assigns conversations variable') { assigns(:conversations).should eq conversations }
     it('assigns company variable') { assigns(:company).should eq company }
   end
 

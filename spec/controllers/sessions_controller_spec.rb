@@ -58,9 +58,6 @@ describe SessionsController do
         get(:sign_up)
       end
       it { should respond_with(:success) }
-      it 'has new company object' do
-        assigns(:company).should eq company
-      end
     end
   end
 
