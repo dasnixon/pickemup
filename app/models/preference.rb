@@ -90,4 +90,9 @@ class Preference < ActiveRecord::Base
   def api_attributes
     self.attributes.merge("preference_id" => self.id)
   end
+
+  def score(job_listing_id)
+    score = $redis.get("score.#{job_listing_id}.#{self.id}")
+    score ? JSON(score) : {}
+  end
 end
