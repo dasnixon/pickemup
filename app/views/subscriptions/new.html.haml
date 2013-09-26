@@ -22,7 +22,7 @@
           = hidden_field_tag :company_id, @company.id
           .control-group
             .controls
-              = f.submit 'Save Subscription', class: 'btn'
+              = f.submit 'Save Subscription', class: 'btn btn-success'
       - if @clicked_option.present?
         .span6
           %div#in_pricing{style: 'margin-top: 15px;'}

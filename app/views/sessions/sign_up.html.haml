@@ -19,7 +19,7 @@
           = text_field_tag 'company[email]', nil, placeholder: 'Email'
           = password_field_tag 'company[password]', nil, placeholder: 'Password'
           = password_field_tag 'company[password_confirmation]', nil, placeholder: 'Password Confirmation'
-          = submit_tag 'Sign Up', {id: 'company_sign_in'}
+          = submit_tag 'Sign Up', {id: 'company_sign_in', class: 'btn btn-primary'}
       .span12.proof
         .span5.remember
           %a{:href => "reset.html"} Forgot password?

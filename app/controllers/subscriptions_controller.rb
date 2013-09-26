@@ -4,7 +4,8 @@ class SubscriptionsController < ApplicationController
   before_filter :get_credentials, only: [:edit, :update, :edit_card]
 
   def new
-    @subscription = Subscription.new
+    @subscription = @company.subscription || Subscription.new
+    redirect_to edit_company_subscription_path(company_id: @company.id, id: @subscription.id) unless @subscription.new_record?
     @clicked_option = params[:clicked_option]
   end
 

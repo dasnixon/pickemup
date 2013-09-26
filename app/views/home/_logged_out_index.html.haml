@@ -2,7 +2,7 @@
   .container
     .row.login
       .span5.left_box
-        %h1 Get started today
+        %h2 Get started today
         .perk_box
           .media
             .pull-left
@@ -43,7 +43,7 @@
                 .forgot
                   %span Already have an account?
                   = link_to 'Sign in', sign_in_path
-                = f.submit 'Sign Up'
+                = f.submit 'Sign Up', class: 'btn btn-primary'
 #showcase
   .container
     .row.feature_wrapper

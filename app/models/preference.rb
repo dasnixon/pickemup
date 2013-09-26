@@ -56,8 +56,7 @@ class Preference < ActiveRecord::Base
   def attribute_default_values(attr)
     case attr
       when 'skills'
-        preference_user = self.user
-        preference_user.linkedin_uid ? preference_user.linkedin.profile.skills.sort : []
+        self.user.get_user_skills
       else
         self.class.const_get(attr.upcase)
     end

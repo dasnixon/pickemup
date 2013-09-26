@@ -1,39 +1,46 @@
 .media
-  = link_to image_tag(@company.get_logo, class: 'media-object img-rounded', size: '150x150'), @company.website, target: '_blank', class: 'pull-left'
   .media-body
     .section_header
       %h3.media-heading= @company.name
-      - if current_company == @company
-        = link_to 'Edit', edit_company_path(id: @company.id), class: 'btn btn-primary', style: 'margin-left: 15px;'
-      - elsif user_signed_in?
-        = link_to 'View Job Listings', company_job_listings_path(company_id: @company.id), class: 'btn btn-success pull-right', style: 'margin-right: 25px;'
+      - if user_signed_in?
+        = link_to 'View Job Listings', company_job_listings_path(company_id: @company.id), class: 'btn btn-info pull-right', style: 'margin-right: 25px;'
     %ul.unstyled
+      %li= link_to image_tag(@company.get_logo, class: 'media-object img-rounded', size: '150x150'), @company.website, target: '_blank'
+      %br
       - if @company.founded
         %li
-          %strong Founded:
-          #{@company.founded.year}
+          %p
+            %strong Founded:
+            #{@company.founded.year}
       %li
-        %strong Type
-        #{@company.size_definition}
-      %li
-        %strong Number of Employees:
-        #{@company.num_employees}
-      %li
-        %strong Industry:
-        #{@company.industry}
-      %li
-        %strong Description:
-        #{@company.description.try(:html_safe)}
-      %li
-        %strong Ownership:
-        #{@company.public? ? "Public" : "Private"}
-      %li
-        %strong Tags:
-        #{@company.tags.join(', ')}
-      %li
-        %strong Total Money Raised:
-        #{@company.total_money_raised}
-      %li
-        %strong Competitors:
         %p
+          %strong Type:
+          #{@company.size_definition}
+      %li
+        %p
+          %strong Number of Employees:
+          #{@company.num_employees}
+      %li
+        %p
+          %strong Industry:
+          #{@company.industry}
+      %li
+        %p
+          %strong Description:
+          #{@company.description.try(:html_safe)}
+      %li
+        %p
+          %strong Ownership:
+          #{@company.public? ? "Public" : "Private"}
+      %li
+        %p
+          %strong Tags:
+          #{@company.tags.join(', ')}
+      %li
+        %p
+          %strong Total Money Raised:
+          #{@company.total_money_raised}
+      %li
+        %p
+          %strong Competitors:
           #{@company.competitors.join(', ')}

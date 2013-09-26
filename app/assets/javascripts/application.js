@@ -19,6 +19,7 @@
 //= require angular-ui-states
 //= require cardcheck.min
 //= require fileupload.min
+//= require flatui-radio
 //= require app/main
 //= require ckeditor-jquery
 //= require_tree .

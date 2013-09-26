@@ -49,6 +49,15 @@ class GithubAccount < ActiveRecord::Base
   def setup_information
     Repo.from_omniauth(get_repos, self.id, self.collected_repo_keys)
     Organization.from_omniauth(get_organizations, self.id, self.collected_org_keys)
+    self.set_skills(get_repos)
+  end
+
+  def set_skills(repos)
+    collected_languages = repos.inject([]) do |languages, repo|
+      languages << get_languages(repo)
+      languages
+    end.flatten.uniq.select { |lang| lang.is_a?(String) }
+    self.update(skills: collected_languages)
   end
 
   #use mode from /concerns/extensions to get most common language
@@ -96,9 +105,17 @@ class GithubAccount < ActiveRecord::Base
   #get all the public repos from a user's github account
   def get_repos
     begin
-      github_api_setup.repos.list
+      @repos ||= github_api_setup.repos.list
     rescue Exception => e
       logger.error "Github #get_repos error #{e}"
+    end
+  end
+
+  def get_languages(repo)
+    begin
+      github_api_setup.repos.languages(self.nickname, repo.name).try(:keys)
+    rescue Exception => e
+      logger.error "Github #get_languages error #{e}"
     end
   end
 

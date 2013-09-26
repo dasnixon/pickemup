@@ -2,7 +2,9 @@
   .container
     .pull-right
       - if @company.subscription
-        #{link_to "Change Billing Info", edit_company_subscription_path(id: @subscription.id, company_id: @company.id), class: 'btn btn-success'}
+        = link_to 'Edit Billing Information', edit_company_subscription_path(company_id: @company.id), class: 'btn btn-info'
+      - else
+        = link_to 'Add Billing Information', company_purchase_options_path(company_id: @company.id), class: 'btn btn-info'
       - if current_company.active?
         = link_to 'Deactivate Account', toggle_activation_company_path(id: current_company.id), method: :put, class: 'btn btn-danger', style: 'margin-left: 5px;',
           confirm: 'Are you sure you want to deactivate your account? We will also be sure to put your subscription on hold.'
@@ -18,7 +20,7 @@
               = image_tag(@company.logo)
             .fileupload-preview.fileupload-exists.thumbnail{style: "width: 200px; height: 150px;"}
             .clearfix
-              %span.btn.btn-primary.btn-file
+              %span.btn.btn-inverse.btn-file
                 %span.fileupload-new Select image
                 %span.fileupload-exists Change
                 %input{type: 'file', name: 'company[logo]'}/
@@ -69,4 +71,4 @@
           = f.password_field :password_confirmation
       .control-group
         .controls
-          = f.submit 'Save Company', class: 'btn', id: 'company_save'
+          = f.submit 'Save Company', class: 'btn btn-success', id: 'company_save'

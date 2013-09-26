@@ -49,12 +49,6 @@
     display: inline-block;
     margin-top: 15px;
 }
-#sign_up1 .header .social a.github_link{
-    color: black;
-}
-#sign_up1 .header .social a.github_link:hover{
-    color: darkblue;
-}
 #sign_up1 .header .social a.twitter{
     border:2px solid #54AEE1;
     background: #54AEE1;
@@ -118,7 +112,6 @@
 #sign_up1 .footer input[type="submit"]{
 	text-transform: uppercase;
 	color: #fff;
-	background: #187CCC;
 	font-size: 15px;
 	padding: 8px 18px;
 	border: 0 none;
@@ -127,9 +120,6 @@
 	-moz-transition: background linear .2s, box-shadow linear .2s;
 	-o-transition: background linear .2s, box-shadow linear .2s;
 	transition: background linear .2s, box-shadow linear .2s;
-}
-#sign_up1 .footer input[type="submit"]:hover{
-	background: #252528;
 }
 #sign_up1 .remember label.checkbox{
 	float: left;
@@ -179,19 +169,19 @@
 #sign_up2 {
   background: image-url('backgrounds/front-page2.jpg') repeat-x;
   display: block;
-  height: 650px;
+  height: 700px;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
 #sign_up2 .row.login {
-  margin-top: 100px;
+  margin-top: 120px;
 }
 #sign_up2 .left_box{
 	color: black;
 }
-#sign_up2 .left_box h1{
+#sign_up2 .left_box h2{
 	margin: 20px 0 40px 0;
 }
 #sign_up2 .left_box .perk_box{
@@ -332,7 +322,6 @@
 	margin-left: 0;
 	margin-bottom: 20px;
 	width: 100%;
-	color: #797979;
 	text-align: center;
 	overflow: hidden;
 }
@@ -340,7 +329,6 @@
 	margin-right: 5px;
 }
 #sign_up2 .signin_box .box .form .forgot a{
-	color: #797979;
 	font-size: 13px;
 	border-bottom: 1px solid black;
     -webkit-transition: all .2s;
@@ -348,14 +336,8 @@
     -ms-transition: all .2s;
     transition: all .2s;
 }
-#sign_up2 .signin_box .box .form .forgot a:hover{
-	color: #187CCC;
-	border-color: #187CCC;
-}
 #sign_up2 .signin_box .box .form input[type="submit"]{
 	text-transform: uppercase;
-	color: #fff;
-	background: #187CCC;
 	font-size: 15px;
 	margin: 0 auto;
 	display: block;
@@ -366,9 +348,6 @@
 	-moz-transition: background linear .2s, box-shadow linear .2s;
 	-o-transition: background linear .2s, box-shadow linear .2s;
 	transition: background linear .2s, box-shadow linear .2s;
-}
-#sign_up2 .signin_box .box .form input[type="submit"]:hover{
-	background: #252528;
 }
 .title-signup2 {
   text-align: center;
@@ -407,6 +386,9 @@
 	}
   .sign-up-front {
     font-size: 18px;
+  }
+  div.span5.left_box h1 {
+    font-size: 35px;
   }
   #sign_up2 .signin_box .box .form input[type="password"]{
     width: 93%;

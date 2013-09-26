@@ -23,6 +23,12 @@
       <input type="hidden" ng-model="user.id" />
 
       <div class="control-group">
+        <div class="controls">
+          <img ng-src="{{user.profile_image.url}}" class="img-rounded">
+        </div>
+      </div>
+
+      <div class="control-group">
         <label class='control-label'><strong>Name</strong></label>
         <div class="controls">
           <input type="text" ng-model="user.name" required/>
@@ -72,7 +78,7 @@
 
       <div class="control-group">
         <div class="controls">
-          <button class='btn btn-primary' type="submit">Save Your Profile</button>
+          <button class='btn btn-success' type="submit">Save Your Profile</button>
         </div>
       </div>
     </div>

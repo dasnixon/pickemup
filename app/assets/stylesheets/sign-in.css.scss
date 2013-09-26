@@ -48,9 +48,6 @@
     display: inline-block;
     margin-top: 15px;
 }
-#sign_in1 .header .social a.github_link{
-    color: black;
-}
 #sign_in1 .header .social a.twitter{
     border:2px solid #54AEE1;
     background: #54AEE1;
@@ -59,9 +56,6 @@
     border:2px solid #292929;
     background: #292929;
     margin: 0;
-}
-#sign_in1 .header .social a.github_link:hover{
-    color: darkblue;
 }
 #sign_in1 .division{
     margin: 0 auto 50px;
@@ -124,7 +118,6 @@
 #sign_in1 .footer input[type="submit"]{
     text-transform: uppercase;
     color: #fff;
-    background: #187CCC;
     font-size: 15px;
     padding: 8px 18px;
     border: 0 none;
@@ -349,7 +342,6 @@
     margin-left: 0;
     margin-bottom: 20px;
     width: 100%;
-    color: #797979;
     text-align: center;
     overflow: hidden;
 }
@@ -357,7 +349,6 @@
     margin-right: 5px;
 }
 #sign_in2 .signin_box .box .form .forgot a{
-    color: #797979;
     font-size: 13px;
     border-bottom: 1px solid #797979;
     font-weight: bold;
@@ -365,10 +356,6 @@
     -moz-transition: color .2s;
     -ms-transition: color .2s;
     transition: color .2s;
-}
-#sign_in2 .signin_box .box .form .forgot a:hover{
-    color: #187CCC;
-    border-color: #187CCC;
 }
 #sign_in2 .signin_box .box .form input[type="submit"]{
     text-transform: uppercase;

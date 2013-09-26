@@ -6,14 +6,18 @@
     = user_bio(@user, @preference)
   %ul.unstyled
     %li
-      %strong Preferred Skills:
-      #{@preference.skills.join(', ')}
+      %p
+        %strong Preferred Skills:
+        #{@preference.skills.join(', ')}
     %li
-      %strong Preferred Practices:
-      #{@preference.practices.join(', ')}
+      %p
+        %strong Preferred Practices:
+        #{@preference.practices.join(', ')}
     %li
-      %strong Preferred Perks:
-      #{@preference.perks.join(', ')}
+      %p
+        %strong Preferred Perks:
+        #{@preference.perks.join(', ')}
     %li
-      %strong Preferred Benefits:
-      = user_benefits(@preference)
+      %p
+        %strong Preferred Benefits:
+        = user_benefits(@preference)

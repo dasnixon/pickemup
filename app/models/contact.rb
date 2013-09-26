@@ -1,3 +1,4 @@
+#This class is used for the form on the contact page http://pickemup.me/contact
 class Contact
   include ActiveModel::Validations
 

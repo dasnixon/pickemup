@@ -1,9 +1,17 @@
 #housing
   .container-fluid
     .row-fluid
-      .span2.pull-right
-        = render 'sidebar'
-      .span10
+      .span3.pull-right
+        - if current_company == @company
+          = link_to 'Edit Profile', edit_company_path(id: @company.id), class: 'btn btn-info', style: 'margin-left: 15px;'
+          - if @company.subscription
+            = link_to 'Edit Billing Information', edit_company_subscription_path(company_id: @company.id), class: 'btn btn-info'
+          - else
+            = link_to 'Add Billing Information', company_purchase_options_path(company_id: @company.id), class: 'btn btn-primary'
+        .span11
+          %br
+          = render 'sidebar'
+      .span9
         = render 'info'
         %hr
         .span1

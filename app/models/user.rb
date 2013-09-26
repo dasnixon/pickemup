@@ -127,6 +127,12 @@ class User < ActiveRecord::Base
     user_attrs.merge(preference_attrs)
   end
 
+  def get_user_skills
+    linkedin_skills = self.linkedin_uid ? self.linkedin.profile.skills : []
+    github_skills = self.github_uid ? self.github_account.skills : []
+    (github_skills + linkedin_skills).uniq.sort
+  end
+
   private
 
   #automatically generate a defaulted preference for a user upon creation
