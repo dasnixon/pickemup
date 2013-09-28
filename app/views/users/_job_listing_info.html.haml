@@ -2,7 +2,8 @@
   .media{id: job_listing[:listing].id}
     .media-body
       %div{class: "#{job_listing[:listing].active ? 'active' : 'deactivated'}"}
-        .pull-right= link_to 'View Conversation', user_conversation_path(user_id: current_user.id, id: job_listing[:conversation].id), class: 'btn btn-primary'
+        .pull-right= link_to 'View Conversation', user_conversation_path(user_id: current_user.id, id: job_listing[:conversation].id), class: 'btn btn-info'
+        %br
         .lead.media-heading #{link_to(job_listing[:company].name, company_path(id: job_listing[:company].id))} - #{link_to(job_listing_title(job_listing[:listing]), company_job_listing_path(id: job_listing[:listing].id, company_id: job_listing[:company].id))}
         .accordion
           .accordion-group

@@ -16,7 +16,7 @@
         = link_to image_tag(company.logo, size: '100x100'), company_path(id: company.id), class: 'pull-left'
         .pull-right
           .pull-right
-            = link_to 'View Listing', company_job_listing_path(company_id: company.id, id: job_listing.id), class: 'btn btn-primary'
+            = link_to 'View Listing', company_job_listing_path(company_id: company.id, id: job_listing.id), class: 'btn btn-info'
             = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'
           .clearfix
           %dl.dl-horizontal

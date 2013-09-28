@@ -20,7 +20,7 @@
               = link_to image_tag(user.profile_image, size: '100x100', class: 'img-circle'), resume_user_path(id: user.id), class: 'pull-left'
               .pull-right
                 .pull-right
-                  = link_to 'View Resume', resume_user_path(id: user.id), class: 'btn btn-primary'
+                  = link_to 'View Resume', resume_user_path(id: user.id), class: 'btn btn-info'
                   = link_to 'Send Message', new_company_message_path(company_id: current_company.id, receiver: user.id, job_listing_id: job_listing.id), class: 'btn btn-success'
                 .clearfix
                 %dl.dl-horizontal

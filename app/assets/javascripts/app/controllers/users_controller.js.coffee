@@ -28,7 +28,7 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
   $scope.update = ->
     User.update
       id: $stateParams['id'],
-      action: 'update',
+      action: '',
       user:
         name: $scope.user.name
         email: $scope.user.email

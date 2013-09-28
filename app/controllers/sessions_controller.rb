@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
   end
 
   def company
+    session[:user_id] = nil
     company = Company.authenticate(params[:email], params[:password], request)
     if company.present?
       session[:company_id] = company.id
@@ -23,6 +24,7 @@ class SessionsController < ApplicationController
   end
 
   def github
+    session[:company_id] = nil
     if sync_user_github?
       if current_user.setup_github_account(request.env['omniauth.auth'])
         redirect_to_root('Sweet, we got your Github account!')
@@ -35,13 +37,14 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         redirect_to_root('You are signed in!')
       else
-        session[:user_id] = nil
+        session[:company_id] = session[:user_id] = nil
         redirect_to root_path, alert: 'Unable to add your Github, try again later. You may have another account in our system with the same email address.'
       end
     end
   end
 
   def linkedin
+    session[:company_id] = nil
     if sync_user_linkedin?
       if current_user.setup_linkedin_account(request.env['omniauth.auth'])
         redirect_to_root('Sweet, we got your LinkedIn account!')
