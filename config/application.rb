@@ -75,5 +75,6 @@ module Pickemup
 
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif) #for bootstrap-sass
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.assets.paths << File.join(Rails.root, 'app', 'assets', 'templates')
   end
 end
