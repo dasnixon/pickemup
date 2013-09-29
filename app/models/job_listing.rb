@@ -14,7 +14,6 @@
 #  remote                  :boolean
 #  hiring_time             :integer
 #  tech_stack_id           :integer
-#  location                :string(255)
 #  active                  :boolean          default(FALSE)
 #  sponsorship_available   :boolean          default(FALSE)
 #  healthcare              :boolean          default(FALSE)
@@ -32,6 +31,7 @@
 #  created_at              :datetime
 #  updated_at              :datetime
 #  company_id              :uuid
+#  locations               :string(255)      default([])
 #
 
 class JobListing < ActiveRecord::Base
@@ -39,7 +39,7 @@ class JobListing < ActiveRecord::Base
   include PreferencesHelper
   include PickemupAPI
 
-  HASHABLE_PARAMS = %w(practices perks experience_levels special_characteristics acceptable_languages position_titles)
+  HASHABLE_PARAMS = %w(practices perks experience_levels special_characteristics acceptable_languages position_titles locations)
 
   belongs_to :company
   has_many :conversations
@@ -68,7 +68,7 @@ class JobListing < ActiveRecord::Base
 
   def api_attributes
     attrs = self.attributes
-    attrs.merge!(job_listing_id: attrs.delete("id"), expiration_time: self.company.subscription.expiration_time, skills: skills, locations: [self.location])
+    attrs.merge!(job_listing_id: attrs.delete("id"), expiration_time: self.company.subscription.expiration_time, skills: skills, locations: self.locations)
   end
 
   def skills
@@ -88,7 +88,7 @@ class JobListing < ActiveRecord::Base
   end
 
   def search_attributes(preference_id)
-    listing_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|job_title|languages|company_id|salary|description|location/ }.merge(score: self.score(preference_id)['score'])
+    listing_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|job_title|languages|company_id|salary|description|locations/ }.merge(score: self.score(preference_id)['score'])
     company_attrs = self.company.attributes.keep_if { |k,v| k =~ /name|get_logo|website|industry/ }
     company_attrs.merge(listing_attrs)
   end

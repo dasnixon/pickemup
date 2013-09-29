@@ -17,6 +17,7 @@
 #  user_id            :uuid
 #  created_at         :datetime
 #  updated_at         :datetime
+#  skills             :string(255)      default([])
 #
 
 class GithubAccount < ActiveRecord::Base

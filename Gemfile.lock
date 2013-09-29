@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: bea5e32955f630b9280ca49d44a3f10c4c664f8b
+  revision: 6a6740790f58c69ad2c03213ae66bbfe6030ba60
   branch: 4-0-stable
   specs:
     actionmailer (4.0.0)
@@ -106,7 +106,7 @@ GEM
     diff-lcs (1.2.4)
     erubis (2.7.0)
     excon (0.25.3)
-    execjs (2.0.1)
+    execjs (2.0.2)
     factory_girl (4.2.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.2.1)
@@ -286,7 +286,7 @@ GEM
       rspec (~> 2.0)
       sidekiq (>= 2.4.0)
     ruby-hmac (0.4.0)
-    sass (3.2.10)
+    sass (3.2.11)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)

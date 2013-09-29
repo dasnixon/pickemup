@@ -11,6 +11,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       action: 'retrieve_listing'
     , (response) ->
       response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6)
+      response.job_listing.locations = chunk(response.job_listing.locations, 6)
       response.job_listing.practices = chunk(response.job_listing.practices, 6)
       response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6)
       response.job_listing.experience_levels = chunk(response.job_listing.experience_levels, 5)
@@ -26,6 +27,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       action: 'new'
     , (response) ->
       response.job_listing.acceptable_languages = chunk(response.job_listing.acceptable_languages, 6)
+      response.job_listing.locations = chunk(response.job_listing.locations, 6)
       response.job_listing.practices = chunk(response.job_listing.practices, 6)
       response.job_listing.special_characteristics = chunk(response.job_listing.special_characteristics, 6)
       response.job_listing.experience_levels = chunk(response.job_listing.experience_levels, 5)
@@ -60,7 +62,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       job_listing:
         job_title: $scope.data.job_title
         job_description: $scope.data.job_description
-        location: $scope.data.location
+        locations: unchunk($scope.data.locations)
         position_titles: unchunk($scope.data.position_titles)
         experience_levels: unchunk($scope.data.experience_levels)
         salary_range_low: $scope.data.salary_range_low
@@ -97,7 +99,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       job_listing:
         job_title: $scope.data.job_title
         job_description: $scope.data.job_description
-        location: $scope.data.location
+        locations: unchunk($scope.data.locations)
         position_titles: unchunk($scope.data.position_titles)
         experience_levels: unchunk($scope.data.experience_levels)
         salary_range_low: $scope.data.salary_range_low

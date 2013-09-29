@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130926034837) do
+ActiveRecord::Schema.define(version: 20130929184209) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,7 +130,6 @@ ActiveRecord::Schema.define(version: 20130926034837) do
     t.boolean  "remote"
     t.integer  "hiring_time"
     t.integer  "tech_stack_id"
-    t.string   "location"
     t.boolean  "active",                  default: false
     t.boolean  "sponsorship_available",   default: false
     t.boolean  "healthcare",              default: false
@@ -148,6 +147,7 @@ ActiveRecord::Schema.define(version: 20130926034837) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "company_id"
+    t.string   "locations",               default: [],    array: true
   end
 
   add_index "job_listings", ["company_id"], name: "index_job_listings_on_company_id", using: :btree

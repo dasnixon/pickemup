@@ -21,7 +21,7 @@ module CompaniesHelper
   end
 
   def job_listing_title(listing)
-    "#{listing.fulltime? ? 'Fulltime ' : 'Part-time '}#{listing.remote? ? 'Remote ' : ''}#{listing.job_title} - #{listing.location || "Unspecified Location"}"
+    "#{listing.fulltime? ? 'Fulltime ' : 'Part-time '}#{listing.remote? ? 'Remote ' : ''}#{listing.job_title} - #{listing.locations.present? ? listing.locations.join(', ') : "Unspecified Location"}"
   end
 
   def default_job_listing_company(listing, company, user)

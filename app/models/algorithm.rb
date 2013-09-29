@@ -31,7 +31,7 @@ class Algorithm
   end
 
   def valid_count
-    %w(salary work_hours position vacation_days perks practices availability_to_start location).count do |meth|
+    %w(salary work_hours position vacation_days perks practices availability_to_start locations).count do |meth|
       self.send("valid_#{meth}?")
     end
   end
@@ -73,8 +73,8 @@ class Algorithm
     (self.job_listing.hiring_time - 1..self.job_listing.hiring_time + 1).include?(self.preference.potential_availability)
   end
 
-  def valid_location?
-    self.preference.willing_to_relocate or self.preference.locations.blank? or self.preference.locations.include?(self.job_listing.location)
+  def valid_locations?
+    self.preference.willing_to_relocate or self.preference.locations.blank? or (self.preference.locations & self.job_listing.locations).length > 0
   end
 
   def company_preferred_count
