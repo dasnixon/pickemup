@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.0.0'
 
 #MAGIC
-gem 'rails'#, git: 'git://github.com/rails/rails.git', branch: '4-0-stable'
+gem 'rails', git: 'git://github.com/rails/rails.git', branch: '4-0-stable'
 
 #DATABASES
 gem 'pg'
