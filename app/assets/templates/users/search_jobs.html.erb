@@ -14,10 +14,9 @@
                   Send Message
                 </button>
               </div>
-              <div class='clearfix'>
               <dl class='dl-horizontal'>
-                <dt>Location</dt>
-                <dd>{{listing.location}}</dd>
+                <dt>Locations</dt>
+                <dd>{{listing.locations.join(', ')}}</dd>
                 <dt>Salary</dt>
                 <dd>${{listing.salary_range_low}} - ${{listing.salary_range_high}}</dd>
                 <dt>Languages</dt>

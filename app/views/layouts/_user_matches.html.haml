@@ -20,8 +20,8 @@
             = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'
           .clearfix
           %dl.dl-horizontal
-            %dt Location
-            %dd= job_listing.location
+            %dt Locations
+            %dd= job_listing.locations.join(', ')
             %dt Salary
             %dd= "#{number_to_currency(job_listing.salary_range_low)} - #{number_to_currency(job_listing.salary_range_high)}"
             %dt Languages

@@ -17,6 +17,7 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
       $scope.original = angular.copy($scope.user)
     , (response) ->
       $scope.error_updating = 'There were issues updating your information.'
+
   else if $state.current.name == 'search_jobs'
     User.searchJobs
       id: $stateParams['id'],
