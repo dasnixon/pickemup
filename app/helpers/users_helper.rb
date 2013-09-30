@@ -10,7 +10,8 @@ module UsersHelper
     "<p>To whomever this may concern at #{company.name},</p>
     <p>My name is #{user.name} and I am interested in speaking
     about a potential opportunity for the #{listing.fulltime? ? 'Fulltime' : 'Part-time'}
-    #{listing.remote? ? 'Remote' : nil} #{listing.job_title} position #{"in #{listing.location}." if listing.location}
+    #{listing.remote? ? 'Remote' : nil} #{listing.job_title} position in #{"
+    #{listing.locations.to_sentence(two_words_connector: ' or ', last_word_connector: ' or ')}." if listing.locations.present?}
     You can view my qualifications on my #{link_to 'resume page', resume_user_path(id: user.id)} and either get back
     to me on Pickemup, or email me directly at #{mail_to user.email}.
     <p>Thanks and I hope to hear back soon,</p>

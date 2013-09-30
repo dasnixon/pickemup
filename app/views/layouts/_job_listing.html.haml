@@ -2,7 +2,7 @@
   .media-body
     - if current_company == company
       .media-heading
-        = link_to 'Edit', edit_company_job_listing_path(id: job_listing.id, company_id: company.id), class: 'btn btn-primary'
+        = link_to 'Edit', edit_company_job_listing_path(id: job_listing.id, company_id: company.id), class: 'btn btn-info'
         = link_to 'Remove', company_job_listing_path(id: job_listing.id, company_id: company.id), method: :delete, class: 'btn btn-danger'
         = link_to (job_listing.active ? 'Deactivate' : 'Activate'), toggle_active_company_job_listing_path(company_id: company.id, id: job_listing.id), class: "#{job_listing.active ? 'btn btn-warning' : 'btn btn-success'}", method: :put
         = link_to 'Find Candidates', search_users_company_job_listing_path(id: job_listing.id, company_id: company.id), method: :get, class: 'btn btn-success'
