@@ -25,7 +25,7 @@ describe SubscriptionsController do
       end
     end
     context 'valid company' do
-      let(:subscription) { double(Subscription) }
+      let(:subscription) { double(Subscription, new_record?: true) }
       before :each do
         company_login(company)
         Company.stub(:find).and_return(company)

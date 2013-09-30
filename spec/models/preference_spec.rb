@@ -74,20 +74,22 @@ describe Preference do
     context 'skills attribute' do
       context 'user has linkedin synced' do
         let(:preference) { user.preference }
-        let(:user) { create(:user, linkedin_uid: generate(:guid)) }
+        let(:user) { create(:user, linkedin_uid: generate(:guid), github_uid: generate(:guid)) }
         let(:linkedin) { double(Linkedin, profile: profile) }
         let(:profile) { double(Profile, skills: ['Ruby', 'Python']) }
+        let(:github_account) { double(GithubAccount, skills: ['Javascript']) }
         before :each do
           preference.stub(:user).and_return(user)
           user.stub(:linkedin).and_return(linkedin)
+          user.stub(:github_account).and_return(github_account)
         end
         it 'returns the skills from linkedin profile' do
-          preference.attribute_default_values('skills').should =~ ['Ruby', 'Python']
+          preference.attribute_default_values('skills').should =~ ['Ruby', 'Python', 'Javascript']
         end
       end
       context 'user linkedin not synced' do
         let(:preference) { user.preference }
-        let(:user) { create(:user, linkedin_uid: nil) }
+        let(:user) { create(:user, linkedin_uid: nil, github_uid: nil) }
         before :each do
           preference.stub(:user).and_return(user)
         end

@@ -393,37 +393,37 @@ describe Algorithm do
     end
   end
 
-  describe '#valid_location' do
+  describe '#valid_locations?' do
     context 'user preferes the location for the job listing' do
       context 'willing to relocate' do
         before :each do
           preference.willing_to_relocate = true
         end
-        it('returns true') { algorithm.valid_location?.should be_true }
+        it('returns true') { algorithm.valid_locations?.should be_true }
       end
-      context 'user does not care about location preference' do
+      context 'user does not care about locations preference' do
         before :each do
           preference.willing_to_relocate = false
           preference.locations = []
         end
-        it('returns true') { algorithm.valid_location?.should be_true }
+        it('returns true') { algorithm.valid_locations?.should be_true }
       end
       context 'job listing location is one of the preferred user locations' do
         before :each do
           preference.willing_to_relocate = false
           preference.locations = ['San Francisco, CA']
-          job_listing.location = 'San Francisco, CA'
+          job_listing.locations = ['San Francisco, CA']
         end
-        it('returns true') { algorithm.valid_location?.should be_true }
+        it('returns true') { algorithm.valid_locations?.should be_true }
       end
     end
     context 'user does not prefer the location for the job listing' do
       before :each do
         preference.willing_to_relocate = false
         preference.locations = ['Los Angeles, CA']
-        job_listing.location = 'San Francisco, CA'
+        job_listing.locations = ['San Francisco, CA']
       end
-      it('returns false') { algorithm.valid_location?.should be_false }
+      it('returns false') { algorithm.valid_locations?.should be_false }
     end
   end
 

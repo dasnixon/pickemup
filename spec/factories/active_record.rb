@@ -35,7 +35,7 @@ FactoryGirl.define do
     bonuses                 { Faker::Lorem.word }
     remote                  false
     hiring_time             2
-    location                { Faker::Lorem.word }
+    locations               PreferenceConstants::LOCATIONS.shuffle[0..2]
     sponsorship_available   true
     estimated_work_hours    40
     active                  true
