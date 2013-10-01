@@ -83,7 +83,7 @@ class JobListing < ActiveRecord::Base
   end
 
   def score(preference_id)
-    score = $redis.get("score.#{self.id}.#{preference_id}")
+    score = $scores.get("score.#{self.id}.#{preference_id}")
     score ? JSON(score) : {}
   end
 
