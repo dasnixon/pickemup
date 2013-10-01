@@ -32,6 +32,12 @@ class HomeController < ApplicationController
     render json: Company.search_by(:name, params[:term])
   end
 
+  def terms_of_service
+  end
+
+  def privacy_policy
+  end
+
   private
 
   def contact_params

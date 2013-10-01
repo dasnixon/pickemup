@@ -44,6 +44,11 @@
                   %span Already have an account?
                   = link_to 'Sign in', sign_in_path
                 = f.submit 'Sign Up', class: 'btn btn-info'
+                %br
+                .forgot
+                  %span
+                    By signing up as a developer or company you agree to our #{link_to 'terms of service', terms_of_service_path}
+                    and #{link_to 'privacy policy', privacy_policy_path}.
 #showcase
   .container
     .row.feature_wrapper

@@ -15,6 +15,8 @@ Pickemup::Application.routes.draw do
     get :company_search
     get :pricing
     post :create_contact
+    get :terms_of_service
+    get :privacy_policy
   end
   get "log_out" => "sessions#destroy", as: "log_out"
   resources :users, only: [:edit, :update] do
