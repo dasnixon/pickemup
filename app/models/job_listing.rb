@@ -91,7 +91,7 @@ class JobListing < ActiveRecord::Base
     return nil if user.already_has_applied?(self.id)
     listing_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|job_title|languages|company_id|salary|description|locations/ }.merge('score' => self.score(preference_id)['score'])
     comp = self.company
-    company_attrs = comp.attributes.keep_if { |k,v| k =~ /name|website|industry/ }
-    company_attrs.merge(listing_attrs).merge('logo' => comp.logo.url(:medium))
+    company_attrs = comp.attributes.keep_if { |k,v| k =~ /name|website|industry/ }.merge('logo' => comp.logo.url(:medium))
+    company_attrs.merge(listing_attrs)
   end
 end

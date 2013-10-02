@@ -115,11 +115,13 @@ class User < ActiveRecord::Base
       user_attrs.merge(preference_attrs.merge({job_listing_name: job_listing.job_title, job_listing_id: job_listing.id}))
     else
       complete_listings = JobListing.all.inject({}) do |matched_users, job|
-        next matched_users if company.already_has_applied?(job.id) or matched_users.length == 10
+        next matched_users if company.already_has_applied?(job.id) || matched_users.length == 10
         matched_users["#{job.job_title} & #{job.id}"] ||= []
-        user_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|name|description|location/ }.merge('profile_image' => self.profile_image.url(:medium))
-        preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => self.preference.score(job.id)['score'])
-        matched_users["#{job.job_title} & #{job.id}"] << user_attrs.merge(preference_attrs.merge({job_listing_name: job.job_title, job_listing_id: job.id}))
+        unless matched_users["#{job.job_title} & #{job.id}"].any? { |user| user['id'] == self.id }
+          user_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|name|description|location/ }.merge('profile_image' => self.profile_image.url(:medium))
+          preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => self.preference.score(job.id)['score'])
+          matched_users["#{job.job_title} & #{job.id}"] << user_attrs.merge(preference_attrs.merge({job_listing_name: job.job_title, job_listing_id: job.id}))
+        end
         matched_users
       end
       complete_listings.each { |job_info, listing| listing.sort! { |a, b| a['score'] <=> b['score'] } }
