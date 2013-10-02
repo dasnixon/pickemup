@@ -4,7 +4,7 @@
       <tr class="user" ng-repeat="user in users">
         <td class="user">
           <div class='media'>
-            <img class='pull-left img-circle' alt="0  rftk trpnz mrktrgqoklhw1qa1m98trp1oklrr2algltb yjcsoakzjslddaty14lxx9gcz2ag" height="100" src="https://s3-us-west-1.amazonaws.com//pickemup/uploads/user/profile_image/{{user.id}}/{{user.profile_image}}" width="100">
+            <img class='pull-left img-rounded' style='max-width: 120px; max-height: 120px;' src='{{user.profile_image}}'>
             <div class='pull-right'>
               <div class='pull-right'>
                 <button class="btn btn-info" onclick="location.href='/users/{{user.id}}/resume'">
@@ -14,7 +14,7 @@
                   Send Message
                 </button>
               </div>
-              <div class='clearfix'>
+              <div class='clearfix'></div>
               <dl class='dl-horizontal'>
                 <dt>Location</dt>
                 <dd>{{user.location}}</dd>
@@ -23,7 +23,6 @@
                 <dt>Languages</dt>
                 <dd>{{user.skills.join(', ')}}</dd>
               </dl>
-              </div>
             </div>
             <div class='media-body'>
               <h4 class='media-heading'>

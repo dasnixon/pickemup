@@ -17,7 +17,7 @@
               %h3.media-heading= job_listing_name
             - matches.each do |match|
               .media
-                = link_to image_tag("https://s3-us-west-1.amazonaws.com//pickemup/uploads/user/profile_image/#{match['id']}/#{match['profile_image']}", size: '100x100', class: 'img-circle'), resume_user_path(id: match['id']), class: 'pull-left'
+                = link_to image_tag(match['profile_image'], style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded'), resume_user_path(id: match['id']), class: 'pull-left'
                 .pull-right
                   .pull-right
                     = link_to 'View Resume', resume_user_path(id: match['id']), class: 'btn btn-info'

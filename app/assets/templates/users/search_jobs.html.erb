@@ -1,5 +1,5 @@
 <div class='media' ng-repeat="listing in job_listings">
-  <img class='pull-left media-object img-rounded' style="max-width: 120px; max-height: 120px;" src='https://s3-us-west-1.amazonaws.com/pickemup/uploads/company/logo/{{listing.company_id}}/{{listing.logo}}'>
+  <img class='pull-left media-object img-rounded' style="max-width: 120px; max-height: 120px;" src='{{listing.logo}}'>
   <div class='pull-right'>
     <div class='pull-right'>
       <button class="btn btn-info" onclick="location.href='/companies/{{listing.company_id}}'">
