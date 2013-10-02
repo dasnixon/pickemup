@@ -9,7 +9,12 @@
     .pull-right
       - if user_signed_in?
         - if conversation = current_user.already_has_applied(job_listing.id)
-          = link_to 'Already Applied - View Conversation', user_conversation_path(user_id: current_user.id, id: conversation.id, box: :sentbox), class: 'btn btn-info'
+          - box = :inbox
+          - if conversation.is_completely_trashed?(current_user)
+            - box = :trash
+          - elsif conversation.last_sender == current_user
+            - box = :sentbox
+          = link_to 'Already Applied - View Conversation', user_conversation_path(user_id: current_user.id, id: conversation.id, box: box), class: 'btn btn-info'
         - else
           = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'
     %div{class: "#{job_listing.active ? 'active' : 'deactivated'}"}

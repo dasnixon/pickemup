@@ -10,7 +10,7 @@
   - if @matchings.present?
     - @matchings.each do |matching|
       .media
-        = link_to image_tag("https://s3-us-west-1.amazonaws.com//pickemup/uploads/company/logo/#{matching['company_id']}/#{matching['logo']}", size: '100x100', class: 'img-rounded'), company_path(id: matching['company_id']), class: 'pull-left'
+        = link_to image_tag("https://s3-us-west-1.amazonaws.com/pickemup/uploads/company/logo/#{matching['company_id']}/#{matching['logo']}", style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded'), company_path(id: matching['company_id']), class: 'pull-left'
         .pull-right
           .pull-right
             = link_to 'View Listing', company_job_listing_path(company_id: matching['company_id'], id: matching['id']), class: 'btn btn-info'

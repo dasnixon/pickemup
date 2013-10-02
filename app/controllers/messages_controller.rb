@@ -77,15 +77,18 @@ class MessagesController < ApplicationController
 
   def validate_params
     unless params[:receiver] && params[:job_listing_id]
-      conversations_redirect
+      conversations_redirect('Missing a valid recipient or job listing')
     end
   end
 
   def lookup_info
     @job_listing = JobListing.find(params[:job_listing_id])
     @recipient = user_signed_in? ? Company.find(params[:receiver]) : User.find(params[:receiver])
-    conversations_redirect('Missing a valid recipient or job listing') if invalid_message?
-    already_messaged_for_job_listing
+    if invalid_message?
+      conversations_redirect('Missing a valid recipient or job listing')
+    else
+      already_messaged_for_job_listing
+    end
   end
 
   def invalid_message?

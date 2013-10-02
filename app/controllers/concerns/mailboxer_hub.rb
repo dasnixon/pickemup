@@ -37,11 +37,11 @@ module MailboxerHub
 
   def conversations_redirect(message=nil)
     if params[:user_id]
-      redirect_to(user_conversations_path(box: @box), notice: message) and return
+      redirect_to(user_conversations_path(box: @box), notice: message)
     elsif params[:company_id]
-      redirect_to(company_conversations_path(box: @box), notice: message) and return
+      redirect_to(company_conversations_path(box: @box), notice: message)
     else
-      redirect_to root_path, error: 'Unable to find your conversation.' and return
+      redirect_to root_path, error: 'Unable to find your conversation.'
     end
   end
 end
