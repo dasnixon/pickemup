@@ -9,32 +9,29 @@
   %hr
   - if @matchings.present?
     - @matchings.each do |matching|
-      - job_listing = matching[:job_listing]
-      - company     = matching[:company]
-      - score       = matching[:score]
       .media
-        = link_to image_tag(company.logo, size: '100x100'), company_path(id: company.id), class: 'pull-left'
+        = link_to image_tag(matching['logo'], size: '100x100'), company_path(id: matching['company_id']), class: 'pull-left'
         .pull-right
           .pull-right
-            = link_to 'View Listing', company_job_listing_path(company_id: company.id, id: job_listing.id), class: 'btn btn-info'
-            = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'
+            = link_to 'View Listing', company_job_listing_path(company_id: matching['company_id'], id: matching['id']), class: 'btn btn-info'
+            = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: matching['company_id'], job_listing_id: matching['id']), class: 'btn btn-success'
           .clearfix
           %dl.dl-horizontal
             %dt Locations
-            %dd= job_listing.locations.join(', ')
+            %dd= matching['locations'].join(', ')
             %dt Salary
-            %dd= "#{number_to_currency(job_listing.salary_range_low)} - #{number_to_currency(job_listing.salary_range_high)}"
+            %dd= "#{number_to_currency(matching['salary_range_low'])} - #{number_to_currency(matching['salary_range_high'])}"
             %dt Languages
-            %dd= truncate_html(job_listing.acceptable_languages.join(', '), length: 30, omission: '...and more')
+            %dd= truncate_html(matching['acceptable_languages'].join(', '), length: 30, omission: '...and more')
         .media-body
           %h4.media-heading
-            .label.label-success{style: 'font-size: 20px;'} #{score}% Match
-            = link_to company.name, company_path(id: company.id)
+            .label.label-success{style: 'font-size: 20px;'} #{matching['score']}% Match
+            = link_to matching['name'], company_path(id: matching['company_id'])
             %i.icon-hand-right.icon-large
-            = link_to "#{job_listing.job_title}", company_job_listing_path(company_id: company.id, id: job_listing.id)
+              = link_to "#{matching['job_title']}", company_job_listing_path(company_id: matching['company_id'], id: matching['id'])
           %div
             %p
-              = truncate_html(job_listing.job_description, length: 150, omission: "...#{link_to 'read more', company_job_listing_path(company_id: company.id, id: job_listing.id)}")
+              = truncate_html(matching['job_description'], length: 150, omission: "...#{link_to 'read more', company_job_listing_path(company_id: matching['company_id'], id: matching['id'])}")
       %hr
   - else
     %p

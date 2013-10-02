@@ -131,23 +131,6 @@ class Company < ActiveRecord::Base
     end
   end
 
-  def matching_users
-    return nil unless self.fully_activated?
-    self.job_listings.inject({}) do |matches, job_listing|
-      where_skills_statement = job_listing.acceptable_languages.collect { |a| "a ~* '#{a}'" }.join(' OR ')
-      query = "SELECT * FROM ( SELECT *, unnest(skills) a FROM profiles) x WHERE #{where_skills_statement}"
-      user_profiles = Profile.find_by_sql(query)
-      user_profiles.each do |user_profile|
-        user = user_profile.linkedin.user
-        preference = user.preference
-        matches[job_listing.job_title] ||= []
-        matches[job_listing.job_title] << { job_listing: job_listing, user: user, preference: preference, score: Algorithm.new(preference, job_listing).score }
-        matches[job_listing.job_title].uniq!
-      end
-      matches
-    end
-  end
-
   def fully_activated?
     self.active? and self.subscription and self.subscription.active?
   end
@@ -155,6 +138,14 @@ class Company < ActiveRecord::Base
   def api_attributes
     attrs = self.attributes
     attrs.merge!(company_id: attrs.delete("id"))
+  end
+
+  def already_has_applied(job_listing_id)
+    self.mailbox.conversations.find_by(job_listing_id: job_listing_id)
+  end
+
+  def already_has_applied?(job_listing_id)
+    already_has_applied(job_listing_id).present?
   end
 
   private

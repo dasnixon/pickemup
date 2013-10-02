@@ -87,9 +87,10 @@ class JobListing < ActiveRecord::Base
     score ? JSON(score) : {}
   end
 
-  def search_attributes(preference_id)
+  def search_attributes(preference_id, user)
+    return nil if user.already_has_applied?(self.id)
     listing_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|job_title|languages|company_id|salary|description|locations/ }.merge(score: self.score(preference_id)['score'])
-    company_attrs = self.company.attributes.keep_if { |k,v| k =~ /name|get_logo|website|industry/ }
+    company_attrs = self.company.attributes.keep_if { |k,v| k =~ /name|logo|website|industry/ }
     company_attrs.merge(listing_attrs)
   end
 end

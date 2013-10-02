@@ -50,6 +50,31 @@ class MessagesController < ApplicationController
     end
   end
 
+  def already_messaged_for_job_listing
+    notice = "You already have a conversation regarding this job listing."
+    if user_signed_in?
+      if conversation = current_user.mailbox.conversations.find_by(job_listing_id: @job_listing.id)
+        box = :inbox
+        if conversation.is_completely_trashed?(current_user)
+          box = :trash
+        elsif conversation.last_sender == current_user
+          box = :sentbox
+        end
+        redirect_to user_conversation_path(user_id: current_user.id, id: conversation.id, box: box), notice: notice
+      end
+    elsif company_signed_in?
+      if conversation = current_company.mailbox.conversations.find_by(job_listing_id: @job_listing.id)
+        box = :inbox
+        if conversation.is_completely_trashed?(current_company)
+          box = :trash
+        elsif conversation.last_sender == current_company
+          box = :sentbox
+        end
+        redirect_to company_conversation_path(company_id: current_company.id, id: conversation.id, box: box), notice: notice
+      end
+    end
+  end
+
   def validate_params
     unless params[:receiver] && params[:job_listing_id]
       conversations_redirect
@@ -59,6 +84,11 @@ class MessagesController < ApplicationController
   def lookup_info
     @job_listing = JobListing.find(params[:job_listing_id])
     @recipient = user_signed_in? ? Company.find(params[:receiver]) : User.find(params[:receiver])
-    conversations_redirect('Missing a valid recipient or job listing') if @recipient.blank? || sending_to_self? || @job_listing.blank?
+    conversations_redirect('Missing a valid recipient or job listing') if invalid_message?
+    already_messaged_for_job_listing
+  end
+
+  def invalid_message?
+    @recipient.blank? || sending_to_self? || @job_listing.blank?
   end
 end

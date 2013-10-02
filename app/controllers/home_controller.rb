@@ -1,9 +1,10 @@
 class HomeController < ApplicationController
   def index
     if user_signed_in?
-      @matchings = current_user.matching_companies
+      @matchings = JobListing.all.map { |listing| listing.search_attributes(current_user.preference.id, current_user) }.compact
+      @matchings.sort! { |a, b| a['score'] <=> b['score'] }
     elsif company_signed_in?
-      @matchings = current_company.matching_users
+      @matchings = User.all.map { |user| user.search_attributes(current_company) }.compact
     else
       @company = Company.new
     end

@@ -107,30 +107,38 @@ class User < ActiveRecord::Base
     self.save!
   end
 
-  def matching_companies
-    return nil unless self.active?
-    linkedin = self.linkedin
-    if linkedin
-      profile = linkedin.profile
-      if profile && profile.skills.present?
-        where_lang_statement = profile.skills.collect { |j| "j ~* '#{j}'" }.join(' OR ')
-        query = "SELECT * FROM ( SELECT *, unnest(acceptable_languages) j FROM job_listings) x WHERE #{where_lang_statement}"
-        pref = self.preference
-        JobListing.find_by_sql(query).uniq.collect { |job_listing| {job_listing: job_listing, company: job_listing.company, score: Algorithm.new(pref, job_listing).score} }
+  def search_attributes(company, job_listing=nil)
+    if job_listing
+      return nil if company.already_has_applied?(job_listing.id)
+      user_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|name|profile_image|description|location/ }
+      preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge(score: self.preference.score(job_listing.id)['score'])
+      user_attrs.merge(preference_attrs.merge({job_listing_name: job_listing.job_title, job_listing_id: job_listing.id}))
+    else
+      complete_listings = JobListing.all.inject({}) do |matched_users, job|
+        next matched_users if company.already_has_applied?(job.id) or matched_users.length == 10
+        matched_users["#{job.job_title} & #{job.id}"] ||= []
+        user_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|name|profile_image|description|location/ }
+        preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge(score: self.preference.score(job.id)['score'])
+        matched_users["#{job.job_title} & #{job.id}"] << user_attrs.merge(preference_attrs.merge({job_listing_name: job.job_title, job_listing_id: job.id}))
+        matched_users
       end
+      complete_listings.each { |job_info, listing| listing.sort! { |a, b| a['score'] <=> b['score'] } }
+      complete_listings
     end
-  end
-
-  def search_attributes(job_listing_id)
-    user_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|name|profile_image|description|location/ }
-    preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills/ }.merge(score: self.preference.score(job_listing_id)['score'])
-    user_attrs.merge(preference_attrs)
   end
 
   def get_user_skills
     linkedin_skills = self.linkedin_uid ? self.linkedin.profile.skills : []
     github_skills = self.github_uid ? self.github_account.skills : []
     (github_skills + linkedin_skills).uniq.sort
+  end
+
+  def already_has_applied(job_listing_id)
+    self.mailbox.conversations.find_by(job_listing_id: job_listing_id)
+  end
+
+  def already_has_applied?(job_listing_id)
+    already_has_applied(job_listing_id).present?
   end
 
   private

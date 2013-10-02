@@ -1,7 +1,7 @@
 class JobListingsController < ApplicationController
   before_filter :find_company
   before_filter :check_invalid_permissions_company, except: [:index, :show]
-  before_filter :check_for_subscription, only: [:new, :create]
+  before_filter :check_for_subscription, only: [:new, :create, :search_users]
   before_filter :get_job_listing, except: [:index, :new, :create, :guide]
   before_filter :cleanup_invalid_data, only: [:create, :update_listing]
   respond_to :json, :html
@@ -68,7 +68,7 @@ class JobListingsController < ApplicationController
   end
 
   def search_users
-    @users = User.all.map { |user| user.search_attributes(params[:id]) }
+    @users = User.all.map { |user| user.search_attributes(current_company, @job_listing) }.compact
     @users.sort! { |a, b| a['score'] <=> b['score'] }
     respond_with({ job_listing_id: params[:id], company_id: params[:company_id], users: @users })
   end

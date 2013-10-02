@@ -68,7 +68,7 @@ class UsersController < ApplicationController
   end
 
   def search_jobs
-    @listings = JobListing.all.map { |listing| listing.search_attributes(current_user.preference.id) }
+    @listings = JobListing.all.map { |listing| listing.search_attributes(current_user.preference.id, current_user) }.compact
     @listings.sort! { |a, b| a['score'] <=> b['score'] }
     respond_with({ job_listings: @listings, user_id: current_user.id })
   end

@@ -1,3 +1,9 @@
+.pull-right
+  - if @box.eql?('trash')
+    - if user_signed_in?
+      = link_to 'Un-trash', untrash_user_conversation_path(id: conversation.id, user_id: current_user.id), method: :put, class: 'btn btn-success'
+    - elsif company_signed_in?
+      = link_to 'Un-trash', untrash_company_conversation_path(id: conversation.id, company_id: current_company.id), method: :put, class: 'btn btn-success'
 .pull-left
   %h4= t("message.participants")
   - company = nil

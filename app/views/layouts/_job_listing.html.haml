@@ -8,7 +8,10 @@
         = link_to 'Find Candidates', search_users_company_job_listing_path(id: job_listing.id, company_id: company.id), method: :get, class: 'btn btn-success'
     .pull-right
       - if user_signed_in?
-        = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'
+        - if conversation = current_user.already_has_applied(job_listing.id)
+          = link_to 'Already Applied - View Conversation', user_conversation_path(user_id: current_user.id, id: conversation.id, box: :sentbox), class: 'btn btn-info'
+        - else
+          = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'
     %div{class: "#{job_listing.active ? 'active' : 'deactivated'}"}
       .lead.media-heading= job_listing_title(job_listing)
       %blockquote
