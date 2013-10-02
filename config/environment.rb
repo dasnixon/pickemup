@@ -17,5 +17,5 @@ ActionMailer::Base.smtp_settings = {
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.default_url_options[:host] = "localhost:8080"
 
-ENV["PICKEMUP_API_BASE_URL"] = Rails.env == "production" ? "http://api.pickemup.me/" : "http://127.0.0.1:9292/"
+ENV["PICKEMUP_API_BASE_URL"] = Rails.env.production? ? "http://pickemup-api.herokuapp.com" : "http://127.0.0.1:9292/"
 
