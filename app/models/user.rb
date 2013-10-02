@@ -114,7 +114,7 @@ class User < ActiveRecord::Base
       preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => self.preference.score(job_listing.id)['score'])
       user_attrs.merge(preference_attrs.merge({job_listing_name: job_listing.job_title, job_listing_id: job_listing.id}))
     else
-      complete_listings = JobListing.all.inject({}) do |matched_users, job|
+      complete_listings = company.job_listings.inject({}) do |matched_users, job|
         next matched_users if company.already_has_applied?(job.id) || matched_users.length == 10
         matched_users["#{job.job_title} & #{job.id}"] ||= []
         unless matched_users["#{job.job_title} & #{job.id}"].any? { |user| user['id'] == self.id }
