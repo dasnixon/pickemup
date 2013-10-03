@@ -39,7 +39,8 @@ class UsersController < ApplicationController
   end
 
   def listings
-    @job_listings = @user.mailbox.sentbox.collect do |conv|
+    @job_listings = @user.mailbox.conversations.collect do |conv|
+      next if conv.is_completely_trashed?(current_user)
       listing = JobListing.find(conv.job_listing_id)
       company = listing.company
       OpenStruct.new(listing: listing, company: company, conversation: conv)
