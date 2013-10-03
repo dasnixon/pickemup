@@ -4,9 +4,9 @@ require 'rails/all'
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
-  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  #Bundler.require(*Rails.groups(:assets => %w(development test)))
   # If you want your assets lazily compiled in production, use this line
-  # Bundler.require(:default, :assets, Rails.env)
+  Bundler.require(:default, :assets, Rails.env)
 end
 
 ActionView::Base.field_error_proc = Proc.new do |html_tag, instance|
@@ -73,7 +73,7 @@ module Pickemup
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif) #for bootstrap-sass
-    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf|png|jpg|jpeg|gif)$/
+    config.assets.paths << File.join(Rails.root, 'app', 'assets', 'templates')
   end
 end
