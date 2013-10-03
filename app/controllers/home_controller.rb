@@ -4,7 +4,7 @@ class HomeController < ApplicationController
       @matchings = JobListing.all.map { |listing| listing.search_attributes(current_user.preference.id, current_user) }.compact
       @matchings.sort! { |a, b| a['score'] <=> b['score'] }
     elsif company_signed_in?
-      @matchings = User.all.map { |user| user.search_attributes(current_company) }.compact
+      @matchings = current_company.match_users_per_listing
     else
       @company = Company.new
     end

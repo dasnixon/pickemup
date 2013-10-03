@@ -16,7 +16,7 @@
             = link_to 'View Listing', company_job_listing_path(company_id: matching['company_id'], id: matching['id']), class: 'btn btn-info'
             = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: matching['company_id'], job_listing_id: matching['id']), class: 'btn btn-success'
           .clearfix
-          %dl.dl-horizontal
+          %dl.dl-horizontal{style: 'width: 400px;'}
             %dt Locations
             %dd= matching['locations'].join(', ')
             %dt Salary
@@ -24,14 +24,14 @@
             %dt Languages
             %dd= truncate_html(matching['acceptable_languages'].join(', '), length: 30, omission: '...and more')
         .media-body
-          %h4.media-heading
-            .label.label-success{style: 'font-size: 20px;'} #{matching['score']}% Match
-            = link_to matching['name'], company_path(id: matching['company_id'])
-            %i.icon-hand-right.icon-large
-              = link_to "#{matching['job_title']}", company_job_listing_path(company_id: matching['company_id'], id: matching['id'])
+          %h6.media-heading
+            %strong #{matching['score'] || "Unavailable"}% Match
+            %strong= link_to matching['name'], company_path(id: matching['company_id'])
+            #{"-"}
+            %strong= link_to "#{matching['job_title']}", company_job_listing_path(company_id: matching['company_id'], id: matching['id'])
           %div
             %p
-              = truncate_html(matching['job_description'], length: 150, omission: "...#{link_to 'read more', company_job_listing_path(company_id: matching['company_id'], id: matching['id'])}")
+              = truncate_html(matching['job_description'], length: 400, omission: "...#{link_to 'read more.', company_job_listing_path(company_id: matching['company_id'], id: matching['id'])}")
       %hr
   - else
     %p

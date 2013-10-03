@@ -24,10 +24,3 @@
 //= require ckeditor-jquery
 //= require_tree '../templates/'
 //= require_tree .
-
-$.ajaxSetup({
-  beforeSend: function(xhr) {
-    return xhr.setRequestHeader("Accept", "application/json");
-  },
-  cache: false
-});

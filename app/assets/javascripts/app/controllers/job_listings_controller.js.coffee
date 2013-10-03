@@ -42,8 +42,9 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       job_listing_id: $stateParams['job_listing_id'],
       company_id: $stateParams['company_id'],
       action: 'search_users'
+
     , (response) ->
-      $scope.users = response.users
+      $scope.matches = response.matches
       $scope.job_listing_id = response.job_listing_id
       $scope.company_id = response.company_id
 

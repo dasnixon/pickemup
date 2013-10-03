@@ -8,36 +8,36 @@
       .section_header
         %h3 Your Matches
       - if @matchings.present?
-        - @matchings.each do |overall_matches|
-          - overall_matches.each do |job_listing_info, matches|
-            - info = job_listing_info.split('&').each(&:strip!)
-            - job_listing_name = info.first
-            - job_listing_id = info.last
-            .media-body
-              %h3.media-heading= job_listing_name
-            - matches.each do |match|
-              .media
-                = link_to image_tag(match['profile_image'], style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded'), resume_user_path(id: match['id']), class: 'pull-left'
+        - @matchings.each do |job_listing_info, matches|
+          - info = job_listing_info.split('___')
+          - job_listing_name = info.first
+          - job_listing_id = info.last
+          .media-body
+            %h3.media-heading= job_listing_name
+          - matches.each do |match|
+            .media
+              = link_to image_tag(match['profile_image'], style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded'), resume_user_path(id: match['id']), class: 'pull-left'
+              .pull-right
                 .pull-right
-                  .pull-right
-                    = link_to 'View Resume', resume_user_path(id: match['id']), class: 'btn btn-info'
-                    = link_to 'Send Message', new_company_message_path(company_id: current_company.id, receiver: match['id'], job_listing_id: job_listing_id), class: 'btn btn-success'
-                  .clearfix
-                  %dl.dl-horizontal
-                    %dt Preferred Locations
-                    %dd= match['locations'].join(', ')
-                    %dt Salary
-                    %dd= "#{number_to_currency(match['expected_salary'])}"
-                    %dt Languages
-                    %dd= truncate_html(match['skills'].join(', '), length: 30, omission: '...and more')
-                .media-body
-                  %h4.media-heading
-                    .label.label-success{style: 'font-size: 20px;'} #{match['score']}% Match
-                    = "#{match['name']}"
-                  %div
-                    %p
-                      = truncate_html(match['description'].try(:html_safe), length: 250, omission: "...#{link_to 'read more', resume_user_path(id: match['id'])}")
-            %hr
+                  = link_to 'View Resume', resume_user_path(id: match['id']), class: 'btn btn-info'
+                  = link_to 'Send Message', new_company_message_path(company_id: current_company.id, receiver: match['id'], job_listing_id: job_listing_id), class: 'btn btn-success'
+                .clearfix
+                %dl.dl-horizontal{style: 'width: 400px;'}
+                  %dt Preferred Locations
+                  %dd= match['locations'].join(', ')
+                  %dt Salary
+                  %dd= "#{number_to_currency(match['expected_salary'])}"
+                  %dt Languages
+                  %dd= match['skills'].join(', ')
+              .media-body
+                %h4.media-heading
+                  #{match['score'] || 'Unavailable'}% Match
+                  #{"-"}
+                  = "#{match['name']}"
+                %div
+                  %p
+                    = truncate_html(match['description'].try(:html_safe), length: 250, omission: "...#{link_to 'read more', resume_user_path(id: match['id'])}")
+          %hr
       - else
         - if current_company.fully_activated?
           %p

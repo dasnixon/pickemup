@@ -140,12 +140,28 @@ class Company < ActiveRecord::Base
     attrs.merge!(company_id: attrs.delete("id"))
   end
 
-  def already_has_applied(job_listing_id)
+  def conversation_for_job_listing(job_listing_id)
     self.mailbox.conversations.find_by(job_listing_id: job_listing_id)
   end
 
-  def already_has_applied?(job_listing_id)
-    already_has_applied(job_listing_id).present?
+  def already_has_conversation_over?(job_listing_id, user)
+    conversation = conversation_for_job_listing(job_listing_id) and
+      conversation.is_participant?(user)
+  end
+
+  def match_users_per_listing
+    self.job_listings.inject({}) do |matches, job_listing|
+      matches["#{job_listing.job_title}___#{job_listing.id}"] ||= []
+      User.all.find_in_batches do |batched_users|
+        batched_users.each do |user|
+          next matches if matches["#{job_listing.job_title}___#{job_listing.id}"].length >= 25 or self.already_has_conversation_over?(job_listing.id, user)
+          user_attrs = user.attributes.keep_if { |k,v| k =~ /^id$|name|description|location/ }.merge('profile_image' => user.profile_image.url(:medium))
+          preference_attrs = user.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => user.preference.score(job_listing.id)['score'])
+          matches["#{job_listing.job_title}___#{job_listing.id}"] << user_attrs.merge(preference_attrs)
+        end
+      end
+      matches
+    end
   end
 
   private

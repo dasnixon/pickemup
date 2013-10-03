@@ -87,6 +87,19 @@ class JobListing < ActiveRecord::Base
     score ? JSON(score) : {}
   end
 
+  def match_users
+    matches, company = [], self.company
+    User.all.find_in_batches do |batched_users|
+      batched_users.each do |user|
+        next if matches.length >= 25 or company.already_has_conversation_over?(self.id, user)
+        user_attrs = user.attributes.keep_if { |k,v| k =~ /^id$|name|description|location/ }.merge('profile_image' => user.profile_image.url(:medium))
+        preference_attrs = user.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => user.preference.score(self.id)['score'])
+        matches << user_attrs.merge(preference_attrs)
+      end
+    end
+    matches
+  end
+
   def search_attributes(preference_id, user)
     return nil if user.already_has_applied?(self.id)
     listing_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|job_title|languages|company_id|salary|description|locations/ }.merge('score' => self.score(preference_id)['score'])

@@ -1,35 +1,36 @@
 <div class="control-group">
   <div class="controls">
     <table class="table">
-      <tr class="user" ng-repeat="user in users">
+      <tr class="user" ng-repeat="user in matches">
         <td class="user">
           <div class='media'>
-            <img class='pull-left img-rounded' style='max-width: 120px; max-height: 120px;' src='{{user.profile_image}}'>
+            <img class='pull-left img-rounded' style='max-width: 120px; max-height: 120px;' ng-src='{{user.profile_image}}'>
             <div class='pull-right'>
               <div class='pull-right'>
                 <button class="btn btn-info" onclick="location.href='/users/{{user.id}}/resume'">
                   View Resume
                 </button>
-                <button class="btn btn-success" onclick="location.href='/companies/{{company_id}}/messages/new?job_listing_id={{job_listing_id}}&receiver={{user.id}}'">
+                <button class="btn btn-success" onclick="location.href='/companies/{{company.id}}/messages/new?job_listing_id={{job_listing.id}}&receiver={{user.id}}'">
                   Send Message
                 </button>
               </div>
               <div class='clearfix'></div>
-              <dl class='dl-horizontal'>
+              <dl class='dl-horizontal' style="width: 500px;">
                 <dt>Location</dt>
                 <dd>{{user.location}}</dd>
                 <dt>Salary</dt>
-                <dd>{{user.expected_salary}}</dd>
+                <dd>${{user.expected_salary}}</dd>
                 <dt>Languages</dt>
                 <dd>{{user.skills.join(', ')}}</dd>
               </dl>
             </div>
             <div class='media-body'>
               <h4 class='media-heading'>
-                <div class='label label-success'; style='font-size: 20px;'>{{user.score}}% Match</div>
+                {{user.score}}% Match
+                -
                 {{user.name}}
               </h4>
-              <div>{{user.description}}</div>
+              <div ng-bind-html-unsafe="user.description|truncate:300"></div>
             </div>
           </div>
         </td>

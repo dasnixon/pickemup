@@ -107,28 +107,6 @@ class User < ActiveRecord::Base
     self.save!
   end
 
-  def search_attributes(company, job_listing=nil)
-    if job_listing
-      return nil if company.already_has_applied?(job_listing.id)
-      user_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|name|description|location/ }.merge('profile_image' => self.profile_image.url(:medium))
-      preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => self.preference.score(job_listing.id)['score'])
-      user_attrs.merge(preference_attrs.merge({job_listing_name: job_listing.job_title, job_listing_id: job_listing.id}))
-    else
-      complete_listings = company.job_listings.inject({}) do |matched_users, job|
-        next matched_users if company.already_has_applied?(job.id) || matched_users.length == 10
-        matched_users["#{job.job_title} & #{job.id}"] ||= []
-        unless matched_users["#{job.job_title} & #{job.id}"].any? { |user| user['id'] == self.id }
-          user_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|name|description|location/ }.merge('profile_image' => self.profile_image.url(:medium))
-          preference_attrs = self.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => self.preference.score(job.id)['score'])
-          matched_users["#{job.job_title} & #{job.id}"] << user_attrs.merge(preference_attrs.merge({job_listing_name: job.job_title, job_listing_id: job.id}))
-        end
-        matched_users
-      end
-      complete_listings.each { |job_info, listing| listing.sort! { |a, b| a['score'] <=> b['score'] } }
-      complete_listings
-    end
-  end
-
   def get_user_skills
     linkedin_skills = self.linkedin_uid ? self.linkedin.profile.skills : []
     github_skills = self.github_uid ? self.github_account.skills : []
