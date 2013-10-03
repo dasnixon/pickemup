@@ -22,7 +22,7 @@
 //= require flatui-radio
 //= require app/main
 //= require ckeditor-jquery
-//= require_tree ./templates/
+//= require_tree '../templates/'
 //= require_tree .
 
 $.ajaxSetup({
