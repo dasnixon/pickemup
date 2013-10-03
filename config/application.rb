@@ -73,7 +73,6 @@ module Pickemup
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile << /\.(?:svg|eot|woff|ttf|png|jpg|jpeg|gif)$/
-    config.assets.paths << File.join(Rails.root, 'app', 'assets', 'templates')
+    config.assets.precompile << /\.(?:svg|eot|woff|ttf|png|jpg|jpeg|gif|erb)$/
   end
 end
