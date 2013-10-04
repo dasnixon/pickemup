@@ -3,7 +3,6 @@
     Your account is currently deactivated. To start getting matched with companies again activate your account by clicking
     #{link_to 'here.', toggle_activation_user_path(id: current_user.id)}
 - else
-  %hr
   - if @matchings.present?
     - @matchings.each do |matching|
       .well
@@ -11,7 +10,7 @@
           - image = matching['logo'] || 'default_logo.png'
           = link_to image_tag(image, style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded media-object'), company_path(id: matching['company_id']), class: 'pull-left', style: 'clear: both; margin-bottom: 5px;'
           .pull-left{style: 'clear: both;'}
-            .box.box-item.all.illustration.state-5.hexagon.isotope-item
+            .box.box-item.isotope-item
               .box-link
                 %span.box-number.box-number-item
                   #{matching['score'] || 0} %

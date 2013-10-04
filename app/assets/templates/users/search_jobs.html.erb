@@ -1,30 +1,46 @@
-<div class='media' ng-repeat="listing in job_listings">
-  <img class='pull-left media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{listing.logo}}">
-  <div class='pull-right'>
-    <div class='pull-right'>
-      <button class="btn btn-info" onclick="location.href='/companies/{{listing.company_id}}'">
-        Learn More About {{listing.name}}
-      </button>
-      <button class="btn btn-success" onclick="location.href='/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}'">
-        Apply
-      </button>
+<div class='well' ng-repeat="listing in job_listings">
+  <div class='media'>
+    <div class='pull-left' style='clear: both; margin-top: 5px;'>
+      <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{listing.logo || 'default_logo.png'}}">
     </div>
-    <div class="clearfix"></div>
-    <dl class='dl-horizontal' style="width: 500px;">
-      <dt>Locations</dt>
-      <dd>{{listing.locations.join(', ')}}</dd>
-      <dt>Salary</dt>
-      <dd>${{listing.salary_range_low}} - ${{listing.salary_range_high}}</dd>
-      <dt>Languages</dt>
-      <dd>{{listing.acceptable_languages.join(', ')}}</dd>
-    </dl>
-  </div>
-  <div class='media-body'>
-    <h4 class='media-heading'>
-      <div class='label label-success'; style='font-size: 20px;'>{{listing.score}}% Match</div>
-      {{listing.name}} - {{listing.job_title}}
-    </h4>
-    <p ng-bind-html-unsafe="listing.job_description|truncate:300"></p>
+    <div class='pull-left' style='clear: both; margin-top: 5px;'>
+      <div class='box box-item isotope-item'>
+        <div class='box-link'>
+          <span class='box-number box-number-item'>
+            {{listing.score || '0'}} %
+          </span>
+          <br />
+          <span class='box-number box-number-item'>
+            MATCH
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class='media-body total-body-info'>
+      <div class='pull-right right-sidebar-info' style='height: 240px;'>
+        <div class='pull-right'>
+          <button class="btn btn-info" onclick="location.href='/companies/{{listing.company_id}}'">
+            Learn More About {{listing.name}}
+          </button>
+          <button class="btn btn-success" onclick="location.href='/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}'">
+            Apply
+          </button>
+        </div>
+        <div class="clearfix"></div>
+        <dl class='dl-horizontal' style="width: 500px;">
+          <dt>Locations</dt>
+          <dd>{{listing.locations.join(', ')}}</dd>
+          <dt>Salary</dt>
+          <dd>${{listing.salary_range_low}} - ${{listing.salary_range_high}}</dd>
+          <dt>Languages</dt>
+          <dd>{{listing.acceptable_languages.join(', ')}}</dd>
+        </dl>
+      </div>
+      <h4 class='media-heading'>
+        <a onclick="location.href='/companies/{{listing.company_id}}'">{{listing.name}}</a> - <a onclick="location.href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}'">{{listing.job_title}}</a>
+      </h4>
+      <p ng-bind-html-unsafe="listing.job_description|truncate:300"></p>
+    </div>
   </div>
 </div>
 <hr/>
