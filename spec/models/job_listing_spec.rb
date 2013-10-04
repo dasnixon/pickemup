@@ -15,6 +15,12 @@ describe JobListing do
         it { should have(1).errors_on(:job_description) }
       end
     end
+    context 'synopsis' do
+      context 'length' do
+        subject(:job_listing) { with_attrs({synopsis: 'a'*400}) }
+        it { should have(1).errors_on(:synopsis) }
+      end
+    end
     context 'salary range' do
       context 'range high presence' do
         subject(:job_listing) { with_attrs({salary_range_low: 100000, salary_range_high: nil}) }

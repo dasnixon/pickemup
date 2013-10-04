@@ -1,4 +1,4 @@
-= link_to 'See your active applications', listings_user_path(id: current_user.id), class: 'btn btn-info pull-right'
+= link_to 'See your active applications', listings_user_path(id: current_user.id), class: 'btn btn-info pull-right', style: 'margin-left: 5px;' if @matchings.present?
 - unless current_user.linkedin_uid.present?
   = link_to '/auth/linkedin', class: 'pull-right btn btn-info', style: 'margin-left: 5px;' do
     %i.icon-linkedin

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130929184209) do
+ActiveRecord::Schema.define(version: 20131004054720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(version: 20130929184209) do
     t.datetime "updated_at"
     t.uuid     "company_id"
     t.string   "locations",               default: [],    array: true
+    t.text     "synopsis"
   end
 
   add_index "job_listings", ["company_id"], name: "index_job_listings_on_company_id", using: :btree

@@ -157,19 +157,20 @@ describe UsersController do
     end
     context 'valid user' do
       let(:job_listing) { create(:job_listing) }
-      let(:sentbox) { create_list(:conversation, 3, job_listing_id: job_listing.id) }
+      let(:convs) { create_list(:conversation, 3, job_listing_id: job_listing.id) }
       let(:inbox) { create_list(:conversation, 3, job_listing_id: job_listing.id) }
       let(:company) { job_listing.company }
       before :each do
         User.stub(:find).and_return(user)
         JobListing.stub(:find).and_return(job_listing)
-        user.stub_chain(:mailbox, :sentbox).and_return(sentbox)
+        user.stub_chain(:mailbox, :conversations).and_return(convs)
         user.stub_chain(:mailbox, :inbox).and_return(inbox)
+        Conversation.any_instance.stub(:is_completely_trashed?).and_return(false)
         get(:listings, {id: user.id})
       end
       it { should respond_with(:success) }
-      it 'sets job_listings from users sentbox' do
-        assigns(:job_listings).should eq sentbox.collect { |s| OpenStruct.new(listing: job_listing, company: company, conversation: s) }
+      it 'sets job_listings from users mailbox conversations' do
+        assigns(:job_listings).should eq convs.collect { |s| OpenStruct.new(listing: job_listing, company: company, conversation: s) }
       end
       it 'sets user object' do
         assigns(:user).should eq user

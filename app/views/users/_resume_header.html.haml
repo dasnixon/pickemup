@@ -9,7 +9,7 @@
         %li.job-listing-header
           %strong.text-center Regarding Job Listing
         - job_listings.each do |listing|
-          %li= link_to listing.job_title, new_company_message_path(company_id: current_company.id, receiver: @user.id, job_listing_id: listing.id) unless current_company.already_has_applied?(listing.id)
+          %li= link_to listing.job_title, new_company_message_path(company_id: current_company.id, receiver: @user.id, job_listing_id: listing.id) unless current_company.already_has_conversation_over?(listing.id, @user)
 
 .section_header
   - if company_signed_in?
@@ -25,5 +25,4 @@
       .media-body
         %h3 #{@user.name}'s Resume
   - else
-    %h3 Resume
     = link_to 'Edit Profile', edit_user_path(id: current_user.id), class: 'btn btn-info pull-right'

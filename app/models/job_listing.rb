@@ -32,6 +32,7 @@
 #  updated_at              :datetime
 #  company_id              :uuid
 #  locations               :string(255)      default([])
+#  synopsis                :text
 #
 
 class JobListing < ActiveRecord::Base
@@ -47,6 +48,7 @@ class JobListing < ActiveRecord::Base
 
   validates :salary_range_high, :salary_range_low, presence: true, numericality: { only_integer: true }
   validates :job_description, presence: true
+  validates :synopsis, length: { maximum: 300 }
   validate :salary_range_check, if: Proc.new { |j| j.salary_range_low.present? and j.salary_range_high.present? }
 
   def salary_range
@@ -102,7 +104,7 @@ class JobListing < ActiveRecord::Base
 
   def search_attributes(preference_id, user)
     return nil if user.already_has_applied?(self.id)
-    listing_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|job_title|languages|company_id|salary|description|locations/ }.merge('score' => self.score(preference_id)['score'])
+    listing_attrs = self.attributes.keep_if { |k,v| k =~ /^id$|job_title|synopsis|languages|company_id|salary|description|locations/ }.merge('score' => self.score(preference_id)['score'])
     comp = self.company
     company_attrs = comp.attributes.keep_if { |k,v| k =~ /name|website|industry/ }.merge('logo' => comp.logo.url(:medium))
     company_attrs.merge(listing_attrs)

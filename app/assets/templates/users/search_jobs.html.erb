@@ -1,10 +1,10 @@
 <div class='well' ng-repeat="listing in job_listings">
   <div class='media'>
     <div class='pull-left' style='clear: both; margin-top: 5px;'>
-      <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{listing.logo || 'default_logo.png'}}">
+      <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{listing.logo || '<%= asset_path('default_logo.png') %>'}}">
     </div>
     <div class='pull-left' style='clear: both; margin-top: 5px;'>
-      <div class='box box-item isotope-item'>
+      <div class='box-score box-item isotope-item'>
         <div class='box-link'>
           <span class='box-number box-number-item'>
             {{listing.score || '0'}} %
@@ -16,8 +16,8 @@
         </div>
       </div>
     </div>
-    <div class='media-body total-body-info'>
-      <div class='pull-right right-sidebar-info' style='height: 240px;'>
+    <div class='media-body'>
+      <div class='pull-right' style="height: 200px;">
         <div class='pull-right'>
           <button class="btn btn-info" onclick="location.href='/companies/{{listing.company_id}}'">
             Learn More About {{listing.name}}
@@ -27,7 +27,7 @@
           </button>
         </div>
         <div class="clearfix"></div>
-        <dl class='dl-horizontal' style="width: 500px;">
+        <dl class='dl-horizontal' style="width: 400px;">
           <dt>Locations</dt>
           <dd>{{listing.locations.join(', ')}}</dd>
           <dt>Salary</dt>
@@ -39,8 +39,7 @@
       <h4 class='media-heading'>
         <a onclick="location.href='/companies/{{listing.company_id}}'">{{listing.name}}</a> - <a onclick="location.href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}'">{{listing.job_title}}</a>
       </h4>
-      <p ng-bind-html-unsafe="listing.job_description|truncate:300"></p>
+      <p ng-bind-html-unsafe="listing.synopsis || listing.job_description|truncate:300"></p>
     </div>
   </div>
 </div>
-<hr/>

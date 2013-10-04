@@ -10,7 +10,7 @@
           - image = matching['logo'] || 'default_logo.png'
           = link_to image_tag(image, style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded media-object'), company_path(id: matching['company_id']), class: 'pull-left', style: 'clear: both; margin-bottom: 5px;'
           .pull-left{style: 'clear: both;'}
-            .box.box-item.isotope-item
+            .box-score.box-item.isotope-item
               .box-link
                 %span.box-number.box-number-item
                   #{matching['score'] || 0} %
@@ -37,7 +37,10 @@
               %strong= link_to "#{matching['job_title']}", company_job_listing_path(company_id: matching['company_id'], id: matching['id'])
             %div
               %p
-                = truncate_html(matching['job_description'], length: 400, omission: "...#{link_to 'read more.', company_job_listing_path(company_id: matching['company_id'], id: matching['id'])}")
+                - if matching['synopsis'].present?
+                  = matching['synopsis'].html_safe
+                - else
+                  = truncate_html(matching['job_description'], length: 400, omission: "...#{link_to 'read more.', company_job_listing_path(company_id: matching['company_id'], id: matching['id'])}")
   - else
     %p
       Make sure you fill our your preferences to start getting matched with companies.

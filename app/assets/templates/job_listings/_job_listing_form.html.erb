@@ -243,8 +243,16 @@
 <div class='control-group'>
   <label class='control-label'><strong>Job Description*</strong></label>
   <div class='controls'>
-    <span class='client-error', ng-show = 'jobListingForm.job_description.$invalid'></span>
+    <span class='client-error' ng-show='jobListingForm.job_description.$invalid'></span>
     <textarea id="job_listing_job_description" ck-editor name="job_description" ng-model="data.job_description"></textarea>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong>Job Synopsis</strong></label>
+  <div class='controls'>
+    <span class='client-error' ng-show='jobListingForm.synopsis.$invalid'></span>
+    <textarea ng-maxlength="300" ng-model="data.synopsis"></textarea>
   </div>
 </div>
 

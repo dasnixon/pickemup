@@ -1,4 +1,5 @@
 jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'JobListing', ($scope, $http, $state, $stateParams, $location, JobListing) ->
+
   $scope.jobListing     = {}
   $scope.errors         = []
   $scope.success        = ''
@@ -63,6 +64,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       job_listing:
         job_title: $scope.data.job_title
         job_description: $scope.data.job_description
+        synopsis: $scope.data.synopsis
         locations: unchunk($scope.data.locations)
         position_titles: unchunk($scope.data.position_titles)
         experience_levels: unchunk($scope.data.experience_levels)
@@ -100,6 +102,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       job_listing:
         job_title: $scope.data.job_title
         job_description: $scope.data.job_description
+        synopsis: $scope.data.synopsis
         locations: unchunk($scope.data.locations)
         position_titles: unchunk($scope.data.position_titles)
         experience_levels: unchunk($scope.data.experience_levels)
