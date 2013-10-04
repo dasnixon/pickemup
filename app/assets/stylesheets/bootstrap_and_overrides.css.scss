@@ -2,6 +2,12 @@
 @import "bootstrap-responsive";
 @import 'font-awesome';
 
+.dl-horizontal > dd:after {
+  display: table;
+  content: "";
+  clear: both;
+}
+
 .bronze {
   background-color: #8c7853;
 }
@@ -12,6 +18,47 @@
 
 .silver {
   background-color: #C0C0C0;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+  -moz-transition-property: -moz-transform, opacity;
+  -ms-transition-property: -ms-transform, opacity;
+  -o-transition-property: -o-transform, opacity;
+}
+
+.isotope, .isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+  -moz-transition-duration: 0.8s;
+  -ms-transition-duration: 0.8s;
+  -o-transition-duration: 0.8s;
+  transition-duration: 0.8s;
+}
+
+.box {
+  width: 120px;
+  height: 70px;
+  float: left;
+}
+
+.box .box-link {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  width: inherit;
+  height: inherit;
+  background: #2ecc71;
+  color: #fff;
+  text-align: center;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.box-number {
+  text-align: center;
+  width: 100px;
+  height: inherit;
+  z-index: 100;
 }
 
 .deactived {

@@ -7,3 +7,6 @@ $ ->
       source: "/company_search"
     ).data("ui-autocomplete")._renderItem = (ul, item) ->
       $("<li>").append("<a href='/companies/" + item.id + "'><img src='" + item.logo + "' class='img-rounded' height='10' width='25' />&nbsp; &nbsp;" + item.name + "</a>").appendTo ul
+
+  bodyHeight = $('.total-body-info').height()
+  $('.right-sidebar-info').height(bodyHeight)
