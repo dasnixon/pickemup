@@ -8,7 +8,8 @@
     - @matchings.each do |matching|
       .well
         .media
-          = link_to image_tag(matching['logo'], style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded media-object'), company_path(id: matching['company_id']), class: 'pull-left', style: 'clear: both; margin-bottom: 5px;'
+          - image = matching['logo'] || 'default_logo.png'
+          = link_to image_tag(image, style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded media-object'), company_path(id: matching['company_id']), class: 'pull-left', style: 'clear: both; margin-bottom: 5px;'
           .pull-left{style: 'clear: both;'}
             .box.box-item.all.illustration.state-5.hexagon.isotope-item
               .box-link
