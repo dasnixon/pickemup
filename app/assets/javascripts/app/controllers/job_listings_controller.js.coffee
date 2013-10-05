@@ -57,6 +57,9 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.dirty_message = 'You have made changes, make sure to click the \'Save\' button below.'
   ), true
 
+  $scope.scoreClass = (score) ->
+    scoreClass(score)
+
   $scope.create = ->
     JobListing.createListing.create
       company_id: $stateParams['company_id'],

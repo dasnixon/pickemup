@@ -26,6 +26,9 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
       $scope.job_listings = response.job_listings
       $scope.user_id = response.user_id
 
+  $scope.scoreClass = (score) ->
+    scoreClass(score)
+
   $scope.update = ->
     User.update
       id: $stateParams['id'],

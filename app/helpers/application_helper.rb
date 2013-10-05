@@ -19,4 +19,17 @@ module ApplicationHelper
     end
     flash_messages.join("\n").html_safe
   end
+
+  def score_class(score)
+    case score.to_i
+    when 0..24
+      'poor-score-color'
+    when 25..49
+      'low-score-color'
+    when 50..74
+      'medium-score-color'
+    else
+      'high-score-color'
+    end
+  end
 end

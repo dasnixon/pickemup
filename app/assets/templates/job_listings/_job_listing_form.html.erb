@@ -1,5 +1,5 @@
 <div class='control-group'>
-  <label class='control-label'><strong>Job Title*</strong></label>
+  <label class='control-label'><strong>Title</strong></label>
   <div class='controls'>
     <input id="job_listing_job_title" name="job_title" ng-model="data.job_title" type="text" required \> <span class='client-error', ng-show = 'jobListingForm.job_title.$invalid'></span>
   </div>
@@ -19,7 +19,7 @@
 </div>
 
 <div class='control-group'>
-  <label class='control-label'><strong>Approx. Hours a Week*</strong></label>
+  <label class='control-label'><strong>Approx. Hours a Week</strong></label>
   <div class='controls'>
     <div class="input-append">
       <input id="job_listing_estimated_work_hours" name="estimate_work_hours" ng-model="data.estimated_work_hours" required="required" type="text"></input>
@@ -241,7 +241,7 @@
 </div>
 
 <div class='control-group'>
-  <label class='control-label'><strong>Job Description*</strong></label>
+  <label class='control-label'><strong>Description</strong></label>
   <div class='controls'>
     <span class='client-error' ng-show='jobListingForm.job_description.$invalid'></span>
     <textarea id="job_listing_job_description" ck-editor name="job_description" ng-model="data.job_description"></textarea>
@@ -249,10 +249,10 @@
 </div>
 
 <div class='control-group'>
-  <label class='control-label'><strong>Job Synopsis</strong></label>
+  <label class='control-label'><strong>Synopsis</strong></label>
   <div class='controls'>
     <span class='client-error' ng-show='jobListingForm.synopsis.$invalid'></span>
-    <textarea ng-maxlength="300" ng-model="data.synopsis"></textarea>
+    <textarea class='field span12' ng-maxlength='300' maxlength='300' ng-model="data.synopsis"></textarea>
   </div>
 </div>
 

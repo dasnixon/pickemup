@@ -8,6 +8,8 @@
   clear: both;
 }
 
+.nav, .pagination, .carousel a { cursor: pointer; }
+
 .bronze {
   background-color: #8c7853;
 }
@@ -39,15 +41,14 @@
   width: 120px;
   height: 70px;
   float: left;
-}
-
-.box-score .box-link {
   -webkit-border-radius: 6px;
   -moz-border-radius: 6px;
   border-radius: 6px;
+}
+
+.box-score .box-link {
   width: inherit;
   height: inherit;
-  background: #2ecc71;
   color: #fff;
   text-align: center;
   font-size: 25px;
@@ -59,6 +60,22 @@
   width: 100px;
   height: inherit;
   z-index: 100;
+}
+
+.poor-score-color {
+  background: #C0392B;
+}
+
+.low-score-color {
+  background: #F1C40F;
+}
+
+.medium-score-color {
+  background: #3498DB;
+}
+
+.high-score-color {
+  background: #2ecc71;
 }
 
 .deactived {

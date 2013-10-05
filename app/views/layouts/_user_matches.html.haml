@@ -10,7 +10,7 @@
           - image = matching['logo'] || 'default_logo.png'
           = link_to image_tag(image, style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded media-object'), company_path(id: matching['company_id']), class: 'pull-left', style: 'clear: both; margin-bottom: 5px;'
           .pull-left{style: 'clear: both;'}
-            .box-score.box-item.isotope-item
+            .box-score.box-item.isotope-item{class: score_class(matching['score'])}
               .box-link
                 %span.box-number.box-number-item
                   #{matching['score'] || 0} %

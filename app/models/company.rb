@@ -57,9 +57,9 @@ class Company < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
   validates :size_definition, inclusion: { in: PreferenceConstants::COMPANY_TYPES }, allow_blank: true
 
-  has_one :subscription
-  has_many :job_listings
-  has_many :tech_stacks
+  has_one :subscription, dependent: :destroy
+  has_many :job_listings, dependent: :destroy
+  has_many :tech_stacks, dependent: :destroy
 
   def active_listings
     self.job_listings.select { |listing| listing.active }

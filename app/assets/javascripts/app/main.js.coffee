@@ -31,3 +31,15 @@
   else
     $location.path(url)
     $scope.$apply()
+
+@scoreClass = (score) ->
+  score = if score? then parseInt(score) else 0
+
+  if 0 <= score <= 24
+    'poor-score-color'
+  else if 25 <= score <= 49
+    'low-score-color'
+  else if 50 <= score <= 74
+    'medium-score-color'
+  else
+    'high-score-color'

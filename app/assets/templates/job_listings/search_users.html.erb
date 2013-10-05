@@ -4,7 +4,7 @@
       <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{user.profile_image || '<%= asset_path('default_logo.png') %>'}}">
     </div>
     <div class='pull-left' style='clear: both; margin-top: 5px;'>
-      <div class='box-score box-item isotope-item'>
+      <div class='box-score box-item isotope-item' ng-class="scoreClass(user.score)">
         <div class='box-link'>
           <span class='box-number box-number-item'>
             {{user.score || '0'}} %

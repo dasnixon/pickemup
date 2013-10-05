@@ -18,7 +18,7 @@
                 - image = match['profile_image'] || 'default_logo.png'
                 = link_to image_tag(image, style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded media-object'), resume_user_path(id: match['id']), class: 'pull-left', style: 'clear: both; margin-bottom: 5px;'
                 .pull-left{style: 'clear: both;'}
-                  .box-score.box-item.isotope-item
+                  .box-score.box-item.isotope-item{class: score_class(match['score'])}
                     .box-link
                       %span.box-number.box-number-item
                         #{match['score'] || 0} %
