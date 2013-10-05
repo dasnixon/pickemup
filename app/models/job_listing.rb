@@ -95,10 +95,11 @@ class JobListing < ActiveRecord::Base
       batched_users.each do |user|
         next if matches.length >= 25 or company.already_has_conversation_over?(self.id, user)
         user_attrs = user.attributes.keep_if { |k,v| k =~ /^id$|name|description|location/ }.merge('profile_image' => user.profile_image.url(:medium))
-        preference_attrs = user.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => user.preference.score(self.id)['score'])
+        preference_attrs = user.preference.attributes.keep_if { |k,v| k =~ /salary|skills|locations|expected_salary/ }.merge('score' => user.preference.score(self.id)['score'].to_i)
         matches << user_attrs.merge(preference_attrs)
       end
     end
+    matches.sort_by! { |match| match['score'] }
     matches
   end
 
