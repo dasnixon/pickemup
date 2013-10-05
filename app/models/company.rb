@@ -160,7 +160,7 @@ class Company < ActiveRecord::Base
           matches["#{job_listing.job_title}___#{job_listing.id}"] << user_attrs.merge(preference_attrs)
         end
       end
-      matches["#{job_listing.job_title}___#{job_listing.id}"].sort_by! { |match| match['score'] }
+      matches["#{job_listing.job_title}___#{job_listing.id}"].sort_by { |match| match['score'] }.reverse!
       matches
     end
   end

@@ -99,7 +99,7 @@ class JobListing < ActiveRecord::Base
         matches << user_attrs.merge(preference_attrs)
       end
     end
-    matches.sort_by! { |match| match['score'] }
+    matches.sort_by { |match| match['score'] }.reverse!
     matches
   end
 
