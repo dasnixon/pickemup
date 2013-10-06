@@ -43,5 +43,6 @@
                   = truncate_html(matching['job_description'], length: 400, omission: "...#{link_to 'read more.', company_job_listing_path(company_id: matching['company_id'], id: matching['id'])}")
   - else
     %p
-      Make sure you fill our your preferences to start getting matched with companies.
-      You can also start looking around by searching for companies that you may want to apply for.
+      Make sure you fill our your preferences to start getting matched with companies. You won't be able to start getting
+      matches until you have filled out more than 60% of your preference. You can also start looking around by searching
+      for companies that you may want to apply for.

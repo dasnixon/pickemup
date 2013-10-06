@@ -12,7 +12,8 @@
     = favicon_link_tag
     = yield(:head)
   %body.pull_top
-    = render 'layouts/navigation'
-    = render 'layouts/messages'
-    = yield
+    .wrapper
+      = render 'layouts/navigation'
+      = render 'layouts/messages'
+      = yield
     = render 'layouts/footer'

@@ -1,8 +1,7 @@
 class HomeController < ApplicationController
   def index
     if user_signed_in?
-      @matchings = JobListing.all.map { |listing| listing.search_attributes(current_user.preference.id, current_user) }.compact
-      @matchings.sort_by { |matches| matches['score'] }.reverse!
+      @matchings = current_user.match_listings_for_user
     elsif company_signed_in?
       @matchings = current_company.match_users_per_listing
     else

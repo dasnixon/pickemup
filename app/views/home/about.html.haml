@@ -1,7 +1,5 @@
 #aboutus
   .container
-    .section_header
-      %h3 About Pickemup
     .row
       .span6.intro
         %h6 Working to get companies and developers easily and quickly connected by what they prefer in an employee or employer.
@@ -25,21 +23,13 @@
           immediately be able to find, search, and narrow down the perfect company that you've always been looking for. Also, we strive
           to make sure you speak directly to those that matter. No longer do you have to take 10 meaningless phone calls, everything there is
           to know about your background is cleanly organized and within a click of a button.
-      .span6.flexslider
-        %ul.slides
-          %li
-            = image_tag('vim_recruit.png')
-          %li
-            = image_tag('about_slide1.jpg')
-          %li
-            = image_tag('about_slide1.jpg')
+      .span6
+        = image_tag('vim_recruit.png')
 
 = render 'layouts/team'
 
 #process
   .container
-    .section_header
-      %h3 Our Philosophy
     .row.services_circles
       .span4.description
         .text.active

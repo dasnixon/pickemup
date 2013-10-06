@@ -121,6 +121,10 @@ class User < ActiveRecord::Base
     already_has_applied(job_listing_id).present?
   end
 
+  def match_listings_for_user
+    JobListing.all.map { |listing| listing.search_attributes(self) }.compact.sort_by { |matches| matches['score'] }.reverse
+  end
+
   private
 
   #automatically generate a defaulted preference for a user upon creation
