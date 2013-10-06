@@ -1,7 +1,8 @@
 #housing
   .container
     = render 'navigation'
-    .section_header
-      %h3 Conversations - #{@box.capitalize}
+    - if @conversations.present?
       = render @conversations
       = will_paginate @conversations, renderer: BootstrapPagination::Rails
+    - else
+      %p You current have no conversations at this moment

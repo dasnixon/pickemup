@@ -1,7 +1,5 @@
 #housing
   .container
-    .section_header
-      %h3 Your Active Job Applications
     - if @job_listings.present?
       - @job_listings.each do |job_listing|
         = render partial: 'job_listing_info', locals: {job_listing: job_listing}

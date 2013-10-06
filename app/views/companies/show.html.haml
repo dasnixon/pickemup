@@ -2,6 +2,8 @@
   .container-fluid
     .row-fluid
       .span3.pull-right
+        - if user_signed_in?
+          = link_to 'View Job Listings', company_job_listings_path(company_id: @company.id), class: 'pull-right btn btn-info', style: 'margin-right: 25px;'
         - if current_company == @company
           = link_to 'Edit Profile', edit_company_path(id: @company.id), class: 'btn btn-info', style: 'margin-left: 15px;'
           - if @company.subscription
@@ -13,8 +15,3 @@
           = render 'sidebar'
       .span9
         = render 'info'
-        %hr
-        .span1
-        .span9
-          %h4 Job Listings
-          = render 'layouts/job_listings'

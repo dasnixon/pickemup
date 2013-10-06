@@ -252,7 +252,13 @@
   <label class='control-label'><strong>Synopsis</strong></label>
   <div class='controls'>
     <span class='client-error' ng-show='jobListingForm.synopsis.$invalid'></span>
-    <textarea class='field span12' ng-maxlength='300' maxlength='300' ng-model="data.synopsis"></textarea>
+    <span class="help-block alert alert-info">
+      The synopsis is used as the short description on the list of matched job listings for a user. It
+      should be less than 300 characters and make sure it will engage a user's interest! Otherwise,
+      your description will be used, which may not be as clean and engaging.
+    </span>
+    <br />
+    <textarea class='field span12' ng-maxlength='300' rows="3" maxlength='300' ng-model="data.synopsis"></textarea>
   </div>
 </div>
 

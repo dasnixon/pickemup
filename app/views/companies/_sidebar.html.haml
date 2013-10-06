@@ -2,4 +2,4 @@
   %ul.nav.nav-list
     %li.nav-header Job Listings
     - @job_listings.each do |listing|
-      %li= link_to listing.job_title, "##{listing.id}"
+      %li= link_to listing.job_title, company_job_listing_path(company_id: @company.id, id: listing.id)
