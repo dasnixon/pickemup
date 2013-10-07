@@ -31,7 +31,7 @@
                       = link_to 'View Resume', resume_user_path(id: match['id']), class: 'btn btn-info'
                       = link_to 'Send Message', new_company_message_path(company_id: current_company.id, receiver: match['id'], job_listing_id: job_listing_id), class: 'btn btn-success'
                     .clearfix
-                    %dl.dl-horizontal{style: 'width: 400px;'}
+                    %dl.dl-horizontal.side-info
                       %dt Preferred Locations
                       %dd= match['locations'].join(', ')
                       %dt Salary
@@ -39,7 +39,9 @@
                       %dt Languages
                       %dd= match['skills'].join(', ')
                   %h6.media-heading
-                    = "#{match['name']}"
+                    #{match['name']}
+                    %small
+                      #{match['valid_us_worker'] ? "U.S. Citizen or Green Card holder" : "Not a U.S. Citizen or Green Card holder"}
                   %div
                     %p
                       = truncate_html(match['description'].try(:html_safe), length: 400, omission: "...#{link_to 'read more', resume_user_path(id: match['id'])}")

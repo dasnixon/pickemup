@@ -87,7 +87,7 @@ preference_app.controller("PreferencesController", ['$scope', '$location', '$sta
         bonuses:                @preference.bonuses
         retirement:             @preference.retirement
         fulltime:               @preference.fulltime
-        us_citizen:             @preference.us_citizen
+        valid_us_worker:        @preference.valid_us_worker
         open_source:            @preference.open_source
         expected_salary:        @preference.expected_salary.replace(/,/g, "") if $scope.preference.expected_salary
         remote:                 @preference.remote

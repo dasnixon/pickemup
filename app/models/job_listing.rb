@@ -44,7 +44,7 @@ class JobListing < ActiveRecord::Base
   LISTINGS_ATTR_REGEX = /^id$|job_title|synopsis|languages|company_id|salary|description|locations/
   COMPANY_ATTR_REGEX = /name|website|industry/
   USER_ATTR_REGEX = /^id$|name|description|location/
-  PREFERENCE_ATTR_REGEX = /salary|skills|locations|expected_salary/
+  PREFERENCE_ATTR_REGEX = /salary|skills|locations|expected_salary|valid_us_worker/
 
   belongs_to :company
   has_many :conversations

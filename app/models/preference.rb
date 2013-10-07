@@ -12,7 +12,7 @@
 #  bonuses                :boolean          default(FALSE)
 #  retirement             :boolean          default(FALSE)
 #  fulltime               :boolean          default(TRUE)
-#  us_citizen             :boolean          default(FALSE)
+#  valid_us_worker        :boolean          default(FALSE)
 #  open_source            :boolean          default(FALSE)
 #  remote                 :boolean          default(FALSE)
 #  expected_salary        :integer          default(0)
@@ -43,7 +43,7 @@ class Preference < ActiveRecord::Base
 
   HASHABLE_PARAMS = %w(locations industries position_titles company_types perks
     practices experience_levels company_size skills)
-  BENEFIT_ATTRS = %w(vacation_days healthcare vision dental life_insurance us_citizen equity
+  BENEFIT_ATTRS = %w(vacation_days healthcare vision dental life_insurance valid_us_worker equity
     bonuses retirement fulltime open_source)
   COMPANY_SIZE_RANGES = {'1-10 Employees' => 1..10, '11-50 Employees' => 11..50, '51-200 Employees' => 51..200, '201-500 Employees' => 201..500, '501+ Employees' => 501..Float::INFINITY}
 

@@ -23,7 +23,7 @@
                 = link_to 'View Listing', company_job_listing_path(company_id: matching['company_id'], id: matching['id']), class: 'btn btn-info'
                 = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: matching['company_id'], job_listing_id: matching['id']), class: 'btn btn-success'
               .clearfix
-              %dl.dl-horizontal{style: 'width: 400px;'}
+              %dl.dl-horizontal.side-info
                 %dt Locations
                 %dd= matching['locations'].join(', ')
                 %dt Salary

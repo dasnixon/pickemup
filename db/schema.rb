@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131004054720) do
+ActiveRecord::Schema.define(version: 20131007000009) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -236,7 +236,7 @@ ActiveRecord::Schema.define(version: 20131004054720) do
     t.boolean  "bonuses",                default: false
     t.boolean  "retirement",             default: false
     t.boolean  "fulltime",               default: true
-    t.boolean  "us_citizen",             default: false
+    t.boolean  "valid_us_worker",        default: false
     t.boolean  "open_source",            default: false
     t.boolean  "remote",                 default: false
     t.integer  "expected_salary",        default: 0
