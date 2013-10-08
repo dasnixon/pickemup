@@ -14,6 +14,7 @@ gem 'bootstrap-sass'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'font-awesome-rails'
+gem 'underscore-rails'
 
 #JSON PARSING
 gem 'multi_json'

@@ -69,7 +69,7 @@ class JobListingsController < ApplicationController
 
   def search_users
     @matches = @job_listing.match_users
-    respond_with({ job_listing_id: @job_listing.id, company_id: current_company.id, matches: @matches })
+    respond_with({ job_listing: @job_listing, company_id: current_company.id, matches: @matches })
   end
 
   private

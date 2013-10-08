@@ -1,4 +1,15 @@
 #housing
   .container
     = link_to 'Add a Tech Stack', new_company_tech_stack_path(company_id: current_company.id), class: 'btn btn-info'
-    = render 'layouts/tech_stacks'
+    - if @tech_stacks.present?
+      = render 'layouts/tech_stacks'
+    - else
+      %hr
+      %h5 What is a Technology Stack?
+      %p
+        A technology stack comprises the layers of components and/or services that are used to provide a software
+        solution or application. Let a developer know for a specific job listing what tools, languages, databases,
+        and frameworks they will be interacting with on a daily basis. Do not just list your general tech stack, but
+        the one that comprises a specific position/job listing. When you create a job listing, you will be able to
+        select the tech stack from a list to attach. This helps target developers better, and it gives the
+        developer a better feel of what is expected of them.

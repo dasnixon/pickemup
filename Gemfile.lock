@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: ceaf211d81b1116ab6389d13b9457ffa2846af09
+  revision: 64ba1ab09bb2514bea9bf426bb83fd97fe7c6b68
   branch: 4-0-stable
   specs:
     actionmailer (4.0.0)
@@ -74,7 +74,7 @@ GEM
       json (>= 1.7)
     carrierwave_backgrounder (0.3.0)
       carrierwave (~> 0.5)
-    celluloid (0.15.1)
+    celluloid (0.15.2)
       timers (~> 1.1.0)
     ckeditor_rails (4.2)
       railties (>= 3.0)
@@ -200,7 +200,7 @@ GEM
     mime-types (1.25)
     mini_portile (0.5.1)
     minitest (4.7.5)
-    multi_json (1.8.0)
+    multi_json (1.8.1)
     multi_test (0.0.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
@@ -286,7 +286,7 @@ GEM
       rspec (~> 2.0)
       sidekiq (>= 2.4.0)
     ruby-hmac (0.4.0)
-    sass (3.2.11)
+    sass (3.2.12)
     sass-rails (4.0.0)
       railties (>= 4.0.0.beta, < 5.0)
       sass (>= 3.1.10)
@@ -296,7 +296,7 @@ GEM
       rdoc (~> 3.10)
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
-    sidekiq (2.15.0)
+    sidekiq (2.15.1)
       celluloid (>= 0.15.1)
       connection_pool (>= 1.0.0)
       json
@@ -342,6 +342,7 @@ GEM
     uglifier (2.2.1)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
+    underscore-rails (1.5.2)
     unicorn (4.6.3)
       kgio (~> 2.6)
       rack
@@ -415,5 +416,6 @@ DEPENDENCIES
   timecop
   truncate_html
   uglifier
+  underscore-rails
   unicorn
   will_paginate-bootstrap

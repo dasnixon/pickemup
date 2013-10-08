@@ -22,5 +22,7 @@
 //= require flatui-radio
 //= require app/main
 //= require ckeditor-jquery
+//= require bootstrap-slider
+//= require underscore
 //= require_tree '../templates/'
 //= require_tree .

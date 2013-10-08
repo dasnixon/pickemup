@@ -1,9 +1,8 @@
 #housing
   .container
-    .section_header
-      %h3 Edit Subscription
-      = link_to "Change Card", edit_card_company_subscription_path(company_id: @company.id, :id => @subscription.id), class: 'btn btn-info pull-right'
-      %h4 #{"Subscription Status: #{@subscription.active ? 'Active' : 'Inactive'}"}
+    = link_to "Change Card", edit_card_company_subscription_path(company_id: @company.id, :id => @subscription.id), class: 'btn btn-info pull-right'
+    %h6 #{"Subscription Status: #{@subscription.active ? 'Active' : 'Inactive'}"}
+    %hr
     = form_for [@company, @subscription], html: { class: 'form-horizontal' } do |f|
       .control-group
         = label_tag 'Subscription Plan:', nil, class: 'control-label'
@@ -14,20 +13,20 @@
         .control-group
           = label_tag 'Cancel Subscription', nil, class: 'control-label'
           .controls
-            = label_tag 'Yes', nil, class: 'radio inline' do
+            = label_tag 'Yes', nil, class: 'radio-flat inline' do
               = radio_button_tag :cancel_subscription, true, false, {'data-toggle' => 'radio'}
               Yes
-            = label_tag 'No', nil, class: 'radio inline' do
+            = label_tag 'No', nil, class: 'radio-flat inline' do
               = radio_button_tag :cancel_subscription, false, true, {'data-toggle' => 'radio'}
               No
       - else
         .control-group
           = label_tag 'Reactivate Subscription', nil, class: 'control-label'
           .controls
-            = label_tag 'Yes', nil, class: 'radio inline' do
+            = label_tag 'Yes', nil, class: 'radio-flat inline' do
               = radio_button_tag :reactivate_subscription, true, true, {'data-toggle' => 'radio'}
               Yes
-            = label_tag 'No', nil, class: 'radio inline' do
+            = label_tag 'No', nil, class: 'radio-flat inline' do
               = radio_button_tag :reactivate_subscription, false, false, {'data-toggle' => 'radio'}
               No
 

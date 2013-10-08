@@ -10,6 +10,7 @@
  *
  *= require jquery.ui.autocomplete
  *= require fileupload.min
+ *= require slider
  *= require_self
  *= require_tree .
  */

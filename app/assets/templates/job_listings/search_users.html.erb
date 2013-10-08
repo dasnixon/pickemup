@@ -1,4 +1,25 @@
-<div class='well' ng-repeat="user in matches">
+<h5>Filter Results</h5>
+<a class='btn btn-info' ng-click="filters = {}">Clear Filter(s)</a>
+<hr></hr>
+<h6>Citizenship/Green Card</h6>
+<label class='radio inline'>
+  <input checked="checked" ng-click="filters.valid_us_worker = ''" type="radio" name="valid_us_worker" value="all">All Developers
+</label>
+<label class='radio inline'>
+  <input ng-click="filters.valid_us_worker = true" type="radio" name="valid_us_worker" value="citizen_gc">U.S. Citizens/Green Card Holders
+</label>
+<label class='radio inline'>
+  <input ng-click="filters.valid_us_worker = false" type="radio" name="valid_us_worker" value="non_citizen_non_gc">Non U.S. Citizens/Non Green Card Holders
+</label>
+
+<hr></hr>
+<h6>Salary Range</h6>
+<input class="span12" value="" data-selection='none' data-slider-min="0" data-slider-max="1000000" data-slider-step="100" data-slider-value="[0,1000000]" uislider />
+
+<hr></hr>
+
+<h5>{{job_listing.job_title}}</h5>
+<div class='well' ng-repeat="user in matches | filter:filters">
   <div class='media'>
     <div class='pull-left' style='clear: both; margin-top: 5px;'>
       <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{user.profile_image || '<%= asset_path('default_logo.png') %>'}}">

@@ -44,7 +44,7 @@
                       #{match['valid_us_worker'] ? "U.S. Citizen or Green Card holder" : "Not a U.S. Citizen or Green Card holder"}
                   %div
                     %p
-                      = truncate_html(match['description'].try(:html_safe), length: 400, omission: "...#{link_to 'read more', resume_user_path(id: match['id'])}")
+                      = truncate_html(match['description'].try(:html_safe), length: 400, omission: "...#{link_to 'read more.', resume_user_path(id: match['id'])}")
       - else
         - if current_company.fully_activated?
           %p

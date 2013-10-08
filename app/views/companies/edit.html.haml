@@ -10,10 +10,9 @@
           confirm: 'Are you sure you want to deactivate your account? We will also be sure to put your subscription on hold.'
       - else
         = link_to 'Activate Account', toggle_activation_company_path(id: current_company.id), method: :put, class: 'btn btn-success', style: 'margin-left: 5px;'
-    .section_header
-      %h3 Company Info
     = form_for @company, html: { class: 'form-horizontal', multipart: true } do |f|
       .control-group
+        = label_tag :logo, nil, class: 'control-label'
         .controls
           .fileupload.fileupload-new{"data-provides" => "fileupload"}
             .fileupload-new.thumbnail{style: "width: 200px; height: 150px;"}

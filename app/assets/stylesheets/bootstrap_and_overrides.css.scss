@@ -1363,8 +1363,8 @@ fieldset[disabled] .form-control + .input-icon,
   color: #d5dbdb;
   background-color: #f4f6f6;
 }
-.checkbox,
-.radio {
+.checkbox-flat,
+.radio-flat {
   margin-bottom: 12px;
   padding-left: 32px;
   position: relative;
@@ -1374,13 +1374,13 @@ fieldset[disabled] .form-control + .input-icon,
   transition: color 0.25s linear;
   -webkit-backface-visibility: hidden;
 }
-.checkbox input,
-.radio input {
+.checkbox-flat input,
+.radio-flat input {
   outline: none !important;
   display: none;
 }
-.checkbox .icons,
-.radio .icons {
+.checkbox-flat .icons,
+.radio-flat .icons {
   color: #bdc3c7;
   display: block;
   height: 20px;
@@ -1398,10 +1398,10 @@ fieldset[disabled] .form-control + .input-icon,
   transition: color 0.25s linear;
   -webkit-backface-visibility: hidden;
 }
-.checkbox .icons .first-icon,
-.radio .icons .first-icon,
-.checkbox .icons .second-icon,
-.radio .icons .second-icon {
+.checkbox-flat .icons .first-icon,
+.radio-flat .icons .first-icon,
+.checkbox-flat .icons .second-icon,
+.radio-flat .icons .second-icon {
   display: inline-table;
   position: absolute;
   left: 0;
@@ -1410,13 +1410,13 @@ fieldset[disabled] .form-control + .input-icon,
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.checkbox .icons .second-icon,
-.radio .icons .second-icon {
+.checkbox-flat .icons .second-icon,
+.radio-flat .icons .second-icon {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-.checkbox:hover,
-.radio:hover {
+.checkbox-flat:hover,
+.radio-flat:hover {
   color: #bdc3c7;
   -webkit-transition: color 0.25s linear;
   -moz-transition: color 0.25s linear;
@@ -1424,17 +1424,17 @@ fieldset[disabled] .form-control + .input-icon,
   transition: color 0.25s linear;
   -webkit-backface-visibility: hidden;
 }
-.checkbox.checked,
-.radio.checked {
+.checkbox-flat.checked,
+.radio-flat.checked {
   color: #2C3E50;
 }
-.checkbox.checked .first-icon,
-.radio.checked .first-icon {
+.checkbox-flat.checked .first-icon,
+.radio-flat.checked .first-icon {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-.checkbox.checked .second-icon,
-.radio.checked .second-icon {
+.checkbox-flat.checked .second-icon,
+.radio-flat.checked .second-icon {
   color: #2C3E50;
   -webkit-transition: color 0.25s linear;
   -moz-transition: color 0.25s linear;
@@ -1444,36 +1444,36 @@ fieldset[disabled] .form-control + .input-icon,
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.checkbox.disabled,
-.radio.disabled {
+.checkbox-flat.disabled,
+.radio-flat.disabled {
   cursor: default;
   color: #e6e8ea;
 }
-.checkbox.disabled .icons,
-.radio.disabled .icons {
+.checkbox-flat.disabled .icons,
+.radio-flat.disabled .icons {
   color: #e6e8ea;
 }
-.checkbox.disabled .first-icon,
-.radio.disabled .first-icon {
+.checkbox-flat.disabled .first-icon,
+.radio-flat.disabled .first-icon {
   opacity: 1;
   filter: alpha(opacity=100);
 }
-.checkbox.disabled .second-icon,
-.radio.disabled .second-icon {
+.checkbox-flat.disabled .second-icon,
+.radio-flat.disabled .second-icon {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-.checkbox.disabled.checked .icons,
-.radio.disabled.checked .icons {
+.checkbox-flat.disabled.checked .icons,
+.radio-flat.disabled.checked .icons {
   color: #e6e8ea;
 }
-.checkbox.disabled.checked .first-icon,
-.radio.disabled.checked .first-icon {
+.checkbox-flat.disabled.checked .first-icon,
+.radio-flat.disabled.checked .first-icon {
   opacity: 0;
   filter: alpha(opacity=0);
 }
-.checkbox.disabled.checked .second-icon,
-.radio.disabled.checked .second-icon {
+.checkbox-flat.disabled.checked .second-icon,
+.radio-flat.disabled.checked .second-icon {
   color: #e6e8ea;
   opacity: 1;
   filter: alpha(opacity=100);

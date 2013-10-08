@@ -1,9 +1,10 @@
 jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'JobListing', ($scope, $http, $state, $stateParams, $location, JobListing) ->
 
-  $scope.jobListing     = {}
-  $scope.errors         = []
-  $scope.success        = ''
-  $scope.error_updating = ''
+  $scope.jobListing      = {}
+  $scope.errors          = []
+  $scope.success         = ''
+  $scope.error_updating  = ''
+  $scope.filters         = {}
 
   if $state.current.name == "edit"
     JobListing.editListing.retrieveListing
@@ -46,7 +47,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
 
     , (response) ->
       $scope.matches = response.matches
-      $scope.job_listing_id = response.job_listing_id
+      $scope.job_listing = response.job_listing
+      $scope.retainedMatches = angular.copy($scope.matches)
       $scope.company_id = response.company_id
 
   $scope.$watch 'data', ( ->
