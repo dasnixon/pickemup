@@ -1,5 +1,5 @@
 @preference_app = angular.module('Preferences', ['ngResource', 'ui.compat', 'csrf', 'utf8'])
-@jobListing = angular.module('JobListing', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'igTruncate', 'ui-slider'])
+@jobListing = angular.module('JobListing', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'igTruncate', 'ui-slider', 'langSearch'])
 @techStack = angular.module('TechStack', ['ngResource', 'ui.compat', 'csrf', 'utf8'])
 @userEdit = angular.module('Users', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'igTruncate'])
 
