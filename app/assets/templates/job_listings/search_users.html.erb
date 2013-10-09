@@ -1,32 +1,53 @@
-<h5>Filter Results</h5>
-<a class='btn btn-info' ng-click="filters = {}">Clear Filter(s)</a>
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse">
+        <h5>Filter Results</h5>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body" uicollapse>
+      <div class="accordion-inner">
+        <a class='btn btn-info' ng-click="filters = {}">Clear Filter(s)</a>
+        <br />
+        <br />
 
-<hr></hr>
+        <h6>Citizenship/Green Card</h6>
+        <label class='radio inline'>
+          <input checked="checked" ng-click="filters.valid_us_worker = ''" type="radio" name="valid_us_worker" value="all">All Developers
+        </label>
+        <label class='radio inline'>
+          <input ng-click="filters.valid_us_worker = true" type="radio" name="valid_us_worker" value="citizen_gc">U.S. Citizens/Green Card Holders
+        </label>
+        <label class='radio inline'>
+          <input ng-click="filters.valid_us_worker = false" type="radio" name="valid_us_worker" value="non_citizen_non_gc">Non U.S. Citizens/Non Green Card Holders
+        </label>
 
-<h6>Citizenship/Green Card</h6>
-<label class='radio inline'>
-  <input checked="checked" ng-click="filters.valid_us_worker = ''" type="radio" name="valid_us_worker" value="all">All Developers
-</label>
-<label class='radio inline'>
-  <input ng-click="filters.valid_us_worker = true" type="radio" name="valid_us_worker" value="citizen_gc">U.S. Citizens/Green Card Holders
-</label>
-<label class='radio inline'>
-  <input ng-click="filters.valid_us_worker = false" type="radio" name="valid_us_worker" value="non_citizen_non_gc">Non U.S. Citizens/Non Green Card Holders
-</label>
+        <hr></hr>
 
-<hr></hr>
+        <h6>Salary Range</h6>
+        <p class="text-center">
+          <input class="span11" value="" data-selection='none' data-slider-min="0" data-slider-max="1000000" data-slider-step="100" data-slider-value="[0,1000000]" uislider />
+        </p>
+        <hr></hr>
 
-<h6>Salary Range</h6>
-<input class="span12" value="" data-selection='none' data-slider-min="0" data-slider-max="1000000" data-slider-step="100" data-slider-value="[0,1000000]" uislider />
-<hr></hr>
+        <h6>Search Language</h6>
+        <input type='text' ng-model="searchLanguage"/>
 
-<h6>Search Language</h6>
-<input type='text' ng-model="searchLanguage"/>
+        <hr></hr>
 
-<hr></hr>
+        <h6>By Location</h6>
+        <label class="checkbox inline" ng-repeat="location in locations">
+          <input ng-click="maintainSelectedLocations(location)" type="checkbox" ng-value="location"> {{location}}
+        </label>
+
+        <hr></hr>
+      </div>
+    </div>
+  </div>
+</div>
 
 <h5>{{job_listing.job_title}}</h5>
-<div class='well' ng-repeat="user in matches | filter:filters | language:searchLanguage">
+<div class='well' ng-repeat="user in matches | filter:filters | language:searchLanguage | location:selectedLocations">
   <div class='media'>
     <div class='pull-left' style='clear: both; margin-top: 5px;'>
       <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{user.profile_image || '<%= asset_path('default_logo.png') %>'}}">
