@@ -40,6 +40,10 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.original = angular.copy($scope.data)
 
   else if $state.current.name == "search_users"
+    $scope.locations = ['San Francisco, CA', 'Portland, OR', 'Seattle, WA',
+                        'New York City, NY', 'Chicago, IL', 'Boston, MA',
+                        'Austin, TX', 'Los Angeles, CA', 'Cincinnati, OH']
+    $scope.selectedLocations = []
     JobListing.editListing.searchUsers
       job_listing_id: $stateParams['job_listing_id'],
       company_id: $stateParams['company_id'],
@@ -58,6 +62,13 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.success = ''
       $scope.dirty_message = 'You have made changes, make sure to click the \'Save\' button below.'
   ), true
+
+  $scope.maintainSelectedLocations = (location) ->
+    if _.contains($scope.selectedLocations, location)
+      $scope.selectedLocations = _.filter $scope.selectedLocations, (selectedLocation) ->
+        selectedLocation != location
+    else
+      $scope.selectedLocations.push location
 
   $scope.scoreClass = (score) ->
     scoreClass(score)
