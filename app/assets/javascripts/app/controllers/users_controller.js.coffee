@@ -41,6 +41,11 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
   $scope.scoreClass = (score) ->
     scoreClass(score)
 
+  $scope.clearFilters = ->
+    $scope.searchLanguage = null
+    $scope.selectedLocations = []
+    $scope.clearSalaryBetween()
+
   $scope.update = ->
     User.update
       id: $stateParams['id'],

@@ -5,4 +5,5 @@ angular.module('locationSearch', []).filter 'location', ->
         return _.filter users, (user) ->
           (_.intersection(user.locations, selectedLocations)).length > 0
       else
+        $('input:checkbox').removeAttr('checked')
         return users

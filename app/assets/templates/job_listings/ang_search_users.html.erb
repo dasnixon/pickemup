@@ -7,26 +7,26 @@
     </div>
     <div id="collapseOne" class="accordion-body" uicollapse>
       <div class="accordion-inner">
-        <a class='btn btn-info' ng-click="filters = {}">Clear Filter(s)</a>
+        <a class='btn btn-info' ng-click="clearFilters()">Clear Filter(s)</a>
         <br />
         <br />
 
         <h6>Citizenship/Green Card</h6>
         <label class='radio inline'>
-          <input checked="checked" ng-click="filters.valid_us_worker = ''" type="radio" name="valid_us_worker" value="all">All Developers
+          <input checked='checked' ng-checked="all" ng-click="setCitizenshipFilter('')" type="radio" name="valid_us_worker" value="all">All Developers
         </label>
         <label class='radio inline'>
-          <input ng-click="filters.valid_us_worker = true" type="radio" name="valid_us_worker" value="citizen_gc">U.S. Citizens/Green Card Holders
+          <input ng-checked="us" ng-click="setCitizenshipFilter('us')" type="radio" name="valid_us_worker" value="citizen_gc">U.S. Citizens/Green Card Holders
         </label>
         <label class='radio inline'>
-          <input ng-click="filters.valid_us_worker = false" type="radio" name="valid_us_worker" value="non_citizen_non_gc">Non U.S. Citizens/Non Green Card Holders
+          <input ng-checked="non_us" ng-click="setCitizenshipFilter('non_us')" type="radio" name="valid_us_worker" value="non_citizen_non_gc">Non U.S. Citizens/Non Green Card Holders
         </label>
 
         <hr></hr>
 
         <h6>Salary Range</h6>
         <p class="text-center">
-          <input class="span11" value="" data-selection='none' data-slider-min="0" data-slider-max="1000000" data-slider-step="100" data-slider-value="[0,1000000]" salaryrange />
+          <input class="span11" value="" data-selection='none' data-slider-min="0" data-slider-max="300000" data-slider-step="100" data-slider-value="[0,1000000]" salaryrange />
         </p>
         <hr></hr>
 

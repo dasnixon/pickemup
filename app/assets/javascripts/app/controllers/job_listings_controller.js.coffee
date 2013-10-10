@@ -4,7 +4,6 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
   $scope.errors          = []
   $scope.success         = ''
   $scope.error_updating  = ''
-  $scope.filters         = {}
 
   if $state.current.name == "edit"
     JobListing.editListing.retrieveListing
@@ -40,6 +39,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.original = angular.copy($scope.data)
 
   else if $state.current.name == "search_users"
+    $scope.filters   = {valid_us_worker: ''}
+    $scope.all = true
     $scope.locations = ['San Francisco, CA', 'Portland, OR', 'Seattle, WA',
                         'New York City, NY', 'Chicago, IL', 'Boston, MA',
                         'Austin, TX', 'Los Angeles, CA', 'Cincinnati, OH']
@@ -72,6 +73,27 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
 
   $scope.scoreClass = (score) ->
     scoreClass(score)
+
+  $scope.clearFilters = ->
+    $scope.selectedLocations = []
+    $scope.searchSkillKeyword = null
+    $scope.filters = {}
+    $scope.resetRange()
+    $scope.setCitizenshipFilter('')
+
+  $scope.setCitizenshipFilter = (filterScope) ->
+    if filterScope == 'us'
+      $scope.filters.valid_us_worker = true
+      $scope.us = true
+      $scope.all = $scope.non_us = false
+    else if filterScope == 'non_us'
+      $scope.filters.valid_us_worker = false
+      $scope.non_us = true
+      $scope.all = $scope.us = false
+    else
+      $scope.filters.valid_us_worker = ''
+      $scope.all = true
+      $scope.us = $scope.non_us = false
 
   $scope.create = ->
     JobListing.createListing.create
