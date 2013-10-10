@@ -26,12 +26,12 @@
 
         <h6>Salary Range</h6>
         <p class="text-center">
-          <input class="span11" value="" data-selection='none' data-slider-min="0" data-slider-max="1000000" data-slider-step="100" data-slider-value="[0,1000000]" uislider />
+          <input class="span11" value="" data-selection='none' data-slider-min="0" data-slider-max="1000000" data-slider-step="100" data-slider-value="[0,1000000]" salaryrange />
         </p>
         <hr></hr>
 
         <h6>Search Language</h6>
-        <input type='text' ng-model="searchLanguage"/>
+        <input type='text' ng-model="searchSkillKeyword"/>
 
         <hr></hr>
 
@@ -47,7 +47,7 @@
 </div>
 
 <h5>{{job_listing.job_title}}</h5>
-<div class='well' ng-repeat="user in matches | filter:filters | language:searchLanguage | location:selectedLocations">
+<div class='well' ng-repeat="user in matches | filter:filters | skills:searchSkillKeyword | location:selectedLocations">
   <div class='media'>
     <div class='pull-left' style='clear: both; margin-top: 5px;'>
       <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{user.profile_image || '<%= asset_path('default_logo.png') %>'}}">
@@ -78,7 +78,7 @@
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>
           <dt>Location</dt>
-          <dd>{{user.location}}</dd>
+          <dd>{{user.locations.join(', ')}}</dd>
           <dt>Salary</dt>
           <dd>${{user.expected_salary}}</dd>
           <dt>Languages</dt>

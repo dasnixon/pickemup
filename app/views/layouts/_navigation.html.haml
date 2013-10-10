@@ -7,7 +7,6 @@
         %span.icon-bar
       = link_to raw('<strong>Pickemup</strong>'), root_path, class: 'brand'
       .nav-collapse.collapse
-        = render 'layouts/navigation/search'
         %ul.nav.pull-right
           - if user_signed_in?
             %li= link_to 'Profile', edit_user_path(id: current_user.id)

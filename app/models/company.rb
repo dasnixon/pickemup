@@ -38,8 +38,6 @@ class Company < ActiveRecord::Base
   include Trackable
   include PickemupAPI
 
-  autocomplete :name, score: :calculate_score
-
   mount_uploader :logo, AvatarUploader #carrierwave
   process_in_background :logo
 

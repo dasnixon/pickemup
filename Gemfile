@@ -59,26 +59,14 @@ gem 'coffee-rails'
 gem 'indefinite_article'
 gem 'possessive'
 
-#DOCUMENTING
-group :doc do
-  gem 'sdoc', require: false
-end
-
 #PHONE # VALIDATION
 gem 'phony_rails'
 
 #WEB SERVERS
 gem 'unicorn'
 
-#ENV VARIABLES (application.yml)
-gem 'figaro'
-
 #HTML TEXT EDITOR
 gem 'ckeditor_rails'
-
-#SEARCH AUTOCOMPLETION
-gem 'soulmate_rails'
-gem 'jquery-ui-rails'
 
 #PAGINATION
 gem 'will_paginate-bootstrap'
@@ -120,6 +108,7 @@ group :test do
 end
 
 group :development do
+  gem 'figaro' #ENV VARIABLES (application.yml)
   gem 'consistency_fail'
   gem 'railroady' #schema diagrams
   gem 'meta_request' #for RailsPanel Google Chrome extension

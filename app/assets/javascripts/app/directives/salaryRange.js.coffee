@@ -1,4 +1,4 @@
-angular.module('ui-slider', []).directive 'uislider', ->
+angular.module('salary-range', []).directive 'salaryrange', ->
   restrict: 'A',
   link: (scope, elm, attr) ->
     elm.slider().on 'slide', (ev) ->

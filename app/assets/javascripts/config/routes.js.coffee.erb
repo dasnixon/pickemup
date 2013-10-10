@@ -8,14 +8,14 @@ userEdit.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($
       views:
         "":
           controller: "UsersController"
-          templateUrl: "<%= asset_path('users/edit.html.erb') %>"
+          templateUrl: "<%= asset_path('users/ang_edit.html.erb') %>"
 
     .state "search_jobs",
       url: "/users/:id/search_jobs"
       views:
         "":
           controller: "UsersController"
-          templateUrl: "<%= asset_path('users/search_jobs.html.erb') %>"
+          templateUrl: "<%= asset_path('users/ang_search_jobs.html.erb') %>"
 
   $urlRouterProvider.otherwise("/")
 ])
@@ -50,14 +50,14 @@ jobListing.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 
       views:
         "":
           controller: "JobListingCtrl"
-          templateUrl: "<%= asset_path('job_listings/new.html.erb') %>",
+          templateUrl: "<%= asset_path('job_listings/ang_new.html.erb') %>",
 
     .state "search_users",
       url: "/companies/:company_id/job_listings/:job_listing_id/search_users"
       views:
         "":
           controller: "JobListingCtrl"
-          templateUrl: "<%= asset_path('job_listings/search_users.html.erb') %>",
+          templateUrl: "<%= asset_path('job_listings/ang_search_users.html.erb') %>",
 
   $urlRouterProvider.otherwise("/")
 ])
@@ -71,14 +71,14 @@ techStack.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', (
       views:
         "":
           controller: "TechStackCtrl"
-          templateUrl: "<%= asset_path('tech_stacks/edit.html.erb') %>",
+          templateUrl: "<%= asset_path('tech_stacks/ang_edit.html.erb') %>",
 
     .state "new",
       url: "/companies/:company_id/tech_stacks/new"
       views:
         "":
           controller: "TechStackCtrl"
-          templateUrl: "<%= asset_path('tech_stacks/new.html.erb') %>",
+          templateUrl: "<%= asset_path('tech_stacks/ang_new.html.erb') %>",
 
   $urlRouterProvider.otherwise("/")
 ])

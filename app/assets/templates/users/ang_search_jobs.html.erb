@@ -1,4 +1,39 @@
-<div class='well' ng-repeat="listing in job_listings">
+<div class="accordion" id="accordion2">
+  <div class="accordion-group">
+    <div class="accordion-heading">
+      <a class="accordion-toggle" data-toggle="collapse">
+        <h5>Filter Results</h5>
+      </a>
+    </div>
+    <div id="collapseOne" class="accordion-body" uicollapse>
+      <div class="accordion-inner">
+        <a class='btn btn-info' ng-click="filters = {}">Clear Filter(s)</a>
+        <br />
+        <br />
+
+        <h6>Salary</h6>
+        <p class="text-center">
+          <input class="span11" value="" data-selection='none' data-slider-min="0" data-slider-max="1000000" data-slider-step="100" data-slider-value="[0]" salarybetween />
+        </p>
+        <hr></hr>
+
+        <h6>Search Language</h6>
+        <input type='text' ng-model="searchLanguage"/>
+
+        <hr></hr>
+
+        <h6>By Location</h6>
+        <label class="checkbox inline" ng-repeat="location in locations">
+          <input ng-click="maintainSelectedLocations(location)" type="checkbox" ng-value="location"> {{location}}
+        </label>
+
+        <hr></hr>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='well' ng-repeat="listing in job_listings | language:searchLanguage | location:selectedLocations">
   <div class='media'>
     <div class='pull-left' style='clear: both; margin-top: 10px;'>
       <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{listing.logo || '<%= asset_path('default_logo.png') %>'}}">

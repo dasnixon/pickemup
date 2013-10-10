@@ -1,8 +1,7 @@
-angular.module('langSearch', []).filter 'language', ->
+angular.module('skillUserSearch', []).filter 'skills', ->
   (scope, keyword) ->
     if scope?
       if keyword?
-        debugger
         return _.filter scope, (match) ->
           found_matches = _.find match.skills, (skill) ->
             pattern = keyword.replace(/\s+/, "|")

@@ -19,12 +19,24 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
       $scope.error_updating = 'There were issues updating your information.'
 
   else if $state.current.name == 'search_jobs'
+    $scope.locations = ['San Francisco, CA', 'Portland, OR', 'Seattle, WA',
+                        'New York City, NY', 'Chicago, IL', 'Boston, MA',
+                        'Austin, TX', 'Los Angeles, CA', 'Cincinnati, OH']
+    $scope.selectedLocations = []
     User.searchJobs
       id: $stateParams['id'],
       action: 'search_jobs'
     , (response) ->
       $scope.job_listings = response.job_listings
       $scope.user_id = response.user_id
+      $scope.retainedMatches = angular.copy($scope.job_listings)
+
+  $scope.maintainSelectedLocations = (location) ->
+    if _.contains($scope.selectedLocations, location)
+      $scope.selectedLocations = _.filter $scope.selectedLocations, (selectedLocation) ->
+        selectedLocation != location
+    else
+      $scope.selectedLocations.push location
 
   $scope.scoreClass = (score) ->
     scoreClass(score)
