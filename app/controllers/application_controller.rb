@@ -7,6 +7,13 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_user_messages, if: :user_signed_in?
   before_filter :check_company_messages, if: :company_signed_in?
+  before_filter :disable_caching, :if => ->(controller){controller.request.xhr?}
+
+  def disable_caching
+    response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
+    response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
+    response.headers['Pragma'] = 'no-cache'
+  end
 
   def check_invalid_permissions_user
     redirect_to root_path, alert: 'You do not have permissions to view this page' if not_valid_user?
