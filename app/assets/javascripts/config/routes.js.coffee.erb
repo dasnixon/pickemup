@@ -17,6 +17,13 @@ userEdit.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($
           controller: "UsersController"
           templateUrl: "<%= asset_path('users/ang_search_jobs.html.erb') %>"
 
+    .state "user_home",
+      url: "/"
+      views:
+        "":
+          controller: "UsersController"
+          templateUrl: "<%= asset_path('users/ang_search_jobs.html.erb') %>"
+
   $urlRouterProvider.otherwise("/")
 ])
 
@@ -58,6 +65,13 @@ jobListing.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 
         "":
           controller: "JobListingCtrl"
           templateUrl: "<%= asset_path('job_listings/ang_search_users.html.erb') %>",
+
+    .state "company_home",
+      url: "/"
+      views:
+        "":
+          controller: "JobListingCtrl"
+          templateUrl: "<%= asset_path('job_listings/ang_full_user_matches.html.erb') %>"
 
   $urlRouterProvider.otherwise("/")
 ])

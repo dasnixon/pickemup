@@ -1,4 +1,4 @@
-jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'JobListing', ($scope, $http, $state, $stateParams, $location, JobListing) ->
+jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'JobListing', 'Home', ($scope, $http, $state, $stateParams, $location, JobListing, Home) ->
 
   $scope.jobListing      = {}
   $scope.errors          = []
@@ -56,6 +56,21 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.retainedMatches = angular.copy($scope.matches)
       $scope.company_id = response.company_id
 
+  else if $state.current.name == "company_home"
+    $scope.filters   = {valid_us_worker: ''}
+    $scope.all = true
+    $scope.locations = ['San Francisco, CA', 'Portland, OR', 'Seattle, WA',
+                        'New York City, NY', 'Chicago, IL', 'Boston, MA',
+                        'Austin, TX', 'Los Angeles, CA', 'Cincinnati, OH']
+    $scope.selectedLocations = []
+    Home.getMatches
+      action: 'get_matches'
+    , (response) ->
+      $scope.matchings       = response.matchings
+      $scope.retainedMatches = angular.copy($scope.matchings)
+      $scope.company_id      = response.company_id
+      $scope.fully_activated = response.fully_activated
+
   $scope.$watch 'data', ( ->
     if angular.equals($scope.data, $scope.original)
       $scope.dirty_message = ''
@@ -63,6 +78,12 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.success = ''
       $scope.dirty_message = 'You have made changes, make sure to click the \'Save\' button below.'
   ), true
+
+  $scope.splitString = (string, pattern) ->
+    splitStringResult = string.split(pattern)
+    $scope.job_listing_title = splitStringResult[0]
+    $scope.job_listing_id = splitStringResult[1]
+    splitStringResult
 
   $scope.maintainSelectedLocations = (location) ->
     if _.contains($scope.selectedLocations, location)

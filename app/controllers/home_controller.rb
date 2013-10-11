@@ -1,12 +1,8 @@
 class HomeController < ApplicationController
+  respond_to :json, :html
+
   def index
-    if user_signed_in?
-      @matchings = current_user.match_listings_for_user
-    elsif company_signed_in?
-      @matchings = current_company.match_users_per_listing
-    else
-      @company = Company.new
-    end
+    @company = Company.new unless user_signed_in? or company_signed_in?
   end
 
   def about
@@ -28,14 +24,22 @@ class HomeController < ApplicationController
   def pricing
   end
 
-  def company_search
-    render json: Company.search_by(:name, params[:term])
-  end
-
   def terms_of_service
   end
 
   def privacy_policy
+  end
+
+  def get_matches
+    if user_signed_in?
+      @matches = current_user.match_listings_for_user
+      respond_with({ job_listings: @matches, user_id: current_user.id })
+    elsif company_signed_in?
+      @matchings = current_company.match_users_per_listing
+      respond_with({company_id: current_company.id, matchings: @matchings, fully_activated: current_company.fully_activated? })
+    else
+      redirect_to root_path, notice: 'You don\'t have permissions to access the API.'
+    end
   end
 
   private

@@ -3,46 +3,5 @@
     Your account is currently deactivated. To start getting matched with companies again activate your account by clicking
     #{link_to 'here.', toggle_activation_user_path(id: current_user.id)}
 - else
-  - if @matchings.present?
-    - @matchings.each do |matching|
-      .well
-        .media
-          - image = matching['logo'] || 'default_logo.png'
-          = link_to image_tag(image, style: 'max-width: 120px; max-height: 120px;', class: 'img-rounded media-object'), company_path(id: matching['company_id']), class: 'pull-left', style: 'clear: both; margin-bottom: 5px;'
-          .pull-left{style: 'clear: both;'}
-            .box-score.box-item.isotope-item{class: score_class(matching['score'])}
-              .box-link
-                %span.box-number.box-number-item
-                  #{matching['score'] || 0} %
-                %br
-                %span.box-number.box-number-item
-                  MATCH
-          .media-body.total-body-info
-            .pull-right.right-sidebar-info
-              .pull-right
-                = link_to 'View Listing', company_job_listing_path(company_id: matching['company_id'], id: matching['id']), class: 'btn btn-info'
-                = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: matching['company_id'], job_listing_id: matching['id']), class: 'btn btn-success'
-              .clearfix
-              %dl.dl-horizontal.side-info
-                %dt Locations
-                %dd= matching['locations'].join(', ')
-                %dt Salary
-                %dd= "#{number_to_currency(matching['salary_range_low'])} - #{number_to_currency(matching['salary_range_high'])}"
-                %dt Languages
-                %dd= truncate_html(matching['acceptable_languages'].join(', '), length: 30, omission: '...and more')
-
-            %h6.media-heading
-              %strong= link_to matching['name'], company_path(id: matching['company_id'])
-              #{"-"}
-              %strong= link_to "#{matching['job_title']}", company_job_listing_path(company_id: matching['company_id'], id: matching['id'])
-            %div
-              %p
-                - if matching['synopsis'].present?
-                  = matching['synopsis'].html_safe
-                - else
-                  = truncate_html(matching['job_description'], length: 400, omission: "...#{link_to 'read more.', company_job_listing_path(company_id: matching['company_id'], id: matching['id'])}")
-  - else
-    %p
-      Make sure you fill our your preferences to start getting matched with companies. You won't be able to start getting
-      matches until you have filled out more than 60% of your preference. You can also start looking around by searching
-      for companies that you may want to apply for.
+  %div{"ng-app"=>"Users"}
+    #wrapper{'ui-view' => ''}

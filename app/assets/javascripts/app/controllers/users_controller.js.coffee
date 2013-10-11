@@ -1,4 +1,4 @@
-userEdit.controller("UsersController", ['$scope', '$location', '$state', '$stateParams', 'User', ($scope, $location, $state, $stateParams, User) ->
+userEdit.controller("UsersController", ['$scope', '$location', '$state', '$stateParams', 'User', 'Home', ($scope, $location, $state, $stateParams, User, Home) ->
 
   $scope.user           = {}
   $scope.original       = {}
@@ -26,6 +26,18 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
     User.searchJobs
       id: $stateParams['id'],
       action: 'search_jobs'
+    , (response) ->
+      $scope.job_listings = response.job_listings
+      $scope.user_id = response.user_id
+      $scope.retainedMatches = angular.copy($scope.job_listings)
+
+  else if $state.current.name == 'user_home'
+    $scope.locations = ['San Francisco, CA', 'Portland, OR', 'Seattle, WA',
+                        'New York City, NY', 'Chicago, IL', 'Boston, MA',
+                        'Austin, TX', 'Los Angeles, CA', 'Cincinnati, OH']
+    $scope.selectedLocations = []
+    Home.getMatches
+      action: 'get_matches'
     , (response) ->
       $scope.job_listings = response.job_listings
       $scope.user_id = response.user_id
