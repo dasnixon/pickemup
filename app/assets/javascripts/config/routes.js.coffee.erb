@@ -10,13 +10,6 @@ userEdit.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($
           controller: "UsersController"
           templateUrl: "<%= asset_path('users/ang_edit.html.erb') %>"
 
-    .state "search_jobs",
-      url: "/users/:id/search_jobs"
-      views:
-        "":
-          controller: "UsersController"
-          templateUrl: "<%= asset_path('users/ang_search_jobs.html.erb') %>"
-
     .state "user_home",
       url: "/"
       views:

@@ -68,11 +68,6 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: "Successfully #{@user.active? ? 'activated' : 'deactivated'} your account."
   end
 
-  def search_jobs
-    @listings = current_user.match_listings_for_user
-    respond_with({ job_listings: @listings, user_id: current_user.id })
-  end
-
   private
 
   def eager_load_user

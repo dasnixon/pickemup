@@ -28,7 +28,6 @@ Pickemup::Application.routes.draw do
       get :get_preference
       put :update_preference
       put :toggle_activation
-      get :search_jobs
     end
     resources :conversations, only: [:index, :show, :destroy, :update] do
       member do
