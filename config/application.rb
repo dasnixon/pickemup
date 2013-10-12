@@ -71,6 +71,6 @@ module Pickemup
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.precompile << /\.(?:svg|eot|woff|ttf|png|jpg|jpeg|gif|erb)$/
+    config.assets.precompile += %w(templates/* fonts/* javascripts/* stylesheets/* images/*)
   end
 end
