@@ -1,3 +1,10 @@
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: pickemup_prod
+  pool: 5
+  host: localhost
+
 development:
   adapter: postgresql
   encoding: unicode

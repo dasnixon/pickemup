@@ -1,0 +1,269 @@
+<div class='control-group'>
+  <label class='control-label'><strong>Title</strong></label>
+  <div class='controls'>
+    <input id="job_listing_job_title" name="job_title" ng-model="data.job_title" type="text" required \> <span class='client-error', ng-show = 'jobListingForm.job_title.$invalid'></span>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Locations</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.locations">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong>Approx. Hours a Week</strong></label>
+  <div class='controls'>
+    <div class="input-append">
+      <input id="job_listing_estimated_work_hours" name="estimate_work_hours" ng-model="data.estimated_work_hours" required="required" type="text"></input>
+      <span class="add-on">hour(s)</span>
+    </div>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong># Vacation Days</strong></label>
+  <div class='controls'>
+    <div class="input-append">
+      <input id="job_listing_vacation_days" name="vacation_days" ng-model="data.vacation_days" required="required" type="text"/>
+      <span class="add-on">day(s)</span>
+    </div>
+  </div>
+</div>
+
+
+<div class='control-group'>
+  <label class='control-label'><strong>Approximate Start Time</strong></label>
+  <div class='controls'>
+    <div class="input-append">
+      <input id="job_listing_hiring_time" name="hiring_time" ng-model="data.hiring_time" required="required" type="text"></input>
+      <span class="add-on">week(s)</span>
+    </div>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong>Salary Range</strong></label>
+  <div class='controls'>
+    <select id="job_listing_salary_range_low" name="salary_range_low", ng-model="data.salary_range_low">
+     <option value="0">Less than $10,000</option>
+     <option value="10000">$10,000</option>
+     <option value="20000">$20,000</option>
+     <option value="30000">$30,000</option>
+     <option value="40000">$40,000</option>
+     <option value="50000">$50,000</option>
+     <option value="60000">$60,000</option>
+     <option value="70000">$70,000</option>
+     <option value="80000">$80,000</option>
+     <option value="90000">$90,000</option>
+     <option value="100000">$100,000</option>
+     <option value="110000">$110,000</option>
+     <option value="120000">$120,000</option>
+     <option value="130000">$130,000</option>
+     <option value="140000">$140,000</option>
+     <option value="150000">$150,000</option>
+     <option value="160000">$160,000</option>
+     <option value="170000">$170,000</option>
+     <option value="180000">$180,000</option>
+     <option value="190000">$190,000</option>
+     <option value="200000">$200,000</option>
+     <option value="225000">$225,000</option>
+     <option value="250000">$250,000</option>
+     <option value="275000">$275,000</option>
+     <option value="300000">$300,000</option>
+     <option value="325000">$325,000</option>
+     <option value="350000">$350,000</option>
+     <option value="500000">More than $350,000</option>
+    </select>
+    to
+    <select id="job_listing_salary_range_high" name="salary_range_high", ng-model="data.salary_range_high">
+     <option value="0">Less than $10,000</option>
+     <option value="10000">$10,000</option>
+     <option value="20000">$20,000</option>
+     <option value="30000">$30,000</option>
+     <option value="40000">$40,000</option>
+     <option value="50000">$50,000</option>
+     <option value="60000">$60,000</option>
+     <option value="70000">$70,000</option>
+     <option value="80000">$80,000</option>
+     <option value="90000">$90,000</option>
+     <option value="100000">$100,000</option>
+     <option value="110000">$110,000</option>
+     <option value="120000">$120,000</option>
+     <option value="130000">$130,000</option>
+     <option value="140000">$140,000</option>
+     <option value="150000">$150,000</option>
+     <option value="160000">$160,000</option>
+     <option value="170000">$170,000</option>
+     <option value="180000">$180,000</option>
+     <option value="190000">$190,000</option>
+     <option value="200000">$200,000</option>
+     <option value="225000">$225,000</option>
+     <option value="250000">$250,000</option>
+     <option value="275000">$275,000</option>
+     <option value="300000">$300,000</option>
+     <option value="325000">$325,000</option>
+     <option value="350000">$350,000</option>
+     <option value="500000">More than $350,000</option>
+    </select>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong>Equity</strong></label>
+  <div class='controls'>
+    <select id="job_listing_equity" name="equity", ng-model="data.equity">
+      <option value="None">None</option>
+      <option value="Less than 1%">Less than 1%</option>
+      <option value="1% - 5%">1% - 5%</option>
+      <option value="Greater than 5%">Greater than 5%</option>
+    </select>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong>Bonus</strong></label>
+  <div class='controls'>
+    <select id="job_listing_bonuses" name="bonuses", ng-model="data.bonuses">
+      <option value="None">None</option>
+      <option value="1-10% of base salary">1-10% of base salary</option>
+      <option value="Greater than 10% of base salary">Greater than 10% of base salary</option>
+      <option value="Something else">Something else</option>
+    </select>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class='preference'>
+        <td class="preference-list" ng-click="toggleActive('fulltime')" ng-class="{active: data.fulltime}">
+          Is this a fulltime position?
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class='preference'>
+        <td class="preference-list" ng-click="toggleActive('remote')" ng-class="{active: data.remote}">
+          Is working remote required or acceptable?
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Position Type</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.position_titles">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+  <label class='control-label'><strong>Experience Level</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.experience_levels">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="control-group">
+  <label class='control-label'><strong>Health Benefits</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference">
+        <td class="preference-list" ng-click="toggleActive('healthcare')" ng-class="{active: data.healthcare}">
+          Healthcare?
+        </td>
+        <td class="preference-list" ng-click="toggleActive('vision')" ng-class="{active: data.vision}">
+          Vision?
+        </td>
+        <td class="preference-list" ng-click="toggleActive('dental')" ng-class="{active: data.dental}">
+          Dental?
+        </td>
+        <td class="preference-list" ng-click="toggleActive('life_insurance')" ng-class="{active: data.life_insurance}">
+          Life Insurance?
+        </td>
+        <td class="preference-list" ng-click="toggleActive('retirement')" ng-class="{active: data.retirement}">
+          Retirement?
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class = 'perks'>
+  <ng-include src="'/assets/job_listings/_perks.html-6e7b710ed7aaed054947adeac228091d.erb'" />
+</div>
+
+<div class = 'practices'>
+  <ng-include src="'/assets/job_listings/_practices.html-437af7d4415c7f627a2def3ada2ff437.erb'" />
+</div>
+
+<div class = 'special-characteristics'>
+  <ng-include src="'/assets/job_listings/_special_characteristics.html-20185c821493cfdb24c1a2ec0a101881.erb'" />
+</div>
+
+<div class = 'acceptable-languages'>
+  <ng-include src="'/assets/job_listings/_acceptable_languages.html-a93837d6dea76f7ae5eef14ccb2f3b14.erb'" />
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong>Tech Stack</strong></label>
+  <div class='controls'>
+    <select ng-options="stack.id as stack.name for stack in tech_stacks" id="job_listing_tech_stack_id" name="tech_stack_id", ng-model="data.tech_stack_id">
+    </select>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong>Description</strong></label>
+  <div class='controls'>
+    <span class='client-error' ng-show='jobListingForm.job_description.$invalid'></span>
+    <textarea id="job_listing_job_description" ck-editor name="job_description" ng-model="data.job_description"></textarea>
+  </div>
+</div>
+
+<div class='control-group'>
+  <label class='control-label'><strong>Synopsis</strong></label>
+  <div class='controls'>
+    <span class='client-error' ng-show='jobListingForm.synopsis.$invalid'></span>
+    <span class="help-block alert alert-info">
+      The synopsis is used as the short description on the list of matched job listings for a user. It
+      should be less than 300 characters and make sure it will engage a user's interest! Otherwise,
+      your description will be used, which may not be as clean and engaging.
+    </span>
+    <br />
+    <textarea class='field span12' ng-maxlength='300' rows="3" maxlength='300' ng-model="data.synopsis"></textarea>
+  </div>
+</div>
+
+<div class="control-group">
+  <div class="controls">
+    <button class='btn btn-info' type="submit">Save Your Job Listing</button>
+  </div>
+</div>
