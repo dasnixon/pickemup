@@ -2,7 +2,10 @@
   <div class="row-fluid">
     <div class="span2">
       <div class="span2 affix">
-        <ul class="unstyled">
+        <div class='user-image'>
+          <p><img ng-src="{{user.profile_image.url}}" class="img-polaroid span12"></p>
+        </div>
+        <ul class="unstyled with-user-image">
           <li ng-show="success.length > 0" class="alert alert-success">
             {{success}}
           </li>
@@ -21,12 +24,6 @@
 
     <div class="span8 span-fixed-sidebar">
       <input type="hidden" ng-model="user.id" />
-
-      <div class="control-group">
-        <div class="controls">
-          <img ng-src="{{user.profile_image.url}}" class="img-rounded">
-        </div>
-      </div>
 
       <div class="control-group">
         <label class='control-label'><strong>Name</strong></label>

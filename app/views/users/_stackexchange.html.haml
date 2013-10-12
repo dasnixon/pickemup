@@ -1,8 +1,10 @@
 %hr
 %p
   %i.icon-stackexchange.icon-2x
-    Stackoverflow Information
+    Stackoverflow
   - if @stackexchange
+    %span.nickname_link
+      = link_to(@stackexchange.display_name, @stackexchange.profile_url)
     = render 'stackoverflow'
   - elsif user_signed_in?
     %p

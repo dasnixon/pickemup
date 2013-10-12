@@ -27,3 +27,26 @@
   color: white;
   font-weight: bold;
 }
+
+  .with-user-image {
+    margin-top: 252px;
+  }
+
+@media (max-width: 767px) {
+  .user-image {
+    display: none;
+  }
+
+  .with-user-image {
+    margin-top: 0px;
+  }
+
+  #housing {
+    margin-top: 20px;
+  }
+
+  .user-deactivate {
+    margin-bottom: 10px;
+    float: none;
+  }
+}
