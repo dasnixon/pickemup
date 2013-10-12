@@ -152,7 +152,7 @@ class Company < ActiveRecord::Base
       matches["#{job_listing.job_title}___#{job_listing.id}"] ||= []
       User.all.find_in_batches do |batched_users|
         batched_users.each do |user|
-          next matches if matches["#{job_listing.job_title}___#{job_listing.id}"].length >= 25 or self.already_has_conversation_over?(job_listing.id, user)
+          next matches if matches["#{job_listing.job_title}___#{job_listing.id}"].length >= 3 or self.already_has_conversation_over?(job_listing.id, user)
           preference = user.preference
           next matches unless preference.preference_percentage_filled >= 60
           user_attrs = user.attributes.keep_if { |k,v| k =~ JobListing::USER_ATTR_REGEX }.merge('profile_image' => user.profile_image.url(:medium))

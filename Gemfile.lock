@@ -135,7 +135,7 @@ GEM
     foreigner (1.5.0)
       activerecord (>= 3.0.0)
     formatador (0.2.4)
-    gherkin (2.12.1)
+    gherkin (2.12.2)
       multi_json (~> 1.3)
     github_api (0.10.2)
       addressable
