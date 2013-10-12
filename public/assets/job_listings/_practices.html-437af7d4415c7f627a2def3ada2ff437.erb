@@ -1,0 +1,12 @@
+<div class="control-group">
+  <label class='control-label'><strong>Practices</strong></label>
+  <div class="controls">
+    <table class="table table-bordered">
+      <tr class="preference" ng-repeat="row in data.practices">
+        <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
+          {{attributes.name}}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
