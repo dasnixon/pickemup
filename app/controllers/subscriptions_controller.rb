@@ -6,12 +6,18 @@ class SubscriptionsController < ApplicationController
   def new
     @subscription = @company.subscription || Subscription.new
     redirect_to edit_company_subscription_path(company_id: @company.id, id: @subscription.id) unless @subscription.new_record?
+    mixpanel.track 'Company Subscription New', {
+      distinct_id: @company.id
+    }
     @clicked_option = params[:clicked_option]
   end
 
   def create
     @subscription = @company.build_subscription(subscription_params)
     if @subscription.save_with_payment
+      mixpanel.track 'Company Subscription Created', {
+        distinct_id: @company.id
+      }
       redirect_to root_path, notice: 'Subscription created! Start by adding a job listing.'
     else
       @clicked_option = params[:plan]
@@ -56,6 +62,9 @@ class SubscriptionsController < ApplicationController
   end
 
   def purchase_options
+    mixpanel.track 'Company Purchase Option', {
+      distinct_id: @company.id
+    }
   end
 
   private

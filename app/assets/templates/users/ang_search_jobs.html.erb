@@ -7,9 +7,9 @@
     </div>
     <div id="collapseOne" class="accordion-body" uicollapse>
       <div class="accordion-inner">
-        <a class='btn btn-info' ng-click="clearFilters()">Clear Filter(s)</a>
-        <br />
-        <br />
+        <a class='btn btn-danger' ng-click="clearFilters()">Clear Filter(s)</a>
+
+        <hr></hr>
 
         <h6>Salary</h6>
         <p class="text-center">
@@ -26,8 +26,6 @@
         <label class="checkbox inline" ng-repeat="location in locations">
           <input ng-click="maintainSelectedLocations(location)" type="checkbox" ng-value="location"> {{location}}
         </label>
-
-        <hr></hr>
       </div>
     </div>
   </div>

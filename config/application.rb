@@ -72,5 +72,7 @@ module Pickemup
     config.assets.version = '1.0'
 
     config.assets.precompile += %w(templates/* fonts/* javascripts/* stylesheets/* images/*)
+
+    config.middleware.use "Mixpanel::Middleware", "b15ae514a2349c14ecdf3ce2422aead0", {persist: true}
   end
 end

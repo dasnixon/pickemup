@@ -82,6 +82,9 @@ gem 'redis'
 #HTML Truncate Text
 gem 'truncate_html'
 
+#ANALYTICS
+gem 'mixpanel'
+
 group :production do
   #HEROKU
   gem 'rails_12factor'

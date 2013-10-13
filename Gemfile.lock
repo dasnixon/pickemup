@@ -7,7 +7,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: c3fa44b9254edbea8bb5e1b7a0a36418e0fca979
+  revision: aa1e95e385e82dd08cbcbc70d148ff051102726b
   branch: 4-0-stable
   specs:
     actionmailer (4.0.0)
@@ -105,6 +105,7 @@ GEM
     currencies (0.4.2)
     diff-lcs (1.2.4)
     erubis (2.7.0)
+    escape (0.0.4)
     excon (0.25.3)
     execjs (2.0.2)
     factory_girl (4.2.0)
@@ -198,6 +199,10 @@ GEM
     mime-types (1.25)
     mini_portile (0.5.1)
     minitest (4.7.5)
+    mixpanel (4.0.8)
+      escape
+      json
+      rack
     multi_json (1.8.1)
     multi_test (0.0.2)
     multi_xml (0.5.5)
@@ -336,7 +341,7 @@ GEM
       rack
       raindrops (~> 0.7)
     will_paginate (3.0.5)
-    will_paginate-bootstrap (0.2.5)
+    will_paginate-bootstrap (1.0.0)
       will_paginate (>= 3.0.3)
     xpath (2.0.0)
       nokogiri (~> 1.3)
@@ -373,6 +378,7 @@ DEPENDENCIES
   lol_dba
   mailboxer
   meta_request
+  mixpanel
   multi_json
   newrelic_rpm
   oauth2

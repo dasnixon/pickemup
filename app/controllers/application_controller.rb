@@ -3,11 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   helper_method :current_user, :current_company, :user_signed_in?,
-    :company_signed_in?
+    :company_signed_in?, :mixpanel
 
   before_filter :check_user_messages, if: :user_signed_in?
   before_filter :check_company_messages, if: :company_signed_in?
   before_filter :disable_caching, :if => ->(controller){controller.request.xhr?}
+  def mixpanel
+    @mixpanel ||= Mixpanel::Tracker.new(ENV['MIXPANEL_API_TOKEN'], {persist: true, env: request.env})
+  end
 
   def disable_caching
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'

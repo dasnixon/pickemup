@@ -7,6 +7,10 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     if @company.save_with_tracking_info(request)
+      mixpanel.track 'Company Created', {
+        distinct_id: @company.id,
+        time: @company.created_at
+      }
       @company.api_create
       Notifier.new_company_confirmation(@company).deliver
       session[:company_id] = @company.id
