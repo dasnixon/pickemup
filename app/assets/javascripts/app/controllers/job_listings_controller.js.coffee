@@ -71,8 +71,8 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.company_id      = response.company_id
       $scope.fully_activated = response.fully_activated
 
-  $scope.hasNoMatches = ->
-    _.isEmpty($scope.matchings)
+  $scope.hasMatches = ->
+    !_.isEmpty($scope.matchings)
 
   $scope.$watch 'data', ( ->
     if angular.equals($scope.data, $scope.original)

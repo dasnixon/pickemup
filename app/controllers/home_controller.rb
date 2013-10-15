@@ -37,8 +37,6 @@ class HomeController < ApplicationController
     elsif company_signed_in?
       @matchings = current_company.match_users_per_listing
       respond_with({company_id: current_company.id, matchings: @matchings, fully_activated: current_company.fully_activated? })
-    else
-      redirect_to root_path, notice: 'You don\'t have permissions to access the API.'
     end
   end
 
