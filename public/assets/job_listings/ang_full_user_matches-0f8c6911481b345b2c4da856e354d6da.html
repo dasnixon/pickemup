@@ -10,7 +10,7 @@
     <div class='well' ng-repeat="user in matches">
       <div class='media'>
         <div class='pull-left' style='clear: both; margin-top: 5px;'>
-          <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{user.profile_image || '<%= asset_path('default_logo.png') %>'}}">
+          <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{user.profile_image || '/assets/default_logo-c6752dc05d776b6f048be5759f325bab.png'}}">
         </div>
         <div class='pull-left' style='clear: both; margin-top: 5px;'>
           <div class='box-score box-item isotope-item' ng-class="scoreClass(user.score)">
