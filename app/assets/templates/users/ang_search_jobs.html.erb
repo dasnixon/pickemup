@@ -52,12 +52,12 @@
     <div class='media-body'>
       <div class='pull-right' style="height: 200px;">
         <div class='pull-right'>
-          <button class="btn btn-info" onclick="location.href='/companies/{{listing.company_id}}'">
+          <a class="btn btn-info" ng-href='/companies/{{listing.company_id}}' target='_self'>
             Learn More About {{listing.name}}
-          </button>
-          <button class="btn btn-success" onclick="location.href='/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}'">
+          </a>
+          <a class="btn btn-success" ng-href='/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}' target='_self'>
             Apply
-          </button>
+          </a>
         </div>
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>
@@ -70,7 +70,7 @@
         </dl>
       </div>
       <h4 class='media-heading'>
-        <a onclick="location.href='/companies/{{listing.company_id}}'">{{listing.name}}</a> - <a onclick="location.href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}'">{{listing.job_title}}</a>
+        <a ng-href='/companies/{{listing.company_id}}' target='_self'>{{listing.name}}</a> - <a ng-href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}' target='_self'>{{listing.job_title}}</a>
       </h4>
       <p ng-bind-html-unsafe="listing.synopsis || listing.job_description|truncate:300"></p>
     </div>
