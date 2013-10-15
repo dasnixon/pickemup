@@ -16,6 +16,7 @@
 //= require angular
 //= require angular-resource
 //= require angular-ui-states
+//= require angular-sanitize
 //= require cardcheck.min
 //= require fileupload.min
 //= require flatui-radio
