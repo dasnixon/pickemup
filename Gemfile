@@ -51,7 +51,7 @@ gem 'omniauth-stackexchange'
 gem 'bcrypt-ruby', require: 'bcrypt'
 
 #JAVASCRIPT
-gem 'angularjs-rails'
+gem 'angularjs-rails', '~> 1.2.0.rc2'
 gem 'jquery-rails'
 gem 'coffee-rails'
 
