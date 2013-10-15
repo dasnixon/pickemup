@@ -1,34 +1,5 @@
 <div ng-switch on='hasNoMatches()'>
-  <div ng-switch-when='true'>
-    <div ng-switch on='fully_activated'>
-      <div ng-switch-when='true'>
-        <div class="hero-unit">
-          <h1>Start adding a job listing now!</h1>
-          <p>Add a job listing to begin getting matched with developers.
-          Make sure your job listing is as accurate as possible. If you want the perfect developer then be honest, transparent,
-          and descriptive with what your company has to offer. It's important for you to get as much detail up front so the
-          process can move as quickly as possible, and the chances of landing the right developer the first time increase.</p>
-          <p>
-            <a class="btn btn-primary btn-large" href='/companies/{{company_id}}/job_listings/new'>
-              Add Job Listing
-            </a>
-          </p>
-        </div>
-      </div>
-      <div ng-switch-default>
-        <div class="hero-unit">
-          <h1>Setup your subscription to get started.</h1>
-          <p>Tagline</p>
-          <p>
-            <a class="btn btn-primary btn-large">
-              Learn more
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div ng-switch-default>
+  <div ng-switch-when='false'>
     <div ng-repeat="(job_listing_info, matches) in matchings">
       <h5 style='margin-bottom: 10px;'>{{ splitString(job_listing_info, '___')[0] }}</h5>
       <div ng-switch on='matches.length'>
@@ -84,6 +55,35 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div ng-switch-default>
+    <div ng-switch on='fully_activated'>
+      <div ng-switch-when='true'>
+        <div class="hero-unit">
+          <h1>Start adding a job listing now!</h1>
+          <p>Add a job listing to begin getting matched with developers.
+          Make sure your job listing is as accurate as possible. If you want the perfect developer then be honest, transparent,
+          and descriptive with what your company has to offer. It's important for you to get as much detail up front so the
+          process can move as quickly as possible, and the chances of landing the right developer the first time increase.</p>
+          <p>
+            <a class="btn btn-primary btn-large" href='/companies/{{company_id}}/job_listings/new'>
+              Add Job Listing
+            </a>
+          </p>
+        </div>
+      </div>
+      <div ng-switch-default>
+        <div class="hero-unit">
+          <h1>Setup your subscription to get started.</h1>
+          <p>Tagline</p>
+          <p>
+            <a class="btn btn-primary btn-large">
+              Learn more
+            </a>
+          </p>
         </div>
       </div>
     </div>
