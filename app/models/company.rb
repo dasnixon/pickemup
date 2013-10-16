@@ -156,7 +156,7 @@ class Company < ActiveRecord::Base
           preference = user.preference
           next matches unless preference.preference_percentage_filled >= 60
           truncated_description = ''
-          user_attrs = user.attributes.keep_if { |k,v| k =~ JobListing::USER_ATTR_REGEX }.merge('profile_image' => user.profile_image.url(:medium))
+          user_attrs = user.attributes.keep_if { |k,v| k =~ JobListing::USER_ATTR_REGEX }.merge('profile_image' => user.profile_image.url)
           if user.description.present?
             html_string = TruncateHtml::HtmlString.new(user.description)
             truncated_description = TruncateHtml::HtmlTruncator.new(html_string, length: 360, omission: '...').truncate

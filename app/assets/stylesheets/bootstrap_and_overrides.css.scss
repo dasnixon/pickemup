@@ -3419,6 +3419,9 @@ footer, .push {
   width: 400px;
   margin-top: 10px;
 }
-.btn {
+.btn.ng-binding {
   color: white !important;
+}
+a.ng-binding {
+  color: #2980B9 !important;
 }

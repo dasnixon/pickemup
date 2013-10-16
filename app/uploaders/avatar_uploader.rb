@@ -14,5 +14,6 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
   version :medium do
     process resize_to_fit: [512, 512]
+    process quality: 100
   end
 end
