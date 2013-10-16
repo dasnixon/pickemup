@@ -39,12 +39,12 @@
             </div>
             <div class="clearfix"></div>
             <dl class='dl-horizontal side-info'>
-              <dt>Location</dt>
-              <dd>{{user.locations.join(', ')}}</dd>
+              <dt>Location(s)</dt>
+              <dd ng-bind='locations | attributeArrayLimit:60'></dd>
               <dt>Salary</dt>
               <dd>${{user.expected_salary}}</dd>
-              <dt>Languages</dt>
-              <dd>{{user.skills.join(', ')}}</dd>
+              <dt>Language(s)</dt>
+              <dd ng-bind='user.skills | attributeArrayLimit:90'></dd>
             </dl>
           </div>
           <h6 class='media-heading'>

@@ -1,7 +1,7 @@
 @preference_app = angular.module('Preferences', ['ngResource', 'ui.compat', 'csrf', 'utf8'])
-@jobListing = angular.module('JobListing', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'salary-range', 'skillUserSearch', 'locationSearch', 'ui-collapse', 'ngSanitize'])
+@jobListing = angular.module('JobListing', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'salary-range', 'skillUserSearch', 'locationSearch', 'ui-collapse', 'ngSanitize', 'attributeArrayLimit'])
 @techStack = angular.module('TechStack', ['ngResource', 'ui.compat', 'csrf', 'utf8'])
-@userEdit = angular.module('Users', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'salary-between', 'languageCompanySearch', 'locationSearch', 'ui-collapse', 'ngSanitize'])
+@userEdit = angular.module('Users', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'salary-between', 'languageCompanySearch', 'locationSearch', 'ui-collapse', 'ngSanitize', 'attributeArrayLimit'])
 
 @chunk = (a,s) ->
   if a

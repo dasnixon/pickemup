@@ -71,13 +71,15 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.company_id      = response.company_id
       $scope.fully_activated = response.fully_activated
 
-  $scope.$watch 'data', ( ->
-    if angular.equals($scope.data, $scope.original)
-      $scope.dirty_message = ''
-    else
-      $scope.success = ''
-      $scope.dirty_message = 'You have made changes, make sure to click the \'Save\' button below.'
-  ), true
+  if $state.current.name == 'new' or $state.current.name == 'edit'
+    debugger
+    $scope.$watch 'data', ( ->
+      if angular.equals($scope.data, $scope.original)
+        $scope.dirty_message = ''
+      else
+        $scope.success = ''
+        $scope.dirty_message = 'You have made changes, make sure to click the \'Save\' button below.'
+    ), true
 
   $scope.splitString = (string, pattern) ->
     splitStringResult = string.split(pattern)

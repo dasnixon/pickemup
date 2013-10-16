@@ -59,12 +59,12 @@
         </div>
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>
-          <dt>Locations</dt>
-          <dd>{{listing.locations.join(', ')}}</dd>
+          <dt>Location(s)</dt>
+          <dd ng-bind='listing.locations | attributeArrayLimit:50'></dd>
           <dt>Salary</dt>
           <dd>${{listing.salary_range_low}} - ${{listing.salary_range_high}}</dd>
           <dt>Languages</dt>
-          <dd>{{listing.acceptable_languages.join(', ')}}</dd>
+          <dd ng-bind='listing.acceptable_languages | attributeArrayLimit:90'></dd>
         </dl>
       </div>
       <h4 class='media-heading'>
