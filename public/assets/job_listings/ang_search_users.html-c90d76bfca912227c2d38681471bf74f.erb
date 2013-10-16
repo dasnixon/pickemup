@@ -88,7 +88,7 @@
       <h6 class='media-heading'>
         {{user.name}} <small> {{user.valid_us_worker && "U.S. Citizen or Green Card holder" || "Not a U.S. Citizen or Green Card holder"}}</small>
       </h4>
-      <p ng-bind-html="user.description|truncate:650:this"></p>
+      <p ng-bind-html="user.description"></p>
     </div>
   </div>
 </div>

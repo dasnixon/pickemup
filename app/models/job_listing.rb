@@ -41,9 +41,9 @@ class JobListing < ActiveRecord::Base
   include PickemupAPI
 
   HASHABLE_PARAMS = %w(practices perks experience_levels special_characteristics acceptable_languages position_titles locations)
-  LISTINGS_ATTR_REGEX = /^id$|job_title|synopsis|languages|company_id|salary|description|locations/
+  LISTINGS_ATTR_REGEX = /^id$|job_title|languages|company_id|salary|locations/
   COMPANY_ATTR_REGEX = /name|website|industry/
-  USER_ATTR_REGEX = /^id$|name|description|location/
+  USER_ATTR_REGEX = /^id$|name|location/
   PREFERENCE_ATTR_REGEX = /salary|skills|locations|expected_salary|valid_us_worker/
 
   belongs_to :company
@@ -100,7 +100,11 @@ class JobListing < ActiveRecord::Base
         next if matches.length >= 25 or company.already_has_conversation_over?(self.id, user)
         preference = user.preference
         next unless preference.preference_percentage_filled >= 60
-        user_attrs = user.attributes.keep_if { |k,v| k =~ USER_ATTR_REGEX }.merge('profile_image' => user.profile_image.url(:medium))
+        if user.description.present?
+          html_string = TruncateHtml::HtmlString.new(user.description)
+          truncated_description = TruncateHtml::HtmlTruncator.new(html_string, length: 360, omission: '...').truncate
+        end
+        user_attrs = user.attributes.keep_if { |k,v| k =~ USER_ATTR_REGEX }.merge('profile_image' => user.profile_image.url(:medium), 'description' => truncated_description)
         preference_attrs = user.preference.attributes.keep_if { |k,v| k =~ PREFERENCE_ATTR_REGEX }.merge('score' => preference.score(self.id)['score'].to_i)
         matches << user_attrs.merge(preference_attrs)
       end
@@ -113,7 +117,12 @@ class JobListing < ActiveRecord::Base
     return nil if user.already_has_applied?(self.id)
     preference, company = user.preference, self.company
     return nil unless preference.preference_percentage_filled >= 60
-    listing_attrs = self.attributes.keep_if { |k,v| k =~ LISTINGS_ATTR_REGEX }.merge('score' => self.score(preference.id)['score'].to_i)
+    text_to_truncate = self.synopsis.present? ? self.synopsis : self.job_description
+    if text_to_truncate.present?
+      html_string = TruncateHtml::HtmlString.new(text_to_truncate)
+      truncated_description = TruncateHtml::HtmlTruncator.new(html_string, length: 360, omission: '...').truncate
+    end
+    listing_attrs = self.attributes.keep_if { |k,v| k =~ LISTINGS_ATTR_REGEX }.merge('score' => self.score(preference.id)['score'].to_i, 'details' => truncated_description)
     company_attrs = company.attributes.keep_if { |k,v| k =~ COMPANY_ATTR_REGEX }.merge('logo' => company.logo.url(:medium))
     company_attrs.merge(listing_attrs)
   end

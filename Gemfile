@@ -80,7 +80,7 @@ gem 'jbuilder'
 gem 'redis'
 
 #HTML Truncate Text
-gem 'truncate_html'
+gem 'truncate_html', git: 'git://github.com/hgmnz/truncate_html.git'
 
 #ANALYTICS
 gem 'mixpanel'

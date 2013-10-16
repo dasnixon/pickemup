@@ -72,7 +72,7 @@
       <h4 class='media-heading'>
         <a ng-href='/companies/{{listing.company_id}}' target='_self'>{{listing.name}}</a> - <a ng-href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}' target='_self'>{{listing.job_title}}</a>
       </h4>
-      <p ng-bind-html="listing.synopsis || listing.job_description|truncate:300"></p>
+      <p ng-bind-html="listing.details"></p>
     </div>
   </div>
 </div>

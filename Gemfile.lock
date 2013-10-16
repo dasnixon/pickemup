@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/hgmnz/truncate_html.git
+  revision: cb569366275d030e98a4a4c21bcdebc00463e629
+  specs:
+    truncate_html (0.9.2)
+
+GIT
   remote: git://github.com/liamneesonsarm/serel.git
   revision: b39f8eaaee74188a9e5e179c1a6c14d3276253aa
   specs:
@@ -7,7 +13,7 @@ GIT
 
 GIT
   remote: git://github.com/rails/rails.git
-  revision: aa1e95e385e82dd08cbcbc70d148ff051102726b
+  revision: 0785008a64f4af8d09379683303d49d160cd444d
   branch: 4-0-stable
   specs:
     actionmailer (4.0.0)
@@ -203,7 +209,7 @@ GEM
       escape
       json
       rack
-    multi_json (1.8.1)
+    multi_json (1.8.2)
     multi_test (0.0.2)
     multi_xml (0.5.5)
     multipart-post (1.2.0)
@@ -288,8 +294,8 @@ GEM
       sidekiq (>= 2.4.0)
     ruby-hmac (0.4.0)
     sass (3.2.12)
-    sass-rails (4.0.0)
-      railties (>= 4.0.0.beta, < 5.0)
+    sass-rails (4.0.1)
+      railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)
       sprockets-rails (~> 2.0.0)
     shoulda-matchers (2.4.0)
@@ -330,7 +336,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    truncate_html (0.9.2)
     tzinfo (0.3.38)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
@@ -405,7 +410,7 @@ DEPENDENCIES
   slim
   stripe
   timecop
-  truncate_html
+  truncate_html!
   uglifier
   underscore-rails
   unicorn

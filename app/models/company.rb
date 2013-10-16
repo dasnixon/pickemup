@@ -155,8 +155,13 @@ class Company < ActiveRecord::Base
           next matches if matches["#{job_listing.job_title}___#{job_listing.id}"].length >= 3 or self.already_has_conversation_over?(job_listing.id, user)
           preference = user.preference
           next matches unless preference.preference_percentage_filled >= 60
+          truncated_description = ''
           user_attrs = user.attributes.keep_if { |k,v| k =~ JobListing::USER_ATTR_REGEX }.merge('profile_image' => user.profile_image.url(:medium))
-          preference_attrs = preference.attributes.keep_if { |k,v| k =~ JobListing::PREFERENCE_ATTR_REGEX }.merge('score' => preference.score(job_listing.id)['score'].to_i)
+          if user.description.present?
+            html_string = TruncateHtml::HtmlString.new(user.description)
+            truncated_description = TruncateHtml::HtmlTruncator.new(html_string, length: 360, omission: '...').truncate
+          end
+          preference_attrs = preference.attributes.keep_if { |k,v| k =~ JobListing::PREFERENCE_ATTR_REGEX }.merge('score' => preference.score(job_listing.id)['score'].to_i, 'description' => truncated_description)
           matches["#{job_listing.job_title}___#{job_listing.id}"] << user_attrs.merge(preference_attrs)
         end
       end
