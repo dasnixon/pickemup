@@ -9,19 +9,21 @@
   <div ng-if='matches.length > 0'>
     <div class='well' ng-repeat="user in matches">
       <div class='media'>
-        <div class='pull-left' style='clear: both; margin-top: 5px;'>
-          <img class='media-object img-rounded' style="max-width: 120px; max-height: 120px;" ng-src="{{user.profile_image || '<%= asset_path('default_logo.png') %>'}}">
-        </div>
-        <div class='pull-left' style='clear: both; margin-top: 5px;'>
-          <div class='box-score box-item isotope-item' ng-class="scoreClass(user.score)">
-            <div class='box-link'>
-              <span class='box-number box-number-item'>
-                {{user.score || '0'}} %
-              </span>
-              <br />
-              <span class='box-number box-number-item'>
-                MATCH
-              </span>
+        <div class='pull-left'>
+          <div style='margin-top: 5px;'>
+            <img class='media-object img-rounded' style='display: block; margin: auto; width: 120px; max-width: 120px; max-height: 120px;' ng-src="{{user.profile_image || '<%= asset_path('default_logo.png') %>'}}">
+          </div>
+          <div style='margin-top: 5px; display: block; margin-left: auto; margin-right: auto;'>
+            <div class='box-score box-item isotope-item' ng-class="scoreClass(user.score)">
+              <div class='box-link'>
+                <span class='box-number box-number-item'>
+                  {{user.score || '0'}} %
+                </span>
+                <br />
+                <span class='box-number box-number-item'>
+                  MATCH
+                </span>
+              </div>
             </div>
           </div>
         </div>
@@ -48,7 +50,7 @@
           <h6 class='media-heading'>
             {{user.name}} <small>{{user.valid_us_worker && "U.S. Citizen or Green Card holder" || "Not a U.S. Citizen or Green Card holder"}}</small>
           </h6>
-          <p ng-bind-html="user.description"></p>
+          <p class='description' ng-bind-html="user.description"></p>
         </div>
       </div>
     </div>
