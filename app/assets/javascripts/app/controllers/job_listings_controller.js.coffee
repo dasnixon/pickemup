@@ -196,6 +196,9 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.error_updating = 'Unable to update your job listing.'
       $scope.success        = ''
 
+  $scope.go = (path) ->
+    changeLocation($scope, $location, path, true)
+
   $scope.toggleActive = (attr) ->
     $scope.data[attr] = !$scope.data[attr]
 

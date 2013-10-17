@@ -67,6 +67,9 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
       $scope.error_updating = 'Unable to update your profile. See specific error messages below.'
       $scope.success        = ''
 
+  $scope.go = (path) ->
+    changeLocation($scope, $location, path, true)
+
   $scope.$watch 'user', ( ->
     if angular.equals($scope.user, $scope.original)
       $scope.dirty_message = ''

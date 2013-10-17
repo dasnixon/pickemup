@@ -9,18 +9,18 @@
       <div class="accordion-inner">
         <a class='btn btn-danger' ng-click="clearFilters()">Clear Filter(s)</a>
 
-        <hr></hr>
+        <hr>
 
         <h6>Salary</h6>
         <p class="text-center">
-          <input class="span11" value="" data-selection='none' data-slider-min="0" data-slider-max="300000" data-slider-step="1000" data-slider-value="[0]" salarybetween />
+          <input class="span11" value="" data-selection="none" data-slider-min="0" data-slider-max="300000" data-slider-step="1000" data-slider-value="[0]" salarybetween />
         </p>
-        <hr></hr>
+        <hr>
 
         <h6>Search Language</h6>
         <input type='text' ng-model="searchLanguage"/>
 
-        <hr></hr>
+        <hr>
 
         <h6>By Location</h6>
         <label class="checkbox inline" ng-repeat="location in locations">
@@ -40,13 +40,9 @@
       <div style='margin-top: 5px; display: block; margin-left: auto; margin-right: auto;'>
         <div class='box-score box-item isotope-item' ng-class="scoreClass(listing.score)">
           <div class='box-link'>
-            <span class='box-number box-number-item'>
-              {{listing.score || '0'}} %
-            </span>
+            <span class='box-number box-number-item'>{{listing.score || '0'}} %</span>
             <br />
-            <span class='box-number box-number-item'>
-              MATCH
-            </span>
+            <span class='box-number box-number-item'>MATCH</span>
           </div>
         </div>
       </div>
@@ -54,8 +50,8 @@
     <div class='media-body'>
       <div class='pull-right' style="height: 200px;">
         <div class='pull-right'>
-          <a class='btn btn-info' ng-href='/companies/{{listing.company_id}}' target='_self'>Learn More About {{listing.name}}</a>
-          <a class='btn btn-success' ng-href='/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}' target='_self'>Apply</a>
+          <button class='btn btn-info' ng-click="go('/companies/{{listing.company_id}}')">Learn More About {{listing.name}}</button>
+          <button class='btn btn-success' ng-click="go('/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}')">Apply</button>
         </div>
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>
@@ -68,7 +64,7 @@
         </dl>
       </div>
       <h4 class='media-heading'>
-        <a ng-href='/companies/{{listing.company_id}}' target='_self'>{{listing.name}}</a> - <a ng-href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}' target='_self'>{{listing.job_title}}</a>
+        <a ng-href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}' target='_self'>{{listing.job_title}} at {{listing.name}}</a>
       </h4>
       <p class='description' ng-bind-html="listing.details"></p>
     </div>
