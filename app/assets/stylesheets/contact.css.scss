@@ -71,8 +71,6 @@
 #contact .contact .submit .right input[type="submit"]{
 	float: right;
 	text-transform: uppercase;
-	color: #fff;
-	background: #187CCC;
 	font-size: 15px;
 	padding: 4px 12px;
 	border: 0 none;
@@ -81,9 +79,6 @@
 	-moz-transition: background linear .2s, box-shadow linear .2s;
 	-o-transition: background linear .2s, box-shadow linear .2s;
 	transition: background linear .2s, box-shadow linear .2s;
-}
-#contact .contact .submit .right input[type="submit"]:hover{
-	background: #252528;
 }
 #contact .map{
 	margin: 0;

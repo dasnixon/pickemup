@@ -17,7 +17,7 @@
         = form_tag company_log_in_path, :action => :create, :method => :post, id: 'company_sign_in' do |f|
           = text_field_tag :email, nil, placeholder: 'Email'
           = password_field_tag :password, nil, placeholder: 'Password'
-          = submit_tag "Sign In", class: 'btn btn-info'
+          = submit_tag "Sign In", class: 'btn btn-theme'
       .span12.proof
         .span5.remember
           %a{:href => "reset.html"} Forgot password?

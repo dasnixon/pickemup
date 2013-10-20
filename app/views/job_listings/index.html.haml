@@ -4,7 +4,7 @@
       #{@company.name.possessive} Job Listings
       .pull-right
         - if current_company == @company
-          - if current_company.job_listings.blank? || current_company.tech_stacks.blank? || current_company.subscription.blank?
+          - if current_company.not_fully_setup?
             = link_to 'Add a Job Listing', guide_company_job_listings_path(company_id: current_company.id), class: 'btn btn-success'
           - else
             = link_to 'Add a Job Listing', new_company_job_listing_path(company_id: current_company.id), class: 'btn btn-success'

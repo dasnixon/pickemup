@@ -12,10 +12,21 @@
   = hidden_field_tag :receiver, @recipient.id
   = hidden_field_tag :job_listing_id, @job_listing.id
 
+  .pull-right
+    - if @recipient.is_a?(User)
+      = link_to "#{@recipient.name.possessive} Resume", resume_user_path(id: @recipient.id), class: 'btn btn-info', target: '_blank'
+    - else
+      = link_to "#{@recipient.name.possessive} Overview", company_path(id: @recipient.id), class: 'btn btn-info', target: '_blank'
+
   .control-group
     = label_tag t('mailboxer.form.recipients'), nil, class: 'control-label'
     .controls
       = text_field_tag :recipient_name, @recipient.name, disabled: true
+    .controls{style: 'margin-top: 15px;'}
+      - if @recipient.is_a?(User)
+        = image_tag(@recipient.profile_image.preview, class: 'img-rounded')
+      - else
+        = image_tag(@recipient.logo.preview, class: 'img-rounded')
 
   - if @job_listings
     .control-group

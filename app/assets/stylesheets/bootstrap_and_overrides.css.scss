@@ -462,7 +462,7 @@ body {
   background-color: #ffffff;
 }
 a {
-  color: #2980B9;
+  color: #3B4990;
   text-decoration: none;
   -webkit-transition: 0.25s;
   -moz-transition: 0.25s;
@@ -786,6 +786,19 @@ address {
 .btn-group.open .btn.btn-primary.dropdown-toggle,
 .btn.btn-primary.active {
   background-color: #2C3E50;
+}
+.btn.btn-theme {
+  background-color: #3B4990;
+}
+.btn.btn-theme:hover,
+.btn.btn-theme:focus,
+.btn-group:focus .btn.btn-theme.dropdown-toggle {
+  background-color: #22316C;
+}
+.btn.btn-theme:active,
+.btn-group.open .btn.btn-theme.dropdown-toggle,
+.btn.btn-theme.active {
+  background-color: #4169E1;
 }
 .btn.btn-info {
   background-color: #3498db;

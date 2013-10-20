@@ -170,6 +170,10 @@ class Company < ActiveRecord::Base
     end
   end
 
+  def not_fully_setup?
+    self.job_listings.blank? || self.tech_stacks.blank? || !self.fully_activated?
+  end
+
   private
 
   def encrypt_password
