@@ -43,3 +43,33 @@
                   %li
                     %strong Benefits:
                     = job_listing_benefits(job_listing[:listing])
+          .accordion-group
+            .accordion-heading
+              %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseTechStack' }
+                %h4 Tech Stack
+          #collapseTechStack{ class: 'accordion-body collapse' }
+            .accordion-inner
+              .row-fluid
+                - tech_stack = job_listing[:listing].tech_stack
+                - if tech_stack.present?
+                  %ul.unstyled
+                    %li
+                      %strong Back-end Languages:
+                      #{tech_stack.back_end_languages.join(', ')}
+                    %li
+                      %strong Front-end Languages:
+                      #{tech_stack.front_end_languages.join(', ')}
+                    %li
+                      %strong Frameworks:
+                      #{tech_stack.frameworks.join(', ')}
+                    %li
+                      %strong Dev Ops Tools:
+                      #{tech_stack.dev_ops_tools.join(', ')}
+                    %li
+                      %strong NoSQL Databases:
+                      #{tech_stack.nosql_databases.join(', ')}
+                    %li
+                      %strong Relational Databases:
+                      #{tech_stack.relational_databases.join(', ')}
+                - else
+                  %p Sorry there is no tech stack information, contact #{job_listing[:company].name} for more information.

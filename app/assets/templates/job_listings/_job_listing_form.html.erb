@@ -236,6 +236,7 @@
   <label class='control-label'><strong>Tech Stack</strong></label>
   <div class='controls'>
     <select ng-options="stack.id as stack.name for stack in tech_stacks" id="job_listing_tech_stack_id" name="tech_stack_id", ng-model="data.tech_stack_id">
+      <option value="">None</option>
     </select>
   </div>
 </div>
