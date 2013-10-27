@@ -31,7 +31,7 @@ class JobListingsController < ApplicationController
   def create
     @job_listing = @company.job_listings.build
     if @job_listing.update(@bathed_params)
-      @job_listing.api_create
+      APICreateWorker.perform_async(@job_listing.id, @job_listing.class.name)
       respond_with(@job_listing, location: nil, status: :created)
     else
       render json: { errors: @job_listing.errors }, status: :bad_request
@@ -40,7 +40,7 @@ class JobListingsController < ApplicationController
 
   def update_listing
     if @job_listing.update(@bathed_params)
-      @job_listing.api_update
+      APIUpdateWorker.perform_async(@job_listing.id, @job_listing.class.name)
       respond_with @job_listing
     else
       render json: { errors: @job_listing.errors }, status: :bad_request

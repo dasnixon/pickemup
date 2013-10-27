@@ -11,7 +11,7 @@ class CompaniesController < ApplicationController
         distinct_id: @company.id,
         time: @company.created_at
       }
-      @company.api_create
+      APICreateWorker.perform_async(@company.id, @company.class.name)
       Notifier.new_company_confirmation(@company).deliver
       session[:company_id] = @company.id
       redirect_to company_purchase_options_path(:company_id => @company.id), notice: "You've just created a new company.  You will receive an email to verify your account in a moment."
@@ -31,7 +31,7 @@ class CompaniesController < ApplicationController
 
   def update
     if @company.update(company_params)
-      @company.api_update
+      APIUpdateWorker.perform_async(@company.id, @company.class.name)
       redirect_to company_path(id: @company.id), notice: 'Info updated!'
     else
       @subscription = @company.subscription
