@@ -72,7 +72,6 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
       $scope.fully_activated = response.fully_activated
 
   if $state.current.name == 'new' or $state.current.name == 'edit'
-    debugger
     $scope.$watch 'data', ( ->
       if angular.equals($scope.data, $scope.original)
         $scope.dirty_message = ''
