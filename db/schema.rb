@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131022013507) do
+ActiveRecord::Schema.define(version: 20131026191035) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,16 +50,16 @@ ActiveRecord::Schema.define(version: 20131022013507) do
     t.string   "website"
     t.string   "industry"
     t.string   "num_employees"
-    t.boolean  "public",             default: "false"
+    t.boolean  "public",             default: false
     t.date     "founded"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "acquired_by"
-    t.string   "tags",               default: [],      array: true
+    t.string   "tags",               default: [],    array: true
     t.string   "total_money_raised"
-    t.string   "competitors",        default: [],      array: true
+    t.string   "competitors",        default: [],    array: true
     t.string   "logo"
-    t.boolean  "verified",           default: "false"
+    t.boolean  "verified",           default: false
     t.datetime "last_sign_in_at"
     t.datetime "current_sign_in_at"
     t.inet     "last_sign_in_ip"
@@ -118,6 +118,19 @@ ActiveRecord::Schema.define(version: 20131022013507) do
   add_index "github_accounts", ["uid"], name: "index_github_accounts_on_uid", using: :btree
   add_index "github_accounts", ["user_id"], name: "index_github_accounts_on_user_id", unique: true, using: :btree
 
+  create_table "interviews", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "status",         default: "pending"
+    t.boolean  "hireable"
+    t.datetime "request_date"
+    t.uuid     "job_listing_id"
+    t.uuid     "company_id"
+    t.uuid     "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "interviews", ["user_id", "company_id", "job_listing_id"], name: "index_interviews_on_user_id_and_company_id_and_job_listing_id", unique: true, using: :btree
+
   create_table "job_listings", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "job_title"
     t.text     "job_description"
@@ -129,24 +142,24 @@ ActiveRecord::Schema.define(version: 20131022013507) do
     t.boolean  "fulltime",                default: true
     t.boolean  "remote"
     t.integer  "hiring_time"
-    t.boolean  "active",                  default: "false"
-    t.boolean  "sponsorship_available",   default: "false"
-    t.boolean  "healthcare",              default: "false"
-    t.boolean  "dental",                  default: "false"
-    t.boolean  "vision",                  default: "false"
-    t.boolean  "life_insurance",          default: "false"
-    t.boolean  "retirement",              default: "false"
+    t.boolean  "active",                  default: false
+    t.boolean  "sponsorship_available",   default: false
+    t.boolean  "healthcare",              default: false
+    t.boolean  "dental",                  default: false
+    t.boolean  "vision",                  default: false
+    t.boolean  "life_insurance",          default: false
+    t.boolean  "retirement",              default: false
     t.integer  "estimated_work_hours"
-    t.string   "practices",               default: [],      array: true
-    t.string   "acceptable_languages",    default: [],      array: true
-    t.string   "special_characteristics", default: [],      array: true
-    t.string   "experience_levels",       default: [],      array: true
-    t.string   "perks",                   default: [],      array: true
-    t.string   "position_titles",         default: [],      array: true
+    t.string   "practices",               default: [],    array: true
+    t.string   "acceptable_languages",    default: [],    array: true
+    t.string   "special_characteristics", default: [],    array: true
+    t.string   "experience_levels",       default: [],    array: true
+    t.string   "perks",                   default: [],    array: true
+    t.string   "position_titles",         default: [],    array: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.uuid     "company_id"
-    t.string   "locations",               default: [],      array: true
+    t.string   "locations",               default: [],    array: true
     t.text     "synopsis"
     t.uuid     "tech_stack_id"
   end
@@ -175,14 +188,14 @@ ActiveRecord::Schema.define(version: 20131022013507) do
     t.uuid     "sender_id"
     t.string   "sender_type"
     t.uuid     "conversation_id"
-    t.boolean  "draft",                default: "false"
-    t.datetime "updated_at",                             null: false
-    t.datetime "created_at",                             null: false
+    t.boolean  "draft",                default: false
+    t.datetime "updated_at",                           null: false
+    t.datetime "created_at",                           null: false
     t.uuid     "notified_object_id"
     t.uuid     "notified_object_type"
     t.string   "notification_code"
     t.string   "attachment"
-    t.boolean  "global",               default: "false"
+    t.boolean  "global",               default: false
     t.datetime "expires"
   end
 
@@ -227,34 +240,34 @@ ActiveRecord::Schema.define(version: 20131022013507) do
   add_index "positions", ["profile_id"], name: "index_positions_on_profile_id", using: :btree
 
   create_table "preferences", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
-    t.boolean  "healthcare",             default: "false"
-    t.boolean  "dental",                 default: "false"
-    t.boolean  "vision",                 default: "false"
-    t.boolean  "life_insurance",         default: "false"
-    t.boolean  "vacation_days",          default: "false"
-    t.boolean  "equity",                 default: "false"
-    t.boolean  "bonuses",                default: "false"
-    t.boolean  "retirement",             default: "false"
+    t.boolean  "healthcare",             default: false
+    t.boolean  "dental",                 default: false
+    t.boolean  "vision",                 default: false
+    t.boolean  "life_insurance",         default: false
+    t.boolean  "vacation_days",          default: false
+    t.boolean  "equity",                 default: false
+    t.boolean  "bonuses",                default: false
+    t.boolean  "retirement",             default: false
     t.boolean  "fulltime",               default: true
-    t.boolean  "valid_us_worker",        default: "false"
-    t.boolean  "open_source",            default: "false"
-    t.boolean  "remote",                 default: "false"
+    t.boolean  "valid_us_worker",        default: false
+    t.boolean  "open_source",            default: false
+    t.boolean  "remote",                 default: false
     t.integer  "expected_salary",        default: 0
     t.integer  "potential_availability", default: 0
     t.integer  "work_hours",             default: 0
-    t.string   "company_size",           default: [],      array: true
-    t.string   "skills",                 default: [],      array: true
-    t.string   "locations",              default: [],      array: true
-    t.string   "industries",             default: [],      array: true
-    t.string   "position_titles",        default: [],      array: true
-    t.string   "company_types",          default: [],      array: true
-    t.string   "perks",                  default: [],      array: true
-    t.string   "practices",              default: [],      array: true
-    t.string   "experience_levels",      default: [],      array: true
+    t.string   "company_size",           default: [],    array: true
+    t.string   "skills",                 default: [],    array: true
+    t.string   "locations",              default: [],    array: true
+    t.string   "industries",             default: [],    array: true
+    t.string   "position_titles",        default: [],    array: true
+    t.string   "company_types",          default: [],    array: true
+    t.string   "perks",                  default: [],    array: true
+    t.string   "practices",              default: [],    array: true
+    t.string   "experience_levels",      default: [],    array: true
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "willing_to_relocate",    default: "false"
+    t.boolean  "willing_to_relocate",    default: false
   end
 
   add_index "preferences", ["user_id"], name: "index_preferences_on_user_id", unique: true, using: :btree
@@ -274,13 +287,13 @@ ActiveRecord::Schema.define(version: 20131022013507) do
   create_table "receipts", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.uuid     "receiver_id"
     t.string   "receiver_type"
-    t.uuid     "notification_id",                              null: false
-    t.boolean  "is_read",                    default: "false"
-    t.boolean  "trashed",                    default: "false"
-    t.boolean  "deleted",                    default: "false"
+    t.uuid     "notification_id",                            null: false
+    t.boolean  "is_read",                    default: false
+    t.boolean  "trashed",                    default: false
+    t.boolean  "deleted",                    default: false
     t.string   "mailbox_type",    limit: 25
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
   end
 
   add_index "receipts", ["notification_id"], name: "index_receipts_on_notification_id", using: :btree
@@ -326,10 +339,10 @@ ActiveRecord::Schema.define(version: 20131022013507) do
 
   create_table "subscriptions", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.integer  "plan"
-    t.uuid     "company_id",                              null: false
+    t.uuid     "company_id",                            null: false
     t.string   "stripe_customer_token"
     t.string   "stripe_card_token"
-    t.boolean  "active",                default: "false"
+    t.boolean  "active",                default: false
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -364,13 +377,13 @@ ActiveRecord::Schema.define(version: 20131022013507) do
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "stackexchange_synced",   default: "false"
+    t.boolean  "stackexchange_synced",   default: false
     t.datetime "last_sign_in_at"
     t.datetime "current_sign_in_at"
     t.inet     "last_sign_in_ip"
     t.inet     "current_sign_in_ip"
     t.integer  "sign_in_count"
-    t.boolean  "manually_setup_profile", default: "false"
+    t.boolean  "manually_setup_profile", default: false
     t.boolean  "active",                 default: true
   end
 

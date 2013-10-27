@@ -36,6 +36,9 @@ gem 'sidekiq'
 gem 'sinatra'
 gem 'slim'
 
+#INTERVIEW SCHEDULING
+gem 'state_machine'
+
 #APIs
 gem 'github_api'
 gem 'serel', git: 'git://github.com/liamneesonsarm/serel.git' #stackoverflow may need to switch back to original if gets updated properly
@@ -94,7 +97,6 @@ group :production do
 end
 
 group :test, :development do
-  gem 'annotate'
   gem 'pry' #debugging
   gem 'rspec-rails'
   gem 'jasmine-rails'
@@ -111,6 +113,7 @@ group :test do
 end
 
 group :development do
+  gem 'annotate'
   gem 'figaro' #ENV VARIABLES (application.yml)
   gem 'consistency_fail'
   gem 'railroady' #schema diagrams

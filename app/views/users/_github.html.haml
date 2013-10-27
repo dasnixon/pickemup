@@ -1,6 +1,6 @@
 %hr
 %p
-  %i.icon-github.icon-2x
+  %i.fa.fa-github.fa-2x
     Github
   - if @github_account
     %span.nickname_link
@@ -20,5 +20,5 @@
   - elsif user_signed_in?
     %p
       = link_to '/auth/github', class: 'btn btn-inverse' do
-        %i.icon-github
+        %i.fa.fa-github
         %strong | Link your Github

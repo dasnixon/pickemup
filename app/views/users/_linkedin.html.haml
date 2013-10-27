@@ -1,6 +1,6 @@
 %hr
 %p
-  %i.icon-linkedin.icon-2x
+  %i.fa.fa-linkedin.fa-2x
     Linkedin
     - if @linkedin.present?
       %span.nickname_link
@@ -22,5 +22,5 @@
   - elsif user_signed_in?
     %p
       = link_to '/auth/linkedin', class: 'btn btn-info' do
-        %i.icon-linkedin
+        %i.fa.fa-linkedin
         %strong | Link your Linkedin

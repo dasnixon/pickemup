@@ -191,4 +191,12 @@ FactoryGirl.define do
   factory :preference do
     user
   end
+
+  factory :interview do
+    user_id        { create(:user).id }
+    company_id     { create(:company).id }
+    job_listing_id { create(:job_listing).id }
+    request_date   5.days.from_now
+    status         :pending
+  end
 end

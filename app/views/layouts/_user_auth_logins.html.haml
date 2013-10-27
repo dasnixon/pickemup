@@ -1,18 +1,18 @@
 = link_to 'See your active applications', listings_user_path(id: current_user.id), class: 'btn btn-info pull-right', style: 'margin-left: 5px;' if @matchings.present?
 - unless current_user.linkedin_uid.present?
   = link_to '/auth/linkedin', class: 'pull-right btn btn-info', style: 'margin-left: 5px;' do
-    %i.icon-linkedin
+    %i.fa.fa-linkedin
     %strong Link your Linkedin
 - unless current_user.github_uid.present?
   = link_to '/auth/github', class: 'pull-right btn btn-inverse', style: 'margin-left: 5px;' do
-    %i.icon-github
+    %i.fa.fa-github
     %strong Link your Github
 - unless current_user.stackexchange_synced?
   = link_to '/auth/stackexchange', class: 'pull-right btn btn-warning', style: 'margin-left: 5px;' do
-    %i.icon-stackexchange
+    %i.fa.fa-stackexchange
     %strong Link your Stackoverflow
 - unless current_user.active?
   = link_to toggle_activation_user_path(id: current_user.id), method: :put, class: 'pull-right btn btn-success', style: 'margin-left: 5px;' do
-    %i.icon-magic
+    %i.fa.fa-magic
     %strong Activate Account
 .clearfix

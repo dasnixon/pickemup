@@ -13,7 +13,6 @@
 #  fulltime                :boolean          default(TRUE)
 #  remote                  :boolean
 #  hiring_time             :integer
-#  tech_stack_id           :integer
 #  active                  :boolean          default(FALSE)
 #  sponsorship_available   :boolean          default(FALSE)
 #  healthcare              :boolean          default(FALSE)
@@ -33,6 +32,7 @@
 #  company_id              :uuid
 #  locations               :string(255)      default([])
 #  synopsis                :text
+#  tech_stack_id           :uuid
 #
 
 class JobListing < ActiveRecord::Base

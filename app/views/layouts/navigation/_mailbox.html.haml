@@ -1,11 +1,9 @@
 - is_user = messages_for.is_a?(User)
 - if is_user
   %li
-    = link_to user_conversations_path(user_id: current_user.id) do
-      %i{class: "icon-envelope #{@unread_messages.present? ? 'notification-indicator unread' : ''}"}
+    = link_to user_conversations_path(user_id: current_user.id), class: "#{@unread_messages.present? ? 'notification-indicator unread' : ''}" do
       Mailbox - #{@unread_messages.length}
 - else
   %li
-    = link_to company_conversations_path(company_id: current_company.id) do
-      %i{class: "icon-envelope #{@unread_messages.present? ? 'notification-indicator unread' : ''}"}
+    = link_to company_conversations_path(company_id: current_company.id), class: "#{@unread_messages.present? ? 'notification-indicator unread' : ''}" do
       Mailbox - #{@unread_messages.length}
