@@ -20,7 +20,7 @@ gem 'underscore-rails'
 gem 'multi_json'
 
 #CRON
-#gem 'whenever', require: false
+gem 'sidetiq'
 
 #STORE FILES/IMAGES
 gem 'carrierwave'
