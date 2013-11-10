@@ -1,9 +1,9 @@
-.accordion-group
-  .accordion-heading
-    %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseSkills' }
+.panel-group
+  .panel-heading
+    %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseSkills' }
       %h4 Skills
-  #collapseSkills{ class: 'accordion-body collapse' }
-    .accordion-inner
+  #collapseSkills.panel-collapse.collapse
+    .panel-body
       %table.table
         - @skills.try(:each_slice, 6) do |group|
           %tr

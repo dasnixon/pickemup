@@ -25,49 +25,62 @@
         %p
           #{job_listing.job_description.html_safe}
       %h6 General Information
-      %ul.unstyled
-        %li
-          %strong Salary Range:
-          #{number_to_currency(job_listing.salary_range_low)} - #{number_to_currency(job_listing.salary_range_high)}
-        %li
-          %strong Preferred Languages:
-          #{job_listing.acceptable_languages.join(', ')}
-        %li
-          %strong Preferred Experience Level:
-          #{job_listing.experience_levels.join(', ')}
-        %li
-          %strong Preferred Practices:
-          #{job_listing.practices.join(', ')}
-        %li
-          %strong Bonus Points for:
-          #{job_listing.special_characteristics.join(', ')}
-        %li
-          %strong Job Perks:
-          #{job_listing.perks.join(', ')}
-        %li
-          %strong Benefits:
-          = job_listing_benefits(job_listing)
+      %ul.list-group
+        %li.list-group-item
+          %strong.list-group-item-heading Salary Range
+          %p.list-group-item-text
+            #{number_to_currency(job_listing.salary_range_low)} - #{number_to_currency(job_listing.salary_range_high)}
+        %li.list-group-item
+          %strong.list-group-item-heading Preferred Languages
+          %p.list-group-item-text
+            #{job_listing.acceptable_languages.join(', ')}
+        %li.list-group-item
+          %strong.list-group-item-heading Preferred Experience Level
+          %p.list-group-item-text
+            #{job_listing.experience_levels.join(', ')}
+        %li.list-group-item
+          %strong.list-group-item-heading Preferred Practices
+          %p.list-group-item-text
+            #{job_listing.practices.join(', ')}
+        %li.list-group-item
+          %strong.list-group-item-heading Bonus Points for
+          %p.list-group-item-text
+            #{job_listing.special_characteristics.join(', ')}
+        %li.list-group-item
+          %strong.list-group-item-heading Job Perks
+          %p.list-group-item-text
+            #{job_listing.perks.join(', ')}
+        %li.list-group-item
+          %strong.list-group-item-heading Benefits
+          %p.list-group-item-text
+            = job_listing_benefits(job_listing)
     %h6 Tech Stack Information
     - tech_stack = job_listing.tech_stack
     - if tech_stack.present?
-      %ul.unstyled
+      %ul.list-group
         %li
-          %strong Back-end Languages:
-          #{tech_stack.back_end_languages.join(', ')}
+          %strong.list-group-item-heading Back-end Languages:
+          %p.list-group-item-text
+            #{tech_stack.back_end_languages.join(', ')}
         %li
-          %strong Front-end Languages:
-          #{tech_stack.front_end_languages.join(', ')}
+          %strong.list-group-item-heading Front-end Languages:
+          %p.list-group-item-text
+            #{tech_stack.front_end_languages.join(', ')}
         %li
-          %strong Frameworks:
-          #{tech_stack.frameworks.join(', ')}
+          %strong.list-group-item-heading Frameworks:
+          %p.list-group-item-text
+            #{tech_stack.frameworks.join(', ')}
         %li
-          %strong Dev Ops Tools:
-          #{tech_stack.dev_ops_tools.join(', ')}
+          %strong.list-group-item-heading Dev Ops Tools:
+          %p.list-group-item-text
+            #{tech_stack.dev_ops_tools.join(', ')}
         %li
-          %strong NoSQL Databases:
-          #{tech_stack.nosql_databases.join(', ')}
+          %strong.list-group-item-heading NoSQL Databases:
+          %p.list-group-item-text
+            #{tech_stack.nosql_databases.join(', ')}
         %li
-          %strong Relational Databases:
-          #{tech_stack.relational_databases.join(', ')}
+          %strong.list-group-item-heading Relational Databases:
+          %p.list-group-item-text
+            #{tech_stack.relational_databases.join(', ')}
     - else
       %p Sorry there is no tech stack information, contact #{company.name} for more information.

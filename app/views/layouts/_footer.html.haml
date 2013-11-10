@@ -1,16 +1,16 @@
 %footer#footer.footer
   .container
     .row.info
-      .span4.residence
+      .col-md-4.residence
         %ul
           %li 1114 Sutter Street Apt. 607
           %li United States, San Francisco, CA 94109
-      .span3.touchup
+      .col-md-3.touchup
         %ul
           %li= link_to 'About', about_path
           %li= link_to 'Contact', contact_path
           %li= link_to 'Pricing', pricing_path
-      .span5.touch
+      .col-md-5.touch
         %ul
           %li
             %strong
@@ -21,9 +21,9 @@
               E.
             pickemupteam@gmail.com
     .row.credits
-      .span12
+      .col-md-12
         .row.social
-          .span12
+          .col-md-12
             = link_to root_path, class: 'facebook' do
               %span.socialicons.ico1
               %span.socialicons_h.ico1h
@@ -34,5 +34,5 @@
               %span.socialicons.ico3
               %span.socialicons_h.ico3h
         .row.copyright
-          .span12
+          .col-md-12
             2013 Pickemup. All rights reserved

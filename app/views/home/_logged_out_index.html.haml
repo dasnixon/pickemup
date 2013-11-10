@@ -1,7 +1,7 @@
 #sign_up2
   .container
     .row.login
-      .span5.left_box
+      .col-md-5.left_box
         %h2 Get started today
         .perk_box
           .media
@@ -19,7 +19,7 @@
               = image_tag('target.png', size: '70x70', style: 'float: left; margin-right: 16px;')
             .media-body.sign-up-front
               Get precisely matched with companies or developers based on skills, tech stacks, benefits, locations, experience levels, job positions, and much more.
-      .span6.signin_box
+      .col-md-6.signin_box
         .box
           .box_cont
             .developer-title
@@ -34,12 +34,15 @@
             .form
               .form_errors
               .title-signup2 Companies
-              = form_for @company, url: companies_path, method: :post do |f|
-                = f.text_field :name, placeholder: 'Company Name'
-                = f.text_field :email, placeholder: 'Email'
-                .inline
-                  = f.password_field :password, placeholder: 'Password'
-                  = f.password_field :password_confirmation, placeholder: 'Password Confirmation'
+              = form_for @company, role: 'form', url: companies_path, method: :post do |f|
+                .form-group
+                  = f.text_field :name, placeholder: 'Company Name', class: 'form-control input-sm'
+                .form-group
+                  = f.text_field :email, placeholder: 'Email', class: 'form-control input-sm'
+                .form-group
+                  = f.password_field :password, placeholder: 'Password', class: 'form-control input-sm'
+                .form-group
+                  = f.password_field :password_confirmation, placeholder: 'Password Confirmation', class: 'form-control input-sm'
                 .forgot
                   %span Already have an account?
                   = link_to 'Sign in', sign_in_path
@@ -53,7 +56,7 @@
   .container
     .row.feature_wrapper
       .features_op1_row
-        .span4.feature.first
+        .col-md-4.feature.first
           .img_box{style: 'text-align: center;'}
             %i.fa.fa-compass.fa-4x
           .text
@@ -62,7 +65,7 @@
               Quickly and accurately discover developers or companies based on your preferred programming languages,
               benefits, locations, programming practices, and more. No longer do you need to sift through resumes or
               job listings to find what you are looking for.
-        .span4.feature
+        .col-md-4.feature
           .img_box{style: 'text-align: center;'}
             %i.fa.fa-code.fa-4x
           .text
@@ -72,7 +75,7 @@
               get recruited. We have tons of technical experience, a well developed recruiting process that we've adopted
               from several companies, and the best customer support.
               is what you prefer.
-        .span4.feature.last
+        .col-md-4.feature.last
           .img_box{style: 'text-align: center;'}
             %i.fa.fa-thumbs-up.fa-4x
           .text
@@ -84,14 +87,14 @@
 
 %br
 %br
-= render 'layouts/team'
+-#= render 'layouts/team'
 
 #features
   .container
     .row.feature
-      .span6
+      .col-md-6
         = image_tag('showcase1.png')
-      .span6.info
+      .col-md-6.info
         %h3
           %i.fa.fa-user.fa-2x
           Developers
@@ -101,7 +104,7 @@
           to work, how many hours you want to work in a week, the industries you prefer, the size of the company,
           and more! Lastly, do not forget to set those perks. Who wants to work in an office without kegs?
     .row.feature.ss
-      .span6.info
+      .col-md-6.info
         %h3
           %i.fa.fa-building.fa-2x
           Companies
@@ -111,12 +114,12 @@
           databases, frameworks, and dev ops tools. In addition, you can fully tailor your job listing based on
           expected salary, location, skills, experience level, position type, and everything you need to make sure you
           get the perfect developer.
-      .span6
+      .col-md-6
         = image_tag('showcase2.png')
     .row.feature.ss
-      .span6
+      .col-md-6
         = image_tag('scientist.jpg', class: 'img img-rounded')
-      .span6.info
+      .col-md-6.info
         %h3
           %i.fa.fa-magic.fa-2x
           Changing the Game

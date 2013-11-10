@@ -28,9 +28,14 @@
   font-weight: bold;
 }
 
-  .with-user-image {
-    margin-top: 252px;
-  }
+.with-user-image {
+  margin-top: 160px;
+  position: fixed;
+}
+
+.user-deactivate {
+  margin-bottom: 40px;
+}
 
 @media (max-width: 767px) {
   .user-image {

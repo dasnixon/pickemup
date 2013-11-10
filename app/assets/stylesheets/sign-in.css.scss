@@ -2,7 +2,7 @@
 #sign_in1{
     background: image-url('backgrounds/sign-in-page.jpg')  no-repeat;
     display: block;
-    height: 770px;
+    height: 800px;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -58,7 +58,7 @@
     margin: 0;
 }
 #sign_in1 .division{
-    margin: 0 auto 50px;
+    margin: 0 auto 20px;
     float: none;
     left: -6px;
     overflow: hidden;
@@ -104,31 +104,7 @@
     font-weight: 400;
 }
 #sign_in1 .footer form{
-    margin: 0 0 46px 0;
-}
-#sign_in1 .footer input[type="text"],
-#sign_in1 .footer input[type="password"] {
-    border-radius: 3px;
-    font-size: 16px;
-    height: 25px;
-    margin: 0 10px 0px 0;
-    color: black;
-    width: 31%;
-}
-#sign_in1 .footer input[type="submit"]{
-    text-transform: uppercase;
-    color: #fff;
-    font-size: 15px;
-    padding: 8px 18px;
-    border: 0 none;
-    border-radius: 3px;
-    -webkit-transition: background linear .2s, box-shadow linear .2s;
-    -moz-transition: background linear .2s, box-shadow linear .2s;
-    -o-transition: background linear .2s, box-shadow linear .2s;
-    transition: background linear .2s, box-shadow linear .2s;
-}
-#sign_in1 .footer input[type="submit"]:hover{
-    background: #252528;
+    margin: 0 0 16px 0;
 }
 #sign_in1 .remember{
     margin: 0;
@@ -141,40 +117,24 @@
     color: black;
 }
 #sign_in1 .remember a{
-    color: black;
-    font-size: 14px;
-    border-bottom: 1px solid black;
-    font-weight: bold;
-    -webkit-transition: all .2s;
-    -moz-transition: all .2s;
-    -ms-transition: all .2s;
-    transition: all .2s;
+  color: black;
+  font-size: 14px;
+  border-bottom: 1px solid black;
+  font-weight: bold;
+  -webkit-transition: all .2s;
+  -moz-transition: all .2s;
+  -ms-transition: all .2s;
+  transition: all .2s;
 }
 #sign_in1 .dosnt{
-    text-align: center;
-    color: black;
-    float: right;
-    font-size: 14px;
-    margin: 0 18px 0 0;
-    font-weight: bold;
+  font-weight: bold;
+  text-align: center;
+  float: right;
+  font-size: 14px;
 }
 #sign_in1 .dosnt span{
     margin-right: 8px;
 }
-#sign_in1 .dosnt a{
-    color: black;
-    border-bottom: 1px solid black;
-    -webkit-transition: all .2s;
-    -moz-transition: all .2s;
-    -ms-transition: all .2s;
-    transition: all .2s;
-}
-#sign_in1 .dosnt a:hover,
-#sign_in1 .remember a:hover{
-    color:#252528;
-    border-color: #252528;
-}
-
 /* Sign In Option 2 */
 #sign_in2 .section_header{
     margin-bottom: 50px;
@@ -304,7 +264,6 @@
     border-color: rgba(0,0,0,0.7);
 }
 #sign_in2 .signin_box .box .division{
-    margin: 0 auto 18px;
     float: none;
     overflow: hidden;
     width: 100%;
@@ -439,10 +398,6 @@
         width: 90%;
         margin-bottom: 12px;
     }
-    #sign_in1 .footer input[type="submit"]{
-        margin: 10px auto 0;
-        display: block;
-    }
     #sign_in1 .proof{
         width: 100%;
     }
@@ -472,16 +427,10 @@
     }
     #sign_in1 .dosnt span,
     #sign_in1 .dosnt a{
-        color: #333;
-        border-color: #333;
         float: left;
     }
     #sign_in1 .dosnt a{
         float: left;
-    }
-    #sign_in1 .dosnt a:hover{
-        color: #187CCC;
-        border-color: #187CCC;
     }
     #sign_in2 .left_box h4{
         text-align: center;

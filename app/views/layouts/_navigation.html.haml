@@ -1,32 +1,33 @@
-.navbar.transparent.navbar-inverse.navbar-fixed-top
-  .navbar-inner
-    .container
-      %a.btn.btn-navbar{'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'}
+%nav.navbar.transparent.navbar-inverse.navbar-fixed-top{role: 'navigation'}
+  .container
+    .navbar-header
+      = link_to raw('<strong>Pickemup</strong>'), root_path, class: 'navbar-brand'
+      %button.navbar-toggle{type: "button", 'data-toggle' => 'collapse', 'data-target' => '#navigation'}
+        %span.sr-only Toggle navigation
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to raw('<strong>Pickemup</strong>'), root_path, class: 'brand'
-      .nav-collapse.collapse
-        %ul.nav.pull-right
-          - if user_signed_in?
-            %li= link_to 'Profile', edit_user_path(id: current_user.id)
-            %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
-            %li= link_to 'Resume', resume_user_path(id: current_user.id)
-            %li= link_to 'Briefcase', listings_user_path(id: current_user.id)
-            = render partial: 'layouts/navigation/mailbox', locals: {messages_for: current_user}
+    .collapse.navbar-collapse#navigation
+      %ul.nav.navbar-nav.navbar-right
+        - if user_signed_in?
+          %li= link_to 'Profile', edit_user_path(id: current_user.id)
+          %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
+          %li= link_to 'Resume', resume_user_path(id: current_user.id)
+          %li= link_to 'Briefcase', listings_user_path(id: current_user.id)
+          = render partial: 'layouts/navigation/mailbox', locals: {messages_for: current_user}
+        - if company_signed_in?
+          %li= link_to 'Job Listings', company_job_listings_path(company_id: current_company.id)
+          %li= link_to 'Tech Stacks', company_tech_stacks_path(company_id: current_company.id)
+          = render partial: 'layouts/navigation/mailbox', locals: {messages_for: current_company}
+        - if !user_signed_in? and !company_signed_in?
+          %li= link_to 'About', about_path
+          %li= link_to 'Pricing', pricing_path
+          %li= link_to 'Contact Us', contact_path
+        - if !user_signed_in?
           - if company_signed_in?
-            %li= link_to 'Job Listings', company_job_listings_path(company_id: current_company.id)
-            %li= link_to 'Tech Stacks', company_tech_stacks_path(company_id: current_company.id)
-            = render partial: 'layouts/navigation/mailbox', locals: {messages_for: current_company}
-          - if !user_signed_in? and !company_signed_in?
-            %li= link_to 'About', about_path
-            %li= link_to 'Pricing', pricing_path
-            %li= link_to 'Contact Us', contact_path
-          - if !user_signed_in?
-            - if company_signed_in?
-              %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)
-            - else
-              %li= link_to 'Sign In', sign_in_path
-              %li= link_to 'Sign Up', sign_up_path
-          - if user_signed_in? || company_signed_in?
-            %li= link_to 'Logout', log_out_path
+            %li= link_to current_company.name || 'Your Company', company_path(id: current_company.id)
+          - else
+            %li= link_to 'Sign In', sign_in_path
+            %li= link_to 'Sign Up', sign_up_path
+        - if user_signed_in? || company_signed_in?
+          %li= link_to 'Logout', log_out_path

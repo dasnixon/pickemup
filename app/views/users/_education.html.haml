@@ -1,15 +1,15 @@
-.accordion-group
-  .accordion-heading
-    %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseEducation' }
+.panel-group
+  .panel-heading
+    %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseEducation' }
       %h4 Education
-  #collapseEducation{ class: 'accordion-body collapse' }
-    .accordion-inner
+  #collapseEducation.panel-collapse.collapse
+    .panel-body
       %table.table
         %tr
           %th School Name
           %th Field of Study
           %th Degree
-          %th.span5 Activities
+          %th Activities
           %th Notes
           %th Dates Attended
         - @educations.each do |education|
@@ -17,6 +17,6 @@
             %td= education.school_name
             %td= education.field_of_study
             %td= education.degree
-            %td.span5= education.activities
+            %td= education.activities
             %td= education.notes
             %td #{education.start_year} - #{education.end_year}

@@ -1,9 +1,9 @@
-.accordion-group
-  .accordion-heading
-    %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapsePos' }
+.panel-group
+  .panel-heading
+    %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapsePos' }
       %h4 Positions
-  #collapsePos{ class: 'accordion-body collapse' }
-    .accordion-inner
+  #collapsePos.panel-collapse.collapse
+    .panel-body
       %table.table
         %tr
           %th Company Name
@@ -11,7 +11,7 @@
           %th Company Type
           %th Company Size
           %th Title
-          %th.span5 Summary
+          %th Summary
           %th Start Date
         - @positions.each do |position|
           %tr{'class' => "#{position.is_current? ? 'success' : ''}"}
@@ -20,5 +20,5 @@
             %td= position.company_type
             %td= position.size
             %td= position.title
-            %td.span5= position.summary
+            %td= position.summary
             %td #{Date::MONTHNAMES[position.start_month.to_i]} of #{position.start_year}

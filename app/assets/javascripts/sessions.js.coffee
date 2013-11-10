@@ -16,7 +16,7 @@ $ ->
     email = $('#company_email').val()
 
     if !emailCheck(email)
-      $(".form_errors").addClass("alert alert-error")
+      $(".form_errors").addClass("alert alert-danger")
       $(".form_errors").text("Please enter a valid email address.").show()
       $(".form_errors").click ->
         clearErrors()
@@ -24,7 +24,7 @@ $ ->
       return false
 
     if companyName.length == 0
-      $(".form_errors").addClass("alert alert-error")
+      $(".form_errors").addClass("alert alert-danger")
       $(".form_errors").text("Please enter a valid company name.").show()
       $(".form_errors").click ->
         clearErrors()
@@ -32,14 +32,14 @@ $ ->
       return false
 
     if password.length < 8
-      $(".form_errors").addClass("alert alert-error")
+      $(".form_errors").addClass("alert alert-danger")
       $(".form_errors").text("Password must be at least 8 characters").show()
       $(".form_errors").click ->
         clearErrors()
       return false
 
     if password != confirmation
-      $(".form_errors").addClass("alert alert-error")
+      $(".form_errors").addClass("alert alert-danger")
       $(".form_errors").text("Password and Confirmation did not match").show()
       $(".form_errors").click ->
         clearErrors()

@@ -1,7 +1,7 @@
 #aboutus
   .container
     .row
-      .span6.intro
+      .col-md-6.intro
         %h6 Working to get companies and developers easily and quickly connected by what they prefer in an employee or employer.
         %p
           At Pickemup we want to get it right the first time. That's why we built our technical recruiting service around our application
@@ -23,15 +23,15 @@
           immediately be able to find, search, and narrow down the perfect company that you've always been looking for. Also, we strive
           to make sure you speak directly to those that matter. No longer do you have to take 10 meaningless phone calls, everything there is
           to know about your background is cleanly organized and within a click of a button.
-      .span6
+      .col-md-6
         = image_tag('vim_recruit.png')
 
-= render 'layouts/team'
+-#= render 'layouts/team'
 
 #process
   .container
     .row.services_circles
-      .span4.description
+      .col-md-4.description
         .text.active
           %h4 Results you want.
           %p
@@ -53,7 +53,7 @@
             personal experiences, our friends experiences, and outside opinions about the recruitment process to come up
             with what we think is a perfect way to change the way recruitment is done. We know that using our product you will
             be satisfied with the results, and everyone will win.
-      .span7.areas
+      .col-md-7.areas
         .circle.active
           = image_tag('plan.png')
           %span Results

@@ -5,23 +5,28 @@
       = link_to "Edit", edit_company_tech_stack_path(company_id: company.id, id: tech_stack.id), class: 'btn btn-warning'
       = link_to "Remove", company_tech_stack_path(company_id: company.id, id: tech_stack.id), class: 'btn btn-danger', method: :delete
     .lead.media-headling= "#{tech_stack.name} Tech Stack"
-    %blockquote
-      %ul.unstyled
-        %li
-          %strong Back-end Languages:
+    %ul.list-group
+      %li.list-group-item
+        %strong.list-group-item-heading Back-end Languages
+        %p.list-group-item-text
           #{tech_stack.back_end_languages.join(', ')}
-        %li
-          %strong Front-end Languages:
+      %li.list-group-item
+        %strong.list-group-item-heading Front-end Languages
+        %p.list-group-item-text
           #{tech_stack.front_end_languages.join(', ')}
-        %li
-          %strong Frameworks:
+      %li.list-group-item
+        %strong.list-group-item-heading Frameworks
+        %p.list-group-item-text
           #{tech_stack.frameworks.join(', ')}
-        %li
-          %strong Dev-ops Tools:
+      %li.list-group-item
+        %strong.list-group-item-heading Dev Ops Tools
+        %p.list-group-item-text
           #{tech_stack.dev_ops_tools.join(', ')}
-        %li
-          %strong Relational Databases:
-          #{tech_stack.relational_databases.join(', ')}
-        %li
-          %strong NoSQL Databases:
+      %li.list-group-item
+        %strong.list-group-item-heading NoSQL Databases
+        %p.list-group-item-text
           #{tech_stack.nosql_databases.join(', ')}
+      %li.list-group-item
+        %strong.list-group-item-heading Relational Databases
+        %p.list-group-item-text
+          #{tech_stack.relational_databases.join(', ')}

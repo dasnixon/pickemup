@@ -1,28 +1,37 @@
 #sign_up1
   .container
     .row
-      .span12.header
+      .col-md-12.header
         %h4 Sign up for an account
         %h4 Developers
-        .span4.social
-          = link_to raw("<i class='fa fa-github-sign fa-5x'></i>"), '/auth/github', class: 'circle github_link'
-          = link_to raw("<i class='fa fa-linkedin-sign fa-5x'></i>"), '/auth/linkedin', class: 'circle github_link'
-      .span3.division
+        .col-md-4.social
+          = link_to raw("<i class='fa fa-github-square fa-5x'></i>"), '/auth/github', class: 'circle github_link'
+          = link_to raw("<i class='fa fa-linkedin-square fa-5x'></i>"), '/auth/linkedin', class: 'circle github_link'
+      .col-md-3.division
         .line.l
         %span or
         .line.r
-      .span12.footer
+      .col-md-12.footer
         .form_errors
         %h4 Companies
         = form_tag companies_path, method: :post do |f|
-          = text_field_tag 'company[name]', nil, placeholder: 'Company Name'
-          = text_field_tag 'company[email]', nil, placeholder: 'Email'
-          = password_field_tag 'company[password]', nil, placeholder: 'Password'
-          = password_field_tag 'company[password_confirmation]', nil, placeholder: 'Password Confirmation'
-          = submit_tag 'Sign Up', {id: 'company_sign_in', class: 'btn btn-theme'}
-      .span12.proof
-        .span5.remember
-          %a{:href => "reset.html"} Forgot password?
-        .span3.dosnt
-          %span Already have an account?
-          = link_to 'Sign in', sign_in_path, style: 'text-decoration: none;'
+          .row.row-spacing
+            .col-xs-6
+              = text_field_tag 'company[name]', nil, placeholder: 'Company Name', class: 'form-control'
+            .col-xs-6
+              = text_field_tag 'company[email]', nil, placeholder: 'Email', class: 'form-control'
+          .row.row-spacing
+            .col-xs-6
+              = password_field_tag 'company[password]', nil, placeholder: 'Password', class: 'form-control'
+            .col-xs-6
+              = password_field_tag 'company[password_confirmation]', nil, placeholder: 'Password Confirmation', class: 'form-control'
+          .row.row-spacing
+            .col-md-12
+              = submit_tag 'SIGN UP', {class: 'btn btn-theme form-control'}
+          .row
+            .col-md-12.proof
+              .col-md-5.remember
+                %a{:href => "reset.html"} Forgot password?
+              .col-md-3.dosnt
+                %span Already have an account?
+                = link_to 'Sign in', sign_in_path, style: 'text-decoration: none;'

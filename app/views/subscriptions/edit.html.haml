@@ -4,15 +4,15 @@
     %h6 #{"Subscription Status: #{@subscription.active ? 'Active' : 'Inactive'}"}
     %hr
     = form_for [@company, @subscription], html: { class: 'form-horizontal' } do |f|
-      .control-group
-        = label_tag 'Subscription Plan:', nil, class: 'control-label'
-        .controls
-          = select_tag :plan, options_for_select(plans, :selected => @subscription.plan)
+      .form-group
+        = label_tag 'Subscription Plan', nil, class: 'col-sm-2 control-label'
+        .col-sm-10
+          = select_tag :plan, options_for_select(plans, :selected => @subscription.plan), class: 'form-control'
 
       - if @subscription.active
-        .control-group
-          = label_tag 'Cancel Subscription', nil, class: 'control-label'
-          .controls
+        .form-group
+          = label_tag 'Cancel Subscription', nil, class: 'col-sm-2 control-label'
+          .col-sm-10
             = label_tag 'Yes', nil, class: 'radio-flat inline' do
               = radio_button_tag :cancel_subscription, true, false, {'data-toggle' => 'radio'}
               Yes
@@ -20,9 +20,9 @@
               = radio_button_tag :cancel_subscription, false, true, {'data-toggle' => 'radio'}
               No
       - else
-        .control-group
-          = label_tag 'Reactivate Subscription', nil, class: 'control-label'
-          .controls
+        .form-group
+          = label_tag 'Reactivate Subscription', nil, class: 'col-sm-2 control-label'
+          .col-sm-10
             = label_tag 'Yes', nil, class: 'radio-flat inline' do
               = radio_button_tag :reactivate_subscription, true, true, {'data-toggle' => 'radio'}
               Yes
@@ -30,4 +30,4 @@
               = radio_button_tag :reactivate_subscription, false, false, {'data-toggle' => 'radio'}
               No
 
-      = f.submit 'Update Subscription', class: 'btn btn-success'
+      = f.submit 'Update Subscription', class: 'btn btn-success col-sm-offset-2'

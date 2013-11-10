@@ -1,11 +1,10 @@
-.accordion-group
-  .accordion-heading
-    %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseOrg' }
+.panel-group
+  .panel-heading
+    %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseOrg' }
       %h4 Organizations
-  #collapseOrg{ class: 'accordion-body collapse' }
-    .accordion-inner
-      .row-fluid
-        %ul
-          - @orgs.each do |org|
-            %li.span1.text-center
-              = link_to(image_tag(org.logo.url(:preview), width: '50', height: '30', title: org.name), org.url, target: '_blank')
+  #collapseOrg.panel-collapse.collapse
+    .panel-body
+      %ul.list-inline
+        - @orgs.each do |org|
+          %li
+            = link_to(image_tag(org.logo.small, title: org.name, class: 'img-rounded'), org.url, target: '_blank')

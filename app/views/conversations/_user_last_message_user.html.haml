@@ -1,5 +1,5 @@
 .media{class: "media #{conversation.is_unread?(current_user) ? 'info' : @box.eql?('trash') ? 'error' : ''}"}
-  = link_to image_tag(last_message.profile_image, size: '100x100', alt: last_message.name, title: last_message.name, class: 'media-object img-rounded'), company_path(id: last_message.id), class: 'pull-left'
+  = link_to image_tag(last_message.profile_image.small, alt: last_message.name, title: last_message.name, class: 'media-object img-rounded'), company_path(id: last_message.id), class: 'pull-left'
   .media-body
     .pull-right.media-heading
       - unless @box.eql?('trash')
@@ -10,5 +10,5 @@
       Conversation With: #{link_to conversation_with.name, company_path(id: conversation_with.id)}
     %h6.media-heading
       Subject: #{link_to(truncate(conversation.subject, length: 55), user_conversation_path(user_id: current_user.id, id: conversation.id, box: @box))}
-    .span8.well
+    .col-md-8.well
       = raw(truncate(strip_tags(conversation.last_message.body), :length => 100))

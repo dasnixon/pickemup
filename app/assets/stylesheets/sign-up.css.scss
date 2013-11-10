@@ -2,7 +2,7 @@
 #sign_up1{
 	background: image-url('backgrounds/sign-up-page.jpg') no-repeat;
 	display: block;
-  height: 770px;
+  height: 800px;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -99,16 +99,6 @@
     line-height: 38px;
     font-weight: 400;
 }
-
-#sign_up1 .footer input[type="text"],
-#sign_up1 .footer input[type="password"] {
-	border-radius: 3px;
-	font-size: 16px;
-	height: 25px;
-	margin: 0 10px 0px 0;
-	color: black;
-	width: 20%;
-}
 #sign_up1 .footer input[type="submit"]{
 	text-transform: uppercase;
 	color: #fff;
@@ -129,37 +119,18 @@
 	color: #fff;
 }
 #sign_up1 .remember a{
-	color: black;
   text-decoration: none;
 	font-size: 14px;
-	border-bottom: 1px solid black;
 	font-weight: bold;
 }
 #sign_up1 .dosnt{
 	text-align: center;
-	color: black;
 	font-size: 14px;
 }
 #sign_up1 .dosnt span{
 	margin-right: 8px;
   font-weight: bold;
 }
-#sign_up1 .dosnt a{
-	color: black;
-  text-decoration: none;
-	border-bottom: 1px solid black;
-  font-weight: bold;
-}
-#sign_up1 .dosnt a:hover,
-#sign_up1 .remember a:hover{
-	color:#252528;
-	border-color: #252528;
-    -webkit-transition: all .2s;
-    -moz-transition: all .2s;
-    -ms-transition: all .2s;
-    transition: all .2s;
-}
-
 .sign-up-front {
   font-size: 20px;
   line-height: 110%;
@@ -299,25 +270,6 @@
 #sign_up2 .signin_box .box .form form{
 	margin: 0;
 }
-#sign_up2 .signin_box .box .form input[type="text"]{
-	border-radius: 3px;
-	font-size: 16px;
-	width: 93%;
-  margin-left: 3%;
-	margin-bottom: 16px;
-	height: 27px;
-	color: black;
-}
-#sign_up2 .signin_box .box .form input[type="password"]{
-	border-radius: 3px;
-	font-size: 16px;
-	width: 43.4%;
-  margin-left: 3%;
-	margin-bottom: 16px;
-	height: 27px;
-  float: left;
-	color: black;
-}
 #sign_up2 .signin_box .box .form .forgot{
 	margin-left: 0;
 	margin-bottom: 20px;
@@ -356,6 +308,10 @@
   margin-bottom: 15px;
 }
 
+.row-spacing {
+  margin-bottom: 10px;
+}
+
 /* Responsive
 -------------------------------------------------- */
 
@@ -370,7 +326,7 @@
 
 }
 /* Portrait tablet to landscape and desktop */
-@media (min-width: 768px) and (max-width: 1200px) {
+@media (min-width: 768px) and (max-width: 1000px) {
 	#sign_up1 .header .social{
 		width: 35%;
 	}
@@ -378,6 +334,9 @@
 	#sign_up1 .footer input[type="password"]{
 		width: 15%;
 	}
+  #sign_up2 {
+    height: 1300px;
+  }
 	#sign_up2 .left_box .perk_box .perk .icos{
 		height: 66px;
 	}
@@ -390,10 +349,23 @@
   div.span5.left_box h1 {
     font-size: 35px;
   }
-  #sign_up2 .signin_box .box .form input[type="password"]{
-    width: 93%;
-    float: none;
+  #sign_up2 .row.login {
+    height: 1050px;
   }
+	#sign_up2 .left_box{
+		overflow: hidden;
+		margin-bottom: 70px;
+    padding-left: 10px;
+    width: 95%;
+	}
+	#sign_up2 .signin_box{
+		float: none;
+	}
+	#sign_up2 .signin_box .box{
+		float: none;
+		margin: 0 auto;
+		width: 100%;
+	}
 }
 /* Landscape phone to portrait tablet */
 @media (max-width: 767px) {
@@ -417,16 +389,6 @@
 	#sign_up1 .division .line{
 		border-color: #333;
 	}
-	#sign_up1 .footer input[type="text"],
-	#sign_up1 .footer input[type="password"]{
-		font-size: 13px;
-		width: 90%;
-		margin-bottom: 12px;
-	}
-	#sign_up1 .footer input[type="submit"]{
-		margin: 10px auto 0;
-		display: block;
-	}
 	#sign_up1 .dosnt{
 		float: left;
 	}
@@ -435,21 +397,12 @@
 	}
 	#sign_up1 .dosnt span,
 	#sign_up1 .dosnt a{
-		color: #333;
-		border-color: #333;
 		float: left;
-	}
-	#sign_up1 .dosnt a{
-		float: left;
-	}
-	#sign_up1 .dosnt a:hover{
-		color: #187CCC;
-		border-color: #187CCC;
 	}
   #sign_up2{
     margin-left: -20px;
     margin-right: -20px;
-    height: auto;
+    margin-top: 50px;
   }
   #sign_up2 .row.login {
     margin-top: 30px;
@@ -458,10 +411,6 @@
 		text-align: center;
 		margin-bottom: 30px;
 	}
-  #sign_up2 .signin_box .box .form input[type="password"]{
-    width: 93%;
-    float: none;
-  }
 	#sign_up2 .left_box{
 		overflow: hidden;
 		margin-bottom: 70px;

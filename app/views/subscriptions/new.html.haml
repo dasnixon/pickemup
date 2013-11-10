@@ -2,34 +2,31 @@
 #housing
   .container
     %div{id: "stripe_error"}
-    .section_header
-      %h3 New Subscription
     .row
-      .span5
+      .col-md-9
         = form_for [@company, @subscription], html: { class: 'form-horizontal' } do |f|
           - if @clicked_option.present?
             = hidden_field_tag :plan, @clicked_option
           - else
-            .control-group
-              = label_tag 'Subscription Plan:', nil, class: 'control-label'
-              .controls
-                = select_tag :plan, options_for_select(plans, :selected => @subscription.plan)
+            .form-group
+              = label_tag 'Subscription Plan:', nil, class: 'col-sm-2 control-label'
+              .col-sm-10
+                = select_tag :plan, options_for_select(plans, :selected => @subscription.plan), class: 'form-control'
 
           %div{id: "subscription"}
             = render "shared/subscription_form"
 
           = hidden_field_tag :email, @company.email
           = hidden_field_tag :company_id, @company.id
-          .control-group
-            .controls
+          .form-group
+            .col-sm-10.col-sm-offset-2
               = f.submit 'Save Subscription', class: 'btn btn-success'
       - if @clicked_option.present?
-        .span6
-          %div#in_pricing{style: 'margin-top: 15px;'}
-            %div.row.charts_wrapp
-              - if @clicked_option.to_i == 1
-                = render 'layouts/basic_purchase_options_preview'
-              - elsif @clicked_option.to_i == 2
-                = render 'layouts/midlevel_purchase_options_preview'
-              - else
-                = render 'layouts/enterprise_purchase_options_preview'
+        %div#in_pricing{style: 'margin-top: 15px;'}
+          %div.row.charts_wrapp
+            - if @clicked_option.to_i == 1
+              = render 'layouts/basic_purchase_options_preview'
+            - elsif @clicked_option.to_i == 2
+              = render 'layouts/midlevel_purchase_options_preview'
+            - else
+              = render 'layouts/enterprise_purchase_options_preview'

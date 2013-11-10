@@ -1,26 +1,31 @@
 #sign_in1
   .container
     .row
-      .span12.header
+      .col-md-12.header
         %h4 Log in to your account
         %h4 Developers
-        .span4.social
-          = link_to raw("<i class='fa fa-github-sign fa-5x'></i>"), '/auth/github', class: 'circle github_link'
-          = link_to raw("<i class='fa fa-linkedin-sign fa-5x'></i>"), '/auth/linkedin', class: 'circle github_link'
-      .span3.division
+        .col-md-4.social
+          = link_to raw("<i class='fa fa-github-square fa-5x'></i>"), '/auth/github', class: 'circle github_link'
+          = link_to raw("<i class='fa fa-linkedin-square fa-5x'></i>"), '/auth/linkedin', class: 'circle github_link'
+      .col-md-3.division
         .line.l
         %span or
         .line.r
-      .span12.footer
+      .col-md-12.footer
         %h4 Companies
-        %div{class: 'form_errors'}
-        = form_tag company_log_in_path, :action => :create, :method => :post, id: 'company_sign_in' do |f|
-          = text_field_tag :email, nil, placeholder: 'Email'
-          = password_field_tag :password, nil, placeholder: 'Password'
-          = submit_tag "Sign In", class: 'btn btn-theme'
-      .span12.proof
-        .span5.remember
-          %a{:href => "reset.html"} Forgot password?
-        .span3.dosnt
+        .form_errors'
+        = form_tag company_log_in_path, action: :create, method: :post do |f|
+          .row.row-spacing
+            .col-xs-6
+              = text_field_tag :email, nil, placeholder: 'Email', class: 'form-control'
+            .col-xs-6
+              = password_field_tag :password, nil, placeholder: 'Password', class: 'form-control'
+          .row
+            .col-md-12
+              = submit_tag "SIGN IN", {class: 'btn btn-theme form-control'}
+      .col-md-12.proof
+        .col-md-5.dosnt
+          = link_to 'Forgot Password?', root_path
+          %br
           %span Don't have an account?
           = link_to 'Sign up', sign_up_path

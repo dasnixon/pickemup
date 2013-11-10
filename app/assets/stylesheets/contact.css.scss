@@ -28,14 +28,6 @@
 #contact .form .box{
 	margin: 0;
 }
-#contact .form .box input[type="text"]{
-	padding-left: 39px;
-	margin-bottom: 10px;
-	color: black;
-	height: 29px;
-	border-radius: 3px;
-	width: 89%;
-}
 #contact .form .box input.name{
 	background: image-url('formname.png') #fff no-repeat 5px;
 }
@@ -47,13 +39,6 @@
 }
 #contact .form .box_r{
 	float: right;
-}
-#contact .form .box textarea{
-	padding: 11px;
-	width: 94%;
-	margin: 0;
-	border-radius: 3px;
-	height: 113px;
 }
 #contact .contact .submit{
 	margin: 0;
@@ -69,16 +54,8 @@
 	float: right;
 }
 #contact .contact .submit .right input[type="submit"]{
-	float: right;
-	text-transform: uppercase;
-	font-size: 15px;
-	padding: 4px 12px;
-	border: 0 none;
-	border-radius: 3px;
-	-webkit-transition: background linear .2s, box-shadow linear .2s;
-	-moz-transition: background linear .2s, box-shadow linear .2s;
-	-o-transition: background linear .2s, box-shadow linear .2s;
-	transition: background linear .2s, box-shadow linear .2s;
+  float: right;
+  text-transform: uppercase;
 }
 #contact .map{
 	margin: 0;
@@ -219,6 +196,7 @@
     margin: 10px auto;
 	}
 	#contact .form .box.box_r {
+    color: black;
 		width: 92%;
 		display: block;
     float: none;
@@ -234,9 +212,7 @@
 	#contact .map .box_wrapp{
 		width: 90%;
 		position: relative;
-		margin: 0 auto 80px;
-	}
-	#contact .map .box_wrapp .box_cont{
+		margin: 0 auto 140px;
 	}
 	#contact .map iframe{
 		display: none;

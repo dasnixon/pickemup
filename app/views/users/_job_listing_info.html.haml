@@ -5,71 +5,85 @@
         .pull-right= link_to 'View Conversation', user_conversation_path(user_id: current_user.id, id: job_listing[:conversation].id), class: 'btn btn-info'
         %br
         .lead.media-heading #{link_to(job_listing[:company].name, company_path(id: job_listing[:company].id))} - #{link_to(job_listing_title(job_listing[:listing]), company_job_listing_path(id: job_listing[:listing].id, company_id: job_listing[:company].id))}
-        .accordion
-          .accordion-group
-            .accordion-heading
-              %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseDesc' }
-                %h4 Job Description
-          #collapseDesc{ class: 'accordion-body collapse' }
-            .accordion-inner
-              .row-fluid
-                = job_listing[:listing].job_description.html_safe
-          .accordion-group
-            .accordion-heading
-              %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseBene' }
-                %h4 Benefits
-          #collapseBene{ class: 'accordion-body collapse' }
-            .accordion-inner
-              .row-fluid
-                %ul.unstyled
-                  %li
-                    %strong Salary Range:
+        .panel-group#accordion2
+          .panel.panel-default
+            .panel-heading
+              %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseDesc' }
+                %h4.panel-title
+                  Job Description
+          #collapseDesc.panel-collapse.collapse
+            .panel-body
+              = job_listing[:listing].job_description.html_safe
+          .panel.panel-default
+            .panel-heading
+              %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseBene' }
+                %h4.panel-title
+                  Benefits
+          #collapseBene.panel-collapse.collapse
+            .panel-body
+              %ul.list-group
+                %li.list-group-item
+                  %strong.list-group-item-heading
+                    Salary Range
+                  %p.list-group-item-text
                     #{number_to_currency(job_listing[:listing].salary_range_low)} - #{number_to_currency(job_listing[:listing].salary_range_high)}
-                  %li
-                    %strong Preferred Languages:
+                %li.list-group-item
+                  %strong.list-group-item-heading Preferred Languages
+                  %p.list-group-item-text
                     #{job_listing[:listing].acceptable_languages.join(', ')}
-                  %li
-                    %strong Preferred Experience Level:
+                %li.list-group-item
+                  %strong.list-group-item-heading Preferred Experience Level
+                  %p.list-group-item-text
                     #{job_listing[:listing].experience_levels.join(', ')}
-                  %li
-                    %strong Preferred Practices:
+                %li.list-group-item
+                  %strong.list-group-item-heading Preferred Practices
+                  %p.list-group-item-text
                     #{job_listing[:listing].practices.join(', ')}
-                  %li
-                    %strong Bonus Points for:
+                %li.list-group-item
+                  %strong.list-group-item-heading Bonus Points for
+                  %p.list-group-item-text
                     #{job_listing[:listing].special_characteristics.join(', ')}
-                  %li
-                    %strong Job Perks:
+                %li.list-group-item
+                  %strong.list-group-item-heading Job Perks
+                  %p.list-group-item-text
                     #{job_listing[:listing].perks.join(', ')}
-                  %li
-                    %strong Benefits:
+                %li.list-group-item
+                  %strong.list-group-item-heading Benefits
+                  %p.list-group-item-text
                     = job_listing_benefits(job_listing[:listing])
-          .accordion-group
-            .accordion-heading
-              %a{ class: 'accordion-toggle', 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseTechStack' }
-                %h4 Tech Stack
+          .panel.panel-default
+            .panel-heading
+              %a{ 'data-toggle' => 'collapse', 'data-parent' => '#accordion2', href: '#collapseTechStack' }
+                %h4.panel-title
+                  Tech Stack
           #collapseTechStack{ class: 'accordion-body collapse' }
-            .accordion-inner
-              .row-fluid
-                - tech_stack = job_listing[:listing].tech_stack
-                - if tech_stack.present?
-                  %ul.unstyled
-                    %li
-                      %strong Back-end Languages:
+            .panel-body
+              - tech_stack = job_listing[:listing].tech_stack
+              - if tech_stack.present?
+                %ul.list-group
+                  %li.list-group-item
+                    %strong.list-group-item-heading Back-end Languages
+                    %p.list-group-item-text
                       #{tech_stack.back_end_languages.join(', ')}
-                    %li
-                      %strong Front-end Languages:
+                  %li.list-group-item
+                    %strong.list-group-item-heading Front-end Languages
+                    %p.list-group-item-text
                       #{tech_stack.front_end_languages.join(', ')}
-                    %li
-                      %strong Frameworks:
+                  %li.list-group-item
+                    %strong.list-group-item-heading Frameworks
+                    %p.list-group-item-text
                       #{tech_stack.frameworks.join(', ')}
-                    %li
-                      %strong Dev Ops Tools:
+                  %li.list-group-item
+                    %strong.list-group-item-heading Dev Ops Tools
+                    %p.list-group-item-text
                       #{tech_stack.dev_ops_tools.join(', ')}
-                    %li
-                      %strong NoSQL Databases:
+                  %li.list-group-item
+                    %strong.list-group-item-heading NoSQL Databases
+                    %p.list-group-item-text
                       #{tech_stack.nosql_databases.join(', ')}
-                    %li
-                      %strong Relational Databases:
+                  %li.list-group-item
+                    %strong.list-group-item-heading Relational Databases
+                    %p.list-group-item-text
                       #{tech_stack.relational_databases.join(', ')}
-                - else
-                  %p Sorry there is no tech stack information, contact #{job_listing[:company].name} for more information.
+              - else
+                %p Sorry there is no tech stack information, contact #{job_listing[:company].name} for more information.

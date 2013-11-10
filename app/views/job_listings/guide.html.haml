@@ -1,6 +1,6 @@
 #housing
   .container
-    .alert
+    .alert.alert-info
       %button.close{"data-dismiss" => "alert", :type => "button"} &times;
       %strong Heads Up!
       You won't see this page again once you have added/activated a subscription, created a tech stack, and created a job listing.
@@ -17,7 +17,7 @@
         %small Read Below
     - unless @subscription and @subscription.active?
       .row.feature
-        .span12.info
+        .col-md-12.info
           %h3
             %i.fa.fa-credit-card.fa-2x
             Add/Activate a Subscription
@@ -27,7 +27,7 @@
             until you do so. Thanks.
     - unless @has_tech_stacks
       .row.feature.ss
-        .span12.info
+        .col-md-12.info
           %h3
             %i.fa.fa-code.fa-2x
             Add a Tech Stack!
@@ -39,7 +39,7 @@
             #{link_to 'here', new_company_tech_stack_path(company_id: current_company.id)} or there is a link in the
             navigation menu.
     .row.feature.ss
-      .span12.info
+      .col-md-12.info
         %h3
           %i.fa.fa-bullseye.fa-2x
           Be Accurate
@@ -48,7 +48,7 @@
           and descriptive with what your company has to offer. It's important for you to get as much detail up front so the
           process can move as quickly as possible, and the chances of landing the right developer the first time increase.
     .row.feature.ss
-      .span12.info
+      .col-md-12.info
         %h3
           %i.fa.fa-phone.fa-2x
           Let Us Know

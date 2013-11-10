@@ -1,8 +1,8 @@
 %li
   = link_to 'Inbox', user_conversations_path(box: 'inbox'), class: "#{'active' if params[:box] == 'inbox'}"
-  %span.divider /
+  %span.divider
 %li
   = link_to 'Sentbox', user_conversations_path(box: 'sentbox'), class: "#{'active' if params[:box] == 'sentbox'}"
-  %span.divider /
+  %span.divider
 %li
   = link_to 'Trash', user_conversations_path(box: 'trash'), class: "#{'active' if params[:box] == 'trash'}"

@@ -1,17 +1,20 @@
 #housing
-  .container-fluid
-    .row-fluid
-      .span3.pull-right
-        - if user_signed_in?
-          = link_to 'View Job Listings', company_job_listings_path(company_id: @company.id), class: 'pull-right btn btn-info', style: 'margin-right: 25px;'
-        - if current_company == @company
-          = link_to 'Edit Profile', edit_company_path(id: @company.id), class: 'btn btn-info', style: 'margin-left: 15px;'
-          - if @company.subscription
-            = link_to 'Edit Billing Information', edit_company_subscription_path(company_id: @company.id), class: 'btn btn-info'
-          - else
-            = link_to 'Add Billing Information', company_purchase_options_path(company_id: @company.id), class: 'btn btn-primary'
-        .span11
+  .container
+    .row
+      .col-md-4.pull-right
+        .row-spacing
+          - if user_signed_in?
+            = link_to 'View Job Listings', company_job_listings_path(company_id: @company.id), class: 'pull-right btn btn-info', style: 'margin-right: 25px;'
+          - if current_company == @company
+            = link_to 'Edit Profile', edit_company_path(id: @company.id), class: 'btn btn-info', style: 'margin-left: 15px;'
+            - if @company.subscription
+              = link_to 'Edit Billing Information', edit_company_subscription_path(company_id: @company.id), class: 'btn btn-info'
+            - else
+              = link_to 'Add Billing Information', company_purchase_options_path(company_id: @company.id), class: 'btn btn-info'
+        .col-md-12
+          = link_to image_tag(@company.get_logo.preview, class: 'media-object img-rounded'), @company.website, target: '_blank'
+        .col-md-12
           %br
           = render 'sidebar'
-      .span9
+      .col-md-8
         = render 'info'

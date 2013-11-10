@@ -1,14 +1,14 @@
 = render 'shared/stripe_js_head'
 #housing
   .container
-    = form_for [@company, @subscription], url: edit_card_company_subscription_path, method: :put, html: { id: 'new_subscription', class: 'form-horizontal form-xlarge' }  do |f|
-      .control-group
-        = label_tag 'Subscription Plan:', nil, class: 'control-label'
-        .controls
-          = select_tag :plan, options_for_select(plans, :selected => @subscription.plan)
+    = form_for [@company, @subscription], url: edit_card_company_subscription_path, method: :put, html: { id: 'new_subscription', class: 'form-horizontal' }  do |f|
+      .form-group
+        = label_tag 'Subscription Plan', nil, class: 'col-sm-2 control-label'
+        .col-sm-10
+          = select_tag :plan, options_for_select(plans, :selected => @subscription.plan), class: 'form-control'
       %div{id: "subscription"}
         = render "shared/subscription_form"
 
-      .control-group
-        .controls
+      .form-group
+        .col-sm-10.col-sm-offset-2
           = f.submit 'Update Card', class: 'btn btn-success'

@@ -8,20 +8,29 @@
       = form_tag create_contact_path, method: :post do
         .row.form
           - if @contact
-            %ul.alert.alert-error.alert-block.unstyled
-              = @contact.errors.full_messages.to_sentence(last_word_connector: ' and ')
-          .span6.box
-            = text_field_tag 'contact_us[name]', nil, placeholder: "Name", class: 'name'
-            = text_field_tag 'contact_us[email]', nil, placeholder: "Email", class: 'mail'
-            = text_field_tag 'contact_us[phone]', nil, placeholder: "Phone", class: 'phone'
-          .span6.box.box_r
-            = text_area_tag 'contact_us[message]', nil, :placeholder => "Type a message here..."
+            %ul.alert.alert-danger.alert-block.list-unstyled
+              %li= @contact.errors.full_messages.to_sentence(last_word_connector: ' and ')
+          .col-md-6.box
+            .input-group.row-spacing
+              %span.input-group-addon
+                %i.fa.fa-user
+              = text_field_tag 'contact_us[name]', nil, placeholder: "Name", class: 'form-control'
+            .input-group.row-spacing
+              %span.input-group-addon
+                %i.fa.fa-envelope
+              = text_field_tag 'contact_us[email]', nil, placeholder: "Email", class: 'form-control row-spacing'
+            .input-group.row-spacing
+              %span.input-group-addon
+                %i.fa.fa-phone
+              = text_field_tag 'contact_us[phone]', nil, placeholder: "Phone", class: 'form-control'
+          .col-md-6.box.box_r
+            = text_area_tag 'contact_us[message]', nil, :placeholder => "Type a message here...", class: 'form-control', rows: '5'
         .row.submit
-          .span3.right
+          .col-md-3.right
             = submit_tag "Send your message", class: 'btn btn-theme'
   .row.map
     .container
-      .span5.box_wrapp
+      .col-md-5.box_wrapp
         .box_cont
           .head
             %h6 Contact

@@ -11,9 +11,9 @@
       - else
         = link_to 'Activate Account', toggle_activation_company_path(id: current_company.id), method: :put, class: 'btn btn-success', style: 'margin-left: 5px;'
     = form_for @company, html: { class: 'form-horizontal', multipart: true } do |f|
-      .control-group
-        = label_tag :logo, nil, class: 'control-label'
-        .controls
+      .form-group
+        = label_tag :logo, nil, class: 'col-sm-2 control-label'
+        .col-sm-10.col-sm-offset-2
           .fileupload.fileupload-new{"data-provides" => "fileupload"}
             .fileupload-new.thumbnail{style: "width: 200px; height: 150px;"}
               = image_tag(@company.logo)
@@ -23,51 +23,51 @@
                 %span.fileupload-new Select image
                 %span.fileupload-exists Change
                 %input{type: 'file', name: 'company[logo]'}/
-      .control-group
-        = f.label :email, class: 'control-label'
-        .controls
-          = f.text_field :email
-      .control-group
-        = f.label :name, class: 'control-label'
-        .controls
-          = f.text_field :name
-      .control-group
-        = f.label :description, class: 'control-label'
-        .controls
-          = f.text_area :description, class: 'ckeditor'
-      .control-group
-        = f.label :website, class: 'control-label'
-        .controls
-          = f.text_field :website
-      .control-group
-        = f.label :industry, class: 'control-label'
-        .controls
-          = f.text_field :industry
-      .control-group
-        = f.label "Type", class: 'control-label'
-        .controls
-          = f.select :size_definition, Preference::COMPANY_TYPES, include_blank: true
-      .control-group
-        = f.label "Number of Employees", class: 'control-label'
-        .controls
-          = f.text_field :num_employees
-      .control-group
-        = f.label "Publicly Held?", class: 'control-label'
-        .controls
+      .form-group
+        = f.label :email, class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_field :email, class: 'form-control'
+      .form-group
+        = f.label :name, class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_field :name, class: 'form-control'
+      .form-group
+        = f.label :description, class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_area :description, class: 'ckeditor form-control'
+      .form-group
+        = f.label :website, class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_field :website, class: 'form-control'
+      .form-group
+        = f.label :industry, class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_field :industry, class: 'form-control'
+      .form-group
+        = f.label "Type", class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.select :size_definition, Preference::COMPANY_TYPES, { include_blank: true }, { class: 'form-control' }
+      .form-group
+        = f.label "Number of Employees", class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_field :num_employees, class: 'form-control'
+      .form-group
+        = f.label "Publicly Held?", class: 'col-sm-2 control-label'
+        .col-sm-10
           = f.check_box :public
-      .control-group
-        = f.label "Year Founded", class: 'control-label'
-        .controls
-          = f.date_select :founded, start_year: 1970, end_year: Date.today.year
+      .form-group
+        = f.label "Year Founded", class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.date_select :founded, { start_year: 1970, end_year: Date.today.year }, { class: 'form-control-date-select' }
       %h4 Change Password
-      .control-group
-        = f.label "New Password", class: 'control-label'
-        .controls
-          = f.password_field :password
-      .control-group
-        = f.label "New Password Confirmation", class: 'control-label'
-        .controls
-          = f.password_field :password_confirmation
-      .control-group
-        .controls
+      .form-group
+        = f.label "New Password", class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.password_field :password, class: 'form-control'
+      .form-group
+        = f.label "New Password Confirmation", class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.password_field :password_confirmation, class: 'form-control'
+      .form-group
+        .col-sm-10
           = f.submit 'Save Company', class: 'btn btn-info', id: 'company_save'

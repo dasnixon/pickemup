@@ -53,6 +53,7 @@ class JobListing < ActiveRecord::Base
   validates :salary_range_high, :salary_range_low, presence: true, numericality: { only_integer: true }
   validates :job_description, presence: true
   validates :synopsis, length: { maximum: 300 }
+  validates :estimated_work_hours, :vacation_days, :hiring_time, numericality: { only_integer: true }
   validate :salary_range_check, if: Proc.new { |j| j.salary_range_low.present? and j.salary_range_high.present? }
 
   def salary_range

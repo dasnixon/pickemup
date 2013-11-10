@@ -1,24 +1,24 @@
-.control-group
-  = label_tag :card_number, 'Card Number:', class: 'control-label', for: 'credit-card'
-  .controls
-    = text_field_tag :card_number, nil, class: 'xlarge card-number', id: 'credit-card', name: 'credit-card'
+.form-group
+  = label_tag :card_number, 'Card Number', class: 'col-sm-2 control-label', for: 'credit-card'
+  .col-sm-10
+    = text_field_tag :card_number, nil, class: 'xlarge card-number form-control', id: 'credit-card', name: 'credit-card'
     %span#credit-card-type-text.help-inline
 
-.control-group
-  .controls
-    .pull-left#accepted-cards-images
+.form-group
+  .col-sm-10.col-sm-offset-2
+    #accepted-cards-images
 
-.control-group
-  = label_tag :card_cvc, 'Security Code:', class: 'control-label'
-  .controls
-    = text_field_tag :card_cvc, nil, name: nil, class: 'card-cvc'
+.form-group
+  = label_tag :card_cvc, 'Security Code', class: 'col-sm-2 control-label'
+  .col-sm-10
+    = text_field_tag :card_cvc, nil, name: nil, class: 'card-cvc form-control'
 
-.control-group
-  = label_tag :month, 'Expiration Month:', class: 'control-label'
-  .controls
-    = select_month nil, {add_month_numbers: true}, name: nil, class: 'card-expiry-month'
+.form-group
+  = label_tag :month, 'Expiration Month', class: 'col-sm-2 control-label'
+  .col-sm-10
+    = select_month nil, {add_month_numbers: true}, name: nil, class: 'card-expiry-month form-control'
 
-.control-group
-  = label_tag :month, 'Expiration Year:', class: 'control-label'
-  .controls
-    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, name: nil, class: 'card-expiry-year'
+.form-group
+  = label_tag :month, 'Expiration Year', class: 'col-sm-2 control-label'
+  .col-sm-10
+    = select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, name: nil, class: 'card-expiry-year form-control'
