@@ -44,7 +44,7 @@ class JobListing < ActiveRecord::Base
   LISTINGS_ATTR_REGEX   = /^id$|job_title|languages|company_id|salary|locations/
   COMPANY_ATTR_REGEX    = /name|website|industry/
   USER_ATTR_REGEX       = /^id$|name|location/
-  PREFERENCE_ATTR_REGEX = /salary|skills|locations|expected_salary|valid_us_worker/
+  PREFERENCE_ATTR_REGEX = /salary|skills|locations|expected_salary|valid_us_worker|match_threshold/
   EQUITY_SELECTIONS     = ['None', 'Less than 1%', '1% - 5%', 'Greater than 5%']
   BONUS_SELECTIONS      = ['None', '1-10% of base salary', 'Greater than 10% of base salary', 'Something else']
 

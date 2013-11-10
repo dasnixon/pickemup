@@ -56,7 +56,7 @@
       <div class='pull-right' style="height: 200px;">
         <div class='pull-right'>
           <button class='btn btn-info' ng-click="go('/companies/{{listing.company_id}}')">Learn More About {{listing.name}}</button>
-          <button class='btn btn-success' ng-click="go('/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}')">Apply</button>
+          <button class='btn btn-success' ng-show="{{listing.score}} >= {{listing.match_threshold}}" ng-click="go('/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}')">Apply</button>
         </div>
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>

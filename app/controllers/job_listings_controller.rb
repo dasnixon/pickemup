@@ -92,7 +92,7 @@ class JobListingsController < ApplicationController
   end
 
   def job_listing_params
-    params.require(:job_listing).permit(:job_title, :job_description, :estimated_work_hours, :salary_range_low,
+    params.require(:job_listing).permit(:match_threshold, :job_title, :job_description, :estimated_work_hours, :salary_range_low,
     :salary_range_high, :vacation_days, :healthcare, :equity, :bonuses, :retirement, :fulltime, :remote, :hiring_time,
     :tech_stack_id, :company_id, :active, :sponsorship_available, :dental, :vision, :life_insurance, :synopsis).tap do |whitelisted|
       JobListing::HASHABLE_PARAMS.each do |hash_param|
