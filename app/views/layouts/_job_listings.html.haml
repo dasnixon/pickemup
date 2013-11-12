@@ -1,4 +1,14 @@
-- @job_listings.each do |listing|
-  = render partial: 'layouts/job_listing', locals: {job_listing: listing, company: @company}
-  %hr
-= will_paginate @job_listings, renderer: BootstrapPagination::Rails
+- if @job_listings.present?
+  - @job_listings.each do |listing|
+    = render partial: 'layouts/job_listing', locals: {job_listing: listing, company: @company}
+    %hr
+  = will_paginate @job_listings, renderer: BootstrapPagination::Rails
+- elsif company_signed_in?
+  %p
+    A job listing is the meat of discovering developers. Be as specific, transparent, and honest as possible with your job listings.
+    Be sure you add a #{link_to 'tech stack', new_company_tech_stack_path(company_id: current_company.id)} to your job listing. A
+    tech stack can give a developer a better understanding of the tools, languages, frameworks, databases, etc. they will be using
+    for the position. It will also allow us to target developers more accurately for your job listing.
+- else
+  %p
+    Sorry, there are currently no job listings for #{@company.name}.

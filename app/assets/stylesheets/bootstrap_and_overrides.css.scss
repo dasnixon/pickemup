@@ -9,6 +9,10 @@
 
 .nav, .pagination, .carousel a { cursor: pointer; }
 
+.navbar-inverse .navbar-brand {
+  color: white;
+}
+
 .bronze {
   background-color: #8c7853;
 }

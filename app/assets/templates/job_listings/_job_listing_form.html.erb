@@ -218,13 +218,13 @@
   </div>
 </div>
 
-<ng-include src="'<%= asset_path("job_listings/_perks.html.erb") %>'" />
+<div ng-include src="'<%= asset_path("job_listings/_perks.html.erb") %>'"></div>
 
-<ng-include src="'<%= asset_path("job_listings/_practices.html.erb") %>'" />
+<div ng-include src="'<%= asset_path("job_listings/_practices.html.erb") %>'"></div>
 
-<ng-include src="'<%= asset_path("job_listings/_special_characteristics.html.erb") %>'" />
+<div ng-include src="'<%= asset_path("job_listings/_special_characteristics.html.erb") %>'"></div>
 
-<ng-include src="'<%= asset_path("job_listings/_acceptable_languages.html.erb") %>'" />
+<div ng-include src="'<%= asset_path("job_listings/_acceptable_languages.html.erb") %>'"></div>
 
 <div class='form-group'>
   <label class='col-sm-2 control-label'><strong>Tech Stack</strong></label>
@@ -258,7 +258,7 @@
 </div>
 
 <div class="form-group">
-  <div class="col-sm-10">
+  <div class="col-sm-10 col-sm-offset-2">
     <button class='btn btn-success' type="submit">Save Your Job Listing</button>
   </div>
 </div>
