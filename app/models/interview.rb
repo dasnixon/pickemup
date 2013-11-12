@@ -11,6 +11,8 @@
 #  user_id        :uuid
 #  created_at     :datetime
 #  updated_at     :datetime
+#  duration       :integer
+#  description    :text
 #
 
 class Interview < ActiveRecord::Base

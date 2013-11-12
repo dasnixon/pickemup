@@ -121,11 +121,6 @@ span.error_message {
   overflow: hidden;
 }
 
-a.caret-after {
-  padding-left:1px !important;
-  color: #fff !important;
-}
-
 .navbar-inverse .nav li.dropdown > .dropdown-toggle .caret {
   color: #fff;
 }
@@ -739,10 +734,6 @@ address {
 .input-group-hg .btn > [class^="fui-"] {
   top: 1px;
 }
-.btn.btn-hg > [class^="fui-"].pull-right,
-.input-group-hg .btn > [class^="fui-"].pull-right {
-  margin-right: -2px;
-}
 .btn.btn-lg,
 .input-group-lg .btn {
   font-size: 17px;
@@ -752,10 +743,6 @@ address {
 .btn.btn-lg > [class^="fui-"],
 .input-group-lg .btn > [class^="fui-"] {
   top: 0;
-}
-.btn.btn-lg > [class^="fui-"].pull-right,
-.input-group-lg .btn > [class^="fui-"].pull-right {
-  margin-right: -2px;
 }
 .btn.btn-sm,
 .input-group-sm .btn {
@@ -889,9 +876,6 @@ address {
   display: inline-block;
   zoom: 1;
   *display: inline;
-}
-.btn > [class^="fui-"].pull-right {
-  margin-right: 0;
 }
 .btn-toolbar .btn.active {
   color: #ffffff;
