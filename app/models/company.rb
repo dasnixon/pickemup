@@ -67,8 +67,8 @@ class Company < ActiveRecord::Base
     self.num_employees.present? ? self.num_employees.to_i : 1
   end
 
-  def get_logo
-    self.logo.present? ? self.logo : 'default_logo.png'
+  def get_logo(size='preview')
+    self.logo.present? ? self.logo.try(size) : 'default_logo.png'
   end
 
   def set_verified
