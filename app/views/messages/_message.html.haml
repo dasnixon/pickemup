@@ -5,7 +5,7 @@
       - if is_company
         = link_to(image_tag(message.sender.get_logo('small'), |
                               title: message.sender.name, |
-                              alt: message.sender.name, class: 'img-rounded media-object'), |
+                              alt: message.sender.name, class: 'img-rounded media-object', size: '100x100'), |
                      company_path(id: message.sender.id), class: 'pull-left') |
       - else
         = link_to(image_tag(message.sender.profile_image.small, |

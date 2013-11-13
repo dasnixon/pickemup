@@ -12,7 +12,7 @@
             - else
               = link_to 'Add Billing Information', company_purchase_options_path(company_id: @company.id), class: 'btn btn-info'
         .col-md-12
-          = link_to image_tag(@company.get_logo, class: 'media-object img-rounded'), @company.website, target: '_blank'
+          = link_to image_tag(@company.get_logo, class: 'media-object img-rounded', size: '256x256'), @company.website, target: '_blank'
         .col-md-12
           %br
           = render 'sidebar'
