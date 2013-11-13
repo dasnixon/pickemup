@@ -8,12 +8,13 @@ class ConversationsController < ApplicationController
 
   def index
     if @box.eql? 'inbox'
-      @conversations = @mailbox.inbox.paginate(page: params[:page], per_page: PER_PAGE)
+      conversations = @mailbox.inbox
     elsif @box.eql? 'sentbox'
-      @conversations = @mailbox.sentbox.paginate(page: params[:page], per_page: PER_PAGE)
+      conversations = @mailbox.sentbox
     else
-      @conversations = @mailbox.trash.paginate(page: params[:page], per_page: PER_PAGE)
+      conversations = @mailbox.trash
     end
+    @conversations = conversations.select { |conv| JobListing.exists?(id: conv.job_listing_id) }.paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   def show
@@ -62,8 +63,8 @@ class ConversationsController < ApplicationController
 
   def find_conversation
     @conversation = Conversation.find(params[:id])
-    if @conversation.blank? or !@conversation.is_participant?(@mailbox_for)
-      conversations_redirect('Unable to find conversation')
+    if !JobListing.exists?(id: @conversation.job_listing_id) or @conversation.blank? or !@conversation.is_participant?(@mailbox_for)
+      conversations_redirect('Unable to find conversation or the job listing no longer exists, sorry.')
     end
   end
 end

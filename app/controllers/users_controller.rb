@@ -39,11 +39,12 @@ class UsersController < ApplicationController
   end
 
   def listings
-    @job_listings = @user.mailbox.conversations.collect do |conv|
-      next if conv.is_completely_trashed?(current_user)
+    @job_listings = @user.mailbox.conversations.inject([]) do |job_listings, conv|
+      next job_listings if conv.is_completely_trashed?(current_user) || !JobListing.exists?(id: conv.job_listing_id)
       listing = JobListing.find(conv.job_listing_id)
       company = listing.company
-      OpenStruct.new(listing: listing, company: company, conversation: conv)
+      job_listings << OpenStruct.new(listing: listing, company: company, conversation: conv)
+      job_listings
     end
   end
 

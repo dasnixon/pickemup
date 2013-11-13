@@ -53,7 +53,11 @@ class Subscription < ActiveRecord::Base
   end
 
   def maxed_out?
-    (self.company.active_listings.count >= max_job_listings) || !self.active || expired?
+    reached_listings_limit? || (!self.active and expired?)
+  end
+
+  def reached_listings_limit?
+    self.company.active_listings.count >= max_job_listings
   end
 
   def expired?

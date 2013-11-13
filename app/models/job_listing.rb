@@ -56,6 +56,8 @@ class JobListing < ActiveRecord::Base
   validates :estimated_work_hours, :vacation_days, :hiring_time, numericality: { only_integer: true }
   validate :salary_range_check, if: Proc.new { |j| j.salary_range_low.present? and j.salary_range_high.present? }
 
+  scope :active, -> { where(active: true) }
+
   def salary_range
     (self.salary_range_low..self.salary_range_high)
   end

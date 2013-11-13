@@ -60,7 +60,7 @@ class Company < ActiveRecord::Base
   has_many :tech_stacks, dependent: :destroy
 
   def active_listings
-    self.job_listings.select { |listing| listing.active }
+    self.job_listings.active
   end
 
   def calculate_score

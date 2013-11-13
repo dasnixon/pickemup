@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   before_filter :check_user_messages, if: :user_signed_in?
   before_filter :check_company_messages, if: :company_signed_in?
   before_filter :disable_caching, :if => ->(controller){controller.request.xhr?}
+
   def mixpanel
     @mixpanel ||= Mixpanel::Tracker.new(ENV['MIXPANEL_API_TOKEN'], {persist: true, env: request.env})
   end
@@ -40,12 +41,12 @@ class ApplicationController < ActionController::Base
 
   def check_company_messages
     @messages ||= current_company.mailbox.inbox.first(5)
-    @unread_messages ||= @messages.select { |message| message.is_unread?(current_company) }
+    @unread_messages ||= @messages.select { |message| JobListing.exists?(id: message.job_listing_id) and message.is_unread?(current_company) }
   end
 
   def check_user_messages
     @messages ||= current_user.mailbox.inbox.first(5)
-    @unread_messages ||= @messages.select { |message| message.is_unread?(current_user) }
+    @unread_messages ||= @messages.select { |message| JobListing.exists?(id: message.job_listing_id) and message.is_unread?(current_user) }
   end
 
   def current_user?(user)
