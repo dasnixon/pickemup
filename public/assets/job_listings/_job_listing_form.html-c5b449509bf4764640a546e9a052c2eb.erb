@@ -167,11 +167,11 @@
   </div>
 </div>
 
-<div class="form-group">
-  <label class='col-sm-2 control-label'><strong>Position Type</strong></label>
+<div class='form-group'>
+  <label class='col-sm-2 control-label'><strong>Experience Level</strong></label>
   <div class="col-sm-10">
     <table class="table table-bordered">
-      <tr class="preference" ng-repeat="row in data.position_titles">
+      <tr class="preference" ng-repeat="row in data.experience_levels">
         <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
           {{attributes.name}}
         </td>
@@ -180,11 +180,11 @@
   </div>
 </div>
 
-<div class='form-group'>
-  <label class='col-sm-2 control-label'><strong>Experience Level</strong></label>
+<div class="form-group">
+  <label class='col-sm-2 control-label'><strong>Position Type</strong></label>
   <div class="col-sm-10">
     <table class="table table-bordered">
-      <tr class="preference" ng-repeat="row in data.experience_levels">
+      <tr class="preference" ng-repeat="row in data.position_titles">
         <td class="preference-list" ng-click="toggleActiveHash(attributes)" ng-class="{active: attributes.checked}" ng-repeat="attributes in row">
           {{attributes.name}}
         </td>
