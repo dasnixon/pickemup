@@ -16,10 +16,10 @@
 .participants
   - conversation.recipients.each do |recp|
     - if recp.is_a?(User)
-      = link_to image_tag(recp.profile_image.small, title: recp.name, alt: recp.name, class: 'img-rounded', size: '100x100'), resume_user_path(id: recp.id)
+      = link_to image_tag(recp.profile_image.small, title: recp.name, alt: recp.name, class: 'img-rounded img-small'), resume_user_path(id: recp.id)
     - elsif recp.is_a?(Company)
       - company = recp
-      = link_to image_tag(recp.get_logo('small'), title: recp.name, alt: recp.name, class: 'img-rounded', size: '100x100'), company_path(id: recp.id)
+      = link_to image_tag(recp.get_logo('small'), title: recp.name, alt: recp.name, class: 'img-rounded img-small'), company_path(id: recp.id)
 - if user_signed_in?
   %h5= link_to conversation.subject, company_job_listing_path(company_id: company.id, id: conversation.job_listing_id)
 - else

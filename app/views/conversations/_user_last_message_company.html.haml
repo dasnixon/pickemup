@@ -1,5 +1,5 @@
 .media{class: "media #{conversation.is_unread?(current_user) ? 'info' : @box.eql?('trash') ? 'error' : ''}"}
-  = link_to image_tag(last_message.get_logo('small'), alt: last_message.name, title: last_message.name, class: 'media-object img-rounded', size: '100x100'), company_path(id: last_message.id), class: 'pull-left'
+  = link_to image_tag(last_message.get_logo('small'), alt: last_message.name, title: last_message.name, class: 'media-object img-rounded img-small'), company_path(id: last_message.id), class: 'pull-left'
   .media-body
     .pull-right.media-heading
       - unless @box.eql?('trash')

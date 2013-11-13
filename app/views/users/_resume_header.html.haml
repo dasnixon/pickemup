@@ -15,13 +15,13 @@
   - if company_signed_in?
     .media
       .pull-left
-        = image_tag(@user.profile_image, class: 'img-rounded', size: '50x50')
+        = image_tag(@user.profile_image, class: 'img-rounded img-thumb')
       .media-body
         %h4 #{@user.name.possessive} Resume
   - elsif @user != current_user
     .media
       .pull-left
-        = image_tag(@user.profile_image, class: 'img-rounded', size: '50x50')
+        = image_tag(@user.profile_image, class: 'img-rounded img-thumb')
       .media-body
         %h4 #{@user.name.possessive} Resume
   - else
