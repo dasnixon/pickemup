@@ -40,20 +40,26 @@ class JobListing < ActiveRecord::Base
   include PreferencesHelper
   include PickemupAPI
 
-  HASHABLE_PARAMS = %w(practices perks experience_levels special_characteristics acceptable_languages position_titles locations)
-  LISTINGS_ATTR_REGEX = /^id$|job_title|languages|company_id|salary|locations/
-  COMPANY_ATTR_REGEX = /name|website|industry/
-  USER_ATTR_REGEX = /^id$|name|location/
+  HASHABLE_PARAMS       = %w(practices perks experience_levels special_characteristics acceptable_languages position_titles locations)
+  LISTINGS_ATTR_REGEX   = /^id$|job_title|languages|company_id|salary|locations/
+  COMPANY_ATTR_REGEX    = /name|website|industry/
+  USER_ATTR_REGEX       = /^id$|name|location/
   PREFERENCE_ATTR_REGEX = /salary|skills|locations|expected_salary|valid_us_worker/
+  EQUITY_SELECTIONS     = ['None', 'Less than 1%', '1% - 5%', 'Greater than 5%']
+  BONUS_SELECTIONS      = ['None', '1-10% of base salary', 'Greater than 10% of base salary', 'Something else']
 
   belongs_to :company
   has_many :conversations
   belongs_to :tech_stack
 
   validates :salary_range_high, :salary_range_low, presence: true, numericality: { only_integer: true }
-  validates :job_description, presence: true
+  validates :job_description, presence: true, length: { maximum: 3000 }
   validates :synopsis, length: { maximum: 300 }
-  validates :estimated_work_hours, :vacation_days, :hiring_time, numericality: { only_integer: true }
+  validates :vacation_days, numericality: { only_integer: true }, inclusion: { in: 0..200, message: 'Are they ever going to work?' }
+  validates :estimated_work_hours, numericality: true, inclusion: { in: 0..168, message: 'Are you trying to hire a machine?' }
+  validates :hiring_time, numericality: true, inclusion: { in: 0..52, message: 'You may want them to start this year.' }
+  validates :equity, inclusion: { in: EQUITY_SELECTIONS }, allow_nil: true
+  validates :bonuses, inclusion: { in: BONUS_SELECTIONS }, allow_nil: true
   validate :salary_range_check, if: Proc.new { |j| j.salary_range_low.present? and j.salary_range_high.present? }
 
   scope :active, -> { where(active: true) }
