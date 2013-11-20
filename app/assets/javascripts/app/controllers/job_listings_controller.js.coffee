@@ -147,6 +147,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
         acceptable_languages: unchunk($scope.data.acceptable_languages)
         practices: unchunk($scope.data.practices)
         tech_stack_id: $scope.data.tech_stack_id
+        match_threshold: $scope.data.match_threshold
         active: true
     , (response) ->
       changeLocation($scope, $location, '/companies/' + $stateParams['company_id'] + '/job_listings', true)
@@ -184,6 +185,7 @@ jobListing.controller("JobListingCtrl", ['$scope', '$http', '$state', '$statePar
         special_characteristics: unchunk($scope.data.special_characteristics)
         acceptable_languages: unchunk($scope.data.acceptable_languages)
         practices: unchunk($scope.data.practices)
+        match_threshold: $scope.data.match_threshold
         tech_stack_id: $scope.data.tech_stack_id
     , (response) ->
       $scope.success        = 'Successfully updated the job listing.'

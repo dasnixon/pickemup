@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131026191035) do
+ActiveRecord::Schema.define(version: 20131030041912) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(version: 20131026191035) do
     t.string   "locations",               default: [],    array: true
     t.text     "synopsis"
     t.uuid     "tech_stack_id"
+    t.integer  "match_threshold",         default: 0
   end
 
   add_index "job_listings", ["company_id"], name: "index_job_listings_on_company_id", using: :btree
@@ -268,6 +269,7 @@ ActiveRecord::Schema.define(version: 20131026191035) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "willing_to_relocate",    default: false
+    t.integer  "match_threshold",        default: 0
   end
 
   add_index "preferences", ["user_id"], name: "index_preferences_on_user_id", unique: true, using: :btree

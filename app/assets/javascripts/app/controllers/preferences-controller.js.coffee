@@ -94,6 +94,7 @@ preference_app.controller("PreferencesController", ['$scope', '$location', '$sta
         potential_availability: @preference.potential_availability
         work_hours:             @preference.work_hours
         willing_to_relocate:    @preference.willing_to_relocate
+        match_threshold:        @preference.match_threshold
         company_size:           unchunk @preference.company_size
         skills:                 unchunk @preference.skills
         locations:              unchunk @preference.locations
