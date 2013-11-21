@@ -19,10 +19,13 @@ class TechStack < ActiveRecord::Base
   include PreferenceConstants
   include PreferencesHelper
 
-  HASHABLE_PARAMS = ['back_end_languages', 'front_end_languages', 'dev_ops_tools', 'frameworks', 'relational_databases', 'nosql_databases']
+  HASHABLE_PARAMS = ['back_end_languages', 'front_end_languages', 'dev_ops_tools',
+                     'frameworks', 'relational_databases', 'nosql_databases']
 
   belongs_to :company
   has_many :job_listings
+
+  validates :name, presence: true, uniqueness: true
 
   def attribute_default_values(attr)
     self.class.const_get(attr.upcase)

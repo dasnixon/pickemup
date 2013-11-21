@@ -47,6 +47,7 @@ class JobListing < ActiveRecord::Base
   PREFERENCE_ATTR_REGEX = /salary|skills|locations|expected_salary|valid_us_worker|match_threshold/
   EQUITY_SELECTIONS     = ['None', 'Less than 1%', '1% - 5%', 'Greater than 5%']
   BONUS_SELECTIONS      = ['None', '1-10% of base salary', 'Greater than 10% of base salary', 'Something else']
+  SALARY_RANGE_VALUES   = (0..500000).step(10000).to_a
 
   belongs_to :company
   has_many :conversations
@@ -60,17 +61,14 @@ class JobListing < ActiveRecord::Base
   validates :hiring_time, numericality: true, inclusion: { in: 0..52, message: 'You may want them to start this year.' }
   validates :equity, inclusion: { in: EQUITY_SELECTIONS }, allow_nil: true
   validates :bonuses, inclusion: { in: BONUS_SELECTIONS }, allow_nil: true
-  validate :salary_range_check, if: Proc.new { |j| j.salary_range_low.present? and j.salary_range_high.present? }
+  validates :salary_range_low, :salary_range_high, inclusion: { in: SALARY_RANGE_VALUES }, allow_nil: true
+  validate :salary_range_check, if: Proc.new { |jl| jl.salary_range_low.present? and jl.salary_range_high.present? }
+  validate :valid_tech_stack, if: Proc.new { |jl| jl.tech_stack_id.present? }
 
   scope :active, -> { where(active: true) }
 
   def salary_range
     (self.salary_range_low..self.salary_range_high)
-  end
-
-  #validation to check that the salary ranges are correct
-  def salary_range_check
-    errors.add(:salary_range, 'Invalid salary range') if salary_range_high <= salary_range_low
   end
 
   def attribute_default_values(attr)
@@ -134,5 +132,16 @@ class JobListing < ActiveRecord::Base
     listing_attrs = self.attributes.keep_if { |k,v| k =~ LISTINGS_ATTR_REGEX }.merge('score' => self.score(preference.id)['score'].to_i, 'details' => truncated_description)
     company_attrs = company.attributes.keep_if { |k,v| k =~ COMPANY_ATTR_REGEX }.merge('logo' => company.logo.url(:medium))
     company_attrs.merge(listing_attrs)
+  end
+
+  private
+
+  #validation to check that the salary ranges are correct
+  def salary_range_check
+    errors.add(:salary_range, 'Invalid salary range') if salary_range_high <= salary_range_low
+  end
+
+  def valid_tech_stack
+    errors.add(:tech_stack_id, 'Not a valid tech stack') unless TechStack.exists?(id: self.tech_stack_id)
   end
 end
