@@ -33,7 +33,7 @@
               <button class="btn btn-info" ng-click="go('/users/{{user.id}}/resume')">
                 View Resume
               </button>
-              <button class="btn btn-success" ng-click="go('/companies/{{company_id}}/messages/new?job_listing_id={{job_listing_id}}&receiver={{user.id}}')">
+              <button class="btn btn-success" ng-show="{{user.score}} >= {{user.match_threshold}}" ng-click="go('/companies/{{company_id}}/messages/new?job_listing_id={{job_listing_id}}&receiver={{user.id}}')">
                 Send Message
               </button>
             </div>

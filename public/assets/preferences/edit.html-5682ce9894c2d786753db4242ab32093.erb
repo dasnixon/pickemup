@@ -1,7 +1,7 @@
-<form class='jobListing form-horizontal', name='jobListingForm', ng-submit="create()">
+<form name="preferenceForm" class='form-horizontal' ng-submit="update()">
   <div class='row row-offcanvas row-offcanvas-left'>
     <div class="col-md-3 sidebar-offcanvas" id="sidebar">
-      <ul class='list-unstyled'>
+      <ul class="list-unstyled">
         <li class="means-yes alert">
           This means yes or preferred
         </li>
@@ -18,12 +18,12 @@
           {{error_updating}}
         </li>
         <li ng-show="dirty_message.length > 0">
-          <button class='btn btn-success' type="submit">Save Your Job Listing</button>
+          <button class='btn btn-success' type="submit">Save Your Preferences</button>
         </li>
       </ul>
     </div>
     <div class="col-md-9">
-      <div ng-include src="'/assets/job_listings/_job_listing_form.html-c5b449509bf4764640a546e9a052c2eb.erb'"></div>
+      <div ng-include src="'/assets/preferences/_form.html-2d00f11805423ae32bd7ac4f00c06854.erb'"></div>
     </div>
   </div>
 </form>
