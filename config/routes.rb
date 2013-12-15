@@ -75,6 +75,9 @@ Pickemup::Application.routes.draw do
       end
     end
   end
+  resources :admins, only: [:index]
+  get "/admin/log_in" => "admins#sign_in"
+  post "/admin/log_in" => "sessions#admin"
   post "/company_log_in" => "sessions#company"
   match '/subscriptions_listener' => 'subscriptions#listener', via: :all
   require 'sidekiq/web'

@@ -11,12 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131030041912) do
+ActiveRecord::Schema.define(version: 20131215051550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "hstore"
   enable_extension "uuid-ossp"
+
+  create_table "admins", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "email"
+    t.string   "name"
+    t.string   "password_salt"
+    t.string   "password_hash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "code_snippet_files", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "name"
