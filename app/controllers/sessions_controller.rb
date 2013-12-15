@@ -10,6 +10,19 @@ class SessionsController < ApplicationController
   def sign_up
   end
 
+  def admin
+    session[:admin_id] = nil
+    admin = Admin.authenticate(params[:email], params[:password], request)
+    if admin.present?
+      session[:admin_id] = admin.id
+      redirect_to admins_path, notice: "Signed in as Admin!"
+    else
+      session[:admin_id] = nil
+      flash[:error] = "Unable to sign you in."
+      redirect_to :back
+    end
+  end
+
   def company
     session[:user_id] = nil
     company = Company.authenticate(params[:email], params[:password], request)
