@@ -464,19 +464,24 @@ body {
   background-color: #ffffff;
 }
 a {
+  text-decoration: none;
+}
+
+a.accordion-toggle {
+  cursor: pointer;
+  color: #428bca !important;
+}
+
+p {
+  a {
+    color: #428bca !important;
+  }
+}
+
+a.circle {
   color: #3B4990;
-  text-decoration: none;
-  -webkit-transition: 0.25s;
-  -moz-transition: 0.25s;
-  -o-transition: 0.25s;
-  transition: 0.25s;
-  -webkit-backface-visibility: hidden;
 }
-a:hover,
-a:focus {
-  color: #34495E;
-  text-decoration: none;
-}
+
 .img-rounded {
   border-radius: 6px;
 }
