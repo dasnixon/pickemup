@@ -3402,3 +3402,19 @@ footer, .push {
   max-width: 512px;
   max-height: 512px;
 }
+
+.content-left {
+  margin-left: -25%;
+  margin-top: 8%;
+  text-align: center;
+
+  .logo-image {
+    width: 80%;
+  }
+
+  p.motto {
+    font-size: 220%;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+  }
+}
