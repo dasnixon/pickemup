@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class='panel-title'>
-        <a class="accordion-toggle" data-parent='#filters' data-toggle='collapse' data-target='#collapseOne'><h4>Filter Results</h4></a>
+        <a class="accordion-toggle" data-parent='#filters' data-toggle='collapse' data-target='#collapseOne'><h3>Filter Results</h3></a>
       </div>
     </div>
     <div id="collapseOne" class="panel-collapse collapse">
@@ -11,21 +11,21 @@
 
         <hr>
 
-        <h6>Salary</h6>
+        <h4>Salary</h4>
         <p class="text-center">
           <input value="" data-selection="none" data-slider-min="0" data-slider-max="300000" data-slider-step="1000" data-slider-value="[0]" salarybetween />
         </p>
 
         <hr>
 
-        <h6>Search Language</h6>
+        <h4>Search Language</h4>
         <div class='form-group'>
           <input class='form-control' type='text' ng-model="searchLanguage"/>
         </div>
 
         <hr>
 
-        <h6>By Location</h6>
+        <h4>By Location</h4>
         <label class="checkbox-inline" ng-repeat="location in locations">
           <input ng-click="maintainSelectedLocations(location)" type="checkbox" ng-value="location"> {{location}}
         </label>
@@ -68,9 +68,9 @@
           <dd ng-bind='listing.acceptable_languages | attributeArrayLimit:90'></dd>
         </dl>
       </div>
-      <h4 class='media-heading'>
+      <h3 class='media-heading'>
         <a ng-href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}' target='_self'>{{listing.job_title}} at {{listing.name}}</a>
-      </h4>
+      </h3>
       <p class='description' ng-bind-html="listing.details"></p>
     </div>
   </div>

@@ -1,4 +1,3 @@
-%hr
 %p
   %i.fa.fa-linkedin.fa-2x
     Linkedin
@@ -21,6 +20,6 @@
       = render 'education'
   - elsif user_signed_in?
     %p
-      = link_to '/auth/linkedin', class: 'btn btn-info' do
+      = link_to '/auth/linkedin', class: 'btn btn-info', style: 'color: white !important;' do
         %i.fa.fa-linkedin
         %strong | Link your Linkedin

@@ -18,69 +18,69 @@
         - else
           = link_to 'Apply', new_user_message_path(user_id: current_user.id, receiver: company.id, job_listing_id: job_listing.id), class: 'btn btn-success'
     %div{class: "#{job_listing.active ? 'active' : 'deactivated'}"}
-      %h5.media-heading= job_listing_title(job_listing)
+      %h3.media-heading= job_listing_title(job_listing)
       %hr
-      %h6 Job Information
+      %h3 Job Information
       %blockquote
         %p
           #{job_listing.job_description.html_safe}
-      %h6 General Information
+      %h3 General Information
       %ul.list-group
         %li.list-group-item
-          %strong.list-group-item-heading Salary Range
-          %p.list-group-item-text
+          %h4.list-group-item-heading Salary Range
+          .list-group-item-text
             #{number_to_currency(job_listing.salary_range_low)} - #{number_to_currency(job_listing.salary_range_high)}
         %li.list-group-item
-          %strong.list-group-item-heading Preferred Languages
-          %p.list-group-item-text
+          %h4.list-group-item-heading Preferred Languages
+          .list-group-item-text
             #{job_listing.acceptable_languages.join(', ')}
         %li.list-group-item
-          %strong.list-group-item-heading Preferred Experience Level
-          %p.list-group-item-text
+          %h4.list-group-item-heading Preferred Experience Level
+          .list-group-item-text
             #{job_listing.experience_levels.join(', ')}
         %li.list-group-item
-          %strong.list-group-item-heading Preferred Practices
-          %p.list-group-item-text
+          %h4.list-group-item-heading Preferred Practices
+          .list-group-item-text
             #{job_listing.practices.join(', ')}
         %li.list-group-item
-          %strong.list-group-item-heading Bonus Points for
-          %p.list-group-item-text
+          %h4.list-group-item-heading Bonus Points for
+          .list-group-item-text
             #{job_listing.special_characteristics.join(', ')}
         %li.list-group-item
-          %strong.list-group-item-heading Job Perks
-          %p.list-group-item-text
+          %h4.list-group-item-heading Job Perks
+          .list-group-item-text
             #{job_listing.perks.join(', ')}
         %li.list-group-item
-          %strong.list-group-item-heading Benefits
-          %p.list-group-item-text
+          %h4.list-group-item-heading Benefits
+          .list-group-item-text
             = job_listing_benefits(job_listing)
-    %h6 Tech Stack Information
+    %h3 Tech Stack Information
     - tech_stack = job_listing.tech_stack
     - if tech_stack.present?
       %ul.list-group
-        %li
-          %strong.list-group-item-heading Back-end Languages:
-          %p.list-group-item-text
+        %li.list-group-item
+          %h4.list-group-item-heading Back-end Languages
+          .list-group-item-text
             #{tech_stack.back_end_languages.join(', ')}
-        %li
-          %strong.list-group-item-heading Front-end Languages:
-          %p.list-group-item-text
+        %li.list-group-item
+          %h4.list-group-item-heading Front-end Languages
+          .list-group-item-text
             #{tech_stack.front_end_languages.join(', ')}
-        %li
-          %strong.list-group-item-heading Frameworks:
-          %p.list-group-item-text
+        %li.list-group-item
+          %h4.list-group-item-heading Frameworks
+          .list-group-item-text
             #{tech_stack.frameworks.join(', ')}
-        %li
-          %strong.list-group-item-heading Dev Ops Tools:
-          %p.list-group-item-text
+        %li.list-group-item
+          %h4.list-group-item-heading Dev Ops Tools
+          .list-group-item-text
             #{tech_stack.dev_ops_tools.join(', ')}
-        %li
-          %strong.list-group-item-heading NoSQL Databases:
-          %p.list-group-item-text
+        %li.list-group-item
+          %h4.list-group-item-heading NoSQL Databases
+          .list-group-item-text
             #{tech_stack.nosql_databases.join(', ')}
-        %li
-          %strong.list-group-item-heading Relational Databases:
-          %p.list-group-item-text
+        %li.list-group-item
+          %h4.list-group-item-heading Relational Databases
+          .list-group-item-text
             #{tech_stack.relational_databases.join(', ')}
     - else
       %p Sorry there is no tech stack information, contact #{company.name} for more information.

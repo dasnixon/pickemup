@@ -4,19 +4,11 @@
       %h4 Education
   #collapseEducation.panel-collapse.collapse
     .panel-body
-      %table.table
-        %tr
-          %th School Name
-          %th Field of Study
-          %th Degree
-          %th Activities
-          %th Notes
-          %th Dates Attended
+      %ul.media-list
         - @educations.each do |education|
-          %tr
-            %td= education.school_name
-            %td= education.field_of_study
-            %td= education.degree
-            %td= education.activities
-            %td= education.notes
-            %td #{education.start_year} - #{education.end_year}
+          %li.media
+            .media-body
+              %h4 #{education.school_name} from #{education.start_year} to #{education.end_year} - #{education.field_of_study}
+              %p= education.activities
+              %p= education.notes
+          %hr

@@ -4,7 +4,7 @@
       %div{class: "#{job_listing[:listing].active ? 'active' : 'deactivated'}"}
         .pull-right= link_to 'View Conversation', user_conversation_path(user_id: current_user.id, id: job_listing[:conversation].id), class: 'btn btn-info'
         %br
-        .lead.media-heading #{link_to(job_listing[:company].name, company_path(id: job_listing[:company].id))} - #{link_to(job_listing_title(job_listing[:listing]), company_job_listing_path(id: job_listing[:listing].id, company_id: job_listing[:company].id))}
+        %h3.media-heading #{link_to(job_listing[:company].name, company_path(id: job_listing[:company].id))} - #{link_to(job_listing_title(job_listing[:listing]), company_job_listing_path(id: job_listing[:listing].id, company_id: job_listing[:company].id))}
         .panel-group#accordion2
           .panel.panel-default
             .panel-heading
@@ -23,33 +23,33 @@
             .panel-body
               %ul.list-group
                 %li.list-group-item
-                  %strong.list-group-item-heading
+                  %h4.list-group-item-heading
                     Salary Range
-                  %p.list-group-item-text
+                  .list-group-item-text
                     #{number_to_currency(job_listing[:listing].salary_range_low)} - #{number_to_currency(job_listing[:listing].salary_range_high)}
                 %li.list-group-item
-                  %strong.list-group-item-heading Preferred Languages
-                  %p.list-group-item-text
+                  %h4.list-group-item-heading Preferred Languages
+                  .list-group-item-text
                     #{job_listing[:listing].acceptable_languages.join(', ')}
                 %li.list-group-item
-                  %strong.list-group-item-heading Preferred Experience Level
-                  %p.list-group-item-text
+                  %h4.list-group-item-heading Preferred Experience Level
+                  .list-group-item-text
                     #{job_listing[:listing].experience_levels.join(', ')}
                 %li.list-group-item
-                  %strong.list-group-item-heading Preferred Practices
-                  %p.list-group-item-text
+                  %h4.list-group-item-heading Preferred Practices
+                  .list-group-item-text
                     #{job_listing[:listing].practices.join(', ')}
                 %li.list-group-item
-                  %strong.list-group-item-heading Bonus Points for
-                  %p.list-group-item-text
+                  %h4.list-group-item-heading Bonus Points for
+                  .list-group-item-text
                     #{job_listing[:listing].special_characteristics.join(', ')}
                 %li.list-group-item
-                  %strong.list-group-item-heading Job Perks
-                  %p.list-group-item-text
+                  %h4.list-group-item-heading Job Perks
+                  .list-group-item-text
                     #{job_listing[:listing].perks.join(', ')}
                 %li.list-group-item
-                  %strong.list-group-item-heading Benefits
-                  %p.list-group-item-text
+                  %h4.list-group-item-heading Benefits
+                  .list-group-item-text
                     = job_listing_benefits(job_listing[:listing])
           .panel.panel-default
             .panel-heading
@@ -62,28 +62,28 @@
               - if tech_stack.present?
                 %ul.list-group
                   %li.list-group-item
-                    %strong.list-group-item-heading Back-end Languages
-                    %p.list-group-item-text
+                    %h4.list-group-item-heading Back-end Languages
+                    .list-group-item-text
                       #{tech_stack.back_end_languages.join(', ')}
                   %li.list-group-item
-                    %strong.list-group-item-heading Front-end Languages
-                    %p.list-group-item-text
+                    %h4.list-group-item-heading Front-end Languages
+                    .list-group-item-text
                       #{tech_stack.front_end_languages.join(', ')}
                   %li.list-group-item
-                    %strong.list-group-item-heading Frameworks
-                    %p.list-group-item-text
+                    %h4.list-group-item-heading Frameworks
+                    .list-group-item-text
                       #{tech_stack.frameworks.join(', ')}
                   %li.list-group-item
-                    %strong.list-group-item-heading Dev Ops Tools
-                    %p.list-group-item-text
+                    %h4.list-group-item-heading Dev Ops Tools
+                    .list-group-item-text
                       #{tech_stack.dev_ops_tools.join(', ')}
                   %li.list-group-item
-                    %strong.list-group-item-heading NoSQL Databases
-                    %p.list-group-item-text
+                    %h4.list-group-item-heading NoSQL Databases
+                    .list-group-item-text
                       #{tech_stack.nosql_databases.join(', ')}
                   %li.list-group-item
-                    %strong.list-group-item-heading Relational Databases
-                    %p.list-group-item-text
+                    %h4.list-group-item-heading Relational Databases
+                    .list-group-item-text
                       #{tech_stack.relational_databases.join(', ')}
               - else
                 %p Sorry there is no tech stack information, contact #{job_listing[:company].name} for more information.

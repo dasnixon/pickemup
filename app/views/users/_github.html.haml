@@ -1,4 +1,3 @@
-%hr
 %p
   %i.fa.fa-github.fa-2x
     Github
@@ -19,6 +18,6 @@
       = render 'organizations'
   - elsif user_signed_in?
     %p
-      = link_to '/auth/github', class: 'btn btn-inverse' do
+      = link_to '/auth/github', class: 'btn btn-inverse', style: 'color: white !important;' do
         %i.fa.fa-github
         %strong | Link your Github

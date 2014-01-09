@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <div class='panel-title'>
-        <a class="accordion-toggle" data-parent='#filters' data-toggle='collapse' data-target='#collapseOne'><h4>Filter Results</h4></a>
+        <a class="accordion-toggle" data-parent='#filters' data-toggle='collapse' data-target='#collapseOne'><h3>Filter Results</h3></a>
       </div>
     </div>
     <div id="collapseOne" class="panel-collapse collapse">
@@ -11,7 +11,7 @@
         <br />
         <br />
 
-        <h6>Citizenship/Green Card</h6>
+        <h4>Citizenship/Green Card</h4>
         <label class='radio-inline'>
           <input checked='checked' ng-checked="all" ng-click="setCitizenshipFilter('')" type="radio" name="valid_us_worker" value="all">All Developers
         </label>
@@ -24,20 +24,20 @@
 
         <hr></hr>
 
-        <h6>Salary Range</h6>
+        <h4>Salary Range</h4>
         <p class="text-center">
           <input class="col-md-11" value="" data-selection='none' data-slider-min="0" data-slider-max="300000" data-slider-step="100" data-slider-value="[0,1000000]" salaryrange />
         </p>
         <hr></hr>
 
-        <h6>Search Language</h6>
+        <h4>Search Language</h4>
         <div class='form-group'>
           <input class='form-control' type='text' ng-model="searchSkillKeyword"/>
         </div>
 
         <hr></hr>
 
-        <h6>By Location</h6>
+        <h4>By Location</h4>
         <label class="checkbox-inline" ng-repeat="location in locations">
           <input ng-click="maintainSelectedLocations(location)" type="checkbox" ng-value="location"> {{location}}
         </label>
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<h5>{{job_listing.job_title}}</h5>
+<h2>{{job_listing.job_title}}</h2>
 <div class='well' ng-repeat="user in matches | filter:filters | skills:searchSkillKeyword | location:selectedLocations">
   <div class='media'>
     <div class='pull-left'>
@@ -89,9 +89,9 @@
           <dd ng-bind='user.skills | attributeArrayLimit:90'></dd>
         </dl>
       </div>
-      <h6 class='media-heading'>
+      <h3 class='media-heading'>
         {{user.name}} <small>{{user.valid_us_worker && "Authorized for work in U.S." || "Unauthorized for work in U.S."}}</small>
-      </h4>
+      </h3>
       <p class='description' ng-bind-html="user.description"></p>
     </div>
   </div>

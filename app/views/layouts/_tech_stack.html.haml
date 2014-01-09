@@ -4,29 +4,29 @@
     .media-heading
       = link_to "Edit", edit_company_tech_stack_path(company_id: company.id, id: tech_stack.id), class: 'btn btn-warning'
       = link_to "Remove", company_tech_stack_path(company_id: company.id, id: tech_stack.id), class: 'btn btn-danger', method: :delete
-    .lead.media-headling= "#{tech_stack.name} Tech Stack"
+    %h3.media-headling= "#{tech_stack.name} Tech Stack"
     %ul.list-group
       %li.list-group-item
-        %strong.list-group-item-heading Back-end Languages
-        %p.list-group-item-text
+        %h4.list-group-item-heading Back-end Languages
+        .list-group-item-text
           #{tech_stack.back_end_languages.join(', ')}
       %li.list-group-item
-        %strong.list-group-item-heading Front-end Languages
-        %p.list-group-item-text
+        %h4.list-group-item-heading Front-end Languages
+        .list-group-item-text
           #{tech_stack.front_end_languages.join(', ')}
       %li.list-group-item
-        %strong.list-group-item-heading Frameworks
-        %p.list-group-item-text
+        %h4.list-group-item-heading Frameworks
+        .list-group-item-text
           #{tech_stack.frameworks.join(', ')}
       %li.list-group-item
-        %strong.list-group-item-heading Dev Ops Tools
-        %p.list-group-item-text
+        %h4.list-group-item-heading Dev Ops Tools
+        .list-group-item-text
           #{tech_stack.dev_ops_tools.join(', ')}
       %li.list-group-item
-        %strong.list-group-item-heading NoSQL Databases
-        %p.list-group-item-text
+        %h4.list-group-item-heading NoSQL Databases
+        .list-group-item-text
           #{tech_stack.nosql_databases.join(', ')}
       %li.list-group-item
-        %strong.list-group-item-heading Relational Databases
-        %p.list-group-item-text
+        %h4.list-group-item-heading Relational Databases
+        .list-group-item-text
           #{tech_stack.relational_databases.join(', ')}

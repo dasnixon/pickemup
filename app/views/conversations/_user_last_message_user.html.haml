@@ -6,9 +6,9 @@
         = render partial: 'action_conversation', locals: { conversation: conversation }
       - else
         = link_to 'Un-trash', untrash_user_conversation_path(id: conversation.id, user_id: current_user.id), method: :put, class: 'btn btn-success'
-    %h6.media-heading
+    %h4.media-heading
       Conversation With: #{link_to conversation_with.name, company_path(id: conversation_with.id)}
-    %h6.media-heading
+    %h4.media-heading
       Subject: #{link_to(truncate(conversation.subject, length: 55), user_conversation_path(user_id: current_user.id, id: conversation.id, box: @box))}
     .col-md-8.well
       = raw(truncate(strip_tags(conversation.last_message.body), :length => 100))

@@ -1,5 +1,5 @@
 <div ng-repeat="(job_listing_info, matches) in matchings">
-  <h5 style='margin-bottom: 10px;'>{{ splitString(job_listing_info, '___')[0] }}</h5>
+  <h2 style='margin-bottom: 10px;'>{{ splitString(job_listing_info, '___')[0] }}</h2>
   <div ng-if='matches.length == 0'>
     <p>
       We are sorry, there are currently no matches for the {{ splitString(job_listing_info, '___')[0] }} job listing. It may be helpful to clean up the
@@ -47,9 +47,9 @@
               <dd ng-bind='user.skills | attributeArrayLimit:90'></dd>
             </dl>
           </div>
-          <h6 class='media-heading'>
+          <h3 class='media-heading'>
             {{user.name}} <small>{{user.valid_us_worker && "Authorized for work in U.S." || "Unauthorized for work in U.S."}}</small>
-          </h6>
+          </h3>
           <p class='description' ng-bind-html="user.description"></p>
         </div>
       </div>

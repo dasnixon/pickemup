@@ -4,21 +4,16 @@
       %h4 Positions
   #collapsePos.panel-collapse.collapse
     .panel-body
-      %table.table
-        %tr
-          %th Company Name
-          %th Industry
-          %th Company Type
-          %th Company Size
-          %th Title
-          %th Summary
-          %th Start Date
+      %ul.media-list
         - @positions.each do |position|
-          %tr{'class' => "#{position.is_current? ? 'success' : ''}"}
-            %td= position.name
-            %td= position.industry
-            %td= position.company_type
-            %td= position.size
-            %td= position.title
-            %td= position.summary
-            %td #{Date::MONTHNAMES[position.start_month.to_i]} of #{position.start_year}
+          %li.media
+            .media-body
+              %h4
+                #{position.name} - #{position.title} from #{Date::MONTHNAMES[position.start_month.to_i]} of #{position.start_year}
+                - if position.is_current?
+                  %small
+                    Current Position
+                    %i.fa.fa-check
+
+              %p= position.summary
+          %hr

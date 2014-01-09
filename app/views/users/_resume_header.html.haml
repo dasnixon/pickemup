@@ -17,12 +17,12 @@
       .pull-left
         = image_tag(@user.profile_image, class: 'img-rounded img-thumb')
       .media-body
-        %h4 #{@user.name.possessive} Resume
+        %h1 #{@user.name.possessive} Resume
   - elsif @user != current_user
     .media
       .pull-left
         = image_tag(@user.profile_image, class: 'img-rounded img-thumb')
       .media-body
-        %h4 #{@user.name.possessive} Resume
+        %h1 #{@user.name.possessive} Resume
   - else
     = link_to 'Edit Profile', edit_user_path(id: current_user.id), class: 'btn btn-info pull-right'

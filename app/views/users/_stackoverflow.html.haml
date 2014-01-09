@@ -1,18 +1,17 @@
 .media
   .media-body
-    %h6.media-heading
+    %h4.media-heading
       Reputation:
-      %small
-        #{@stackexchange.reputation}
+      #{@stackexchange.reputation}
     .col-md-1.pull-left.text-center
-      %h6 Gold
+      %h4 Gold
       .col-md-1
         %span.badge.gold #{@stackexchange.badges['gold']}
     .col-md-1.pull-left.text-center
-      %h6 Silver
+      %h4 Silver
       .col-md-1
         %span.badge.silver #{@stackexchange.badges['silver']}
     .col-md-1.pull-left.text-center
-      %h6 Bronze
+      %h4 Bronze
       .col-md-1
         %span.badge.bronze #{@stackexchange.badges['bronze']}

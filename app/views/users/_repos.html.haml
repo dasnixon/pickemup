@@ -4,21 +4,14 @@
       %h4 Repositories (#{@github_account.public_repos_count})
   #collapseRepo.panel-collapse.collapse
     .panel-body
-      %table.table
-        %tr
-          %th Name
-          %th Description
-          %th Language
-          %th # Forks
-          %th # Watchers
-          %th Started
-          %th Last Updated
+      %ul.media-list
         - @repos.each do |repo|
-          %tr
-            %td= link_to repo.name, repo.url
-            %td= repo.description
-            %td= repo.language
-            %td= repo.number_forks
-            %td= repo.number_watchers
-            %td= repo.started.strftime("%m/%d/%Y")
-            %td= repo.last_updated.strftime("%m/%d/%Y")
+          %li.media
+            .media-body
+              %h4
+                #{link_to repo.name, repo.url}
+                %small
+                  Started on #{repo.started.strftime("%m/%d/%Y")} and last updated #{repo.last_updated.strftime("%m/%d/%Y")}
+              %p Written in #{repo.language} with #{repo.number_forks} forks and #{repo.number_watchers} watchers.
+              %p= repo.description || "No description"
+          %hr

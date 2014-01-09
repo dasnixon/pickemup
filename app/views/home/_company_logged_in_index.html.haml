@@ -14,8 +14,8 @@
           %p
             To begin fully utilizing Pickemup, setup a subscription. After you are done setting up a subscription you will
             be able to start adding job listings and tech stacks. Lastly, be prepared to be swarmed with developers!
-          %p
-            = link_to 'Setup Subscription', new_company_subscription_path(company_id: current_company.id), class: 'btn btn-primary'
+          %br
+          = link_to 'Setup Subscription', new_company_subscription_path(company_id: current_company.id), class: 'btn btn-primary'
       - else
         .hero-unit
           %h1 Start adding a job listing now!
@@ -24,5 +24,5 @@
             Make sure your job listing is as accurate as possible. If you want the perfect developer then be honest, transparent,
             and descriptive with what your company has to offer. It's important for you to get as much detail up front so the
             process can move as quickly as possible, and the chances of landing the right developer the first time increase.
-          %p
-            = link_to 'Add Job Listing', new_company_job_listing_path(company_id: current_company.id), class: 'btn btn-theme'
+          %br
+          = link_to 'Add Job Listing', new_company_job_listing_path(company_id: current_company.id), class: 'btn btn-theme'
