@@ -5,7 +5,7 @@
       - unless @box.eql?('trash')
         = render partial: 'action_conversation', locals: { conversation: conversation }
       - else
-        = link_to 'Un-trash', untrash_user_conversation_path(id: conversation.id, user_id: current_user.id), method: :put, class: 'btn btn-success'
+        = link_to 'Un-trash', untrash_user_conversation_path(id: conversation.id, user_id: current_user.id), method: :patch, class: 'btn btn-success'
     %h4.media-heading
       From: #{link_to last_message.name, company_path(id: last_message.id)}
     %h4.media-heading

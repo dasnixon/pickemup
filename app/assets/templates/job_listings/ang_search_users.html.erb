@@ -72,12 +72,12 @@
     <div class='media-body'>
       <div class='pull-right' style="height: 200px;">
         <div class='pull-right'>
-          <button class="btn btn-info" ng-click="go('/users/{{user.id}}/resume')">
+          <a class="btn btn-info" ng-href="/users/{{user.id}}/resume" target="_self">
             View Resume
-          </button>
-          <button class="btn btn-success" ng-show="{{user.score}} >= {{user.match_threshold}}" ng-click="go('/companies/{{company_id}}/messages/new?job_listing_id={{job_listing.id}}&receiver={{user.id}}')">
+          </a>
+          <a class="btn btn-success" ng-show="{{user.score}} >= {{user.match_threshold}}" ng-href="/companies/{{company_id}}/messages/new?job_listing_id={{job_listing.id}}&receiver={{user.id}}" target="_self">
             Send Message
-          </button>
+          </a>
         </div>
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>

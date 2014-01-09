@@ -47,6 +47,52 @@
       - else
         = text_area_tag :body, default_job_listing_company(@job_listing, @company, @recipient), class: 'ckeditor form-control'
 
+  - if company_signed_in?
+    = hidden_field_tag 'interview[company_id]', current_company.id
+    = hidden_field_tag 'interview[user_id]', @recipient.id
+    = hidden_field_tag 'interview[job_listing_id]', @job_listing.id
+    %h3
+      Interview Setup
+      %small.text-error
+        This is an optional step, leave blank if you want to schedule an interview later.
+    .form-group
+      = label_tag 'Schedule Interview Date', nil, class: 'col-sm-2 control-label'
+      .col-sm-10
+        .row
+          .col-sm-4
+            = select_tag "date[year]", options_for_select([Date.today.year, Date.today.year + 1], Date.today.year), class: 'form-control'
+          .col-sm-4
+            = select_tag "date[month]", options_for_select((1..12).map {|m| [Date::MONTHNAMES[m], m]}, Date.today.month), class: 'form-control'
+          .col-sm-4
+            = select_tag "date[day]", options_for_select((1..31).to_a, Date.today.day), class: 'form-control'
+    .form-group
+      = label_tag 'Schedule Interview Time', nil, class: 'col-sm-2 control-label'
+      .col-sm-10
+        .row
+          .col-sm-4
+            = select_hour(Time.now, {field_name: "hour", ampm: true}, {class: 'form-control'})
+          .col-sm-4
+            = select_minute(Time.now, {field_name: "minute"}, {class: 'form-control'})
+    .form-group
+      = label_tag 'Approximate Duration', nil, class: 'col-sm-2 control-label'
+      .col-sm-10
+        .input-group
+          = number_field_tag 'Duration', nil, name: 'interview[duration]', in: 1..12, class: 'form-control'
+          %span.input-group-addon hour(s)
+    .form-group
+      = label_tag 'Location', nil, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = text_field_tag 'location', nil, class: 'form-control', name: 'interview[location]'
+    .form-group
+      = label_tag 'Interview Details', nil, class: 'col-sm-2 control-label'
+      .col-sm-10
+        = text_area_tag 'Interview Details', nil, class: 'form-control', name: 'interview[description]'
   .form-group
     .col-sm-10.col-sm-offset-2
-      = submit_tag t('mailboxer.send'), name: :send_message, class: "btn btn-success"
+      = submit_tag t('mailboxer.send'), name: :send_message, class: "btn btn-success col-sm-12"
+
+  - if company_signed_in?
+    %h3 Interview Schedule
+    .form-group
+      .col-sm-10.col-sm-offset-2
+        #full-calendar

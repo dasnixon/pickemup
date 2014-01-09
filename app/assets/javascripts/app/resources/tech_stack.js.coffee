@@ -2,7 +2,7 @@ techStack.factory('TechStack', ['$resource', ($resource) ->
   editTechStack: $resource('/companies/:company_id/tech_stacks/:tech_stack_id/:action.json',
     {company_id: '@company_id', tech_stack_id: '@tech_stack_id', action: '@action'},
     'get':    {method:'GET'},
-    'update': {method:'PUT'},
+    'update': {method:'PATCH'},
     'retrieveTechStack': {method: 'GET'}
   )
   newTechStack: $resource('/companies/:company_id/tech_stacks/new.json',

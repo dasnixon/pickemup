@@ -3,7 +3,7 @@
     - if !current_company.active
       %p
         Your account is currently deactivated. To start getting matched with developers again activate your account by clicking
-        #{link_to 'here.', toggle_activation_company_path(id: current_company.id), method: :put}
+        #{link_to 'here.', toggle_activation_company_path(id: current_company.id), method: :patch}
     - else
       - if current_company.job_listings.exists?
         %div{"ng-app"=>"JobListing"}

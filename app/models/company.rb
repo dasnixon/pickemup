@@ -154,14 +154,15 @@ class Company < ActiveRecord::Base
         batched_users.each do |user|
           next matches if matches["#{job_listing.job_title}___#{job_listing.id}"].length >= 3 or self.already_has_conversation_over?(job_listing.id, user)
           preference = user.preference
-          next matches unless preference.preference_percentage_filled >= 60
+          score      = preference.score(job_listing.id)['score'].to_i
+          next matches if preference.preference_percentage_filled < 60 || score < job_listing.match_threshold
           truncated_description = ''
           user_attrs = user.attributes.keep_if { |k,v| k =~ JobListing::USER_ATTR_REGEX }.merge('profile_image' => user.profile_image.url)
           if user.description.present?
             html_string = TruncateHtml::HtmlString.new(user.description)
             truncated_description = TruncateHtml::HtmlTruncator.new(html_string, length: 360, omission: '...').truncate
           end
-          preference_attrs = preference.attributes.keep_if { |k,v| k =~ JobListing::PREFERENCE_ATTR_REGEX }.merge('score' => preference.score(job_listing.id)['score'].to_i, 'description' => truncated_description)
+          preference_attrs = preference.attributes.keep_if { |k,v| k =~ JobListing::PREFERENCE_ATTR_REGEX }.merge('score' => score, 'description' => truncated_description)
           matches["#{job_listing.job_title}___#{job_listing.id}"] << user_attrs.merge(preference_attrs)
         end
       end
@@ -172,6 +173,22 @@ class Company < ActiveRecord::Base
 
   def not_fully_setup?
     self.job_listings.blank? || self.tech_stacks.blank? || !self.fully_activated?
+  end
+
+  def get_scheduled_interviews
+    Interview.where(company_id: self.id).collect { |interview| {title: "Interview with #{User.find(interview.user_id).name}", start: interview.request_date} }
+  end
+
+  def interviews
+    Interview.where(company_id: self.id)
+  end
+
+  def upcoming_interviews
+    Interview.where("company_id = ? AND request_date >= ?", self.id, Time.now.utc)
+  end
+
+  def past_interviews
+    Interview.where("company_id = ? AND request_date <= ?", self.id, Time.now.utc)
   end
 
   private

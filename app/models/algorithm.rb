@@ -5,7 +5,7 @@ class Algorithm
   TOTAL_POINTS = 20.0
 
   def initialize(preference, job_listing, user: nil, company: nil, run_score: true)
-    raise "Unable to score with an invalid preference or job listing" if preference.blank? or job_listing.blank?
+    raise "Unable to score with an invalid preference or job listing" if preference.blank? || job_listing.blank?
     self.preference, self.job_listing = preference, job_listing
     self.company, self.user = (company || job_listing.company), user
     self.score = get_score if run_score

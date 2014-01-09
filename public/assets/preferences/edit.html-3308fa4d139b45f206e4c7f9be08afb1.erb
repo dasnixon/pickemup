@@ -1,0 +1,29 @@
+<form name="preferenceForm" class='form-horizontal' ng-submit="update()">
+  <div class='row row-offcanvas row-offcanvas-left'>
+    <div class="col-md-2 sidebar-offcanvas" id="sidebar">
+      <ul class="list-unstyled">
+        <li class="means-yes alert">
+          This means yes or preferred
+        </li>
+        <li class="means-no alert">
+          This means no or not preferred
+        </li>
+        <li ng-show="success.length > 0" class="alert alert-success">
+          {{success}}
+        </li>
+        <li ng-show="dirty_message.length > 0" class="alert alert-info">
+          {{dirty_message}}
+        </li>
+        <li ng-show="error_updating.length > 0" class="alert alert-danger">
+          {{error_updating}}
+        </li>
+        <li ng-show="dirty_message.length > 0">
+          <button class='btn btn-success' type="submit">Save Your Preferences</button>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-9-right">
+      <div ng-include src="'/assets/preferences/_form.html-65825319d38615bd7ca047b7d8175c8b.erb'"></div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,15 @@
+- user = @user || user_for_interview(interview)
+- job_listing = @job_listing || job_listing_for_interview(interview)
+- conversation = current_company.conversation_for_job_listing(job_listing.id)
+.pull-right
+  = render partial: 'interviews/action', locals: {interview: interview}
+  = link_to 'View Conversation', company_conversation_path(company_id: current_company.id, id: conversation.id), class: 'btn btn-info'
+%h3
+  = image_tag user.profile_image, class: 'img-visible img-rounded'
+  #{link_to user.name, resume_user_path(id: user.id)}
+  %label.label.label-info
+    #{label_status(interview, 'company')}
+%h3 #{job_listing_title(job_listing)}
+%p
+  #{interview.request_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y %I:%M%p")} EST at #{interview.location} for #{pluralize(interview.duration, 'hour')}
+%p= interview.description

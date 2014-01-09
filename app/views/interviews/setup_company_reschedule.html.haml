@@ -1,0 +1,51 @@
+#housing
+  .container
+    .row{style: 'margin-bottom: 30px;'}
+      .participants
+        = image_tag(@user.profile_image.small, title: @user.name, class: 'img-rounded img-visible')
+        = link_to image_tag(current_company.get_logo('small'), title: current_company.name, class: 'img-rounded img-visible'), company_path(id: current_company.id)
+        %strong.lead{style: 'margin-left: 10px; font-size: 16px;'} Interview request to #{link_to @user.name, resume_user_path(id: @user.id)} for #{link_to job_listing_title(@job_listing), company_job_listing_path(company_id: @company.id, id: @job_listing.id)}
+
+    = form_for @interview, url: company_reschedule_interview_path(@interview), html: { class: 'form-horizontal' } do |f|
+      .form-group
+        = f.label 'Schedule Interview Date', class: 'col-sm-2 control-label'
+        .col-sm-10
+          .row
+            .col-sm-4
+              = select_tag "date[year]", options_for_select([Date.today.year, Date.today.year + 1], @interview.request_date.year), class: 'form-control'
+            .col-sm-4
+              = select_tag "date[month]", options_for_select((1..12).map {|m| [Date::MONTHNAMES[m], m]}, @interview.request_date.month), class: 'form-control'
+            .col-sm-4
+              = select_tag "date[day]", options_for_select((1..31).to_a, @interview.request_date.day), class: 'form-control'
+      .form-group
+        = label_tag 'Schedule Interview Time', nil, class: 'col-sm-2 control-label'
+        .col-sm-10
+          .row
+            .col-sm-4
+              = select_hour(@interview.request_date.in_time_zone("Eastern Time (US & Canada)").hour, {field_name: "hour", ampm: true}, {class: 'form-control'})
+            .col-sm-4
+              = select_minute(@interview.request_date.in_time_zone("Eastern Time (US & Canada)").min, {field_name: "minute"}, {class: 'form-control'})
+        %span.help-block
+          %strong Eastern Standard Time
+      .form-group
+        = f.label 'Approximate Duration', nil, class: 'col-sm-2 control-label'
+        .col-sm-10
+          .input-group
+            = f.number_field :duration, in: 1..12, class: 'form-control'
+            %span.input-group-addon hour(s)
+      .form-group
+        = f.label 'Location', class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_field :location, class: 'form-control'
+      .form-group
+        = f.label 'Interview Details', class: 'col-sm-2 control-label'
+        .col-sm-10
+          = f.text_area :description, class: 'form-control'
+      .form-group
+        .col-sm-10.col-sm-offset-2
+          = f.submit 'Reschedule Interview', class: "btn btn-success col-sm-12"
+
+      %h5 Your Schedule
+      .form-group
+        .col-sm-10.col-sm-offset-2
+          #full-calendar

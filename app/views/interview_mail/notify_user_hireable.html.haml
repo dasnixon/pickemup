@@ -1,0 +1,21 @@
+%p= image_tag attachments['logo.png'].url, :height => '100px', :width => '135px'
+
+%h3 Congratulations, #{@company.name} is Interested in Hiring You
+
+%p
+  Hey #{@user.name},
+
+%p
+  We are happy to say that #{@company.name} is interested in hiring you
+  for #{@job_listing.fulltime? ? 'fulltime ' : 'part-time '}#{@job_listing.remote? ? 'remote ' : ''}#{@job_listing.job_title} - #{@job_listing.locations.present? ? @job_listing.locations.join(', ') : "unspecified location"}.
+  #{@company.name} and ourselves will be in contact with you to finalize a deal. Nice job,
+  and we hope that this is a position you desire.
+
+%p
+  We appreciate you using Pickemup. #{link_to 'Contact', contact_url} us if you need help with your decision, or other job searching needs.
+
+%p
+  Thanks,
+  %br
+  Pickemup Team
+

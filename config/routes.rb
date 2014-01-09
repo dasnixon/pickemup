@@ -26,12 +26,12 @@ Pickemup::Application.routes.draw do
       get :skills
       get :preferences
       get :get_preference
-      put :update_preference
-      put :toggle_activation
+      patch :update_preference
+      patch :toggle_activation
     end
     resources :conversations, only: [:index, :show, :destroy, :update] do
       member do
-        put :untrash
+        patch :untrash
       end
     end
     resources :messages, except: [:edit, :update, :destroy]
@@ -41,27 +41,27 @@ Pickemup::Application.routes.draw do
       get '/validate_company', to: 'companies#validate_company', as: :validate_company
     end
     member do
-      put :toggle_activation
+      patch :toggle_activation
     end
     get :purchase_options, to: 'subscriptions#purchase_options'
     get :get_users
     resources :conversations, only: [:index, :show, :destroy, :update] do
       member do
-        put :untrash
+        patch :untrash
       end
     end
     resources :tech_stacks, only: [:index, :new, :create, :edit, :destroy] do
       member do
         get :retrieve_tech_stack
-        put :update_tech_stack
+        patch :update_tech_stack
       end
     end
     resources :job_listings do
       member do
         get :search_users
         get :retrieve_listing
-        put :update_listing
-        put :toggle_active
+        patch :update_listing
+        patch :toggle_active
       end
       collection do
         get :guide
@@ -71,8 +71,24 @@ Pickemup::Application.routes.draw do
     resources :subscriptions, except: [:destroy] do
       member do
         get :edit_card
-        put :edit_card
+        patch :edit_card
       end
+    end
+  end
+  resources :interviews, except: [:edit, :update, :destroy] do
+    collection do
+      get :events
+    end
+    member do
+      patch :accept_candidate
+      patch :reject_candidate
+      get :setup_user_reschedule
+      patch :user_reschedule
+      get :setup_company_reschedule
+      patch :company_reschedule
+      patch :accept_scheduled
+      delete :user_cancel
+      delete :company_cancel
     end
   end
   resources :admins, only: [:index]

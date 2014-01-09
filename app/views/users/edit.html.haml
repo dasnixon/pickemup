@@ -4,9 +4,9 @@
     .container
       .pull-right
         - if current_user.active?
-          = link_to 'Deactivate Account', toggle_activation_user_path(id: current_user.id), method: :put, class: 'btn btn-danger'
+          = link_to 'Deactivate Account', toggle_activation_user_path(id: current_user.id), method: :patch, class: 'btn btn-danger'
         - else
-          = link_to 'Activate Account', toggle_activation_user_path(id: current_user.id), method: :put, class: 'btn btn-success'
+          = link_to 'Activate Account', toggle_activation_user_path(id: current_user.id), method: :patch, class: 'btn btn-success'
       .clearfix
       %br
       %br

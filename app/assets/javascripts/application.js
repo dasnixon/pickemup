@@ -20,6 +20,8 @@
 //= require cardcheck.min
 //= require fileupload.min
 //= require flatui-radio
+//= require bootstrap-datetimepicker
+//= require fullcalendar
 //= require app/main
 //= require ckeditor-jquery
 //= require bootstrap-slider

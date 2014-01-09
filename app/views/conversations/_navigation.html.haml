@@ -1,5 +1,6 @@
-%ul.breadcrumb
-  - if current_user
-    = render 'user_navigation'
-  - elsif current_company
-    = render 'company_navigation'
+.pull-left
+  %ul.breadcrumb
+    - if current_user
+      = render 'user_navigation'
+    - elsif current_company
+      = render 'company_navigation'

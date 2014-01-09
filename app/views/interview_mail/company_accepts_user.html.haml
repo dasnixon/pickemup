@@ -1,0 +1,21 @@
+%p= image_tag attachments['logo.png'].url, :height => '100px', :width => '135px'
+
+%h3 Congratulations on the Successful Interview with #{@user.name}
+
+%p
+  Hey #{@company.name},
+
+%p
+  We are glad to see that you would like to hire #{link_to @user.name, resume_user_url(id: @user.id)}
+  for #{@job_listing.fulltime? ? 'fulltime ' : 'part-time '}#{@job_listing.remote? ? 'remote ' : ''}#{@job_listing.job_title} - #{@job_listing.locations.present? ? @job_listing.locations.join(', ') : "unspecified location"}.
+  We will contact you and #{@user.name} to finalize the process, but for now you can message #{@user.name}
+  to negotiate terms of the contract.
+
+%p
+  We appreciate your business, and are glad we could find a candidate that fits your needs. #{link_to 'Contact', contact_url} us with any questions
+  or concerns you may have.
+
+%p
+  Thanks,
+  %br
+  Pickemup Team

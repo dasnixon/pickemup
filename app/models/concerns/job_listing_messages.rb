@@ -1,5 +1,6 @@
 module JobListingMessages
   extend ActiveSupport::Concern
+
   def send_message(recipients, msg_body, subject, job_listing_id = nil, sanitize_text = true, attachment = nil, message_timestamp = Time.now)
     convo = Conversation.new({subject: subject})
     convo.job_listing_id = job_listing_id

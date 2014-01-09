@@ -1,0 +1,19 @@
+%p= image_tag attachments['logo.png'].url, :height => '100px', :width => '135px'
+
+%h3 Interview Cancellation by #{@company.name}
+
+%p
+  Hey #{@user.name},
+
+%p
+  #{link_to @company.name, company_url(id: @company.id)} has requested to cancel the interview for
+  #{@job_listing.fulltime? ? 'fulltime ' : 'part-time '}#{@job_listing.remote? ? 'remote ' : ''}#{@job_listing.job_title} - #{@job_listing.locations.present? ? @job_listing.locations.join(', ') : "unspecified location"}.
+  We are sorry for this inconvenience, but you may want to contact #{@company.name} to get more details and have them setup a new interview.
+
+%p
+  Please #{link_to 'contact', contact_url} us with any questions or concerns you may have.
+
+%p
+  Thanks,
+  %br
+  Pickemup Team

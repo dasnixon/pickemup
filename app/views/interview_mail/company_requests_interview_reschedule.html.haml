@@ -1,0 +1,22 @@
+%p= image_tag attachments['logo.png'].url, :height => '100px', :width => '135px'
+
+%h3 Interview Reschedule by #{@company.name}
+
+%p
+  Hey #{@user.name},
+
+%p
+  #{link_to @company.name, company_url(id: @company.id)} has requested to reschedule the interview for
+  #{@job_listing.fulltime? ? 'fulltime ' : 'part-time '}#{@job_listing.remote? ? 'remote ' : ''}#{@job_listing.job_title} - #{@job_listing.locations.present? ? @job_listing.locations.join(', ') : "unspecified location"} at #{@interview.location} to
+  #{@interview.request_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y %I:%M%p")} EST.
+
+  To view a description, and accept, reschedule, or cancel this interview, check out the interview information #{link_to 'here', interview_url(id: @interview.id)}. Please be as prompt as possible to keep the process going smoothly.
+
+%p
+  Good luck with your interview, please #{link_to 'contact', contact_url} us with any questions, concerns, or if you need
+  help preparing for your interview, we are here to help.
+
+%p
+  Thanks,
+  %br
+  Pickemup Team

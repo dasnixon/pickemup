@@ -5,6 +5,7 @@ class ConversationsController < ApplicationController
 
   before_filter :find_mailbox_for, :get_mailbox, :get_box
   before_filter :find_conversation, only: [:show, :update, :destroy, :untrash]
+  after_filter :destroy_interview, only: [:destroy]
 
   def index
     if @box.eql? 'inbox'
@@ -65,6 +66,22 @@ class ConversationsController < ApplicationController
     @conversation = Conversation.find(params[:id])
     if !JobListing.exists?(id: @conversation.job_listing_id) or @conversation.blank? or !@conversation.is_participant?(@mailbox_for)
       conversations_redirect('Unable to find conversation or the job listing no longer exists, sorry.')
+    end
+  end
+
+  def destroy_interview
+    user, company = nil, nil
+    @conversation.participants.each do |participant|
+      user = participant if participant.is_a?(User)
+      company = participant if participant.is_a?(Company)
+    end
+    interview = Interview.find_by(job_listing_id: @conversation.job_listing_id, user_id: user.id, company_id: company.id)
+    if interview.present?
+      if user_signed_in?
+        interview.send_company_cancellation_and_destroy
+      elsif company_signed_in?
+        interview.send_user_cancellation_and_destroy
+      end
     end
   end
 end

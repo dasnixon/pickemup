@@ -1,0 +1,6 @@
+#housing
+  .container
+    - if user_signed_in?
+      = render partial: 'user_interview', locals: { interview: @interview }
+    - elsif company_signed_in?
+      = render partial: 'company_interview', locals: { interview: @interview }

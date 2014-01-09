@@ -1,0 +1,58 @@
+<div ng-repeat="(job_listing_info, matches) in matchings">
+  <h2 style='margin-bottom: 10px;'>{{ splitString(job_listing_info, '___')[0] }}</h2>
+  <div ng-if='matches.length == 0'>
+    <p>
+      We are sorry, there are currently no matches for the {{ splitString(job_listing_info, '___')[0] }} job listing. It may be helpful to clean up the
+      job listing a bit, or contact us if you think there is an issue.
+    </p>
+  </div>
+  <div ng-if='matches.length > 0'>
+    <div class='well' ng-repeat="user in matches">
+      <div class='media'>
+        <div class='pull-left'>
+          <div style='margin-top: 5px;'>
+            <img class='media-object img-rounded' style='display: block; margin: auto; width: 120px; max-width: 120px; max-height: 120px;' ng-src="{{user.profile_image || '/assets/default_logo-fd5cdd9116b626e210c7b9290d120f9d.png'}}">
+          </div>
+          <div style='margin-top: 5px; display: block; margin-left: auto; margin-right: auto;'>
+            <div class='box-score box-item isotope-item' ng-class="scoreClass(user.score)">
+              <div class='box-link'>
+                <span class='box-number box-number-item'>
+                  {{user.score || '0'}} %
+                </span>
+                <br />
+                <span class='box-number box-number-item'>
+                  MATCH
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='media-body'>
+          <div class='pull-right' style="height: 200px;">
+            <div class='pull-right'>
+              <a class="btn btn-info" ng-href="/users/{{user.id}}/resume" target="_self">
+                View Resume
+              </a>
+              <a class="btn btn-success" ng-show="{{user.score}} >= {{user.match_threshold}}" ng-href="/companies/{{company_id}}/messages/new?job_listing_id={{job_listing_id}}&receiver={{user.id}}" target="_self">
+                Send Message
+              </a>
+            </div>
+            <div class="clearfix"></div>
+            <dl class='dl-horizontal side-info'>
+              <dt>Location(s)</dt>
+              <dd ng-bind='locations | attributeArrayLimit:60'></dd>
+              <dt>Salary</dt>
+              <dd>${{user.expected_salary}}</dd>
+              <dt>Language(s)</dt>
+              <dd ng-bind='user.skills | attributeArrayLimit:90'></dd>
+            </dl>
+          </div>
+          <h3 class='media-heading'>
+            {{user.name}} <small>{{user.valid_us_worker && "Authorized for work in U.S." || "Unauthorized for work in U.S."}}</small>
+          </h3>
+          <p class='description' ng-bind-html="user.description"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

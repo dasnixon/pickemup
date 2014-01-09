@@ -1,0 +1,10 @@
+#housing
+  .container
+    %ol.breadcrumb
+      %li= link_to 'All', interviews_path
+      %li= link_to 'Upcoming', interviews_path(type: 'upcoming')
+      %li= link_to 'Past', interviews_path(type: 'past')
+    - if user_signed_in?
+      = render partial: 'user_interviews'
+    - else
+      = render partial: 'company_interviews'
