@@ -48,4 +48,9 @@ class Profile < ActiveRecord::Base
   def self.get_skills(skills)
     (skills.present? and skills.total > 0) ? skills.all.collect { |s| s.skill.name } : []
   end
+
+  #use trick of returning 0 or 1 if position is active to sort by boolean
+  def sorted_positions
+    self.positions.sort_by { |pos| pos.is_current? ? 0 : 1 }
+  end
 end

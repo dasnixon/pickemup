@@ -28,7 +28,7 @@ class UsersController < ApplicationController
       @linkedin          = @user.linkedin
       if @linkedin
         @profile         = @linkedin.profile
-        @positions       = @profile.positions
+        @positions       = @profile.sorted_positions
         @educations      = @profile.educations
         @skills          = @profile.skills
       end
