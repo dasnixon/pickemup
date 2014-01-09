@@ -3334,8 +3334,12 @@ footer, .push {
   }
 
   p.motto {
-    font-size: 310%;
-    text-transform: uppercase;
+    font-size: 200%;
+    letter-spacing: -1px;
+  }
+
+  p.mini_motto {
+    font-size: 150%;
     letter-spacing: -1px;
   }
 }
