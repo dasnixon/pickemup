@@ -12,6 +12,6 @@
                 #{link_to repo.name, repo.url}
                 %small
                   Started on #{repo.started.strftime("%m/%d/%Y")} and last updated #{repo.last_updated.strftime("%m/%d/%Y")}
-              %p Written in #{repo.language} with #{repo.number_forks} forks and #{repo.number_watchers} watchers.
-              %p= repo.description || "No description"
+              %p.indent Written in #{repo.language} with #{repo.number_forks} forks and #{repo.number_watchers} watchers.
+              %p.indent= repo.description || "No description"
           %hr

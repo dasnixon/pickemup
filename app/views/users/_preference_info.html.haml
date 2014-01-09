@@ -5,18 +5,18 @@
     = user_bio(@user, @preference)
   %ul.list-group
     %li.list-group-item
-      %strong.list-gorup-item-heading Preferred Skills
-      %p.list-group-item-text
+      %h4.list-gorup-item-heading Preferred Skills
+      .list-group-item-text
         #{@preference.skills.join(', ')}
     %li.list-group-item
-      %strong.list-gorup-item-heading Preferred Practices
-      %p.list-group-item-text
+      %h4.list-gorup-item-heading Preferred Practices
+      .list-group-item-text
         #{@preference.practices.join(', ')}
     %li.list-group-item
-      %strong.list-gorup-item-heading Preferred Perks
-      %p.list-group-item-text
+      %h4.list-gorup-item-heading Preferred Perks
+      .list-group-item-text
         #{@preference.perks.join(', ')}
     %li.list-group-item
-      %strong.list-gorup-item-heading Preferred Benefits
-      %p.list-group-item-text
+      %h4.list-gorup-item-heading Preferred Benefits
+      .list-group-item-text
         = user_benefits(@preference)

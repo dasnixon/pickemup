@@ -3,7 +3,7 @@
     <div class="col-md-2 sidebar-offcanvas" id="sidebar">
       <ul class='list-unstyled'>
         <li>
-          <img ng-src="{{user.profile_image.medium.url}}" class="img-thumbnail" style="margin-bottom: 10px;">
+          <img ng-src="{{user.profile_image.small.url}}" class="img-thumbnail" style="margin-bottom: 10px;">
         </li>
         <li ng-show="success.length > 0" class="alert alert-success">
           {{success}}
@@ -20,7 +20,7 @@
       </ul>
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-10-right">
       <input type="hidden" ng-model="user.id" />
 
       <div class="form-group">

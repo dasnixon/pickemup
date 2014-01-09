@@ -16,6 +16,8 @@
 #  profile_id   :uuid
 #  created_at   :datetime
 #  updated_at   :datetime
+#  end_year     :string(255)
+#  end_month    :string(255)
 #
 
 class Position < ActiveRecord::Base
@@ -37,7 +39,9 @@ class Position < ActiveRecord::Base
           start_year:    position.start_date.year,
           start_month:   position.start_date.month,
           summary:       position.summary,
-          title:         position.title
+          title:         position.title,
+          end_year:      position.end_date.try(:year),
+          end_month:     position.end_date.try(:month)
         )
       end
     end

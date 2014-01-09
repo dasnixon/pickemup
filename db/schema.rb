@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131215051550) do
+ActiveRecord::Schema.define(version: 20140109051301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -136,6 +136,9 @@ ActiveRecord::Schema.define(version: 20131215051550) do
     t.uuid     "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "duration"
+    t.text     "description"
+    t.string   "location"
   end
 
   add_index "interviews", ["user_id", "company_id", "job_listing_id"], name: "index_interviews_on_user_id_and_company_id_and_job_listing_id", unique: true, using: :btree
@@ -244,6 +247,8 @@ ActiveRecord::Schema.define(version: 20131215051550) do
     t.uuid     "profile_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "end_year"
+    t.string   "end_month"
   end
 
   add_index "positions", ["position_key"], name: "index_positions_on_position_key", using: :btree

@@ -1,6 +1,6 @@
-<form class='form-horizontal techStack', name='techStackForm', ng-submit="update()">
+<form class='jobListing form-horizontal', name='jobListingForm', ng-submit="create()">
   <div class='row row-offcanvas row-offcanvas-left'>
-    <div class="col-md-3 sidebar-offcanvas" id="sidebar">
+    <div class="col-md-2 sidebar-offcanvas" id="sidebar">
       <ul class='list-unstyled'>
         <li class="means-yes alert">
           This means yes or preferred
@@ -18,12 +18,12 @@
           {{error_updating}}
         </li>
         <li ng-show="dirty_message.length > 0">
-          <button class='btn btn-success' type="submit">Save Your Tech Stack</button>
+          <button class='btn btn-success' type="submit">Save Your Job Listing</button>
         </li>
       </ul>
     </div>
-    <div class="col-md-9">
-      <div ng-include src="'/assets/tech_stacks/_tech_stack_form.html-7fefa257d9b20feffd323dd6e89bef58.erb'"></div>
+    <div class="col-md-9-right">
+      <div ng-include src="'/assets/job_listings/_job_listing_form.html-ef6f617eb8c3c18625cb1dc43259bffe.erb'"></div>
     </div>
   </div>
 </form>

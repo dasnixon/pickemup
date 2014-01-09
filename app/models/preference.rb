@@ -31,6 +31,7 @@
 #  created_at             :datetime
 #  updated_at             :datetime
 #  willing_to_relocate    :boolean          default(FALSE)
+#  match_threshold        :integer          default(0)
 #
 
 #http://www.postgresql.org/docs/7.3/static/functions-matching.html

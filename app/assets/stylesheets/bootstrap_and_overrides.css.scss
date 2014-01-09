@@ -3339,3 +3339,22 @@ footer, .push {
     letter-spacing: -1px;
   }
 }
+.media-body {
+  p.indent {
+    margin-left: 8px;
+  }
+}
+
+#sidebar {
+  position: fixed;
+}
+
+.col-md-9-right {
+  @extend .col-md-9;
+  float: right;
+}
+
+.col-md-10-right {
+  @extend .col-md-10;
+  float: right;
+}

@@ -13,6 +13,7 @@
 #  updated_at     :datetime
 #  duration       :integer
 #  description    :text
+#  location       :string(255)
 #
 
 class Interview < ActiveRecord::Base

@@ -33,6 +33,7 @@
 #  locations               :string(255)      default([])
 #  synopsis                :text
 #  tech_stack_id           :uuid
+#  match_threshold         :integer          default(0)
 #
 
 class JobListing < ActiveRecord::Base

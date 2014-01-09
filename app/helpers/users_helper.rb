@@ -120,4 +120,16 @@ module UsersHelper
   def describe_company_type(preference)
     preference.company_types.collect { |t| t.gsub(/Business/, '').downcase.strip }.to_sentence(two_words_connector: ' or ', last_word_connector: ', or ')
   end
+
+  def position_end_date(position)
+    if position.end_month.present? and position.end_year.present?
+      "#{Date::MONTHNAMES[position.end_month.to_i]} of #{position.end_year}"
+    else
+      "now"
+    end
+  end
+
+  def position_start_date(position)
+    "#{Date::MONTHNAMES[position.start_month.to_i]} of #{position.start_year}"
+  end
 end
