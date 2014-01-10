@@ -6,6 +6,8 @@
           = image_tag('logo.png', class: 'logo-image')
           %p.motto
             Your  Automated  Recruiting  Platform
+          %p.mini_motto
+            Matching Developers and Companies
       .col-md-6.signin_box
         .box
           .box_cont
@@ -47,31 +49,23 @@
           .img_box{style: 'text-align: center;'}
             %i.fa.fa-compass.fa-4x
           .text
-            %h6 Discovery
+            %h6 Fast
             %p
-              Quickly and accurately discover developers or companies based on your preferred programming languages,
-              benefits, locations, programming practices, and more. No longer do you need to sift through resumes or
-              job listings to find what you are looking for.
+              We are constantly refining our scoring algorithm to put the best choices in front of you right away.  No more sifting through profiles that aren't even remotely the right fit.
         .col-md-4.feature
           .img_box{style: 'text-align: center;'}
             %i.fa.fa-code.fa-4x
           .text
-            %h6 Technical Recruiting
+            %h6 Simple
             %p
-              Companies, let us handle the technical recruiting for you! Trust us, we know exactly what it is like to
-              get recruited. We have tons of technical experience, a well developed recruiting process that we've adopted
-              from several companies, and the best customer support.
-              is what you prefer.
+              Like most developers, we are lazy and leverage computers to do all the boring work.  This is why we try to automate and simplify all the tedious parts of finding a job/hiring candidates.  If you enjoy filling out repetitive forms over and over again, we probably aren't for you.
         .col-md-4.feature.last
           .img_box{style: 'text-align: center;'}
             %i.fa.fa-thumbs-up.fa-4x
           .text
-            %h6 Easy Setup
+            %h6 Specific
             %p
-              No more complicated and unnecessary forms to fill out. We let developers sync their GitHub, LinkedIn, and
-              Stackoverflow profiles so we get the latest information. We use Crunchbase for companies when they sign up
-              to reduce the time it takes for a company to get started using Pickemup.
-
+              You need all the facts when choosing a new company/hire.  We provide a great level of detail in our candidate profiles and job listings to help you make better decisions.
 %br
 %br
 -#= render 'layouts/team'
@@ -86,21 +80,39 @@
           %i.fa.fa-user.fa-2x
           Developers
         %p
-          You can customize your preferences to find the company that is right for you. This includes what you expect in salary,
-          the type of position you want, your experience level, the skills that you want to work with, where you want
-          to work, how many hours you want to work in a week, the industries you prefer, the size of the company,
-          and more! Lastly, do not forget to set those perks. Who wants to work in an office without kegs?
+          %ul
+            %li
+              %strong Get immediate matches based on your technical and cultural preferences
+            %p
+              %li
+                %strong No repetitive copying and pasting of your resume and cover letter
+            %p
+              %li
+                %strong Filter messages from companies than are less than an ideal fit
+            %p
+              %li
+                %strong Easily get the run down on the company before you apply
+            %p
+              %li
+                %strong Start talking directly to companies right away
     .row.feature.ss
       .col-md-6.info
         %h3
           %i.fa.fa-building.fa-2x
           Companies
         %p
-          Use the tech stack feature to customize your job listing so that developers know exactly what programming languages
-          and tools they'll be using on an every day basis. This includes back-end programming languages, front-end languages,
-          databases, frameworks, and dev ops tools. In addition, you can fully tailor your job listing based on
-          expected salary, location, skills, experience level, position type, and everything you need to make sure you
-          get the perfect developer.
+          %ul
+            %li
+              %strong Get immediate matches based on your technical and cultural needs
+            %p
+              %li
+                %strong Create highly specific job listings in minutes
+            %p
+              %li
+                %strong Check out a candidate's tech preferences, Github and StackOverflow profiles
+            %p
+              %li
+                %strong Request a code sample, schedule and interview and more
       .col-md-6
         = image_tag('showcase2.png')
     .row.feature.ss
@@ -111,12 +123,7 @@
           %i.fa.fa-magic.fa-2x
           Changing the Game
         %p
-          At Pickemup we want to change the way recruiting is done. No more spamming inboxes, no more incompetent recruiters
-          who have never written a line of code, no more insane recruiting fees, no more sifting resumes and
-          job listings; just a company run by developers that wants to provide a service that will give you the opportunity
-          to discover the company or developer that you want, no transparency. We also want to provide the highest level
-          of customer service, and make sure that everyone is 100% satisfied, no matter what. We are here to go out of our
-          way to make one of the hardest processes as easy as it can get.
+          We are a group of developers who want to change the way people hire and source talent. No more inbox spam, no more recruiters who don't know how to code, no more insane recruiting fees, no more wading through irrelevant resumes and job listings.  We are here to understand what you are looking for and use software (and even good old fashioned face-to-face conversation) to help you find it.
 
 #in_pricing{style: 'margin-top: 10px;'}
   .container
