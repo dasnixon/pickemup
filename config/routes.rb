@@ -38,7 +38,7 @@ Pickemup::Application.routes.draw do
   end
   resources :companies, except: [:new] do
     collection do
-      get ':email/validate_company', to: 'companies#validate_company', as: :validate_company
+      get '/validate_company', to: 'companies#validate_company', as: :validate_company
     end
     member do
       put :toggle_activation

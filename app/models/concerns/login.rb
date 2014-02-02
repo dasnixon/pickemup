@@ -8,6 +8,7 @@ module Login
       self.newly_created = true
       self.main_provider = auth.provider
       return nil unless self.send("set_attributes_from_#{method}", auth)
+      Notifier.new_user_welcome(self.email).deliver
       self.send("build_#{method}").from_omniauth(auth)
     end
 
