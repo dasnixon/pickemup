@@ -1,6 +1,6 @@
 class CompaniesController < ApplicationController
   before_filter :find_company, only: [:show]
-  before_filter :find_by_email, :check_invalid_permissions_company, only: [:validate_company]
+  before_filter :find_by_email, only: [:validate_company]
   before_filter :get_and_check_company, only: [:edit, :update, :toggle_activation]
   before_filter :cleanup_password_info, only: [:update]
 

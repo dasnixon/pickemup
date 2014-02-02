@@ -1,4 +1,18 @@
 #housing
   .container
-    Thanks for signing up for Pickemup! Please verify your company
+    %h3 Thanks for signing up for Pickemup!
+    %b Please verify your company 
     = link_to "here", validate_company_companies_url(email: @company.email)
+    %br
+
+    %b Once you've verified your email, here are a few quick tips to get the best results possible:
+
+    %ul
+      %li Create a Tech Stack.  This will help us find better technical matches.
+      %li Create a Job Listing and fill out as many of the fields as possible.
+      %li Fill out your Company profile.  Developers will want to see how awesome your company is.
+      %li Start messaging developers.
+
+    If you have any questions or feedback, we would love to hear from you.  
+    You can contact us directly by either replying to this email or through our
+    = link_to "contact page", contact_url
