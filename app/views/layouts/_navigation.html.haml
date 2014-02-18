@@ -14,11 +14,13 @@
           %li= link_to 'Preferences', preferences_user_path(id: current_user.id)
           %li= link_to 'Resume', resume_user_path(id: current_user.id)
           %li= link_to 'Briefcase', listings_user_path(id: current_user.id)
-          = render partial: 'layouts/navigation/mailbox', locals: {messages_for: current_user}
+          = render partial: 'layouts/navigation/mailbox'
+          = render partial: 'layouts/navigation/interview'
         - if company_signed_in?
           %li= link_to 'Job Listings', company_job_listings_path(company_id: current_company.id)
           %li= link_to 'Tech Stacks', company_tech_stacks_path(company_id: current_company.id)
           = render partial: 'layouts/navigation/mailbox', locals: {messages_for: current_company}
+          = render partial: 'layouts/navigation/interview'
         - if !user_signed_in? and !company_signed_in?
           %li= link_to 'About', about_path
           %li= link_to 'Pricing', pricing_path

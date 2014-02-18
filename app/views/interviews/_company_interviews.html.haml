@@ -1,0 +1,8 @@
+%h2 #{current_company.name.possessive} Interviews
+
+- if @interviews.present?
+  - @interviews.each do |interview|
+    = render partial: 'company_interview', locals: { interview: interview }
+    %hr
+- else
+  %p You have no interviews at this time.

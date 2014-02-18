@@ -1,0 +1,20 @@
+%p= image_tag attachments['logo.png'].url, :height => '100px', :width => '135px'
+
+%h3 Sorry #{@company.name} is no Longer Interested
+
+%p
+  Hey #{@user.name},
+
+%p
+  We are sorry to say that #{@company.name} is not interested in hiring you
+  for #{@job_listing.fulltime? ? 'fulltime ' : 'part-time '}#{@job_listing.remote? ? 'remote ' : ''}#{@job_listing.job_title} - #{@job_listing.locations.present? ? @job_listing.locations.join(', ') : "unspecified location"}.
+  Don't let this discourage you, and continue to look for jobs on Pickemup.
+
+%p
+  We appreciate you using Pickemup. #{link_to 'Contact', contact_url} us if you need help with finding any jobs or preparing
+  for an interview.
+
+%p
+  Thanks,
+  %br
+  Pickemup Team

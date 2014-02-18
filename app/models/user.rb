@@ -125,6 +125,22 @@ class User < ActiveRecord::Base
     JobListing.all.map { |listing| listing.search_attributes(self) }.compact.sort_by { |matches| matches['score'] }.reverse
   end
 
+  def get_scheduled_interviews
+    self.interviews.collect { |interview| {title: "Interview with #{Company.find(interview.company_id).name}", start: interview.request_date} }
+  end
+
+  def interviews
+    Interview.where(user_id: self.id)
+  end
+
+  def upcoming_interviews
+    Interview.where("user_id = ? AND request_date >= ?", self.id, Time.now.utc)
+  end
+
+  def past_interviews
+    Interview.where("user_id = ? AND request_date < ?", self.id, Time.now.utc)
+  end
+
   private
 
   #automatically generate a defaulted preference for a user upon creation

@@ -1,0 +1,23 @@
+- unless interview.rejected?
+  - if user_signed_in? and !interview.passed_request_date?
+    - if interview.valid_for_acceptance_by_user?
+      = link_to 'Accept Interview', accept_scheduled_interview_path(id: interview.id), method: :patch, class: 'btn btn-success'
+    - if !interview.completed_state?
+      = link_to 'Reschedule Interview', setup_user_reschedule_interview_path(id: interview.id), class: 'btn btn-info'
+      = link_to 'Cancel Interview', user_cancel_interview_path(id: interview.id), method: :delete, class: 'btn btn-danger', |
+        confirm: 'Are you sure you want to cancel the interview?'
+  - elsif company_signed_in?
+    - if interview.valid_for_acceptance_by_company?
+      = link_to 'Accept Interview', accept_scheduled_interview_path(id: interview.id), method: :patch, class: 'btn btn-success'
+    - if !interview.passed_request_date? && !interview.completed_state?
+      = link_to 'Reschedule Interview', setup_company_reschedule_interview_path(id: interview.id), class: 'btn btn-info'
+      = link_to 'Cancel Interview', company_cancel_interview_path(id: interview.id), method: :delete, class: 'btn btn-danger', |
+        confirm: 'Are you sure you want to cancel the interview?'
+    - elsif interview.passed_request_date? && !interview.completed_state?
+      = link_to 'Schedule Another Interview', setup_company_reschedule_interview_path(id: interview.id), class: 'btn btn-info'
+    - elsif interview.completed_state?
+      = link_to 'Schedule Another Interview', setup_company_reschedule_interview_path(id: interview.id), class: 'btn btn-info'
+      = link_to 'Accept Candidate', accept_candidate_interview_path(id: interview.id), method: :patch, class: 'btn btn-success', |
+        confirm: "Are you sure you want to accept #{user.name}?"
+      = link_to 'Reject Candidate', reject_candidate_interview_path(id: interview.id), method: :patch, class: 'btn btn-danger', |
+        confirm: "Are you sure you want to reject #{user.name}?"

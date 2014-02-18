@@ -1,5 +1,4 @@
-- is_user = messages_for.is_a?(User)
-- if is_user
+- if user_signed_in?
   %li
     = link_to user_conversations_path(user_id: current_user.id), class: "#{@unread_messages.present? ? 'notification-indicator unread' : ''}" do
       Mailbox - #{@unread_messages.length}

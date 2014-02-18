@@ -595,7 +595,6 @@ address {
 }
 .btn,
 .btn-group > .btn,
-.btn-group > .dropdown-menu,
 .btn-group > .popover {
   font-size: 15px;
   font-weight: 400;
@@ -965,33 +964,6 @@ address {
 }
 .select .btn .dropdown-toggle {
   border-radius: 6px;
-}
-.select .btn .dropdown-menu {
-  min-width: 100%;
-}
-.select .btn .dropdown-menu dt {
-  cursor: default;
-  display: block;
-  padding: 3px 20px;
-}
-.select .btn .dropdown-menu li:not(.disabled) > a:hover small {
-  color: rgba(255, 255, 255, 0.004);
-}
-.select .btn .dropdown-menu li > a {
-  min-height: 20px;
-}
-.select .btn .dropdown-menu li > a.opt {
-  padding-left: 35px;
-}
-.select .btn .dropdown-menu li small {
-  padding-left: .5em;
-}
-.select .btn .dropdown-menu li > dt small {
-  font-weight: normal;
-}
-.select .btn > .disabled,
-.select .btn .dropdown-menu li.disabled > a {
-  cursor: default;
 }
 .select .caret {
   border-bottom-color: #ffffff;
@@ -1764,121 +1736,6 @@ fieldset[disabled] .form-control + .input-icon,
   width: 183px;
   border-radius: 6px;
 }
-.dropdown-menu {
-  background-color: #f3f4f5;
-  border: none;
-  display: block;
-  margin-top: 8px;
-  opacity: 0;
-  padding: 0;
-  visibility: hidden;
-  width: auto;
-  text-align: center;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none;
-  -webkit-transition: 0.25s;
-  -moz-transition: 0.25s;
-  -o-transition: 0.25s;
-  transition: 0.25s;
-  -webkit-backface-visibility: hidden;
-}
-.dropdown-menu li.job-listing-header {
-  padding: 10px;
-}
-.dropdown-menu.typeahead {
-  display: none;
-  opacity: 1;
-  visibility: visible;
-  width: auto;
-  margin-top: 2px;
-}
-.open > .dropdown-menu {
-  margin-top: 18px;
-  opacity: 1;
-  visibility: visible;
-}
-.dropdown-menu li:first-child dt + a {
-  border-radius: 0;
-}
-.dropdown-menu li:first-child > a {
-  border-radius: 6px 6px 0 0;
-  padding-top: 8px;
-}
-.dropdown-menu li:last-child > a {
-  border-radius: 0 0 6px 6px;
-  padding-bottom: 10px;
-}
-.dropdown-menu li.active > a,
-.dropdown-menu li.selected > a,
-.dropdown-menu li.active > a.highlighted,
-.dropdown-menu li.selected > a.highlighted {
-  background: #34495E;
-  color: #ffffff;
-}
-.dropdown-menu li.active > a:hover,
-.dropdown-menu li.selected > a:hover,
-.dropdown-menu li.active > a.highlighted:hover,
-.dropdown-menu li.selected > a.highlighted:hover,
-.dropdown-menu li.active > a:focus,
-.dropdown-menu li.selected > a:focus,
-.dropdown-menu li.active > a.highlighted:focus,
-.dropdown-menu li.selected > a.highlighted:focus {
-  background: #2C3E50;
-  color: #ffffff;
-}
-.dropdown-menu li > a {
-  color: rgba(52, 73, 94, 0.75);
-  padding: 6px 15px 8px;
-  text-decoration: none;
-  *zoom: 1;
-  -webkit-transition: background-color 0.25s;
-  -moz-transition: background-color 0.25s;
-  -o-transition: background-color 0.25s;
-  transition: background-color 0.25s;
-  -webkit-backface-visibility: hidden;
-}
-.dropdown-menu li > a:before,
-.dropdown-menu li > a:after {
-  display: table;
-  content: "";
-}
-.dropdown-menu li > a:after {
-  clear: both;
-}
-.dropdown-menu li > a:hover,
-.dropdown-menu li > a:active,
-.dropdown-menu li > a:focus {
-  background: #33335B;
-  color: inherit;
-  outline: none;
-}
-.dropdown-menu li a:hover {
-  color: white;
-}
-.dropdown-menu li > a.highlighted {
-  background: #c9cfd4;
-  color: #ffffff;
-}
-.dropdown-menu li > a.highlighted:hover,
-.dropdown-menu li > a.highlighted:focus {
-  background: #bac1c8;
-  color: #ffffff;
-}
-.dropdown-menu li > a:before {
-  float: right;
-  margin-top: 3px;
-}
-.dropdown-menu li dt {
-  font-weight: 300;
-  margin-bottom: 3px;
-  margin-top: 12px;
-  padding: 0 15px;
-}
-.dropup .dropdown-menu,
-.navbar-fixed-bottom .dropdown .dropdown-menu {
-  margin-bottom: 8px;
-}
 .dropup .dropdown-arrow,
 .navbar-fixed-bottom .dropdown .dropdown-arrow {
   border-bottom: none;
@@ -1891,9 +1748,6 @@ fieldset[disabled] .form-control + .input-icon,
   border-top: 9px outset #34495e;
   bottom: 4px;
   top: auto;
-}
-.open.dropup > .dropdown-menu {
-  margin-bottom: 18px;
 }
 .open.dropup > .dropdown-arrow {
   margin-bottom: 10px;
@@ -3307,10 +3161,20 @@ footer, .push {
   max-height: 256px;
 }
 
+.img-user-profile {
+  width: auto;
+}
+
 .img-small {
   width: 100px;
   max-width: 100px;
   max-height: 100px;
+}
+
+.img-visible {
+  width: 75px;
+  max-width: 75px;
+  max-height: 75px;
 }
 
 .img-thumb {

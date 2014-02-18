@@ -10,6 +10,8 @@
  *
  *= require fileupload.min
  *= require slider
+ *= require fullcalendar
+ *= require bootstrap-datetimepicker
  *= require_self
  *= require_tree .
  */

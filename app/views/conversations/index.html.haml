@@ -1,6 +1,7 @@
 #housing
   .container
     = render 'navigation'
+    .clearfix
     - if @conversations.present?
       = render @conversations
       = will_paginate @conversations, renderer: BootstrapPagination::Rails

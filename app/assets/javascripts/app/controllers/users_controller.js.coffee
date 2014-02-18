@@ -44,6 +44,7 @@ userEdit.controller("UsersController", ['$scope', '$location', '$state', '$state
     $scope.searchLanguage = null
     $scope.selectedLocations = []
     $scope.clearSalaryBetween()
+    return
 
   $scope.update = ->
     User.update

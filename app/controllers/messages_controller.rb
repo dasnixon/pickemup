@@ -1,9 +1,11 @@
 class MessagesController < ApplicationController
   include MailboxerHub
+  include InterviewRequest
 
   before_filter :find_mailbox_for, except: [:index]
   before_filter :get_box
   before_filter :validate_params, :lookup_info, only: [:new, :create]
+  before_filter :check_and_setup_interview, only: [:create], if: :company_signed_in?
 
   def index
     conversations_redirect

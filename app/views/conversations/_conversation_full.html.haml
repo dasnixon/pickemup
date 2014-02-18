@@ -1,34 +1,55 @@
+- user, company = nil, nil
+- interview = find_interview(conversation)
+- conversation.recipients.each do |recp|
+  - if recp.is_a?(User)
+    - user = recp
+  - elsif recp.is_a?(Company)
+    - company = recp
+
 .pull-right
   - if @box.eql?('trash')
     - if user_signed_in?
-      = link_to 'Un-trash', untrash_user_conversation_path(id: conversation.id, user_id: current_user.id), method: :put, class: 'btn btn-success'
+      = link_to 'Un-trash', untrash_user_conversation_path(id: conversation.id, user_id: current_user.id), method: :patch, class: 'btn btn-success'
     - elsif company_signed_in?
-      = link_to 'Un-trash', untrash_company_conversation_path(id: conversation.id, company_id: current_company.id), method: :put, class: 'btn btn-success'
-  - unless @box.eql? 'trash'
-    - if current_user
+      = link_to 'Un-trash', untrash_company_conversation_path(id: conversation.id, company_id: current_company.id), method: :patch, class: 'btn btn-success'
+  - else
+    - if user_signed_in?
       = link_to('Trash', user_conversation_path(user_id: current_user.id, id: conversation.id, location: 'conversation', box: @box), |
-             confirm: 'Are you sure you want to move this conversation to the trash?', method: :delete, class: 'btn btn-danger') |
-    - elsif current_company
+             confirm: 'Are you sure you want to move this conversation to the trash? You will also cancel any interview.', method: :delete, class: 'btn btn-danger') |
+    - elsif company_signed_in?
       = link_to('Trash', company_conversation_path(company_id: current_company.id, id: conversation.id, location: 'conversation', box: @box), |
-             confirm: 'Are you sure you want to move this conversation to the trash?', method: :delete, class: 'btn btn-danger') |
-%h3= t("message.participants")
-- company = nil
-.participants
-  - conversation.recipients.each do |recp|
-    - if recp.is_a?(User)
-      = link_to image_tag(recp.profile_image.small, title: recp.name, alt: recp.name, class: 'img-rounded img-small'), resume_user_path(id: recp.id)
-    - elsif recp.is_a?(Company)
-      - company = recp
-      = link_to image_tag(recp.get_logo('small'), title: recp.name, alt: recp.name, class: 'img-rounded img-small'), company_path(id: recp.id)
-- if user_signed_in?
-  %h4= link_to conversation.subject, company_job_listing_path(company_id: company.id, id: conversation.job_listing_id)
-- else
-  %h4= link_to conversation.subject, company_job_listing_path(company_id: current_company.id, id: conversation.job_listing_id), target: '_blank'
+             confirm: 'Are you sure you want to move this conversation to the trash? You will also cancel any interview.', method: :delete, class: 'btn btn-danger') |
+    - if interview.present?
+      = link_to 'View Interview', interview_path(id: interview.id), class: 'btn btn-theme'
+      = render partial: 'interviews/action', locals: {interview: interview}
+    - elsif interview.blank? and company_signed_in?
+      = link_to 'Schedule Interview', new_interview_path(user_id: user.id, job_listing_id: conversation.job_listing_id), class: 'btn btn-theme'
+
+.col-md-12
+  .pull-left
+    - if user_signed_in?
+      %h4 Conversation with #{link_to company.name, company_path(id: company.id)} over #{link_to conversation.subject, company_job_listing_path(company_id: company.id, id: conversation.job_listing_id)}
+    - elsif company_signed_in?
+      %h4 Conversation with #{link_to user.name, resume_user_path(id: user.id)} over #{link_to conversation.subject, company_job_listing_path(company_id: current_company.id, id: conversation.job_listing_id), target: '_blank'}
+
+- if interview.present?
+  .col-md-12
+    .pull-left
+      - unless @box.eql?('trash')
+        %h4
+          Interview Information
+          %label.label.label-info
+            - if user_signed_in?
+              #{label_status(interview, 'user')}
+            - elsif company_signed_in?
+              #{label_status(interview, 'company')}
+        %p #{interview.request_date.in_time_zone("Eastern Time (US & Canada)").strftime("%m/%d/%Y %I:%M%p")} EST at #{interview.location} for #{pluralize(interview.duration, 'hour')}
+        %p= truncate interview.description, length: 200
 
 .col-md-12
   - unless @box.eql? 'trash'
     - if current_company
-      = form_tag company_conversation_path(id: conversation.id, company_id: current_company.id), method: :put, class: "cont_conversation" do
+      = form_tag company_conversation_path(id: conversation.id, company_id: current_company.id), method: :patch, class: "cont_conversation" do
         - if @receipt and @receipt.errors.any?
           .error
             %h2
@@ -43,7 +64,7 @@
         .actions
           = submit_tag t('mailboxer.reply'), name: :reply_all, class: "btn btn-success"
     - elsif current_user
-      = form_tag user_conversation_path(id: conversation.id, user_id: current_user.id), method: :put, class: "cont_conversation" do
+      = form_tag user_conversation_path(id: conversation.id, user_id: current_user.id), method: :patch, class: "cont_conversation" do
         - if @receipt and @receipt.errors.any?
           .error
             %h2

@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby '2.1.0'
 
 #MAGIC
 gem 'rails', '~> 4.0.1'
@@ -15,6 +15,10 @@ gem 'sass-rails'
 gem 'uglifier'
 gem 'font-awesome-rails'
 gem 'underscore-rails'
+
+#CALENDAR/DATE
+gem 'bootstrap-datetimepicker-rails'
+gem 'fullcalendar-rails'
 
 #JSON PARSING
 gem 'multi_json'
@@ -41,6 +45,7 @@ gem 'state_machine'
 
 #APIs
 gem 'github_api'
+gem 'faraday', '0.8.0'
 gem 'serel', git: 'git://github.com/liamneesonsarm/serel.git' #stackoverflow may need to switch back to original if gets updated properly
 gem 'stripe'
 gem 'crunchbase'
@@ -54,7 +59,7 @@ gem 'omniauth-stackexchange'
 gem 'bcrypt-ruby', require: 'bcrypt'
 
 #JAVASCRIPT
-gem 'angularjs-rails', '~> 1.2.0.rc2'
+gem 'angularjs-rails'
 gem 'jquery-rails'
 gem 'coffee-rails'
 

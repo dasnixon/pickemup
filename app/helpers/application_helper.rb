@@ -32,4 +32,12 @@ module ApplicationHelper
       'high-score-color'
     end
   end
+
+  def find_interview(conversation)
+    job_listing_id, user_id, company_id = conversation.job_listing_id, nil, nil
+    conversation.participants.each do |p|
+      p.is_a?(User) ? user_id = p.id : company_id = p.id
+    end
+    Interview.find_by(job_listing_id: job_listing_id, user_id: user_id, company_id: company_id)
+  end
 end
