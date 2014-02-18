@@ -56,7 +56,7 @@
       <div class='pull-right' style="height: 200px;">
         <div class='pull-right'>
           <a class='btn btn-info' ng-href="/companies/{{listing.company_id}}" target="_self">Learn More About {{listing.name}}</a>
-          <a class='btn btn-success' ng-show="{{listing.score}} >= {{listing.match_threshold}}" ng-href="/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}" target="_self">Apply</a>
+          <a class='btn btn-success' ng-href="/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}" target="_self">Apply</a>
         </div>
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>

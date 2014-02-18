@@ -70,9 +70,12 @@
       .col-sm-10
         .row
           .col-sm-4
-            = select_hour(Time.now, {field_name: "hour", ampm: true}, {class: 'form-control'})
+            = select_hour(Time.now.in_time_zone("Eastern Time (US & Canada)").hour, {field_name: "hour", ampm: true}, {class: 'form-control'})
           .col-sm-4
-            = select_minute(Time.now, {field_name: "minute"}, {class: 'form-control'})
+            = select_minute(Time.now.in_time_zone("Eastern Time (US & Canada)").min, {field_name: "minute"}, {class: 'form-control'})
+          %span.help-block
+            %strong
+              Eastern Standard Time
     .form-group
       = label_tag 'Approximate Duration', nil, class: 'col-sm-2 control-label'
       .col-sm-10
