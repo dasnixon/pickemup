@@ -122,7 +122,8 @@ class User < ActiveRecord::Base
   end
 
   def match_listings_for_user
-    JobListing.all.map { |listing| listing.search_attributes(self) }.compact.sort_by { |matches| matches['score'] }.reverse
+    internal_listings = JobListing.all.map { |listing| listing.search_attributes(self) }.compact.sort_by { |matches| matches['score'] }.reverse
+    internal_listings + ExternalJobListing.all
   end
 
   def get_scheduled_interviews
