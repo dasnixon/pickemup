@@ -33,13 +33,6 @@ describe Interview do
       end
     end
 
-    context 'status' do
-      context 'presence' do
-        let(:subject) { with_attrs({status: nil}) }
-        it { should have(1).errors_on(:status) }
-      end
-    end
-
     context 'unique index (company_id, user_id, job_listing_id)' do
       before :each do
         create(:interview, company_id: company.id, job_listing_id: job_listing.id, user_id: user.id, request_date: now + 1.day )
@@ -47,8 +40,8 @@ describe Interview do
       let(:company)     { create(:company) }
       let(:job_listing) { create(:job_listing) }
       let(:user)        { create(:user) }
-      let(:subject)     { with_attrs({company_id: company.id, job_listing_id: job_listing.id, user_id: user.id, request_date: now + 1.day, status: :pending}) }
-      it { should have(1).errors_on(:base) }
+      let(:subject)     { with_attrs({company_id: company.id, job_listing_id: job_listing.id, user_id: user.id, request_date: now + 1.day}) }
+      it { should have(1).errors_on(:user_id) }
     end
   end
 end

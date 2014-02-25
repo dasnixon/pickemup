@@ -31,8 +31,8 @@ FactoryGirl.define do
     salary_range_high       100000
     salary_range_low        50000
     vacation_days           15
-    equity                  { Faker::Lorem.word }
-    bonuses                 { Faker::Lorem.word }
+    equity                  JobListing::EQUITY_SELECTIONS.shuffle.first
+    bonuses                 JobListing::BONUS_SELECTIONS.shuffle.first
     remote                  false
     hiring_time             2
     locations               PreferenceConstants::LOCATIONS.shuffle[0..2]
@@ -198,5 +198,16 @@ FactoryGirl.define do
     job_listing_id { create(:job_listing).id }
     request_date   5.days.from_now
     status         :pending
+    description    { Faker::Lorem.sentences.join(' ') }
+    duration       5
+    location       { "#{Faker::Address.city}, #{Faker::AddressUS.state}" }
+
+    trait :hireable do
+      hireable true
+    end
+
+    trait :unhireable do
+      hireable false
+    end
   end
 end

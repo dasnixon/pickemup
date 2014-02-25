@@ -18,7 +18,7 @@
 #
 
 class Interview < ActiveRecord::Base
-  validates :request_date, :status, :company_id, :user_id, :job_listing_id, :description, :location, presence: true
+  validates :request_date, :company_id, :user_id, :job_listing_id, :description, :location, presence: true
   validates :duration, presence: true, numericality: { only_integer: true, greater_than: 0, less_than: 13 }
   validates :user_id, uniqueness: { scope: [:company_id, :job_listing_id] }
   validates :rescheduled_by, inclusion: { in: %w(user company) }, allow_blank: true
@@ -174,7 +174,7 @@ class Interview < ActiveRecord::Base
 
   def future_request
     return if self.errors.any? or !self.request_date_changed?
-    if self.request_date.present? and passed_request_date? and enough_time_to_schedule?
+    if self.request_date.present? and (passed_request_date? || !enough_time_to_schedule?)
       self.errors.add(:request_date, "The date scheduled for the interview must take place after #{Time.now} and needs to take place at least an hour in advance for notice.")
     end
   end

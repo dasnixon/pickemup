@@ -3,8 +3,8 @@ require 'spec_helper'
 describe Algorithm do
   let(:user) { create(:user) }
   let(:preference) { user.preference }
-  let(:job_listing) { create(:job_listing, dental: true, healthcare: true, vision: true, life_insurance: true,
-                             vacation_days: 0, bonuses: 'Yes', retirement: true, equity: 'Yes', special_characteristics: ['Open Source Committer'], company: company) }
+  let(:job_listing) { create(:job_listing, dental: true, healthcare: true, vision: true, life_insurance: true, equity: '1% - 5%', bonuses: '1-10% of base salary',
+                             vacation_days: 0, retirement: true, special_characteristics: ['Open Source Committer'], company: company) }
   let(:company) { create(:company) }
   let(:algorithm) { Algorithm.new(preference, job_listing, run_score: false, company: company) }
 
@@ -72,32 +72,55 @@ describe Algorithm do
         end
       end
     end
-    %w(equity bonuses).each do |attr|
-      context "#{attr}" do
-        context "user wants #{attr}" do
-          context 'match' do
-            it 'returns full # of comparators' do
-              preference.send("#{attr}=", true)
-              job_listing.send("#{attr}=", 'Yes')
-              algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length
-            end
-          end
-          context 'mismatch' do
-            it 'returns 1 less than # of comparators' do
-              preference.send("#{attr}=", true)
-              job_listing.send("#{attr}=", 'None')
-              algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length - 1
-            end
-          end
+
+    context 'equity' do
+      context 'match' do
+        it 'returns full # of comparators' do
+          preference.equity = true
+          job_listing.equity = '1% - 5%'
+          algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length
         end
-        context "user does not care about #{attr}" do
-          it 'always returns full # of comparators' do
-            preference.send("#{attr}=", false)
-            algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length
-          end
+      end
+      context 'mismatch' do
+        it 'returns 1 less than # of comparators' do
+          preference.equity = true
+          job_listing.equity = 'None'
+          algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length - 1
+        end
+      end
+      context "user does not care about equity" do
+        it 'always returns full # of comparators' do
+          preference.equity = false
+          job_listing.equity = '1% - 5%'
+          algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length
         end
       end
     end
+
+    context 'bonuses' do
+      context 'match' do
+        it 'returns full # of comparators' do
+          preference.bonuses = true
+          job_listing.bonuses = '1-10% of base salary'
+          algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length
+        end
+      end
+      context 'mismatch' do
+        it 'returns 1 less than # of comparators' do
+          preference.bonuses = true
+          job_listing.bonuses = 'None'
+          algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length - 1
+        end
+      end
+      context "user does not care about bonuses" do
+        it 'always returns full # of comparators' do
+          preference.bonuses = false
+          job_listing.bonuses = '1-10% of base salary'
+          algorithm.benefits_matching_count.should eq Algorithm::BOOLEAN_COMPARATORS.length
+        end
+      end
+    end
+
     context 'open_source' do
       context 'user wants a company that makes open source contributions' do
         before :each do

@@ -64,7 +64,7 @@ class ConversationsController < ApplicationController
 
   def find_conversation
     @conversation = Conversation.find(params[:id])
-    if !JobListing.exists?(id: @conversation.job_listing_id) or @conversation.blank? or !@conversation.is_participant?(@mailbox_for)
+    if @conversation.blank? || !JobListing.exists?(id: @conversation.job_listing_id) || !@conversation.is_participant?(@mailbox_for)
       conversations_redirect('Unable to find conversation or the job listing no longer exists, sorry.')
     end
   end

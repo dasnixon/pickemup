@@ -90,7 +90,7 @@ describe Company do
       before :each do
         company.logo = Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'vim_recruit.png'))
       end
-      it('returns company logo') { company.get_logo.should eq company.logo }
+      it('returns company logo') { company.get_logo.should eq company.logo.preview }
     end
     context 'company has no logo, default used' do
       it 'returns default logo' do

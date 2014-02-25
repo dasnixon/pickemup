@@ -57,7 +57,7 @@ describe ConversationsController do
         context 'inbox' do
           before :each do
             user.stub(:mailbox).and_return(mailbox)
-            mailbox.stub_chain(:inbox, :paginate).and_return(inbox_conversations)
+            mailbox.stub(:inbox).and_return(inbox_conversations)
             get(:index, {user_id: user.id, box: 'inbox'})
           end
           it { should respond_with(:success) }
@@ -71,7 +71,7 @@ describe ConversationsController do
         context 'sentbox' do
           before :each do
             user.stub(:mailbox).and_return(mailbox)
-            mailbox.stub_chain(:sentbox, :paginate).and_return(sent_conversations)
+            mailbox.stub(:sentbox).and_return(sent_conversations)
             get(:index, {user_id: user.id, box: 'sentbox'})
           end
           it { should respond_with(:success) }
@@ -85,7 +85,7 @@ describe ConversationsController do
         context 'trash' do
           before :each do
             user.stub(:mailbox).and_return(mailbox)
-            mailbox.stub_chain(:trash, :paginate).and_return(trash_conversations)
+            mailbox.stub(:trash).and_return(trash_conversations)
             get(:index, {user_id: user.id, box: 'trash'})
           end
           it { should respond_with(:success) }
@@ -99,7 +99,7 @@ describe ConversationsController do
         context 'no box passed in, defaults to inbox' do
           before :each do
             user.stub(:mailbox).and_return(mailbox)
-            mailbox.stub_chain(:inbox, :paginate).and_return(inbox_conversations)
+            mailbox.stub(:inbox).and_return(inbox_conversations)
             get(:index, {user_id: user.id})
           end
           it { should respond_with(:success) }
@@ -130,7 +130,7 @@ describe ConversationsController do
           end
           it { should respond_with(:redirect) }
           it { should redirect_to(user_conversations_path(box: 'inbox')) }
-          it('has flash notice') { flash[:notice].should eq 'Unable to find conversation' }
+          it('has flash notice') { flash[:notice].should eq 'Unable to find conversation or the job listing no longer exists, sorry.' }
         end
         context 'user not participant in conversation' do
           before :each do
@@ -142,7 +142,7 @@ describe ConversationsController do
           end
           it { should respond_with(:redirect) }
           it { should redirect_to(user_conversations_path(box: 'inbox')) }
-          it('has flash notice') { flash[:notice].should eq 'Unable to find conversation' }
+          it('has flash notice') { flash[:notice].should eq 'Unable to find conversation or the job listing no longer exists, sorry.' }
         end
       end
       context 'sentbox or inbox, not trash' do
@@ -200,6 +200,7 @@ describe ConversationsController do
         Conversation.stub(:find).and_return(conversation)
         conversation.stub(:is_participant?).and_return(true)
         expect(conversation).to receive(:move_to_trash).and_return(true)
+        controller.stub(:destroy_interview)
       end
       context 'conversation location' do
         before :each do
@@ -322,7 +323,7 @@ describe ConversationsController do
         context 'inbox' do
           before :each do
             company.stub(:mailbox).and_return(mailbox)
-            mailbox.stub_chain(:inbox, :paginate).and_return(inbox_conversations)
+            mailbox.stub(:inbox).and_return(inbox_conversations)
             get(:index, {company_id: company.id, box: 'inbox'})
           end
           it { should respond_with(:success) }
@@ -336,7 +337,7 @@ describe ConversationsController do
         context 'sentbox' do
           before :each do
             company.stub(:mailbox).and_return(mailbox)
-            mailbox.stub_chain(:sentbox, :paginate).and_return(sent_conversations)
+            mailbox.stub(:sentbox).and_return(sent_conversations)
             get(:index, {company_id: company.id, box: 'sentbox'})
           end
           it { should respond_with(:success) }
@@ -350,7 +351,7 @@ describe ConversationsController do
         context 'trash' do
           before :each do
             company.stub(:mailbox).and_return(mailbox)
-            mailbox.stub_chain(:trash, :paginate).and_return(trash_conversations)
+            mailbox.stub(:trash).and_return(trash_conversations)
             get(:index, {company_id: company.id, box: 'trash'})
           end
           it { should respond_with(:success) }
@@ -364,7 +365,7 @@ describe ConversationsController do
         context 'no box passed in, defaults to inbox' do
           before :each do
             company.stub(:mailbox).and_return(mailbox)
-            mailbox.stub_chain(:inbox, :paginate).and_return(inbox_conversations)
+            mailbox.stub(:inbox).and_return(inbox_conversations)
             get(:index, {company_id: company.id})
           end
           it { should respond_with(:success) }
@@ -395,7 +396,7 @@ describe ConversationsController do
           end
           it { should respond_with(:redirect) }
           it { should redirect_to(company_conversations_path(box: 'inbox')) }
-          it('has flash notice') { flash[:notice].should eq 'Unable to find conversation' }
+          it('has flash notice') { flash[:notice].should eq 'Unable to find conversation or the job listing no longer exists, sorry.' }
         end
         context 'company not participant in conversation' do
           before :each do
@@ -407,7 +408,7 @@ describe ConversationsController do
           end
           it { should respond_with(:redirect) }
           it { should redirect_to(company_conversations_path(box: 'inbox')) }
-          it('has flash notice') { flash[:notice].should eq 'Unable to find conversation' }
+          it('has flash notice') { flash[:notice].should eq 'Unable to find conversation or the job listing no longer exists, sorry.' }
         end
       end
       context 'sentbox or inbox, not trash' do
@@ -465,6 +466,7 @@ describe ConversationsController do
         Conversation.stub(:find).and_return(conversation)
         conversation.stub(:is_participant?).and_return(true)
         expect(conversation).to receive(:move_to_trash).and_return(true)
+        controller.stub(:destroy_interview)
       end
       context 'conversation location' do
         before :each do
