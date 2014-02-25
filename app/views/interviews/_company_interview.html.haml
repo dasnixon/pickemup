@@ -2,7 +2,7 @@
 - job_listing = @job_listing || job_listing_for_interview(interview)
 - conversation = current_company.conversation_for_job_listing(job_listing.id)
 .pull-right
-  = render partial: 'interviews/action', locals: {interview: interview}
+  = render partial: 'interviews/action', locals: {user: user, interview: interview}
   = link_to 'View Conversation', company_conversation_path(company_id: current_company.id, id: conversation.id), class: 'btn btn-info'
 %h3
   = image_tag user.profile_image, class: 'img-visible img-rounded'
