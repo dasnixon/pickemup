@@ -36,15 +36,10 @@ module UsersHelper
     second_sentence = second_block.to_sentence(two_words_connector: ' and ', last_word_connector: ', and ')
     availability_statement(user, third_block, preference)
     work_hours_statement(third_block, preference)
-    salary_statement(third_block, preference)
     third_block.last.insert(-1, '.')
     third_sentence = third_block.to_sentence(two_words_connector: ' and ', last_word_connector: ', and ')
     fourth_sentence = " It would also be preferred if the company makes open source contributions." if preference.open_source?
     first_sentence + second_sentence + third_sentence + fourth_sentence
-  end
-
-  def salary_statement(bio, preference)
-    bio << "would like to make around #{number_to_currency(preference.expected_salary)}" if preference.expected_salary > 0
   end
 
   def work_hours_statement(bio, preference)

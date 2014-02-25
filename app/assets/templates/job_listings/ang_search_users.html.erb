@@ -11,7 +11,7 @@
         <br />
         <br />
 
-        <h4>Citizenship/Green Card</h4>
+        <h4>U.S. Work Authorization</h4>
         <label class='radio-inline'>
           <input checked='checked' ng-checked="all" ng-click="setCitizenshipFilter('')" type="radio" name="valid_us_worker" value="all">All Developers
         </label>
@@ -22,12 +22,6 @@
           <input ng-checked="non_us" ng-click="setCitizenshipFilter('non_us')" type="radio" name="valid_us_worker" value="non_citizen_non_gc">Unauthorized for work in U.S.
         </label>
 
-        <hr></hr>
-
-        <h4>Salary Range</h4>
-        <p class="text-center">
-          <input class="col-md-11" value="" data-selection='none' data-slider-min="0" data-slider-max="300000" data-slider-step="100" data-slider-value="[0,1000000]" salaryrange />
-        </p>
         <hr></hr>
 
         <h4>Search Language</h4>
@@ -82,15 +76,15 @@
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>
           <dt>Location(s)</dt>
-          <dd ng-bind='user.locations | attributeArrayLimit:50'></dd>
-          <dt>Salary</dt>
-          <dd>${{user.expected_salary}}</dd>
+          <dd ng-bind='user.locations | attributeArrayLimit:60'></dd>
+          <dt>Experience Level(s)</dt>
+          <dd ng-bind='user.experience_levels | attributeArrayLimit:60'></dd>
           <dt>Language(s)</dt>
-          <dd ng-bind='user.skills | attributeArrayLimit:90'></dd>
+          <dd ng-bind='user.skills | attributeArrayLimit:75'></dd>
         </dl>
       </div>
       <h3 class='media-heading'>
-        {{user.name}} <small>{{user.valid_us_worker && "Authorized for work in U.S." || "Unauthorized for work in U.S."}}</small>
+        {{user.name}} <small ng-class="user.valid_us_worker ? 'text-success' : 'text-warning'">{{user.valid_us_worker ? "Authorized for work in U.S." : "Unauthorized for work in U.S."}}</small>
       </h3>
       <p class='description' ng-bind-html="user.description"></p>
     </div>

@@ -1,4 +1,4 @@
-<form class='jobListing form-horizontal', name='jobListingForm', ng-submit="create()">
+<form class='form-horizontal techStack', name='techStackForm', ng-submit="update()">
   <div class='row row-offcanvas row-offcanvas-left'>
     <div class="col-md-2 sidebar-offcanvas" id="sidebar">
       <ul class='list-unstyled'>
@@ -18,12 +18,12 @@
           {{error_updating}}
         </li>
         <li ng-show="dirty_message.length > 0">
-          <button class='btn btn-success' type="submit">Save Your Job Listing</button>
+          <button class='btn btn-success' type="submit">Save Your Tech Stack</button>
         </li>
       </ul>
     </div>
     <div class="col-md-9-right">
-      <div ng-include src="'/assets/job_listings/_job_listing_form.html-09d6e2f64001d2fb466444cfea74f250.erb'"></div>
+      <div ng-include src="'/assets/tech_stacks/_tech_stack_form.html-ad408e3f32362c1d75f446b60b43618b.erb'"></div>
     </div>
   </div>
 </form>
