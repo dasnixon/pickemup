@@ -55,6 +55,7 @@ class JobListing < ActiveRecord::Base
   has_many :conversations
 
   validates :salary_range_high, :salary_range_low, presence: true, numericality: { only_integer: true }
+  validates :match_threshold, numericality: { only_integer: true }, inclusion: { in: 0..100 }
   validates :job_description, presence: true, length: { maximum: 3000 }
   validates :synopsis, length: { maximum: 300 }
   validates :vacation_days, numericality: { only_integer: true }, inclusion: { in: 0..200, message: 'Are they ever going to work?' }

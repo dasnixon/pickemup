@@ -53,6 +53,7 @@ class Preference < ActiveRecord::Base
   validates :expected_salary, numericality: true, inclusion: { in: 0..99999999, message: 'Nice try money bags.' }
   validates :work_hours, numericality: true, inclusion: { in: 0..168, message: 'Are you a machine?' }
   validates :potential_availability, numericality: true, inclusion: { in: 0..52, message: 'Start sooner!' }
+  validates :match_threshold, numericality: { only_integer: true }, inclusion: { in: 0..100 }
 
   def attribute_default_values(attr)
     case attr
