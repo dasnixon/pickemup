@@ -45,7 +45,7 @@ GEM
       rake (>= 0.8.7)
     arel (4.0.2)
     atomic (1.1.14)
-    bcrypt (3.1.6)
+    bcrypt (3.1.7)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
     bootstrap-datetimepicker-rails (0.0.11)
@@ -401,7 +401,7 @@ DEPENDENCIES
   newrelic_rpm
   oauth2
   omniauth-github
-  omniauth-linkedin-oauth2
+  omniauth-linkedin-oauth2 (~> 0.1.3)
   omniauth-stackexchange
   pg
   pg-hstore

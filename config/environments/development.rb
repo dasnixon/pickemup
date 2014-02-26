@@ -28,7 +28,7 @@ Pickemup::Application.configure do
     enable_starttls_auto: true
   }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.default_url_options = { host: "http:/localhost:8080" }
+  config.action_mailer.default_url_options = { host: "http://localhost:8080" }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log

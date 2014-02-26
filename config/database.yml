@@ -15,6 +15,6 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: pickemup_dev
+  database: pickemup_test
   pool: 5
   host: localhost

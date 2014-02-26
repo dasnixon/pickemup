@@ -39,10 +39,12 @@ describe SubscriptionsController do
   describe '#create' do
     let(:company) { double(Company, id: '1', build_subscription: subscription, mailbox: inbox) }
     let(:inbox) { double(Conversation, inbox: [message]) }
-    let(:message) { double('message', is_unread?: false) }
+    let(:message) { double('message', is_unread?: false, job_listing_id: job_listing.id) }
+    let(:job_listing) { create(:job_listing) }
     context 'valid payment' do
       let(:subscription) { double(Subscription, save_with_payment: true) }
       before :each do
+        JobListing.stub(:exists?).and_return(true)
         company_login(company)
         Company.stub(:find).and_return(company)
         post(:create, {company_id: company.id, email: 'test@test.com', plan: 0, stripe_card_token: '123'})

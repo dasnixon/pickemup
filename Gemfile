@@ -53,7 +53,7 @@ gem 'linkedin-oauth2'
 
 #AUTHENTICATION
 gem 'oauth2'
-gem 'omniauth-linkedin-oauth2'
+gem 'omniauth-linkedin-oauth2', '~> 0.1.3'
 gem 'omniauth-github'
 gem 'omniauth-stackexchange'
 gem 'bcrypt-ruby', require: 'bcrypt'
