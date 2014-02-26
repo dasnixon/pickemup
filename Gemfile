@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.1.0'
 
 #MAGIC
-gem 'rails', '~> 4.0.1'
+gem 'rails', '~> 4.0.3'
 
 #DATABASES
 gem 'pg'
@@ -53,7 +53,7 @@ gem 'linkedin-oauth2'
 
 #AUTHENTICATION
 gem 'oauth2'
-gem 'omniauth-linkedin-oauth2', '~> 0.1.3'
+gem 'omniauth-linkedin-oauth2', '0.1.3'
 gem 'omniauth-github'
 gem 'omniauth-stackexchange'
 gem 'bcrypt-ruby', require: 'bcrypt'
