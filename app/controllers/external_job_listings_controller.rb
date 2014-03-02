@@ -15,6 +15,6 @@ class ExternalJobListingsController < ApplicationController
 
   def listing_params
     params.require(:job_listing).permit(:job_title, :link, :job_description, :creation_time,
-                                        :skills, :salary_range_low, :salary_range_high, :company_url)
+                                        :salary_range_low, :salary_range_high, :company_url).merge(params[:job_listing][:skills])
   end
 end
