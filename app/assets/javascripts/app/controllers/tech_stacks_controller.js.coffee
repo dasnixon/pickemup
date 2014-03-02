@@ -1,10 +1,12 @@
-techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'TechStack', ($scope, $http, $state, $stateParams, $location, TechStack) ->
-  $scope.techStack      = {}
-  $scope.errors         = []
-  $scope.success        = ''
-  $scope.error_updating = ''
+pickemup.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'TechStack', ($scope, $http, $state, $stateParams, $location, TechStack) ->
+  angular.extend $scope,
+    new SharedCtrl($scope)
+    techStack:      {}
+    errors:         []
+    success:        ''
+    error_updating: ''
 
-  if $state.current.name == "edit"
+  if $state.current.name == "tech_stack_edit"
     TechStack.editTechStack.retrieveTechStack
       tech_stack_id: $stateParams['tech_stack_id'],
       company_id: $stateParams['company_id'],
@@ -19,7 +21,7 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
       $scope.data = response
       $scope.original = angular.copy($scope.data)
 
-  else if $state.current.name == "new"
+  else if $state.current.name == "tech_stack_new"
     TechStack.newTechStack.new
       company_id: $stateParams['company_id'],
       action: 'new'
@@ -33,52 +35,53 @@ techStack.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParam
       $scope.data = response
       $scope.original = angular.copy($scope.data)
 
-  $scope.create = ->
-    TechStack.createTechStack.create
-      company_id: $stateParams['company_id']
-      action: 'create'
-      tech_stack:
-        name: $scope.data.name
-        back_end_languages: unchunk($scope.data.back_end_languages)
-        front_end_languages: unchunk($scope.data.front_end_languages)
-        dev_ops_tools: unchunk($scope.data.dev_ops_tools)
-        frameworks: unchunk($scope.data.frameworks)
-        relational_databases: unchunk($scope.data.relational_databases)
-        nosql_databases: unchunk($scope.data.nosql_databases)
-    , (response) ->
-      changeLocation($scope, $location, '/companies/' + $stateParams['company_id'] + '/tech_stacks', true)
-    , (response) ->
-      $scope.error_updating = 'Unable to create your tech stack.'
-      $scope.success        = ''
+  angular.extend $scope,
+    create: ->
+      TechStack.createTechStack.create
+        company_id: $stateParams['company_id']
+        action: 'create'
+        tech_stack:
+          name: $scope.data.name
+          back_end_languages: unchunk($scope.data.back_end_languages)
+          front_end_languages: unchunk($scope.data.front_end_languages)
+          dev_ops_tools: unchunk($scope.data.dev_ops_tools)
+          frameworks: unchunk($scope.data.frameworks)
+          relational_databases: unchunk($scope.data.relational_databases)
+          nosql_databases: unchunk($scope.data.nosql_databases)
+      , (response) ->
+        changeLocation($scope, $location, '/companies/' + $stateParams['company_id'] + '/tech_stacks', true)
+      , (response) ->
+        $scope.error_updating = 'Unable to create your tech stack.'
+        $scope.success        = ''
 
-  $scope.update = ->
-    TechStack.editTechStack.update
-      company_id: $stateParams['company_id']
-      tech_stack_id: $stateParams['tech_stack_id']
-      action: 'update_tech_stack'
-      tech_stack:
-        name: $scope.data.name
-        back_end_languages: unchunk($scope.data.back_end_languages)
-        front_end_languages: unchunk($scope.data.front_end_languages)
-        dev_ops_tools: unchunk($scope.data.dev_ops_tools)
-        frameworks: unchunk($scope.data.frameworks)
-        relational_databases: unchunk($scope.data.relational_databases)
-        nosql_databases: unchunk($scope.data.nosql_databases)
-    , (response) ->
-      $scope.success        = 'Successfully updated your tech stack.'
-      $scope.data.errors    = []
-      $scope.error_updating = ''
-      $scope.dirty_message  = ''
-      $scope.original       = angular.copy($scope.data)
-    , (response) ->
-      $scope.error_updating = 'Unable to update your tech stack.'
-      $scope.success        = ''
+    update: ->
+      TechStack.editTechStack.update
+        company_id: $stateParams['company_id']
+        tech_stack_id: $stateParams['tech_stack_id']
+        action: 'update_tech_stack'
+        tech_stack:
+          name: $scope.data.name
+          back_end_languages: unchunk($scope.data.back_end_languages)
+          front_end_languages: unchunk($scope.data.front_end_languages)
+          dev_ops_tools: unchunk($scope.data.dev_ops_tools)
+          frameworks: unchunk($scope.data.frameworks)
+          relational_databases: unchunk($scope.data.relational_databases)
+          nosql_databases: unchunk($scope.data.nosql_databases)
+      , (response) ->
+        $scope.success        = 'Successfully updated your tech stack.'
+        $scope.data.errors    = []
+        $scope.error_updating = ''
+        $scope.dirty_message  = ''
+        $scope.original       = angular.copy($scope.data)
+      , (response) ->
+        $scope.error_updating = 'Unable to update your tech stack.'
+        $scope.success        = ''
 
-  $scope.toggleActive = (attr) ->
-    $scope.data[attr] = !$scope.data[attr]
+    toggleActive: (attr) ->
+      $scope.data[attr] = !$scope.data[attr]
 
-  $scope.toggleActiveHash = (attr) ->
-    attr.checked = !attr.checked
+    toggleActiveHash: (attr) ->
+      attr.checked = !attr.checked
 
   $scope.$watch 'data', ( ->
     if angular.equals($scope.data, $scope.original)

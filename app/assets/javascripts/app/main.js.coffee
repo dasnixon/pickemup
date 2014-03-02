@@ -1,7 +1,18 @@
-@preference_app = angular.module('Preferences', ['ngResource', 'ui.compat', 'csrf', 'utf8', 'message-threshold'])
-@jobListing = angular.module('JobListing', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'skillUserSearch', 'locationSearch', 'ngSanitize', 'attributeArrayLimit', 'message-threshold'])
-@techStack = angular.module('TechStack', ['ngResource', 'ui.compat', 'csrf', 'utf8'])
-@userEdit = angular.module('Users', ['ngResource', 'ui.compat', 'ck-editor', 'csrf', 'utf8', 'salary-between', 'languageCompanySearch', 'locationSearch', 'ngSanitize', 'attributeArrayLimit'])
+@pickemup = angular.module('Pickemup', [
+  'ngResource',
+  'ui.router.compat',
+  'csrf',
+  'utf8',
+  'message-threshold',
+  'ck-editor',
+  'salary-between',
+  'skillUserSearch',
+  'languageCompanySearch',
+  'locationSearch',
+  'ngSanitize',
+  'attributeArrayLimit',
+  'message-threshold'
+])
 
 @chunk = (a,s) ->
   if a
@@ -31,15 +42,3 @@
   else
     $location.path(url)
     $scope.$apply()
-
-@scoreClass = (score) ->
-  score = if score? then parseInt(score) else 0
-
-  if 0 <= score <= 24
-    'poor-score-color'
-  else if 25 <= score <= 49
-    'low-score-color'
-  else if 50 <= score <= 74
-    'medium-score-color'
-  else
-    'high-score-color'

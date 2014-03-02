@@ -3,5 +3,5 @@
     Your account is currently deactivated. To start getting matched with companies again activate your account by clicking
     #{link_to 'here.', toggle_activation_user_path(id: current_user.id)}
 - else
-  %div{"ng-app"=>"Users"}
-    #wrapper{'ui-view' => ''}
+  %div{"ng-app"=>"Pickemup"}
+    #wrapper{'ui-view' => '', autoscroll: 'false'}

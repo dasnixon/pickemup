@@ -6,8 +6,8 @@
         #{link_to 'here.', toggle_activation_company_path(id: current_company.id), method: :patch}
     - else
       - if current_company.job_listings.exists?
-        %div{"ng-app"=>"JobListing"}
-          #wrapper{'ui-view' => ''}
+        %div{"ng-app"=>"Pickemup"}
+          #wrapper{'ui-view' => '', autoscroll: 'false'}
       - elsif !current_company.fully_activated?
         .hero-unit
           %h1 Setup your subscription!
