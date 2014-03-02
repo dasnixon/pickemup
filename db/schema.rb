@@ -27,6 +27,20 @@ ActiveRecord::Schema.define(version: 20140226052139) do
     t.datetime "updated_at"
   end
 
+  create_table "agreements", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "company_id"
+    t.string   "job_listing_id"
+    t.string   "admin_id"
+    t.string   "contract_type"
+    t.string   "rate"
+    t.string   "documentation"
+    t.text     "description"
+    t.boolean  "paid",           default: false
+    t.boolean  "signed",         default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "code_snippet_files", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "name"
     t.text     "content"
@@ -104,6 +118,19 @@ ActiveRecord::Schema.define(version: 20140226052139) do
 
   add_index "educations", ["education_key"], name: "index_educations_on_education_key", using: :btree
   add_index "educations", ["profile_id"], name: "index_educations_on_profile_id", using: :btree
+
+  create_table "external_job_listings", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
+    t.string   "job_title"
+    t.string   "link"
+    t.string   "creation_time"
+    t.string   "company_url"
+    t.text     "job_description"
+    t.string   "skills",            default: [], array: true
+    t.integer  "salary_range_high"
+    t.integer  "salary_range_low"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "github_accounts", id: :uuid, default: "uuid_generate_v4()", force: true do |t|
     t.string   "nickname"
