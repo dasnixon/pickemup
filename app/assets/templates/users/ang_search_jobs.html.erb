@@ -55,21 +55,21 @@
     <div class='media-body'>
       <div class='pull-right' style="height: 200px;">
         <div class='pull-right'>
-          <a class='btn btn-info' ng-href="/companies/{{listing.company_id}}" target="_self">Learn More About {{listing.name}}</a>
-          <a class='btn btn-success' ng-href="/users/{{user_id}}/messages/new?job_listing_id={{listing.id}}&receiver={{listing.company_id}}" target="_self">Apply</a>
+          <a joblistingpath link={{listing.link}} listing_id={{listing.id}} company_id={{listing.company_id}} class='btn btn-info' target="_self">Learn More{{listing.company_id ? ' About' + listing.name : '' }}</a>
+          <a joblistingapplicationpath user_id={{user_id}} listing_id={{listing.id}} company_id={{listing.company_id}} class='btn btn-success' target="_self">Apply</a>
         </div>
         <div class="clearfix"></div>
         <dl class='dl-horizontal side-info'>
           <dt>Location(s)</dt>
           <dd ng-bind='listing.locations | attributeArrayLimit:50'></dd>
           <dt>Salary</dt>
-          <dd>${{listing.salary_range_low}} - ${{listing.salary_range_high}}</dd>
+          <dd>{{listing.salary_range_low ? '$' + listing.salary_range_low + ' - $' + listing.salary_range_high : 'Hidden'}}</dd>
           <dt>Languages</dt>
           <dd ng-bind='listing.acceptable_languages | attributeArrayLimit:90'></dd>
         </dl>
       </div>
       <h3 class='media-heading'>
-        <a ng-href='/companies/{{listing.company_id}}/job_listings/{{listing.id}}' target='_self'>{{listing.job_title}} at {{listing.name}}</a>
+        <a joblistingpath link={{listing.link}} listing_id={{listing.id}} company_id={{listing.company_id}} target='_self'>{{listing.company_id ? listing.job_title + ' at ' + listing.name : listing.job_title}}</a>
       </h3>
       <p class='description' ng-bind-html="listing.details"></p>
     </div>
