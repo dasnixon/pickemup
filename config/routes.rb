@@ -96,6 +96,15 @@ Pickemup::Application.routes.draw do
   post "/admin/log_in" => "sessions#admin"
   post "/company_log_in" => "sessions#company"
   match '/subscriptions_listener' => 'subscriptions#listener', via: :all
+
+  namespace :api do
+    resource :auth, only: [] do
+      collection do
+        get :logged_in
+      end
+    end
+  end
+
   require 'sidekiq/web'
   mount Sidekiq::Web, at: '/sidekiq'
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)

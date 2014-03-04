@@ -1,91 +1,62 @@
-userEdit.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
+pickemup.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
 
   $locationProvider.html5Mode(true)
 
   $stateProvider
-    .state "edit",
-      url: "/users/:id/edit"
-      views:
-        "":
-          controller: "UsersController"
-          templateUrl: "<%= asset_path('users/ang_edit.html.erb') %>"
-
-    .state "user_home",
+    .state "home",
       url: "/"
-      views:
-        "":
-          controller: "UsersController"
-          templateUrl: "<%= asset_path('users/ang_search_jobs.html.erb') %>"
+      resolve:
+        auth: (Auth) -> Auth.loggedIn()
+      onEnter: ($state, auth) ->
+        if auth.data.user? and auth.data.user
+          $state.transitionTo("user")
+        else if auth.data.company? and auth.data.company
+          $state.transitionTo("company")
 
-  $urlRouterProvider.otherwise("/")
-])
+    .state "user",
+      url: ''
+      controller: "UsersController"
+      templateUrl: "<%= asset_path('users/ang_search_jobs.html.erb') %>"
 
-preference_app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
-  $locationProvider.html5Mode(true)
+    .state "company",
+      url: ''
+      controller: "JobListingCtrl"
+      templateUrl: "<%= asset_path('job_listings/ang_full_user_matches.html.erb') %>"
 
-  $stateProvider
-    .state "edit_preferences",
+    .state "user_edit",
+      url: "/users/:id/edit"
+      controller: "UsersController"
+      templateUrl: "<%= asset_path('users/ang_edit.html.erb') %>"
+
+    .state "user_preferences",
       url: "/users/:id/preferences"
-      views:
-        "":
-          controller: "PreferencesController"
-          templateUrl: "<%= asset_path('preferences/edit.html.erb') %>"
+      controller: "PreferencesController"
+      templateUrl: "<%= asset_path('preferences/edit.html.erb') %>"
 
-  $urlRouterProvider.otherwise("/")
-])
-
-jobListing.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
-  $locationProvider.html5Mode(true)
-
-  $stateProvider
-    .state "edit",
+    .state "job_listing_edit",
       url: "/companies/:company_id/job_listings/:job_listing_id/edit"
-      views:
-        "":
-          controller: "JobListingCtrl"
-          templateUrl: "<%= asset_path('job_listings/ang_edit.html.erb') %>",
+      controller: "JobListingCtrl"
+      templateUrl: "<%= asset_path('job_listings/ang_edit.html.erb') %>",
 
-    .state "new",
+    .state "job_listing_new",
       url: "/companies/:company_id/job_listings/new"
-      views:
-        "":
-          controller: "JobListingCtrl"
-          templateUrl: "<%= asset_path('job_listings/ang_new.html.erb') %>",
+      controller: "JobListingCtrl"
+      templateUrl: "<%= asset_path('job_listings/ang_new.html.erb') %>",
 
     .state "search_users",
       url: "/companies/:company_id/job_listings/:job_listing_id/search_users"
-      views:
-        "":
-          controller: "JobListingCtrl"
-          templateUrl: "<%= asset_path('job_listings/ang_search_users.html.erb') %>",
+      controller: "JobListingCtrl"
+      templateUrl: "<%= asset_path('job_listings/ang_search_users.html.erb') %>",
 
-    .state "company_home",
-      url: "/"
-      views:
-        "":
-          controller: "JobListingCtrl"
-          templateUrl: "<%= asset_path('job_listings/ang_full_user_matches.html.erb') %>"
-
-  $urlRouterProvider.otherwise("/")
-])
-
-techStack.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($stateProvider, $urlRouterProvider, $locationProvider) ->
-  $locationProvider.html5Mode(true)
-
-  $stateProvider
-    .state "edit",
+    .state "tech_stack_edit",
       url: "/companies/:company_id/tech_stacks/:tech_stack_id/edit"
-      views:
-        "":
-          controller: "TechStackCtrl"
-          templateUrl: "<%= asset_path('tech_stacks/ang_edit.html.erb') %>",
+      controller: "TechStackCtrl"
+      templateUrl: "<%= asset_path('tech_stacks/ang_edit.html.erb') %>",
 
-    .state "new",
+    .state "tech_stack_new",
       url: "/companies/:company_id/tech_stacks/new"
-      views:
-        "":
-          controller: "TechStackCtrl"
-          templateUrl: "<%= asset_path('tech_stacks/ang_new.html.erb') %>",
+      controller: "TechStackCtrl"
+      templateUrl: "<%= asset_path('tech_stacks/ang_new.html.erb') %>",
 
   $urlRouterProvider.otherwise("/")
 ])
