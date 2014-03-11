@@ -14,10 +14,12 @@ pickemup.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', ($
           $state.transitionTo("company")
 
     .state "user",
+      url: '/job_matches'
       controller: "UsersController"
       templateUrl: "<%= asset_path('users/ang_search_jobs.html.erb') %>"
 
     .state "company",
+      url: '/dev_matches'
       controller: "JobListingCtrl"
       templateUrl: "<%= asset_path('job_listings/ang_full_user_matches.html.erb') %>"
 

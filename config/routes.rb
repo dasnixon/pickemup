@@ -17,6 +17,8 @@ Pickemup::Application.routes.draw do
     get :terms_of_service
     get :privacy_policy
     get :get_matches
+    get :job_matches
+    get :dev_matches
   end
   get "log_out" => "sessions#destroy", as: "log_out"
   resources :users, only: [:edit, :update] do

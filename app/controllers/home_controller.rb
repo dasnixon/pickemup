@@ -2,6 +2,11 @@ class HomeController < ApplicationController
   respond_to :json, :html
 
   def index
+    if company_signed_in?
+      redirect_to dev_matches_path
+    elsif user_signed_in?
+      redirect_to job_matches_path
+    end
     @company = Company.new unless user_signed_in? or company_signed_in?
   end
 
@@ -38,6 +43,14 @@ class HomeController < ApplicationController
       @matchings = current_company.match_users_per_listing
       respond_with({company_id: current_company.id, matchings: @matchings, fully_activated: current_company.fully_activated? })
     end
+  end
+
+  def job_matches
+    redirect_to root_path unless user_signed_in?
+  end
+
+  def dev_matches
+    redirect_to root_path unless company_signed_in?
   end
 
   private
