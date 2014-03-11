@@ -1,4 +1,4 @@
-pickemup.controller("TechStackCtrl", ['$scope', '$http', '$state', '$stateParams', '$location', 'TechStack', ($scope, $http, $state, $stateParams, $location, TechStack) ->
+pickemup.controller("TechStackCtrl", ['$scope', '$state', '$stateParams', '$location', 'TechStack', ($scope, $state, $stateParams, $location, TechStack) ->
   angular.extend $scope,
     new SharedCtrl($scope)
     techStack:      {}
